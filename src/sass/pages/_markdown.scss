@@ -1,0 +1,422 @@
+.page-markdown {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: $darker-text-color;
+  word-wrap: break-word;
+}
+
+.page-markdown a {
+  background-color: transparent;
+}
+
+.page-markdown a:active,
+.page-markdown a:hover {
+  outline-width: 0;
+}
+
+.page-markdown strong {
+  font-weight: inherit;
+}
+
+.page-markdown strong {
+  font-weight: bolder;
+}
+
+.page-markdown h1 {
+  margin: 0.67em 0;
+}
+
+.page-markdown img {
+  border-style: none;
+}
+
+.page-markdown code,
+.page-markdown kbd,
+.page-markdown pre {
+  font-family: monospace;
+  font-size: 1rem;
+}
+
+.page-markdown input {
+  font: inherit;
+  margin: 0;
+}
+
+.page-markdown input {
+  overflow: visible;
+}
+
+.page-markdown [type='checkbox'] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.page-markdown * {
+  box-sizing: border-box;
+}
+
+.page-markdown input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.page-markdown a {
+  color: $primary-color;
+  text-decoration: none;
+}
+
+.page-markdown strong {
+  font-weight: 600;
+}
+
+.page-markdown hr::before {
+  display: table;
+  content: '';
+}
+
+.page-markdown hr::after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+.page-markdown table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.page-markdown td,
+.page-markdown th {
+  padding: 0;
+}
+
+.page-markdown h1,
+.page-markdown h2,
+.page-markdown h3,
+.page-markdown h4,
+.page-markdown h5,
+.page-markdown h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.page-markdown h1 {
+  font-size: 2.8rem;
+}
+
+.page-markdown h2 {
+  font-size: 2.4rem;
+}
+
+.page-markdown h3 {
+  font-size: 1.8rem;
+}
+
+.page-markdown h4 {
+  font-size: 1.6rem;
+}
+
+.page-markdown h5 {
+  font-size: 1.4rem;
+}
+
+.page-markdown h6 {
+  font-size: 1.2rem;
+}
+
+.page-markdown p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.page-markdown blockquote {
+  margin: 0;
+}
+
+.page-markdown ul,
+.page-markdown ol {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.page-markdown ol ol,
+.page-markdown ul ol {
+  list-style-type: lower-roman;
+}
+
+.page-markdown ul ul ol,
+.page-markdown ul ol ol,
+.page-markdown ol ul ol,
+.page-markdown ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.page-markdown dd {
+  margin-left: 0;
+}
+
+.page-markdown code {
+  font-family: $mono-font-family;
+  font-size: 1.2rem;
+}
+
+.page-markdown pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: $mono-font-family;
+  font-size: 1.2rem;
+}
+
+.page-markdown::before {
+  display: table;
+  content: '';
+}
+
+.page-markdown::after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+.page-markdown > *:first-child {
+  margin-top: 0 !important;
+}
+
+.page-markdown > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+.page-markdown a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page-markdown p,
+.page-markdown blockquote,
+.page-markdown ul,
+.page-markdown ol,
+.page-markdown dl,
+.page-markdown table,
+.page-markdown pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.page-markdown hr {
+  height: 1px;
+  padding: 0;
+  margin: 23px 0;
+  background-color: $alt-border-color;
+  border: 0;
+}
+
+.page-markdown blockquote {
+  padding: 0 1em;
+  color: $alt-dark-text-color;
+  border-left: 0.25em solid $alt-border-color;
+}
+
+.page-markdown blockquote > :first-child {
+  margin-top: 0;
+}
+
+.page-markdown blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.page-markdown kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: $alt-background-color;
+  border: solid 1px $alt-border-color;
+  border-bottom-color: $alt-border-color;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #959da5;
+}
+
+.page-markdown h1,
+.page-markdown h2,
+.page-markdown h3,
+.page-markdown h4,
+.page-markdown h5,
+.page-markdown h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  line-height: 1.25;
+}
+
+.page-markdown h1 {
+  padding-bottom: 0.3em;
+}
+
+.page-markdown h2 {
+  padding-bottom: 0.3em;
+}
+
+.page-markdown ul,
+.page-markdown ol {
+  padding-left: 2em;
+}
+
+.page-markdown ul ul,
+.page-markdown ul ol,
+.page-markdown ol ol,
+.page-markdown ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.page-markdown li {
+  word-wrap: break-spaces;
+}
+
+.page-markdown li > p {
+  margin-top: 16px;
+}
+
+.page-markdown li + li {
+  margin-top: 0.25em;
+}
+
+.page-markdown dl {
+  padding: 0;
+}
+
+.page-markdown dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.page-markdown dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.page-markdown table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+}
+
+.page-markdown table th {
+  font-weight: 600;
+}
+
+.page-markdown table th,
+.page-markdown table td {
+  padding: 6px 13px;
+  border: 1px solid $alt-border-color;
+}
+
+.page-markdown table tr {
+  background-color: $background-color;
+  border-top: 1px solid $alt-border-color;
+}
+
+.page-markdown table tr:nth-child(2n) {
+  background-color: $alt-background-color;
+}
+
+.page-markdown img {
+  max-width: 100%;
+  box-sizing: content-box;
+}
+
+.page-markdown img[align=right] {
+  padding-left: 20px;
+}
+
+.page-markdown img[align=left] {
+  padding-right: 20px;
+}
+
+.page-markdown code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: $alt-background-color;
+  border-radius: 3px;
+}
+
+.page-markdown pre {
+  word-wrap: normal;
+}
+
+.page-markdown pre > code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.page-markdown .highlight {
+  margin-bottom: 16px;
+}
+
+.page-markdown .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.page-markdown .highlight pre,
+.page-markdown pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: $alt-background-color;
+  border-radius: 3px;
+}
+
+.page-markdown pre code {
+  display: inline;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.page-markdown kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 1.1rem $mono-font-family;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: $alt-background-color;
+  border: solid 1px $alt-border-color;
+  border-bottom-color: $alt-border-color;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #c6cbd1;
+}
+
+.page-markdown :checked + .radio-label {
+  position: relative;
+  z-index: 1;
+  border-color: $alt-border-color;
+}
+
+.page-markdown > .row {
+  align-items: center;
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+  }
+}

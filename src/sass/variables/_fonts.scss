@@ -1,0 +1,9 @@
+@import '../mixins';
+
+@include font-face('Lato', '../assets/fonts/Lato-Light', 300);
+@include font-face('Lato', '../assets/fonts/Lato-Regular', 400);
+@include font-face('Lato', '../assets/fonts/Lato-Semibold', 600);
+
+@include font-face('Source Code Pro', '../assets/fonts/SourceCodePro-Regular', 400);
+
+@include font-face('MyIcons', '../assets/fonts/MyIcons');

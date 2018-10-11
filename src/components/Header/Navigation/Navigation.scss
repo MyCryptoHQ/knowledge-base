@@ -1,0 +1,81 @@
+@import '../../../sass/variables/colors';
+@import '../../../sass/components/grid';
+
+.header {
+  .navigation {
+    line-height: 70px;
+    white-space: nowrap;
+    overflow-y: hidden;
+
+    .branding {
+      display: inline-block;
+      margin-right: 25px;
+
+      & > a > img {
+        vertical-align: middle;
+      }
+    }
+
+    .col-menu {
+      overflow: hidden;
+    }
+
+    .menu {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+
+      & > li {
+        display: inline-block;
+
+        & > a {
+          font-size: 1.6rem;
+          font-weight: 400;
+          text-decoration: none;
+          color: $light-text-color;
+          position: relative;
+          margin-right: 27px;
+
+          &:hover:after, &.active:after, &:active:after {
+            content: '';
+            height: 2px;
+            position: absolute;
+            left: -2px;
+            bottom: -7px;
+            width: 100%;
+            padding: 0 4px;
+            background: $background-color;
+            box-sizing: content-box;
+          }
+        }
+
+        &:last-of-type > a {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .navigation-search {
+      .search-input {
+        vertical-align: top;
+      }
+    }
+  }
+
+  @media only screen and (max-width: $sm-max) {
+    .navigation {
+      .menu {
+        width: calc(100% - 67px);
+        box-sizing: border-box;
+        overflow-x: scroll;
+        height: 85px;
+        margin-bottom: -45px;
+      }
+
+      .navigation-search {
+        line-height: 37px;
+        padding-bottom: 10px;
+      }
+    }
+  }
+}

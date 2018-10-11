@@ -1,0 +1,8 @@
+@import '../../sass/variables/colors';
+
+.header {
+  min-height: 70px;
+  background: #1d334f;
+  border-bottom: 3px solid $border-color;
+  color: white;
+}

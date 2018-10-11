@@ -1,0 +1,4 @@
+[submodule "src/content"]
+	path = src/content
+	url = https://github.com/MyCryptoHQ/knowledge-base-content.git
+	branch = master

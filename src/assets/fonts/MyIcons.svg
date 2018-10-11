@@ -1,0 +1,55 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<metadata>
+Created by FontForge 20170731 at Fri Feb 23 02:31:18 2018
+ By Aleksey,,,
+</metadata>
+<defs>
+<font id="myicons" horiz-adv-x="256" >
+  <font-face 
+    font-family="myicons"
+    font-weight="400"
+    font-stretch="normal"
+    units-per-em="256"
+    panose-1="2 0 5 3 0 0 0 0 0 0"
+    ascent="256"
+    descent="0"
+    bbox="-1 0 256 256"
+    underline-thickness="0"
+    underline-position="2"
+    unicode-range="U+EA02-EA08"
+  />
+<missing-glyph 
+d="M8 0v170h65v-170h-65zM16 8h49v154h-49v-154z" />
+    <glyph glyph-name=".notdef" 
+d="M8 0v170h65v-170h-65zM16 8h49v154h-49v-154z" />
+    <glyph glyph-name=".null" horiz-adv-x="0" 
+ />
+    <glyph glyph-name="nonmarkingreturn" 
+ />
+    <glyph glyph-name="logo-medium" unicode="&#xea02;" 
+d="M245 256h-234q-5 0 -8 -3t-3 -8v-234q0 -5 3 -8t8 -3h234q5 0 8 3t3 8v234q0 5 -3 8t-8 3zM213 195l-14 -13q-2 -1 -2 -4v-96q0 -3 2 -4l13 -13v-3h-67v3l14 13l1 2v80l-38 -98h-6l-45 98v-66q0 -4 3 -7l18 -22v-3h-51v3l18 22q3 3 2 7v76q0 4 -2 6l-16 19v3h50l38 -84
+l34 84h48v-3z" />
+    <glyph glyph-name="discord" unicode="&#xea03;" 
+d="M106 148q-6 -1 -9.5 -5t-3.5 -9t3.5 -9t9 -4t9 4t3.5 9t-3.5 9t-8.5 5zM151 148q-5 0 -8.5 -2t-5.5 -6t-1 -8t3.5 -7t6.5 -4t8 0.5t6.5 5t2.5 8.5t-3.5 9t-8.5 4zM210 251h-164q-11 -1 -18 -8.5t-7 -18.5v-165q0 -11 7.5 -18t17.5 -7h139l-7 23l57 -52v219q0 11 -7 18.5
+t-18 8.5zM163 90l-8 10q14 4 22 15q-7 -4 -15 -7.5t-17 -5.5q-16 -2 -32 1q-9 1 -17 4.5t-15 7.5q8 -11 22 -14l-8 -11q-13 1 -22 6q-7 3 -12 8l-4 5q1 38 18 72q15 12 34 12l1 -1q-17 -4 -32 -16l7 4q14 6 28 7h2q13 2 25 1q20 -3 37 -12q-14 11 -30 16l1 2q20 -1 35 -13
+q17 -34 17 -72v0q-2 -4 -8 -9q-12 -9 -29 -10z" />
+    <glyph glyph-name="logo-linkedin" unicode="&#xea04;" 
+d="M245 256h-234q-5 0 -8 -3t-3 -8v-234q0 -5 3 -8t8 -3h234q5 0 8 3t3 8v234q0 5 -3 8t-8 3zM76 38h-38v122h38v-122zM57 177q-9 0 -15.5 6t-6.5 15.5t6.5 15.5t15.5 6t15.5 -6t6.5 -15t-6.5 -15.5t-15.5 -6.5zM218 38h-38v59q0 15 -2 22q-4 11 -17.5 11t-18.5 -10
+q-4 -7 -4 -22v-60h-38v122h36v-17h1q4 8 13.5 14t21.5 6q27 0 37 -16q9 -14 9 -42v-67z" />
+    <glyph glyph-name="logo-reddit" unicode="&#xea05;" 
+d="M256 130q0 13 -9 22t-22 9q-10 0 -19 -7q-28 18 -68 20l13 43l37 -9q1 -10 8 -17t17.5 -7t18 7.5t7.5 18t-7.5 18t-18.5 7.5q-7 0 -13 -3.5t-10 -10.5l-42 10q-3 1 -5.5 0t-3.5 -4l-16 -53q-42 0 -74 -20q-8 7 -19.5 7t-21 -9.5t-9.5 -21.5q0 -8 4 -14.5t10 -10.5
+q-1 -3 -1 -8q0 -16 9 -30.5t25.5 -25t37 -16t43.5 -5.5t43.5 5.5t37 16t25.5 25t9 30.5q0 4 -1 7q7 4 11 11t4 15zM213 222q5 0 8.5 -3.5t3.5 -8.5t-3.5 -8.5t-8 -3.5t-8 3.5t-3.5 8.5t3.5 8.5t7.5 3.5zM73 111q0 8 5 13t12 5t12 -5t5 -12.5t-5 -12.5t-12 -5t-12 5t-5 12z
+M170 60q-13 -13 -42 -13v0v0q-29 0 -42 13q-2 2 -2 5t2 5t5 2t5 -2q9 -9 32 -9v0v0q23 0 32 9q2 2 5 2t5 -2t2 -5t-2 -5zM166 94q-7 0 -12.5 5t-5.5 12t5.5 12.5t12.5 5.5t12 -5.5t5 -12.5t-5 -12t-12 -5z" />
+    <glyph glyph-name="logo-facebook" unicode="&#xea06;" 
+d="M245 256h-234q-5 0 -8 -3t-3 -8v-234q0 -5 3 -8t8 -3h126v99h-34v39h34v28q0 25 13.5 38t35.5 13q19 0 30 -1v-35h-20q-11 0 -15 -4.5t-4 -14.5v-24h38l-5 -39h-33v-99h68q5 0 8 3t3 8v234q0 5 -3 8t-8 3z" />
+    <glyph glyph-name="logo-twitter" unicode="&#xea07;" 
+d="M256 207q-13 -6 -30 -8q17 10 23 29q-16 -9 -34 -13q-7 8 -17 12t-21 4q-22 0 -37.5 -15t-15.5 -37q0 -6 2 -12q-32 2 -60.5 16.5t-47.5 38.5q-7 -13 -7 -26t6 -24.5t17 -18.5q-13 0 -24 6v-1q0 -19 12 -33.5t30 -17.5q-6 -2 -14 -2q-3 0 -10 1q6 -16 19 -26t30 -10
+q-29 -23 -65 -23q-8 0 -12 1q37 -23 81 -23q45 0 81 23q32 21 51 56q17 34 17 70v7q16 11 26 26z" />
+    <glyph glyph-name="logo-github" unicode="&#xea08;" 
+d="M128 253q-35 0 -64.5 -17.5t-46.5 -46.5t-17 -64q0 -28 11 -52.5t31 -42.5t45 -27q5 -1 7 1t2 6v21q-12 -2 -20.5 -0.5t-13.5 5.5t-7 9l-2 4q-3 6 -6 10t-6 7l-3 1q-7 5 -4.5 6.5t5.5 1.5v0q6 0 10.5 -3t7.5 -7l2 -3q7 -13 20 -14q8 -1 18 3q1 12 8 17q-26 3 -40 15
+q-19 15 -19 49q0 21 14 34v0q-6 16 1 34h3q5 0 12 -3q9 -3 20 -10q16 4 32 4t32 -4q15 10 27 13q6 1 8 0v0q5 -11 4 -22q-1 -7 -3 -12q14 -15 14 -34q0 -34 -19 -49q-14 -11 -40 -14q8 -7 8 -24v-35q0 -3 2.5 -5t7.5 -1q25 8 45 26t31 42.5t11 52.5q0 35 -17 64t-46.5 46.5
+t-64.5 17.5z" />
+  </font>
+</defs></svg>

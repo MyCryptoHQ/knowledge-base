@@ -1,0 +1,124 @@
+@import '../../sass/variables/colors';
+@import '../../sass/components/grid';
+
+.row.footer {
+  max-width: 100%;
+  background: $secondary-color;
+  border-top: 3px solid $primary-color;
+  color: $light-text-color;
+  padding: 14px 0;
+
+  .social-links {
+    margin-bottom: 20px;
+
+    & > a {
+      color: white;
+      margin-right: 18px;
+
+      & > i {
+        font-size: 1.9rem;
+      }
+    }
+  }
+
+  .links {
+    & > a {
+      display: block;
+      color: $light-text-color;
+      font-size: 1.44rem;
+      margin-bottom: 12px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .align-center {
+    align-self: baseline;
+  }
+
+  .branding {
+    & > a > img {
+      margin-bottom: 20px;
+      max-width: 245px;
+    }
+  }
+
+  .about-links {
+    margin-bottom: 20px;
+
+    & > a {
+      margin: 0 12px;
+      color: $light-text-color;
+      font-size: 1.712rem;
+    }
+  }
+
+  .about-text {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    opacity: .8;
+  }
+
+  .about-legal {
+    .about-legal-text {
+      display: inline;
+      margin: 0 8px;
+      font-size: 1.28rem;
+    }
+  }
+
+  .support-title {
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  .support-affiliates {
+    margin-bottom: 8px;
+
+    & > a {
+      display: block;
+      margin-bottom: 4px;
+      color: $light-text-color;
+      font-size: 1.28rem;
+    }
+  }
+
+  .support-donate {
+    margin-bottom: 8px;
+
+    .support-donate-currency {
+      font-size: 1.6rem;
+    }
+
+    .support-donate-address {
+      font-size: 1.12rem;
+      opacity: .8;
+    }
+  }
+
+  .support-friends {
+    & > a {
+      font-size: 1.2rem;
+      color: $light-text-color;
+
+      &:after {
+        content: '\B7';
+        margin: 0 .5rem;
+      }
+
+      &:last-of-type:after {
+        content: '';
+        margin: 0;
+      }
+    }
+  }
+
+  @media only screen and (max-width: $sm-max) {
+    .align-left, .align-right {
+      text-align: center !important;
+    }
+  }
+}

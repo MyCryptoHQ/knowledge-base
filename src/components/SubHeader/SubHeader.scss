@@ -1,0 +1,10 @@
+@import '../../sass/variables/colors';
+
+.sub-header {
+  min-height: 50px;
+  line-height: 50px;
+  background: $alt-background-color;
+  border-bottom: 1px solid $alt-border-color;
+  color: $dark-text-color;
+  font-size: 1.3rem;
+}

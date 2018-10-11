@@ -1,0 +1,32 @@
+language: node_js
+node_js: 8.9.4
+
+git:
+  submodules: false
+
+cache:
+  yarn: true
+  directories:
+   - node_modules
+   - $HOME/.cache
+
+before_install:
+ - git submodule update --init --remote --recursive
+
+install:
+ - yarn --silent
+
+script:
+ - yarn run prettier:diff
+ - yarn run tslint
+
+before_deploy:
+ - yarn run build --prefix-paths
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: public
+  on:
+    branch: master

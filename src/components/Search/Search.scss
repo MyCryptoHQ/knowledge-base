@@ -1,0 +1,37 @@
+@import '../../sass/variables/colors';
+@import '../../sass/variables/variables';
+
+.search {
+  background: $background-color;
+  border-radius: $border-radius;
+  width: 100%;
+  height: 42px;
+  display: inline-block;
+  vertical-align: middle;
+
+  &.compact {
+    height: 37px;
+
+    .search-input {
+      height: 37px;
+      background-position: 10px 10px;
+    }
+  }
+
+  .search-input {
+    width: 100%;
+    height: 42px;
+    border: none;
+    text-indent: 44px;
+    background: url('../../assets/images/icons/search.svg') no-repeat 13px 13px;
+    background-size: 17px;
+    box-sizing: border-box;
+    font-size: 1.4rem;
+    font-family: $font-family;
+    box-shadow: $dark-box-shadow;
+
+    &::placeholder {
+      color: $alt-dark-text-color;
+    }
+  }
+}

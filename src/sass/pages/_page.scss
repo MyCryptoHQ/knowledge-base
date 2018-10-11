@@ -1,0 +1,31 @@
+.page-metadata {
+  margin-top: -23px;
+  margin-bottom: 23px;
+  color: $alt-dark-text-color;
+}
+
+.page-content {
+  padding-bottom: 37px;
+
+  .back {
+    margin-bottom: 37px;
+  }
+}
+
+.page-extra {
+  border-top: 1px solid $alt-border-color;
+  padding-top: 37px;
+  vertical-align: middle;
+
+  img {
+    margin-right: 6px;
+    max-width: 24px;
+    vertical-align: middle;
+  }
+}
+
+article {
+  h1 {
+    font-size: 2.8rem;
+  }
+}
