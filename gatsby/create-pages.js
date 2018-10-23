@@ -181,17 +181,28 @@ const registerCategory = async (category, actions) => {
 const registerTopLevelRedirects = actions => {
   const { createRedirect } = actions;
 
-  const file = fs.readFileSync(path.join(__dirname, '../config/redirects.yml'), 'utf-8');
-  const document = yaml.safeLoad(file);
+  let file;
+  try {
+    file = fs.readFileSync(path.join(__dirname, '../src/content/redirects.yml'), 'utf-8');
+  } catch (error) {
+    // Ignore error if file does not exist
+    if (error.code !== 'ENOENT') {
+      throw error;
+    }
+  }
 
-  document.redirects.forEach(redirect => {
-    createRedirect({
-      fromPath: `/${redirect.from}`,
-      toPath: `/${redirect.to}`,
-      isPermanent: true,
-      redirectInBrowser: true
+  if (file) {
+    const document = yaml.safeLoad(file);
+
+    document.redirects.forEach(redirect => {
+      createRedirect({
+        fromPath: `/${redirect.from}`,
+        toPath: `/${redirect.to}`,
+        isPermanent: true,
+        redirectInBrowser: true
+      });
     });
-  });
+  }
 };
 
 /**
