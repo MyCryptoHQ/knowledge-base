@@ -80,6 +80,14 @@ module.exports = {
           }
         }
       }
+    },
+    {
+      resolve: 'gatsby-plugin-matomo',
+      options: {
+        siteId: '3',
+        matomoUrl: 'https://analytics.mycryptoapi.com',
+        siteUrl: 'https://support.mycrypto.com/'
+      }
     }
   ]
 };
