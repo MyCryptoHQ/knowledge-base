@@ -1,0 +1,95 @@
+@mixin no-margin-padding {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin heading {
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+
+@mixin text {
+  font-family: Lato, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: #bbc2cb;
+}
+
+@mixin perfectly-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.subscribe {
+  text-align: center;
+
+  h2 {
+    @include heading;
+    @include no-margin-padding;
+
+    margin-bottom: 5px !important;
+  }
+
+  p {
+    @include text;
+
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  &-input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-input {
+      min-width: 0;
+
+      input {
+        height: 40px;
+        padding: 7px;
+        background: #142c46;
+        border: 1px solid #4d5f74;
+        border-radius: 3px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: none;
+        color: #fff;
+        margin-top: 0;
+        text-indent: 0;
+        font-size: 16px;
+      }
+    }
+
+    &-button {
+      button {
+        height: 40px;
+        background: #027796;
+        border: none;
+        border-radius: 3px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        color: #fff;
+        font-size: 16px;
+      }
+    }
+
+    @media (min-width: 800px) {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (min-width: 800px) {
+    padding-left: 20px;
+    text-align: left;
+  }
+
+  @media (min-width: 1050px) {
+    margin-top: 20px;
+    padding-left: 0px;
+  }
+}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import MetaData from '../MetaData/MetaData';
 import Footer from '../Footer/Footer';
-import { StaticQuery, graphql } from 'gatsby';
+import './Layout.scss';
 import '../../sass/index.scss';
 
 interface Props {
