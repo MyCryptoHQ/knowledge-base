@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as CopyToClipboard from 'react-copy-to-clipboard';
 import DonationButton from './DonationButton/DonationButton';
 import Subscribe from './Subscribe/Subscribe';
 import * as ether from '../../../assets/images/donate/ether.png';
@@ -23,18 +22,32 @@ export default class DonateAndSubscribe extends React.PureComponent<{}, State> {
   };
 
   render() {
+    const { displayMessage } = this.state;
+
     return (
       <div className="donate-and-subscribe">
         <div className="donate">
           <h2>Donate</h2>
           <div className="donate-buttons">
-            <CopyToClipboard text={DONATION_ADDRESSES.Ethereum} onCopy={this.displayMessage}>
-              <DonationButton icon={ether} title="Ethereum" />
-            </CopyToClipboard>
-            <CopyToClipboard text={DONATION_ADDRESSES.Bitcoin} onCopy={this.displayMessage}>
-              <DonationButton icon={bitcoin} title="Bitcoin" />
-            </CopyToClipboard>
+            <DonationButton
+              text={DONATION_ADDRESSES.Ethereum}
+              icon={ether}
+              title="Ethereum"
+              onCopy={this.displayMessage}
+            />
+            <DonationButton
+              text={DONATION_ADDRESSES.Bitcoin}
+              icon={bitcoin}
+              title="Bitcoin"
+              onCopy={this.displayMessage}
+            />
           </div>
+          {displayMessage && (
+            <p className="donate-buttons-message">
+              <span className="check">✓</span>
+              Address Copied to Clipboard!
+            </p>
+          )}
         </div>
         <Subscribe />
       </div>
@@ -42,15 +55,13 @@ export default class DonateAndSubscribe extends React.PureComponent<{}, State> {
   }
 
   private displayMessage = (): void => {
-    console.log('a');
-
     clearTimeout(this.state.timerId);
 
-    const timerId = setTimeout(() => {
+    const timerId: number = setTimeout(() => {
       this.setState({
         displayMessage: false
       });
-    });
+    }, 3000) as any;
 
     this.setState({
       displayMessage: true,
