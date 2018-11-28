@@ -155,7 +155,7 @@ const Footer: React.StatelessComponent = () => (
         >
           Buy a Ledger Wallet
         </a>
-        <a href="https://shop.trezor.io/?a=mycrypto.com" target="_blank" rel="noopener noreferrer">
+        <a href="https://shop.trezor.io/?offer_id=10&aff_id=1735" target="_blank" rel="noopener noreferrer">
           Buy a TREZOR
         </a>
         <a
