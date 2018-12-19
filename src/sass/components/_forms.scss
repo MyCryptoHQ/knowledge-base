@@ -18,7 +18,7 @@ form {
     font-family: $font-family;
     box-sizing: border-box;
     text-indent: 13px;
-    background: $background-color;
+    background: $alt-background-color;
     border-radius: $border-radius;
     border: 1px solid $alt-border-color;
     margin-top: 7px;
@@ -27,6 +27,10 @@ form {
       outline: none;
       border-color: rgba($primary-color, 0.5);
     }
+  }
+
+  input[type=file] {
+    background: none;
   }
 
   .g-recaptcha {

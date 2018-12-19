@@ -1,0 +1,13 @@
+.featured-categories {
+  & > div {
+    flex: 1;
+  }
+
+  &:first-of-type {
+    padding-top: 75px;
+  }
+
+  &:last-child {
+    padding-bottom: 75px;
+  }
+}

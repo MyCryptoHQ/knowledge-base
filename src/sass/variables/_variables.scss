@@ -1,7 +1,9 @@
+@import 'colors';
+
 $font-family: 'Lato', sans-serif;
 $mono-font-family: 'Source Code Pro', monospace;
 
 $border-radius: 3px;
 
-$dark-box-shadow: 0px 20px 13.02px 0.98px rgba($secondary-color, 0.1);
-$light-box-shadow: 0px 4px 35.34px 2.66px rgba($secondary-color, 0.06);
+$dark-box-shadow: 0px 20px 13px 1px rgba($secondary-color, 0.1);
+$light-box-shadow: 0px 4px 20px 2px rgba($secondary-color, 0.1);
