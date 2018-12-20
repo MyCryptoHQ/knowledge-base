@@ -86,7 +86,8 @@ module.exports = {
       options: {
         siteId: '3',
         matomoUrl: 'https://analytics.mycryptoapi.com',
-        siteUrl: 'https://support.mycrypto.com/'
+        siteUrl: 'https://support.mycrypto.com/',
+        disableCookies: true
       }
     }
   ]
