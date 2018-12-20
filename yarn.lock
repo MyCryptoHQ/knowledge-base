@@ -5659,10 +5659,10 @@ gatsby-plugin-catch-links@^2.0.2:
   dependencies:
     "@babel/runtime" "^7.0.0"
 
-gatsby-plugin-favicons@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-favicons/-/gatsby-plugin-favicons-1.0.3.tgz#55e0520c02b7c59212450d7875fe84a6eb2a5ed2"
-  integrity sha512-VK5wtDGEXlEViMECatTpZ7FcaIWr0F5tftKvlVZdkCYd5diX0txH15MKN8DUxIssVtCmgGSQZne8oXIEiFllPA==
+gatsby-plugin-favicons@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-favicons/-/gatsby-plugin-favicons-1.0.4.tgz#c452ecdd14eef684ce3cf1220006b9fd037a26e7"
+  integrity sha512-nCJtbhm1tRcnwc7re7nsSq4p1bse3cri6v1PiQsRw3YAlCwj0jmQP7n7a5EnjcjGuqjM+zhLcKsT8zOyysSlow==
   dependencies:
     favicons-webpack-plugin "^0.0.9"
 
