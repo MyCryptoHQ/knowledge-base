@@ -113,7 +113,7 @@ export const query = graphql`
         node {
           title
           slug
-          description
+          excerpt
         }
       }
     }
