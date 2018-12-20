@@ -31,7 +31,7 @@ class Navigation extends React.PureComponent<Props, State> {
     return (
       <div className="navigation container">
         <div className="row">
-          <div className="col-xs col-gutter-lr">
+          <div className="col-xs-12 col-md-6 col-gutter-lr">
             <MobileNavigation isVisible={isMobileVisible} />
             <div className="hamburger-toggle show-xs-only" onClick={this.handleClick}>
               <img src={(isMobileVisible && close) || bars} />

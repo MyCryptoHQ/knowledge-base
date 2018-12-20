@@ -63,10 +63,11 @@
     .branding {
       width: 100%;
       text-align: center;
+      margin-right: 0 !important;
     }
   }
 
-  @media only screen and (max-width: $sm-max) {
+  @media only screen and (max-width: 65rem) {
     .navigation {
       .menu {
         width: calc(100% - 67px);
