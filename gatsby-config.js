@@ -5,9 +5,9 @@ module.exports = {
     title: 'MyCrypto Knowledge Base',
     description:
       'Answers & help for MyCrypto.com & the Ethereum blockchain. If your answer is not here, contact MyCrypto support instantly.',
-    siteUrl: 'https://mrtenz.github.io/knowledge-base',
-    baseUrl: 'https://mrtenz.github.io',
-    recaptchaSitekey: '6LfqM2EUAAAAALqEkyIg1MmhGNas2K9MMBLcPo7K'
+    siteUrl: 'https://mycryptohq.github.io/knowledge-base',
+    baseUrl: 'https://mycryptohq.github.io',
+    recaptchaSitekey: '6Le7uYMUAAAAAKoxLtb4pS41srf8pqVtPGzVkBr4'
   },
   // Used for deployment to gh-pages
   pathPrefix: '/knowledge-base',
@@ -79,6 +79,15 @@ module.exports = {
             description: node => node.description
           }
         }
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-matomo',
+      options: {
+        siteId: '3',
+        matomoUrl: 'https://analytics.mycryptoapi.com',
+        siteUrl: 'https://support.mycrypto.com/',
+        disableCookies: true
       }
     }
   ]

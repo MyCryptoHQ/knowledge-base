@@ -2,7 +2,6 @@ const path = require('path');
 const crypto = require('crypto');
 const yaml = require('js-yaml');
 const fs = require('fs');
-const lunr = require('lunr');
 
 const TEMPLATE_DIR = path.resolve(__dirname, '../src/templates');
 
@@ -147,10 +146,6 @@ const getCategories = async actions => {
         edges {
           node {
             slug
-            redirects {
-              from
-              to
-            }
           }
         }
       }
@@ -181,33 +176,23 @@ const registerCategory = async (category, actions) => {
 const registerTopLevelRedirects = actions => {
   const { createRedirect } = actions;
 
-  const file = fs.readFileSync(path.join(__dirname, '../config/redirects.yml'), 'utf-8');
-  const document = yaml.safeLoad(file);
+  let file;
+  try {
+    file = fs.readFileSync(path.join(__dirname, '../src/content/redirects.yml'), 'utf-8');
+  } catch (error) {
+    // Ignore error if file does not exist
+    if (error.code !== 'ENOENT') {
+      throw error;
+    }
+  }
 
-  document.redirects.forEach(redirect => {
-    createRedirect({
-      fromPath: `/${redirect.from}`,
-      toPath: `/${redirect.to}`,
-      isPermanent: true,
-      redirectInBrowser: true
-    });
-  });
-};
+  if (file) {
+    const document = yaml.safeLoad(file);
 
-/**
- * Setup redirects of a category.
- * @param category
- * @param actions
- * @return {void}
- */
-const registerCategoryRedirects = (category, actions) => {
-  const { createRedirect } = actions;
-
-  if (category.redirects) {
-    category.redirects.forEach(({ from, to }) => {
+    document.redirects.forEach(redirect => {
       createRedirect({
-        fromPath: `/${category.slug}/${from}`,
-        toPath: `/${category.slug}/${to}`,
+        fromPath: `/${redirect.from}`,
+        toPath: `/${redirect.to}`,
         isPermanent: true,
         redirectInBrowser: true
       });
@@ -252,7 +237,6 @@ module.exports = async ({ actions, createNodeId, graphql, getNodes }) => {
   const categories = await getCategories(gatsbyActions);
   categories.forEach(category => {
     registerCategory(category, gatsbyActions);
-    registerCategoryRedirects(category, gatsbyActions);
   });
 
   const pages = await getPages(gatsbyActions);
