@@ -5,8 +5,8 @@ module.exports = {
     title: 'MyCrypto Knowledge Base',
     description:
       'Answers & help for MyCrypto.com & the Ethereum blockchain. If your answer is not here, contact MyCrypto support instantly.',
-    siteUrl: 'https://mrtenz.github.io/knowledge-base',
-    baseUrl: 'https://mrtenz.github.io',
+    siteUrl: 'https://mycryptohq.github.io/knowledge-base',
+    baseUrl: 'https://mycryptohq.github.io',
     recaptchaSitekey: '6LfqM2EUAAAAALqEkyIg1MmhGNas2K9MMBLcPo7K'
   },
   // Used for deployment to gh-pages
