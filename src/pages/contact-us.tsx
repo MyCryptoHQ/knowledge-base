@@ -34,7 +34,7 @@ const ContactUs: React.StatelessComponent = () => (
               <h2>Contact us</h2>
               <p>
                 Before you send us a message, please try searching the knowledge base first or try{' '}
-                <Link to="/diving-deeper/list-of-support-and-communities">
+                <Link to="/general-knowledge/ethereum-blockchain/more-help-support-and-communities">
                   this list of communities
                 </Link>{' '}
                 for more immediate help.

@@ -24,7 +24,7 @@ const PageSelector: React.StatelessComponent<Props> = ({ slug }) => (
             node {
               slug
               title
-              description
+              excerpt
             }
           }
         }

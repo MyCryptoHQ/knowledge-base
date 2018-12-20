@@ -13,6 +13,11 @@ export interface Page {
   description: string;
 
   /**
+   * An excerpt of the page content.
+   */
+  excerpt: string;
+
+  /**
    * The priority in which to sort this page. Higher = first
    */
   priority: number;
