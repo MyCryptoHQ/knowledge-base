@@ -1,0 +1,33 @@
+.featured-category-item-wrapper {
+  display: flex;
+  height: 100%;
+}
+
+.featured-category-item {
+  padding: 40px 60px;
+  line-height: normal;
+  border-radius: 10px;
+  width: 100%;
+  flex: 1;
+
+  &-image {
+    padding: 0 0 15px 0;
+  }
+
+  &-description {
+    padding: 0;
+
+    h2 {
+      margin: 0;
+      font-size: 2.1rem;
+      color: #4d4f51;
+    }
+
+    p {
+      font-size: 1.6rem;
+      color: rgba(0, 0, 0, 0.65);
+      margin: 0;
+      padding-top: 11px;
+    }
+  }
+}

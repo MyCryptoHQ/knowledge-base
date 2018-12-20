@@ -1,13 +1,13 @@
 import * as React from 'react';
 import Link from 'gatsby-link';
 import { Category } from '../../models/category';
+import CategoryItemCount from './CategoryItemCount/CategoryItemCount';
 
 interface Props {
   category: Category;
-  showDescription?: boolean;
 }
 
-const CategoryItem: React.StatelessComponent<Props> = ({ category, showDescription = true }) => (
+const CategoryItem: React.StatelessComponent<Props> = ({ category }) => (
   <div className="category-item">
     <Link to={`/${category.slug}`}>
       <div className="row">
@@ -16,17 +16,8 @@ const CategoryItem: React.StatelessComponent<Props> = ({ category, showDescripti
         </div>
         <div className="category-description col-xs col-no-gutter">
           <h3>{category.title}</h3>
-          {showDescription && category.description}
-          <div className="category-article-count">
-            {category.childrenPage.length} article
-            {category.childrenPage.length !== 1 && 's'}
-            {category.childrenCategory.length > 0 && (
-              <>
-                , {category.childrenCategory.length}{' '}
-                {category.childrenCategory.length === 1 ? 'category' : 'categories'}
-              </>
-            )}
-          </div>
+          <p>{category.description}</p>
+          <CategoryItemCount category={category} />
         </div>
       </div>
     </Link>

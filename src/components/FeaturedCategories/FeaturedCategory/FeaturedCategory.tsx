@@ -1,6 +1,6 @@
 import * as React from 'react';
-import CategoryItem from '../CategoryItem/CategoryItem';
-import { Category } from '../../models/category';
+import { Category } from '../../../models/category';
+import FeaturedCategoryItem from './FeaturedCategoryItem/FeaturedCategoryItem';
 
 interface Props {
   category: string;
@@ -22,7 +22,7 @@ export default class FeaturedCategory extends React.PureComponent<Props, State> 
   render() {
     const { category } = this.state;
     if (category) {
-      return <CategoryItem category={category} showDescription={false} />;
+      return <FeaturedCategoryItem category={category} />;
     }
     return null;
   }

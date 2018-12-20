@@ -1,6 +1,5 @@
 import * as React from 'react';
 import DonationButton from './DonationButton/DonationButton';
-import Subscribe from './Subscribe/Subscribe';
 import * as ether from '../../../assets/images/donate/ether.png';
 import * as bitcoin from '../../../assets/images/donate/bitcoin.png';
 import './DonateAndSubscribe.scss';
@@ -49,7 +48,6 @@ export default class DonateAndSubscribe extends React.PureComponent<{}, State> {
             </p>
           )}
         </div>
-        <Subscribe />
       </div>
     );
   }
