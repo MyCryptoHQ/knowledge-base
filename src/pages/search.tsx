@@ -22,7 +22,7 @@ interface OwnProps {
         node: {
           title: string;
           slug: string;
-          description: string;
+          excerpt: string;
         };
       }[];
     };
@@ -68,7 +68,7 @@ class Search extends React.PureComponent<Props> {
       .map(result => {
         return edges.find(edge => edge.node.slug === result.ref);
       })
-      .map(edge => (edge ? edge.node : { title: '', slug: '', description: '' })); // Temporary workaround for a bug in Gatsby v2
+      .map(edge => (edge ? edge.node : { title: '', slug: '', excerpt: '' })); // Temporary workaround for a bug in Gatsby v2
 
     return (
       <Layout>
@@ -125,7 +125,7 @@ export const query = graphql`
         node {
           title
           slug
-          description
+          excerpt
         }
       }
     }

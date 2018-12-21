@@ -1,10 +1,12 @@
 import * as React from 'react';
 import * as logo from '../../../assets/images/logo.svg';
-import * as logo404 from '../../../assets/images/logo-404.svg';
 import * as bars from '../../../assets/images/icons/bars.svg';
 import * as close from '../../../assets/images/icons/close.svg';
 import Link from 'gatsby-link';
 import Search from '../../Search/Search';
+import MobileNavigation from './MobileNavigation/MobileNavigation';
+import ExternalLink from '../../ExternalLink/ExternalLink';
+import Caret from './Caret/Caret';
 import './Navigation.scss';
 import MobileNavigation from './MobileNavigation/MobileNavigation';
 import ExternalLink from '../../ExternalLink/ExternalLink';
@@ -12,7 +14,6 @@ import Caret from './Caret/Caret';
 
 interface Props {
   showSearch: boolean;
-  specialLogo: boolean;
 }
 
 interface State {
@@ -25,7 +26,7 @@ class Navigation extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { showSearch, specialLogo } = this.props;
+    const { showSearch } = this.props;
     const { isMobileVisible } = this.state;
 
     return (
@@ -38,7 +39,7 @@ class Navigation extends React.PureComponent<Props, State> {
             </div>
             <div className="branding">
               <Link to="/">
-                <img src={specialLogo ? logo404 : logo} height={42} alt="MyCrypto logo" />
+                <img src={logo} height={42} alt="MyCrypto logo" />
               </Link>
             </div>
             <ul className="menu hide-xs-only">

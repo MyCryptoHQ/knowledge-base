@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const minimatch = require('minimatch');
+const removeMarkdown = require('remove-markdown');
 
 /**
  * Create node data that can be used with `createNode`.
@@ -44,6 +45,18 @@ const getPageData = (node, actions) => {
 };
 
 /**
+ * Get excerpt from a page data object.
+ * @param pageData
+ */
+const getExcerpt = pageData => {
+  return (
+    removeMarkdown(pageData.rawMarkdownBody)
+      .slice(0, 200)
+      .replace(/[\r\n]+/g, ' ') + '...'
+  );
+};
+
+/**
  * Get all files in a category from File nodes.
  * @param nodes
  * @param pattern
@@ -63,11 +76,13 @@ const getPages = (nodes, pattern, parent, actions) => {
       const pageData = getPageData(node, actions);
 
       const slug = node.relativePath.replace(/\.md$/, '');
+      const excerpt = getExcerpt(pageData);
 
       const parsedPageData = {
         title: pageData.frontmatter.title,
         filename: node.name,
         description: pageData.frontmatter.description,
+        excerpt,
         priority: pageData.frontmatter.priority,
         datePublished: pageData.frontmatter.date_published,
         dateModified: pageData.frontmatter.date_modified,
