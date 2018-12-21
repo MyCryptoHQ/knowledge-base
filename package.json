@@ -33,7 +33,6 @@
     "@types/react-copy-to-clipboard": "^4.2.6",
     "@types/react-google-recaptcha": "^0.10.0",
     "@types/react-helmet": "^5.0.6",
-    "@types/react-recaptcha": "^2.3.2",
     "@types/react-redux": "^6.0.2",
     "@types/yup": "^0.24.7",
     "gatsby": "^2.0.50",

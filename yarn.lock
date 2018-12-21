@@ -1021,13 +1021,6 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-recaptcha@^2.3.2":
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/@types/react-recaptcha/-/react-recaptcha-2.3.3.tgz#700369afa4d32e6e1fa08166fe73a717931fe8e0"
-  integrity sha512-1IdhJxBbPN+QL/eARSl/qwV2+03kwewJmZ43CWJJoGVZd4S4wGiascCl1HVe8PRtNPzXDqAi+nXIufvEDIsAPg==
-  dependencies:
-    "@types/react" "*"
-
 "@types/react-redux@^6.0.2":
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-6.0.9.tgz#96aa7f5b0716bcc3bfb36ceaa1223118d509f79a"
