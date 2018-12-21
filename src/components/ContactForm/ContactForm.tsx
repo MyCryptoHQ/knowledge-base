@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as Recaptcha from 'react-recaptcha';
+import Recaptcha from 'react-google-recaptcha';
 import { object, string, ValidationError } from 'yup';
 import { graphql, StaticQuery } from 'gatsby';
 
@@ -30,8 +30,8 @@ const schema = object().shape({
 });
 
 export default class ContactForm extends React.PureComponent<{}, State> {
-  constructor() {
-    super({});
+  constructor(props: {}) {
+    super(props);
 
     this.state = {
       formData: {
@@ -174,8 +174,8 @@ export default class ContactForm extends React.PureComponent<{}, State> {
             render={data => (
               <Recaptcha
                 sitekey={data.site.siteMetadata.recaptchaSitekey}
-                verifyCallback={this.handleVerify}
-                expiredCallback={this.handleExpired}
+                onChange={this.handleVerify}
+                onExpired={this.handleExpired}
               />
             )}
           />
@@ -239,7 +239,6 @@ export default class ContactForm extends React.PureComponent<{}, State> {
         form.submit();
       })
       .catch((error: ValidationError) => {
-        console.error(error);
         this.setState({
           errors: [...this.state.errors, ...error.inner.map(innerError => innerError.path)]
         });
