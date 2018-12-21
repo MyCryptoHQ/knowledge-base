@@ -12,6 +12,15 @@
 
   &-image {
     padding: 0 0 15px 0;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      vertical-align: middle;
+      width: 50px;
+    }
   }
 
   &-description {
