@@ -4,16 +4,11 @@ import './Header.scss';
 
 interface Props {
   showSearch?: boolean;
-  specialLogo?: boolean;
 }
 
-const Header: React.StatelessComponent<Props> = ({
-  showSearch = true,
-  specialLogo = false,
-  children
-}) => (
+const Header: React.StatelessComponent<Props> = ({ showSearch = true, children }) => (
   <div className="header">
-    <Navigation showSearch={showSearch} specialLogo={specialLogo} />
+    <Navigation showSearch={showSearch} />
     {children}
   </div>
 );
