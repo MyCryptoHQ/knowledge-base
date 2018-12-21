@@ -8,6 +8,9 @@ import MobileNavigation from './MobileNavigation/MobileNavigation';
 import ExternalLink from '../../ExternalLink/ExternalLink';
 import Caret from './Caret/Caret';
 import './Navigation.scss';
+import MobileNavigation from './MobileNavigation/MobileNavigation';
+import ExternalLink from '../../ExternalLink/ExternalLink';
+import Caret from './Caret/Caret';
 
 interface Props {
   showSearch: boolean;
