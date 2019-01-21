@@ -13,7 +13,7 @@ const SubCategoryItem: React.StatelessComponent<Props> = ({ category }) => (
       <div className="row">
         <div className="category-page-description col-xs col-no-gutter">
           <h3>{category.title}</h3>
-          {category.description}
+          {/*{category.description}*/}
           <CategoryItemCount category={category} />
         </div>
       </div>
