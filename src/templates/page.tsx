@@ -116,7 +116,7 @@ class Page extends React.PureComponent<Props, State> {
                 </section>
                 <section className="page-extra">
                   <a
-                    href={`https://github.com/MyCryptoHQ/knowledge-base/blob/master/src/content/${
+                    href={`https://github.com/MyCryptoHQ/knowledge-base-content/blob/master/${
                       page.originalSlug
                     }.md`}
                     target="_blank"
