@@ -5,9 +5,9 @@ module.exports = {
     title: 'MyCrypto Knowledge Base',
     description:
       'Answers & help for MyCrypto.com & the Ethereum blockchain. If your answer is not here, contact MyCrypto support instantly.',
-    siteUrl: 'https://mycryptohq.github.io/knowledge-base',
-    baseUrl: 'https://mycryptohq.github.io',
-    recaptchaSitekey: '6Le7uYMUAAAAAKoxLtb4pS41srf8pqVtPGzVkBr4'
+    siteUrl: 'https://support.mycrypto.com',
+    baseUrl: 'https://support.mycrypto.com',
+    recaptchaSitekey: '6LcOl00UAAAAACVjGdVFkw918ohOhPIL0PHDtdGM'
   },
   // Used for deployment to gh-pages
   pathPrefix: '/knowledge-base',

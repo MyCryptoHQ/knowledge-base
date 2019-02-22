@@ -59,7 +59,7 @@ export default class ContactForm extends React.PureComponent<{}, State> {
         method="post"
         encType="multipart/form-data"
         acceptCharset="utf-8"
-        action="https://webhook.frontapp.com/forms/myetherwallet/466ecd326b1dc5f079cd546acb782026135f0527827c1a484423a5f5918e289aaf366ae37a303d78868c2252216a2340"
+        action="https://webhook.frontapp.com/forms/myetherwallet/tMA_4BxSeE05bwxsN62-Ue5xP4jz_W7LGlgKNgGTKEchjFw7-6M8q-9q9ZqxsSYDl2BXv7Gx17Vqev1Km0akl8qVZtPM5LYl"
         onSubmit={this.handleSubmit}
       >
         <div className={`field full-width ${errors.includes('name') ? 'error' : ''}`}>
