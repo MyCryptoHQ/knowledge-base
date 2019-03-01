@@ -10,7 +10,7 @@ module.exports = {
     recaptchaSitekey: '6LcOl00UAAAAACVjGdVFkw918ohOhPIL0PHDtdGM'
   },
   // Used for deployment to gh-pages
-  pathPrefix: '/knowledge-base',
+  pathPrefix: '/',
   plugins: [
     'gatsby-plugin-typescript',
     'gatsby-plugin-react-helmet',
