@@ -25,7 +25,7 @@ const MobileNavigation: React.StatelessComponent<Props> = ({ isVisible }) => (
         </Link>
       </li>
       <li>
-        <ExternalLink to="https://mycrypto.com">
+        <ExternalLink to="https://mycrypto.com" currentTab={true}>
           Back to MyCrypto
           <Caret />
         </ExternalLink>

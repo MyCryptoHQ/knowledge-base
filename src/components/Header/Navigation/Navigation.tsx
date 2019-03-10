@@ -53,7 +53,7 @@ class Navigation extends React.PureComponent<Props, State> {
                 </Link>
               </li>
               <li>
-                <ExternalLink to="https://mycrypto.com">
+                <ExternalLink to="https://mycrypto.com" currentTab={true}>
                   Back to MyCrypto
                   <Caret />
                 </ExternalLink>
