@@ -35,6 +35,14 @@ const PopularArticles: React.StatelessComponent = () => (
               <PageSelector slug="how-to/offline/how-to-run-mycrypto-offline-and-locally" />
             </div>
           </div>
+          <div className="row">
+            <div className="col-xs-12 col-md-6">
+              <PageSelector slug="general-knowledge/ethereum-blockchain/a-glossary-of-common-terms-in-the-ethereum-crypto-space" />
+            </div>
+            <div className="col-xs-12 col-md-6">
+              <PageSelector slug="general-knowledge/ethereum-blockchain/what-is-nonce" />
+            </div>
+          </div>
         </section>
       </div>
     </div>

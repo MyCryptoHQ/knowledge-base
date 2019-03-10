@@ -5,6 +5,7 @@ import SearchHero from '../components/SearchHero/SearchHero';
 import Layout from '../components/Layout/Layout';
 import FeaturedCategories from '../components/FeaturedCategories/FeaturedCategories';
 import PopularArticles from '../components/PopularArticles/PopularArticles';
+import Contributing from '../components/Contributing/Contributing';
 
 const Index: React.StatelessComponent = () => {
   return (
@@ -17,6 +18,7 @@ const Index: React.StatelessComponent = () => {
           <FeaturedCategories />
         </SubHeader>
         <PopularArticles />
+        <Contributing />
       </div>
     </Layout>
   );
