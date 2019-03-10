@@ -15,7 +15,7 @@ interface QueryData {
 const FeaturedCategories: React.StatelessComponent = () => (
   <StaticQuery
     query={graphql`
-      query AllSpul {
+      query {
         allCategory(
           filter: { isTopLevel: { eq: true } }
           sort: { fields: [priority], order: DESC }
