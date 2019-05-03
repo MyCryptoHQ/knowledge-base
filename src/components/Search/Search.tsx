@@ -1,65 +1,45 @@
-import * as React from 'react';
-import { search, setSearchText } from '../../store/search/actions';
-import { ApplicationState } from '../../store';
-import { Dispatch } from 'redux';
-import { SearchActions } from '../../store/search/types';
-import { connect } from 'react-redux';
+import React, { ChangeEvent, FunctionComponent, KeyboardEvent, useContext } from 'react';
+import { SearchContext } from './SearchState';
+import { navigate } from 'gatsby';
 import './Search.scss';
 
-interface OwnProps {
-  compact?: boolean;
+interface Props {
+  compact: boolean;
 }
 
-interface StateProps {
-  searchText: string;
-}
+const Search: FunctionComponent<Props> = ({ compact }) => {
+  const [store, dispatch] = useContext(SearchContext);
 
-interface DispatchProps {
-  onChange(event: React.ChangeEvent<HTMLInputElement>): void;
-  onSearch(): void;
-}
+  const handleSearch = () => {
+    dispatch({ type: 'SEARCH' });
+    navigate('/search');
+  };
 
-type Props = OwnProps & StateProps & DispatchProps;
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: 'SET_SEARCH_TEXT',
+      payload: event.target.value
+    });
+  };
 
-class Search extends React.PureComponent<Props> {
-  constructor(props: Props) {
-    super(props);
-
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
-
-  render(): React.ReactNode {
-    const { compact = true, searchText, onChange } = this.props;
-    return (
-      <div className={`search ${compact ? 'compact' : ''}`}>
-        <input
-          type="search"
-          className="search-input"
-          placeholder="Search"
-          value={searchText}
-          onChange={onChange}
-          onKeyPress={this.handleKeyPress}
-        />
-      </div>
-    );
-  }
-
-  private handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      this.props.onSearch();
+      handleSearch();
     }
-  }
-}
+  };
 
-const mapStateToProps = (state: ApplicationState) => ({ searchText: state.search.searchText });
+  return (
+    <div className={`search ${compact ? 'compact' : ''}`}>
+      <input
+        type="search"
+        className="search-input"
+        placeholder="Search"
+        value={store.searchText}
+        onChange={handleChange}
+        onKeyPress={handleKeyPress}
+      />
+    </div>
+  );
+};
 
-const mapDispatchToProps = (dispatch: Dispatch<SearchActions>) => ({
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
-    dispatch(setSearchText(event.currentTarget.value)),
-  onSearch: () => dispatch(search())
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Search);
+export default Search;

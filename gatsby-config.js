@@ -68,20 +68,6 @@ module.exports = {
       }
     },
     {
-      resolve: 'gatsby-plugin-lunr-search',
-      options: {
-        ref: 'slug',
-        fields: ['title', 'description'],
-        nodes: {
-          Page: {
-            slug: node => node.slug,
-            title: node => node.title,
-            description: node => node.description
-          }
-        }
-      }
-    },
-    {
       resolve: 'gatsby-plugin-matomo',
       options: {
         siteId: '3',

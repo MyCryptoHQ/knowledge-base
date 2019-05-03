@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import MetaData from '../MetaData/MetaData';
 import Footer from '../Footer/Footer';
 import './Layout.scss';
@@ -9,21 +9,19 @@ interface Props {
   hideFooter?: boolean;
 }
 
-const Layout: React.StatelessComponent<Props> = ({
-  children,
-  className = '',
-  hideFooter = false
-}) => (
-  <div className={`layout row full-width ${className}`}>
-    <MetaData />
+const Layout: FunctionComponent<Props> = ({ children, className = '', hideFooter = false }) => {
+  return (
+    <div className={`layout row full-width ${className}`}>
+      <MetaData />
 
-    <div className="row full-width content">{children}</div>
-    {!hideFooter && (
-      <div className="row full-width bottom-xs">
-        <Footer />
-      </div>
-    )}
-  </div>
-);
+      <div className="row full-width content">{children}</div>
+      {!hideFooter && (
+        <div className="row full-width bottom-xs">
+          <Footer />
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default Layout;
