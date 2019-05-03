@@ -8,13 +8,8 @@ import { Page as PageData } from '../models/page';
 import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout/Layout';
-import { ApplicationState } from '../store';
-import { connect } from 'react-redux';
-import { AnyAction, Dispatch } from 'redux';
-import { setSearching } from '../store/search/actions';
-import { navigate } from '@reach/router';
 
-interface OwnProps {
+interface Props {
   pathContext: {
     slug: string;
   };
@@ -28,23 +23,13 @@ interface OwnProps {
   };
 }
 
-interface StateProps {
-  isSearching: boolean;
-}
-
-interface DispatchProps {
-  setSearch(searching: boolean): void;
-}
-
 interface State {
   datePublished: string;
   dateModified: string;
   showSearchButton: boolean;
 }
 
-type Props = OwnProps & StateProps & DispatchProps;
-
-class Page extends React.PureComponent<Props, State> {
+export default class Page extends React.PureComponent<Props, State> {
   state = {
     datePublished: this.props.data.page.datePublished,
     dateModified: this.props.data.page.dateModified,
@@ -53,8 +38,6 @@ class Page extends React.PureComponent<Props, State> {
 
   constructor(props: Props) {
     super(props);
-
-    this.handleClickSearchButton = this.handleClickSearchButton.bind(this);
   }
 
   componentDidMount() {
@@ -62,14 +45,6 @@ class Page extends React.PureComponent<Props, State> {
       datePublished: formatDate(this.state.datePublished),
       dateModified: formatDate(this.state.dateModified)
     });
-  }
-
-  componentWillMount() {
-    const { isSearching, setSearch } = this.props;
-    if (isSearching) {
-      this.setState({ showSearchButton: true });
-      setSearch(false);
-    }
   }
 
   render() {
@@ -100,9 +75,7 @@ class Page extends React.PureComponent<Props, State> {
                 <section className="page-content">
                   {showSearchButton && (
                     <div className="back">
-                      <a href="#" onClick={this.handleClickSearchButton}>
-                        Back to search results
-                      </a>
+                      <a href="#">Back to search results</a>
                     </div>
                   )}
                   <article>
@@ -131,12 +104,6 @@ class Page extends React.PureComponent<Props, State> {
         </div>
       </Layout>
     );
-  }
-
-  private handleClickSearchButton() {
-    const { setSearch } = this.props;
-    setSearch(true);
-    navigate('/search');
   }
 }
 
@@ -168,14 +135,3 @@ export const query = graphql`
     }
   }
 `;
-
-const mapStateToProps = (state: ApplicationState) => ({ isSearching: state.search.isSearching });
-
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
-  setSearch: (searching: boolean) => dispatch(setSearching(searching))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Page);

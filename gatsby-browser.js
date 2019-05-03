@@ -1,3 +1,1 @@
-import wrapWithProvider from './gatsby/wrap-with-provider';
-
-export const wrapRootElement = wrapWithProvider;
+export * from './gatsby/wrap-root-element';
