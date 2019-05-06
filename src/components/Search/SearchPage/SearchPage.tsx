@@ -40,9 +40,12 @@ const SearchPage: FunctionComponent<Props> = ({ allPages }) => {
       const searchResults = fuse.search(store.searchQuery, {
         limit: 15
       });
+
+      window._paq.push(['trackSiteSearch', store.searchQuery, false, searchResults.length]);
+
       setResults(searchResults);
     },
-    [allPages, store.searchQuery]
+    [store.searchQuery]
   );
 
   if (store.searchQuery) {
