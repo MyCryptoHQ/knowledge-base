@@ -73,7 +73,6 @@ module.exports = {
         siteId: '3',
         matomoUrl: 'https://analytics.mycryptoapi.com',
         siteUrl: 'https://support.mycrypto.com/',
-        localScript: '/piwik.js',
         disableCookies: true
       }
     }
