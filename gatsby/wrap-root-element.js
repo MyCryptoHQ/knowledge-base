@@ -1,9 +1,11 @@
 import React from 'react';
-import SearchProvider from '../src/components/Search/SearchProvider';
+import { Provider } from 'react-redux';
+import { configureStore } from '../src/store';
 
 /**
  * All providers should be used in this file, so they work properly in combination with Gatsby.
  */
 export const wrapRootElement = ({ element }) => {
-  return <SearchProvider>{element}</SearchProvider>;
+  const store = configureStore();
+  return <Provider store={store}>{element}</Provider>;
 };

@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import { ApplicationState } from './index';
-import searchReducer from './search/reducer';
+import { searchReducer, SearchActions } from './search';
+
+export type ApplicationActions = SearchActions;
 
 const rootReducer = combineReducers<ApplicationState>({
   search: searchReducer
