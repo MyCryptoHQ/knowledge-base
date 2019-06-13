@@ -1,20 +1,9 @@
 import { Reducer } from 'redux';
-import {
-  SEARCH,
-  SearchActions,
-  SearchState,
-  SET_SEARCH_INDEX,
-  SET_SEARCH_RESULTS,
-  SET_SEARCH_TEXT,
-  SET_SEARCHING
-} from './types';
+import { SEARCH, SearchActions, SearchState, SET_SEARCH_TEXT } from './types';
 
 const INITIAL_STATE: SearchState = {
   searchText: '',
-  searchQuery: '',
-  searchIndex: '',
-  searchResults: [],
-  isSearching: false
+  searchQuery: ''
 };
 
 const reducer: Reducer<SearchState, SearchActions> = (
@@ -23,15 +12,16 @@ const reducer: Reducer<SearchState, SearchActions> = (
 ): SearchState => {
   switch (action.type) {
     case SET_SEARCH_TEXT:
-      return { ...state, searchText: action.payload };
-    case SET_SEARCH_INDEX:
-      return { ...state, searchIndex: action.payload };
-    case SET_SEARCH_RESULTS:
-      return { ...state, searchResults: action.payload };
+      return {
+        ...state,
+        searchText: action.payload
+      };
     case SEARCH:
-      return { ...state, searchQuery: state.searchText, searchText: '', isSearching: true };
-    case SET_SEARCHING:
-      return { ...state, isSearching: action.payload };
+      return {
+        ...state,
+        searchText: '',
+        searchQuery: state.searchText
+      };
     default:
       return state;
   }

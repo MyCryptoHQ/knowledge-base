@@ -1,6 +1,7 @@
-import React, { ChangeEvent, FunctionComponent, KeyboardEvent, useContext } from 'react';
-import { SearchContext } from './SearchState';
+import React, { ChangeEvent, FunctionComponent, KeyboardEvent } from 'react';
 import { navigate } from 'gatsby';
+import { useDispatch, useSelector } from '../../hooks';
+import { search } from '../../store/search';
 import './Search.scss';
 
 interface Props {
@@ -8,10 +9,11 @@ interface Props {
 }
 
 const Search: FunctionComponent<Props> = ({ compact }) => {
-  const [store, dispatch] = useContext(SearchContext);
+  const searchText = useSelector(state => state.search.searchText);
+  const dispatch = useDispatch();
 
   const handleSearch = () => {
-    dispatch({ type: 'SEARCH' });
+    dispatch(search());
     navigate('/search');
   };
 
@@ -34,7 +36,7 @@ const Search: FunctionComponent<Props> = ({ compact }) => {
         type="search"
         className="search-input"
         placeholder="Search"
-        value={store.searchText}
+        value={searchText}
         onChange={handleChange}
         onKeyPress={handleKeyPress}
       />
