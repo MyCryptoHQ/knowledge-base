@@ -68,6 +68,10 @@ const LINK_COLUMNS: Column[] = [
         link: 'https://cryptoscamdb.org/'
       },
       {
+        title: 'FindETH',
+        link: 'https://findeth.io/'
+      },
+      {
         title: 'MoneroVision',
         link: 'https://monerovision.com/'
       }
