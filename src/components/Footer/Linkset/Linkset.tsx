@@ -64,8 +64,12 @@ const LINK_COLUMNS: Column[] = [
           'https://chrome.google.com/webstore/detail/etheraddresslookup/pdknmigbbbhmllnmgdfalmedcmcefdfn'
       },
       {
-        title: 'EtherScamDB',
-        link: 'https://etherscamdb.info/'
+        title: 'CryptoScamDB',
+        link: 'https://cryptoscamdb.org/'
+      },
+      {
+        title: 'FindETH',
+        link: 'https://findeth.io/'
       },
       {
         title: 'MoneroVision',
