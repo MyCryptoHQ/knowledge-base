@@ -1,230 +1,141 @@
-const crypto = require('crypto');
 const minimatch = require('minimatch');
-const removeMarkdown = require('remove-markdown');
 
-/**
- * Create node data that can be used with `createNode`.
- * @param data
- * @param id
- * @param type
- * @param actions
- * @return {{id: *, children: Array, internal: {type: *, content: string, contentDigest: string}}}
- */
-const createNodeData = (data, id, type, actions) => {
-  const { createNodeId } = actions;
+module.exports = async ({
+  actions: { createNode, createParentChildLink },
+  createNodeId,
+  createContentDigest,
+  getNode,
+  getNodes,
+  reporter
+}) => {
+  const nodes = getNodes();
+  const pageNodes = nodes.filter(node => node.internal.type === 'Mdx');
+  const categoryNodes = nodes.filter(node => node.internal.type === 'CategoryData');
 
-  const nodeContent = JSON.stringify(data);
-
-  return {
-    ...data,
-    id: createNodeId(id),
-    children: [],
-    internal: {
-      type,
-      content: nodeContent,
-      contentDigest: crypto
-        .createHash('md5')
-        .update(nodeContent)
-        .digest('hex')
-    }
+  /**
+   * Get a slug from a page data node.
+   *
+   * @param node The page data node to get the slug for.
+   * @return {string} The slug for the page.
+   */
+  const getPageSlug = node => {
+    const parent = getNode(node.parent);
+    return parent.relativePath.replace(/\.md$/, '');
   };
-};
 
-/**
- * Get page data from a File node.
- * @param node
- * @param actions
- * @return {*}
- */
-const getPageData = (node, actions) => {
-  const { getNode } = actions;
-
-  return node.children
-    .map(child => getNode(child))
-    .find(child => child.internal.type === 'MarkdownRemark');
-};
-
-/**
- * Get excerpt from a page data object.
- * @param pageData
- */
-const getExcerpt = pageData => {
-  return (
-    removeMarkdown(pageData.rawMarkdownBody)
-      .slice(0, 200)
-      .replace(/[\r\n]+/g, ' ') + '...'
-  );
-};
-
-/**
- * Get all files in a category from File nodes.
- * @param nodes
- * @param pattern
- * @param parent
- * @param actions
- * @return {*}
- */
-const getPages = (nodes, pattern, parent, actions) => {
-  const { createNode } = actions;
-
-  const pages = [];
-
-  nodes
-    .filter(node => node.internal.type === 'File' && node.extension === 'md')
-    .filter(node => minimatch(node.relativeDirectory, pattern))
-    .forEach(node => {
-      const pageData = getPageData(node, actions);
-
-      const slug = node.relativePath.replace(/\.md$/, '');
-      const excerpt = getExcerpt(pageData);
-
-      const parsedPageData = {
-        title: pageData.frontmatter.title,
-        filename: node.name,
-        description: pageData.frontmatter.description,
-        excerpt,
-        priority: pageData.frontmatter.priority,
-        datePublished: pageData.frontmatter.date_published,
-        dateModified: pageData.frontmatter.date_modified,
-        slug,
-        originalSlug: slug,
-        parent: parent.id,
-        parentSlug: parent.slug,
-        breadcrumbs: [...parent.breadcrumbs]
-      };
-
-      parsedPageData.breadcrumbs.push({
-        title: parsedPageData.title,
-        slug: parsedPageData.slug
-      });
-
-      const pageNode = createNodeData(
-        parsedPageData,
-        `page-${parsedPageData.slug}`,
-        'Page',
-        actions
-      );
-      createNode(pageNode);
-
-      pages.push(pageNode);
+  /**
+   * Register all pages for `categoryNode`.
+   *
+   * @param categoryNode The category to register the pages for.
+   * @return {number} The number of pages registered for the category.
+   */
+  const getPages = async categoryNode => {
+    const pageDataNodes = pageNodes.filter(node => {
+      const parent = getNode(node.parent);
+      return minimatch(parent.relativePath, `${categoryNode.slug}/*`);
     });
 
-  return pages;
-};
+    for (const dataNode of pageDataNodes) {
+      const slug = getPageSlug(dataNode);
+      const {
+        frontmatter: {
+          title,
+          description,
+          priority,
+          date_published: datePublished,
+          date_modified: dateModified
+        }
+      } = dataNode;
 
-/**
- * Get a single page by `slug`.
- * @param nodes
- * @param slug
- */
-const getPage = (nodes, slug) => {
-  return nodes.filter(node => node.internal.type === 'Page').find(node => node.slug === slug);
-};
-
-/**
- * Get category data from a File node.
- * @param node
- * @param actions
- * @return {*}
- */
-const getCategoryData = (node, actions) => {
-  const { getNode } = actions;
-
-  return node.children
-    .map(child => getNode(child))
-    .find(child => child.internal.type === 'CategoryData');
-};
-
-/**
- * Parse all file nodes to categories and return the categories and pages.
- * @param nodes
- * @param pattern
- * @param parent
- * @param actions
- * @return {*}
- */
-const getCategories = (nodes, pattern, parent, actions) => {
-  const { createNode, createParentChildLink } = actions;
-
-  return nodes
-    .filter(
-      node => node.internal.type === 'File' && node.name === 'category' && node.extension === 'yml'
-    )
-    .filter(node => minimatch(node.relativeDirectory, pattern))
-    .map(node => {
-      const categoryData = {
-        ...getCategoryData(node, actions),
-        parent: parent ? parent.id : null,
-        parentSlug: parent ? parent.slug : null,
-        slug: node.relativeDirectory,
-        isTopLevel: !parent,
-        breadcrumbs: []
+      const nodeData = {
+        title,
+        description,
+        priority,
+        datePublished,
+        dateModified,
+        slug
       };
+
+      const node = {
+        ...nodeData,
+        id: createNodeId(`page-${slug}`),
+        parent: categoryNode.id,
+        children: [],
+        internal: {
+          type: 'Page',
+          contentDigest: createContentDigest(nodeData)
+        }
+      };
+
+      await createNode(node);
+      createParentChildLink({ parent: categoryNode, child: node });
+      createParentChildLink({ parent: node, child: dataNode });
+    }
+
+    return pageDataNodes.length;
+  };
+
+  /**
+   * Get a slug from a category data node.
+   *
+   * @param node The category data node to get the slug for.
+   * @return {string} The slug for the category.
+   */
+  const getCategorySlug = node => {
+    const parent = getNode(node.parent);
+    return parent.relativePath.replace('/category.yml', '');
+  };
+
+  /**
+   * Register all categories for `pattern`.
+   *
+   * @param parent The parent of the category nodes.
+   * @param pattern The glob pattern to get all category file nodes for.
+   */
+  const getCategories = async (parent, pattern) => {
+    const categoryDataNodes = categoryNodes.filter(node => {
+      const parent = getNode(node.parent);
+      return minimatch(parent.relativePath, pattern);
+    });
+
+    for (const dataNode of categoryDataNodes) {
+      const slug = getCategorySlug(dataNode);
+      const { title, icon, description, priority } = dataNode;
+
+      const nodeData = {
+        title,
+        icon,
+        description,
+        priority,
+        slug,
+        isTopLevel: !parent
+      };
+
+      const child = {
+        ...nodeData,
+        id: createNodeId(`category-${slug}`),
+        parent: parent ? parent.id : null,
+        children: [],
+        internal: {
+          type: 'Category',
+          contentDigest: createContentDigest(nodeData)
+        }
+      };
+
+      await createNode(child);
+      const pageCount = await getPages(child);
+      reporter.info(`Registered new category '${slug}' with ${pageCount} pages`);
 
       if (parent) {
-        categoryData.breadcrumbs.push(...parent.breadcrumbs);
+        createParentChildLink({
+          parent,
+          child
+        });
       }
 
-      categoryData.breadcrumbs.push({
-        title: categoryData.title,
-        slug: categoryData.slug
-      });
+      await getCategories(child, `${slug}/*/*`);
+    }
+  };
 
-      const categoryNode = createNodeData(
-        categoryData,
-        `category-${categoryData.slug}`,
-        'Category',
-        actions
-      );
-      createNode(categoryNode);
-
-      // Get pages in the category
-      const pages = getPages(nodes, categoryNode.slug, categoryNode, actions);
-      pages.forEach(pageNode => {
-        createParentChildLink({ parent: categoryNode, child: pageNode });
-      });
-
-      // Get subcategories
-      const subCategories = getCategories(nodes, `${categoryNode.slug}/*`, categoryNode, actions);
-      subCategories.forEach(subCategoryNode => {
-        createParentChildLink({ parent: categoryNode, child: subCategoryNode });
-      });
-
-      return categoryNode;
-    });
-};
-
-const registerLinks = (nodes, actions) => {
-  const { createNode, createParentChildLink } = actions;
-
-  return nodes
-    .filter(node => node.internal.type === 'Category')
-    .filter(node => node.links)
-    .forEach(category => {
-      category.links.forEach(link => {
-        const page = { ...getPage(nodes, link) };
-        page.parent = category.id;
-        page.parentSlug = category.slug;
-        page.slug = `${category.slug}/${page.filename}`;
-        page.breadcrumbs = [...category.breadcrumbs];
-
-        page.breadcrumbs.push({
-          title: page.title,
-          slug: page.slug
-        });
-
-        const newPageNode = createNodeData(page, `page-${page.slug}`, 'Page', actions);
-        createNode(newPageNode);
-        createParentChildLink({ parent: category, child: newPageNode });
-      });
-    });
-};
-
-module.exports = ({ getNodes, getNode, createNodeId, actions }) => {
-  const nodes = getNodes();
-  getCategories(nodes, '*', null, { ...actions, getNode, createNodeId });
-
-  // Get nodes including new categories and pages
-  const newNodes = getNodes();
-  registerLinks(newNodes, { ...actions, getNode, createNodeId });
+  await getCategories(null, '*/*');
 };

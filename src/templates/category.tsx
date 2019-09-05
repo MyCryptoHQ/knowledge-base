@@ -6,7 +6,6 @@ import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs';
 import PageItem from '../components/PageItem/PageItem';
 import SubCategoryItem from '../components/SubCategoryItem/SubCategoryItem';
 import { graphql } from 'gatsby';
-import { Page } from '../models/page';
 import MetaData from '../components/MetaData/MetaData';
 import Layout from '../components/Layout/Layout';
 
@@ -15,28 +14,11 @@ interface Props {
     slug: string;
   };
   data: {
-    site: {
-      siteMetadata: {
-        title: string;
-      };
-    };
     category: CategoryData;
-    allCategory: {
-      edges: {
-        node: CategoryData;
-      }[];
-    };
-    allPage: {
-      edges: {
-        node: Page;
-      }[];
-    };
   };
 }
 
-const Category: React.StatelessComponent<Props> = ({
-  data: { site, category, allCategory: subCategories, allPage: pages }
-}) => (
+const Category: React.StatelessComponent<Props> = ({ data: { category } }) => (
   <Layout>
     <div className="full-width">
       <MetaData title={category.title} description={category.description} />
@@ -46,7 +28,7 @@ const Category: React.StatelessComponent<Props> = ({
         <div className="container">
           <div className="row center-xs">
             <div className="col-xs-10 col-gutter-lr">
-              <Breadcrumbs breadcrumbs={category.breadcrumbs} />
+              <Breadcrumbs parent={category.parent} />
             </div>
           </div>
         </div>
@@ -57,16 +39,16 @@ const Category: React.StatelessComponent<Props> = ({
           <div className="col-xs-10 col-md-6 col-gutter-lr">
             <section>
               <h2>{category.title}</h2>
-              {subCategories && (
+              {category.childrenCategory && (
                 <>
-                  {subCategories.edges.map(({ node: subCategory }) => (
+                  {category.childrenCategory.map(subCategory => (
                     <SubCategoryItem key={subCategory.slug} category={subCategory} />
                   ))}
-                  {pages && <hr />}
+                  {category.childrenPage && <hr />}
                 </>
               )}
-              {pages &&
-                pages.edges.map(({ node: page }) => <PageItem key={page.slug} page={page} />)}
+              {category.childrenPage &&
+                category.childrenPage.map(page => <PageItem key={page.slug} page={page} />)}
             </section>
           </div>
         </div>
@@ -77,11 +59,6 @@ const Category: React.StatelessComponent<Props> = ({
 
 export const query = graphql`
   query Category($slug: String!) {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     category(slug: { eq: $slug }) {
       title
       slug
@@ -90,30 +67,24 @@ export const query = graphql`
         title
         slug
         description
-      }
-      breadcrumbs {
-        title
-        slug
-      }
-    }
-    allCategory(filter: { parentSlug: { eq: $slug } }, sort: { fields: [priority], order: DESC }) {
-      edges {
-        node {
+        childrenPage {
           title
-          slug
-          description
-          childrenPage {
-            title
-          }
+        }
+        childrenCategory {
+          title
         }
       }
-    }
-    allPage(filter: { parentSlug: { eq: $slug } }, sort: { fields: [priority], order: DESC }) {
-      edges {
-        node {
+      childrenPage {
+        title
+        slug
+        childMdx {
+          excerpt
+        }
+      }
+      parent {
+        ... on Category {
           title
           slug
-          excerpt
         }
       }
     }

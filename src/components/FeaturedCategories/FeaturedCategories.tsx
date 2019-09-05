@@ -25,9 +25,7 @@ const FeaturedCategories: React.StatelessComponent = () => (
               title
               slug
               description
-              childIconData {
-                icon
-              }
+              icon
               childrenPage {
                 title
               }

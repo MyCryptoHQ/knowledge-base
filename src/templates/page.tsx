@@ -1,4 +1,6 @@
-import * as React from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
+import { graphql } from 'gatsby';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 import MetaData from '../components/MetaData/MetaData';
 import Header from '../components/Header/Header';
 import SubHeader from '../components/SubHeader/SubHeader';
@@ -6,8 +8,9 @@ import { formatDate } from '../utils/date';
 import * as githubIcon from '../assets/images/icons/social/github.svg';
 import { Page as PageData } from '../models/page';
 import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs';
-import { graphql } from 'gatsby';
 import Layout from '../components/Layout/Layout';
+import { MDXProvider } from '@mdx-js/react';
+import * as shortcodes from '../components/markdown';
 
 interface Props {
   pathContext: {
@@ -15,122 +18,85 @@ interface Props {
   };
   data: {
     page: PageData;
-    file: {
-      childMarkdownRemark: {
-        html: string;
-      };
-    };
   };
 }
 
-interface State {
-  datePublished: string;
-  dateModified: string;
-  showSearchButton: boolean;
-}
+const Page: FunctionComponent<Props> = ({ data: { page } }) => {
+  const [dateModified, setDateModified] = useState<string>();
 
-export default class Page extends React.PureComponent<Props, State> {
-  state = {
-    datePublished: this.props.data.page.datePublished,
-    dateModified: this.props.data.page.dateModified,
-    showSearchButton: false
-  };
+  useEffect(
+    () => {
+      setDateModified(formatDate(page.dateModified));
+    },
+    [page.dateModified]
+  );
 
-  constructor(props: Props) {
-    super(props);
-  }
+  return (
+    <Layout>
+      <div className="full-width">
+        <MetaData title={`${page.title} · ${page.parent.title}`} description={page.description} />
 
-  componentDidMount() {
-    this.setState({
-      datePublished: formatDate(this.state.datePublished),
-      dateModified: formatDate(this.state.dateModified)
-    });
-  }
-
-  render() {
-    const {
-      data: { page, file }
-    } = this.props;
-    const { dateModified, showSearchButton } = this.state;
-
-    return (
-      <Layout>
-        <div className="full-width">
-          <MetaData title={`${page.title} · ${page.parent.title}`} description={page.description} />
-
-          <Header />
-          <SubHeader>
-            <div className="container">
-              <div className="row center-xs">
-                <div className="col-xs-10 col-gutter-lr">
-                  <Breadcrumbs breadcrumbs={page.breadcrumbs} />
-                </div>
-              </div>
-            </div>
-          </SubHeader>
-
+        <Header />
+        <SubHeader>
           <div className="container">
-            <div className="page row center-xs">
+            <div className="row center-xs">
               <div className="col-xs-10 col-gutter-lr">
-                <section className="page-content">
-                  {showSearchButton && (
-                    <div className="back">
-                      <a href="#">Back to search results</a>
-                    </div>
-                  )}
-                  <article>
-                    <h1>{page.title}</h1>
-                    <div className="page-metadata">Last updated: {dateModified}</div>
-                    <div
-                      className="page-markdown"
-                      dangerouslySetInnerHTML={{ __html: file.childMarkdownRemark.html || '' }}
-                    />
-                  </article>
-                </section>
-                <section className="page-extra">
-                  <a
-                    href={`https://github.com/MyCryptoHQ/knowledge-base-content/blob/master/${
-                      page.originalSlug
-                    }.md`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img src={githubIcon} alt="Github icon" /> Improve this article
-                  </a>
-                </section>
+                <Breadcrumbs parent={page.parent} />
               </div>
             </div>
           </div>
+        </SubHeader>
+
+        <div className="container">
+          <div className="page row center-xs">
+            <div className="col-xs-10 col-gutter-lr">
+              <section className="page-content">
+                <article>
+                  <h1>{page.title}</h1>
+                  <div className="page-metadata">Last updated: {dateModified}</div>
+                  <MDXProvider components={shortcodes}>
+                    <div className="page-markdown">
+                      <MDXRenderer>{page.childMdx.body}</MDXRenderer>
+                    </div>
+                  </MDXProvider>
+                </article>
+              </section>
+              <section className="page-extra">
+                <a
+                  href={`https://github.com/MyCryptoHQ/knowledge-base-content/blob/master/${
+                    page.slug
+                  }.md`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={githubIcon} alt="Github icon" /> Improve this article
+                </a>
+              </section>
+            </div>
+          </div>
         </div>
-      </Layout>
-    );
-  }
-}
+      </div>
+    </Layout>
+  );
+};
+
+export default Page;
 
 export const query = graphql`
-  fragment CategoryData on Category {
-    title
-  }
-
-  query Page($slug: String!, $file: String!) {
+  query Page($slug: String!) {
     page(slug: { eq: $slug }) {
       title
       slug
-      originalSlug
       description
-      datePublished
       dateModified
+      childMdx {
+        body
+      }
       parent {
-        ...CategoryData
-      }
-      breadcrumbs {
-        title
-        slug
-      }
-    }
-    file(relativePath: { eq: $file }) {
-      childMarkdownRemark {
-        html
+        ... on Category {
+          title
+          slug
+        }
       }
     }
   }

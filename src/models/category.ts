@@ -1,5 +1,4 @@
 import { Page } from './page';
-import { Breadcrumb } from './breadcrumb';
 
 export interface Category {
   /**
@@ -18,16 +17,9 @@ export interface Category {
   slug: string;
 
   /**
-   * The slug of the parent category (if exists).
+   * The name of the icon for the category.
    */
-  parentSlug?: string;
-
-  childIconData: {
-    /**
-     * The public path of the icon for the category.
-     */
-    icon: string;
-  };
+  icon: string;
 
   /**
    * The redirects for this category, e.g. `/category/from` will redirect to `/category/to`.
@@ -43,12 +35,15 @@ export interface Category {
   childrenCategory: Category[];
 
   /**
-   * The pages in this category (without the parsed HTML!).
+   * The pages in this category.
    */
   childrenPage: Page[];
 
   /**
-   * The breadcrumbs to display.
+   * The parent category.
    */
-  breadcrumbs: Breadcrumb[];
+  parent: {
+    title: string;
+    slug: string;
+  };
 }

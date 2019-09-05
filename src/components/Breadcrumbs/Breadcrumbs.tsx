@@ -1,21 +1,23 @@
-import * as React from 'react';
-import { Breadcrumb } from '../../models/breadcrumb';
+import React, { FunctionComponent } from 'react';
 import Link from 'gatsby-link';
 
 interface Props {
-  breadcrumbs: Breadcrumb[];
+  parent?: {
+    title: string;
+    slug: string;
+  };
 }
 
-const Breadcrumbs: React.StatelessComponent<Props> = ({ breadcrumbs }) => (
+const Breadcrumbs: FunctionComponent<Props> = ({ parent }) => (
   <ul className="breadcrumbs">
     <li>
       <Link to="/">Knowledge Base</Link>
     </li>
-    {breadcrumbs.map(breadcrumb => (
-      <li key={breadcrumb.title}>
-        <Link to={`/${breadcrumb.slug}`}>{breadcrumb.title}</Link>
+    {parent && (
+      <li key={parent.slug}>
+        <Link to={`/${parent.slug}`}>{parent.title}</Link>
       </li>
-    ))}
+    )}
   </ul>
 );
 

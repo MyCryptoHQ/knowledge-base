@@ -1,5 +1,4 @@
 import { Category } from './category';
-import { Breadcrumb } from './breadcrumb';
 
 export interface Page {
   /**
@@ -38,19 +37,12 @@ export interface Page {
   slug: string;
 
   /**
-   * The original page slug, e.g. `/page`. Most of the time this is the same as `slug`, except when the page is linked in a different category.
-   */
-  originalSlug: string;
-
-  /**
-   * The slug of the category.
-   */
-  parentSlug: string;
-
-  /**
    * The category of this page.
    */
   parent: Category;
 
-  breadcrumbs: Breadcrumb[];
+  childMdx: {
+    excerpt: string;
+    body: any;
+  };
 }
