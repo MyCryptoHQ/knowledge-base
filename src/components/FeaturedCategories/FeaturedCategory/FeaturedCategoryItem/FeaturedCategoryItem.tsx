@@ -1,32 +1,73 @@
-import * as React from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import { Category } from '../../../../models/category';
 import Center from '../../../ui/Center/Center';
 import Card from '../../../ui/Card/Card';
 import './FeaturedCategoryItem.scss';
-import { Link } from 'gatsby';
 
 interface Props {
   category: Category;
 }
 
-const FeaturedCategoryItem: React.StatelessComponent<Props> = ({ category }) => (
-  <Link to={category.slug} className="featured-category-item-wrapper">
-    <Card className="featured-category-item">
-      <Center>
-        <div className="row">
-          <div className="col-xs featured-category-item-image">
-            <img src={category.childIconData.icon} alt={category.title} />
+interface QueryData {
+  allFile: {
+    edges: {
+      node: {
+        relativePath: string;
+        publicURL: string;
+      };
+    }[];
+  };
+}
+
+const FeaturedCategoryItem: FunctionComponent<Props> = ({ category }) => {
+  const data: QueryData = useStaticQuery(graphql`
+    query {
+      allFile(filter: { sourceInstanceName: { eq: "images" } }) {
+        edges {
+          node {
+            relativePath
+            publicURL
+          }
+        }
+      }
+    }
+  `);
+
+  const [icon, setIcon] = useState<string>();
+
+  useEffect(
+    () => {
+      const iconNode = data.allFile.edges
+        .map(edge => edge.node)
+        .find(node => node.relativePath === `icons/${category.icon}.svg`);
+
+      if (iconNode) {
+        setIcon(iconNode.publicURL);
+      }
+    },
+    [data.allFile.edges]
+  );
+
+  return (
+    <Link to={category.slug} className="featured-category-item-wrapper">
+      <Card className="featured-category-item">
+        <Center>
+          <div className="row">
+            <div className="col-xs featured-category-item-image">
+              {icon && <img src={icon} alt={category.title} />}
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-xs featured-category-item-description">
-            <h2>{category.title}</h2>
-            <p>{category.description}</p>
+          <div className="row">
+            <div className="col-xs featured-category-item-description">
+              <h2>{category.title}</h2>
+              <p>{category.description}</p>
+            </div>
           </div>
-        </div>
-      </Center>
-    </Card>
-  </Link>
-);
+        </Center>
+      </Card>
+    </Link>
+  );
+};
 
 export default FeaturedCategoryItem;

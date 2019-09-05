@@ -62,7 +62,9 @@ export const query = graphql`
           title
           description
           slug
-          excerpt
+          childMdx {
+            excerpt
+          }
         }
       }
     }
