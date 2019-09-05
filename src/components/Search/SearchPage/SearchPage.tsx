@@ -16,7 +16,7 @@ const fuse = new Fuse<Page>([], {
       weight: 0.2
     },
     {
-      name: 'excerpt',
+      name: 'childMdx.excerpt',
       weight: 0.2
     }
   ],

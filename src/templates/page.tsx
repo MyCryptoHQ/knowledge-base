@@ -9,6 +9,8 @@ import * as githubIcon from '../assets/images/icons/social/github.svg';
 import { Page as PageData } from '../models/page';
 import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs';
 import Layout from '../components/Layout/Layout';
+import { MDXProvider } from '@mdx-js/react';
+import * as shortcodes from '../components/markdown';
 
 interface Props {
   pathContext: {
@@ -52,7 +54,11 @@ const Page: FunctionComponent<Props> = ({ data: { page } }) => {
                 <article>
                   <h1>{page.title}</h1>
                   <div className="page-metadata">Last updated: {dateModified}</div>
-                  <MDXRenderer>{page.childMdx.body}</MDXRenderer>
+                  <MDXProvider components={shortcodes}>
+                    <div className="page-markdown">
+                      <MDXRenderer>{page.childMdx.body}</MDXRenderer>
+                    </div>
+                  </MDXProvider>
                 </article>
               </section>
               <section className="page-extra">

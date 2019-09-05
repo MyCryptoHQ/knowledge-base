@@ -70,6 +70,9 @@ export const query = graphql`
         childrenPage {
           title
         }
+        childrenCategory {
+          title
+        }
       }
       childrenPage {
         title

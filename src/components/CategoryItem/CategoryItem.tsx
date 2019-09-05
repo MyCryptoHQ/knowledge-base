@@ -11,9 +11,6 @@ const CategoryItem: React.StatelessComponent<Props> = ({ category }) => (
   <div className="category-item">
     <Link to={`/${category.slug}`}>
       <div className="row">
-        <div className="category-image col-xs-2 col-no-gutter">
-          <img src={category.childIconData.icon} alt={category.title} />
-        </div>
         <div className="category-description col-xs col-no-gutter">
           <h3>{category.title}</h3>
           <p>{category.description}</p>

@@ -25,11 +25,10 @@ declare module '@mdx-js/react' {
     | 'inlineCode'
     | 'hr'
     | 'a'
-    | 'img';
+    | 'img'
+    | string;
 
-  export type Components = {
-    [key in ComponentType]?: React.ComponentType<{ children: React.ReactNode }>
-  };
+  export type Components = { [key in ComponentType]?: React.ComponentType };
 
   export interface MDXProviderProps {
     children: React.ReactNode;
