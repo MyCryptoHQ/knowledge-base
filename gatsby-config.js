@@ -39,6 +39,14 @@ module.exports = {
           {
             resolve: 'gatsby-remark-static-images'
           }
+        ],
+        plugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 750
+            }
+          }
         ]
       }
     },
