@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { graphql, Link, useStaticQuery } from 'gatsby';
 import { Category } from '../../../../models/category';
-import Center from '../../../ui/Center/Center';
-import Card from '../../../ui/Card/Card';
+import Center from '../../../ui/Center';
+import Card from '../../../ui/Card';
 import './FeaturedCategoryItem.scss';
 
 interface Props {
@@ -21,7 +21,7 @@ interface QueryData {
 }
 
 const FeaturedCategoryItem: FunctionComponent<Props> = ({ category }) => {
-  const data: QueryData = useStaticQuery(graphql`
+  const data = useStaticQuery<QueryData>(graphql`
     query {
       allFile(filter: { sourceInstanceName: { eq: "images" } }) {
         edges {
@@ -50,7 +50,7 @@ const FeaturedCategoryItem: FunctionComponent<Props> = ({ category }) => {
   );
 
   return (
-    <Link to={category.slug} className="featured-category-item-wrapper">
+    <Link to={`/${category.slug}`} className="featured-category-item-wrapper">
       <Card className="featured-category-item">
         <Center>
           <div className="row">

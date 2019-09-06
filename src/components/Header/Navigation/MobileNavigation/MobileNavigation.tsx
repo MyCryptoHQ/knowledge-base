@@ -1,15 +1,15 @@
-import * as React from 'react';
-import * as classNames from 'classnames';
+import React, { FunctionComponent } from 'react';
 import { Link } from 'gatsby';
+import * as classNames from 'classnames';
+import ExternalLink from '../../../ExternalLink';
+import Caret from '../Caret';
 import './MobileNavigation.scss';
-import ExternalLink from '../../../ExternalLink/ExternalLink';
-import Caret from '../Caret/Caret';
 
 interface Props {
   isVisible: boolean;
 }
 
-const MobileNavigation: React.StatelessComponent<Props> = ({ isVisible }) => (
+const MobileNavigation: FunctionComponent<Props> = ({ isVisible }) => (
   <div className={classNames('mobile-navigation', { visible: isVisible })}>
     <ul className="mobile-menu">
       <li>

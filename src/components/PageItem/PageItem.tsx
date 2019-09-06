@@ -1,5 +1,5 @@
-import * as React from 'react';
-import Link from 'gatsby-link';
+import React, { FunctionComponent } from 'react';
+import { Link } from 'gatsby';
 
 interface Props {
   page: {
@@ -11,7 +11,7 @@ interface Props {
   };
 }
 
-const PageItem: React.StatelessComponent<Props> = ({ page }) => (
+const PageItem: FunctionComponent<Props> = ({ page }) => (
   <div className="category-page">
     <Link to={`/${page.slug}`}>
       <div className="row">

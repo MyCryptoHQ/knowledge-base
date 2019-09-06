@@ -1,5 +1,5 @@
-import * as React from 'react';
-import CategoryItem from '../CategoryItem/CategoryItem';
+import React, { FunctionComponent } from 'react';
+import CategoryItem from '../CategoryItem';
 import chunk from 'lodash.chunk';
 import { Category } from '../../models/category';
 import './Categories.scss';
@@ -8,7 +8,7 @@ interface Props {
   categories: Category[];
 }
 
-const Categories: React.StatelessComponent<Props> = ({ categories }) => (
+const Categories: FunctionComponent<Props> = ({ categories }) => (
   <div className="categories">
     {chunk(categories, 2).map((categoryChunk, index) => (
       <div className="row" key={index}>

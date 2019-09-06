@@ -1,29 +1,27 @@
-import * as React from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Category } from '../../../models/category';
-import FeaturedCategoryItem from './FeaturedCategoryItem/FeaturedCategoryItem';
+import FeaturedCategoryItem from './FeaturedCategoryItem';
 
 interface Props {
   category: string;
   categories: Category[];
 }
 
-interface State {
-  category?: Category;
-}
+const FeaturedCategory: FunctionComponent<Props> = ({ category, categories }) => {
+  const [categoryItem, setCategoryItem] = useState<Category>();
 
-export default class FeaturedCategory extends React.PureComponent<Props, State> {
-  componentWillMount() {
-    const { category, categories } = this.props;
-    this.setState({
-      category: categories.find(c => c.slug === `${category}`)
-    });
+  useEffect(
+    () => {
+      setCategoryItem(categories.find(item => item.slug === category));
+    },
+    [category]
+  );
+
+  if (categoryItem) {
+    return <FeaturedCategoryItem category={categoryItem} />;
   }
 
-  render() {
-    const { category } = this.state;
-    if (category) {
-      return <FeaturedCategoryItem category={category} />;
-    }
-    return null;
-  }
-}
+  return null;
+};
+
+export default FeaturedCategory;

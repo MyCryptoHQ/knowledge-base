@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Category } from '../../../models/category';
 
 interface Props {
   category: Category;
 }
 
-const CategoryItemCount: React.StatelessComponent<Props> = ({ category }) => {
+const CategoryItemCount: FunctionComponent<Props> = ({ category }) => {
   return (
     <div className="category-article-count">
       {category.childrenPage &&

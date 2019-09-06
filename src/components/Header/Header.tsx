@@ -1,12 +1,12 @@
-import * as React from 'react';
-import Navigation from './Navigation/Navigation';
+import React, { FunctionComponent } from 'react';
+import Navigation from './Navigation';
 import './Header.scss';
 
 interface Props {
   showSearch?: boolean;
 }
 
-const Header: React.StatelessComponent<Props> = ({ showSearch = true, children }) => (
+const Header: FunctionComponent<Props> = ({ showSearch = true, children }) => (
   <div className="header">
     <Navigation showSearch={showSearch} />
     {children}

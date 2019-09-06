@@ -1,5 +1,5 @@
-import * as React from 'react';
-import ExternalLink from '../../ExternalLink/ExternalLink';
+import React, { FunctionComponent } from 'react';
+import ExternalLink from '../../ExternalLink';
 import './Linkset.scss';
 
 interface Link {
@@ -79,7 +79,7 @@ const LINK_COLUMNS: Column[] = [
   }
 ];
 
-const Linkset: React.StatelessComponent = () => (
+const Linkset: FunctionComponent = () => (
   <div className="linkset">
     {LINK_COLUMNS.map(column => (
       <div key={column.heading} className="linkset-column">

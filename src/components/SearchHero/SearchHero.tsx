@@ -1,8 +1,8 @@
-import * as React from 'react';
-import Search from '../Search/Search';
+import React, { FunctionComponent } from 'react';
+import Search from '../Search';
 import './SearchHero.scss';
 
-const SearchHero: React.StatelessComponent = () => (
+const SearchHero: FunctionComponent = () => (
   <div className="hero container">
     <div className="row center-xs">
       <div className="col-xs hero-text align-center">How can we help you?</div>

@@ -1,7 +1,7 @@
-import * as React from 'react';
-import PageSelector from '../PageSelector/PageSelector';
+import React, { FunctionComponent } from 'react';
+import PageSelector from '../PageSelector';
 
-const PopularArticles: React.StatelessComponent = () => (
+const PopularArticles: FunctionComponent = () => (
   <div className="container">
     <div className="home row center-xs">
       <div className="col-xs-10">

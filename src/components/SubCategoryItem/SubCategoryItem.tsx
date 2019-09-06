@@ -1,13 +1,13 @@
-import * as React from 'react';
-import Link from 'gatsby-link';
+import React, { FunctionComponent } from 'react';
+import { Link } from 'gatsby';
 import { Category } from '../../models/category';
-import CategoryItemCount from '../CategoryItem/CategoryItemCount/CategoryItemCount';
+import CategoryItemCount from '../CategoryItem/CategoryItemCount';
 
 interface Props {
   category: Category;
 }
 
-const SubCategoryItem: React.StatelessComponent<Props> = ({ category }) => (
+const SubCategoryItem: FunctionComponent<Props> = ({ category }) => (
   <div className="category-page">
     <Link to={`/${category.slug}`}>
       <div className="row">

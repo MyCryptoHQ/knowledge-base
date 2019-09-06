@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 
-const HorizontalRule: React.StatelessComponent = () => (
+const HorizontalRule: FunctionComponent = () => (
   <div className="horizontal-rule">
     <div className="horizontal-rule-line" />
   </div>

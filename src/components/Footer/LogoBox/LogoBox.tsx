@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import * as logo from '../../../assets/images/logo-2.svg';
-import SocialsAndLegal from '../SocialsAndLegal/SocialsAndLegal';
+import SocialsAndLegal from '../SocialsAndLegal';
 import './LogoBox.scss';
 
-const LogoBox: React.StatelessComponent = () => (
+const LogoBox: FunctionComponent = () => (
   <div className="logo-box">
     <div className="logo-box-image">
       <img src={logo} alt="Logo" />

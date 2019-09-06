@@ -1,13 +1,13 @@
-import * as React from 'react';
-import HorizontalRule from './HorizontalRule/HorizontalRule';
-import VerticalRule from './VerticalRule/VerticalRule';
-import LogoBox from './LogoBox/LogoBox';
-import DonateAndSubscribe from './DonateAndSubscribe/DonateAndSubscribe';
-import Linkset from './Linkset/Linkset';
-import SocialsAndLegal from './SocialsAndLegal/SocialsAndLegal';
+import React, { FunctionComponent } from 'react';
+import HorizontalRule from './HorizontalRule';
+import VerticalRule from './VerticalRule';
+import LogoBox from './LogoBox';
+import DonateAndSubscribe from './DonateAndSubscribe';
+import Linkset from './Linkset';
+import SocialsAndLegal from './SocialsAndLegal';
 import './Footer.scss';
 
-const MobileFooter = () => (
+const MobileFooter: FunctionComponent = () => (
   <div className="mobile-only">
     <div className="footer">
       <LogoBox />
@@ -20,7 +20,7 @@ const MobileFooter = () => (
   </div>
 );
 
-const TabletFooter = () => (
+const TabletFooter: FunctionComponent = () => (
   <div className="tablet-only">
     <div className="footer">
       <LogoBox />
@@ -33,7 +33,7 @@ const TabletFooter = () => (
   </div>
 );
 
-const DesktopFooter = () => (
+const DesktopFooter: FunctionComponent = () => (
   <div className="desktop-only">
     <div className="footer-wrapper">
       <div className="footer">
@@ -47,7 +47,7 @@ const DesktopFooter = () => (
   </div>
 );
 
-const Footer: React.StatelessComponent = () => (
+const Footer: FunctionComponent = () => (
   <div className="footer-row">
     <MobileFooter />
     <TabletFooter />

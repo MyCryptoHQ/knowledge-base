@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useMemo, useState } from 'react';
-import PageItem from '../../PageItem/PageItem';
+import { navigate } from 'gatsby';
+import PageItem from '../../PageItem';
 import { Page } from '../../../models/page';
 import * as Fuse from 'fuse.js';
-import { navigate } from 'gatsby';
 import { useSelector } from '../../../hooks';
 
 const fuse = new Fuse<Page>([], {

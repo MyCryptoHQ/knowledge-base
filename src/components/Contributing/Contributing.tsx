@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Link } from 'gatsby';
 import './Contributing.scss';
 
-const Contributing: React.StatelessComponent = () => (
+const Contributing: FunctionComponent = () => (
   <div className="contributing">
     <div className="row">
       <div className="col-xs-12 col-gutter-lr">

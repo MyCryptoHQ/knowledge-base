@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import * as CopyToClipboard from 'react-copy-to-clipboard';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   onCopy?(): void;
 }
 
-const DonationButton: React.StatelessComponent<Props> = ({ text, icon, title, onCopy }) => (
+const DonationButton: FunctionComponent<Props> = ({ text, icon, title, onCopy }) => (
   <CopyToClipboard text={text} onCopy={onCopy}>
     <button className="donation-button">
       <span>

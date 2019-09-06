@@ -1,5 +1,5 @@
-import * as React from 'react';
-import ExternalLink from '../../ExternalLink/ExternalLink';
+import React, { FunctionComponent } from 'react';
+import ExternalLink from '../../ExternalLink';
 import './SocialsAndLegal.scss';
 
 interface Link {
@@ -38,7 +38,7 @@ const SOCIAL_MEDIA_LINKS: Link[] = [
   }
 ];
 
-const SocialsAndLegal: React.StatelessComponent = () => (
+const SocialsAndLegal: FunctionComponent = () => (
   <div className="socials-and-legal">
     <div className="socials">
       {SOCIAL_MEDIA_LINKS.map((socialMediaLink, index) => (
