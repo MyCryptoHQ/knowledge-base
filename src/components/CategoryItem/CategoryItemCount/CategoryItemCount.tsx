@@ -6,10 +6,6 @@ interface Props {
 }
 
 const CategoryItemCount: React.StatelessComponent<Props> = ({ category }) => {
-  console.log(category);
-  console.log(category.childrenCategory && category.childrenCategory.length);
-  console.log(category.childrenPage && category.childrenPage.length);
-
   return (
     <div className="category-article-count">
       {category.childrenPage &&

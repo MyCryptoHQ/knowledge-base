@@ -15,6 +15,7 @@ script:
 - yarn run prettier:diff
 - yarn run tslint
 before_deploy:
+- yarn run clean
 - yarn run build --prefix-paths
 deploy:
   provider: pages
