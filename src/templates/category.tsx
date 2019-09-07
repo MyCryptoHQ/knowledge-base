@@ -1,13 +1,13 @@
-import * as React from 'react';
-import Header from '../components/Header/Header';
-import SubHeader from '../components/SubHeader/SubHeader';
+import React, { FunctionComponent } from 'react';
+import Header from '../components/Header';
+import SubHeader from '../components/SubHeader';
 import { Category as CategoryData } from '../models/category';
-import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs';
-import PageItem from '../components/PageItem/PageItem';
-import SubCategoryItem from '../components/SubCategoryItem/SubCategoryItem';
+import Breadcrumbs from '../components/Breadcrumbs';
+import PageItem from '../components/PageItem';
+import SubCategoryItem from '../components/SubCategoryItem';
 import { graphql } from 'gatsby';
-import MetaData from '../components/MetaData/MetaData';
-import Layout from '../components/Layout/Layout';
+import MetaData from '../components/MetaData';
+import Layout from '../components/Layout';
 
 interface Props {
   pathContext: {
@@ -18,7 +18,7 @@ interface Props {
   };
 }
 
-const Category: React.StatelessComponent<Props> = ({ data: { category } }) => (
+const Category: FunctionComponent<Props> = ({ data: { category } }) => (
   <Layout>
     <div className="full-width">
       <MetaData title={category.title} description={category.description} />

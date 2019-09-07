@@ -1,1 +1,7 @@
-export { default as TokenInfo } from './TokenInfo';
+import components from './default';
+import TokenInfo from './TokenInfo';
+
+export default {
+  ...components,
+  TokenInfo
+};

@@ -1,16 +1,17 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import MetaData from '../components/MetaData/MetaData';
-import Header from '../components/Header/Header';
-import SubHeader from '../components/SubHeader/SubHeader';
+import MetaData from '../components/MetaData';
+import Header from '../components/Header';
+import SubHeader from '../components/SubHeader';
 import { formatDate } from '../utils/date';
 import * as githubIcon from '../assets/images/icons/social/github.svg';
 import { Page as PageData } from '../models/page';
-import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs';
-import Layout from '../components/Layout/Layout';
+import Breadcrumbs from '../components/Breadcrumbs';
+import Layout from '../components/Layout';
 import { MDXProvider } from '@mdx-js/react';
-import * as shortcodes from '../components/markdown';
+import shortcodes from '../components/markdown';
+import Heading from '../components/ui/Heading';
 
 interface Props {
   pathContext: {
@@ -52,7 +53,7 @@ const Page: FunctionComponent<Props> = ({ data: { page } }) => {
             <div className="col-xs-10 col-gutter-lr">
               <section className="page-content">
                 <article>
-                  <h1>{page.title}</h1>
+                  <Heading>{page.title}</Heading>
                   <div className="page-metadata">Last updated: {dateModified}</div>
                   <MDXProvider components={shortcodes}>
                     <div className="page-markdown">

@@ -18,6 +18,7 @@ module.exports = {
     'gatsby-plugin-sass',
     'gatsby-plugin-sharp',
     'gatsby-plugin-catch-links',
+    'gatsby-plugin-styled-components',
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
@@ -47,7 +48,9 @@ module.exports = {
               maxWidth: 750
             }
           }
-        ]
+        ],
+        remarkPlugins: [require('remark-kbd')],
+        rehypePlugins: [require('rehype-slug')]
       }
     },
     {

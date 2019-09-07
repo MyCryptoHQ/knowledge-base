@@ -1,4 +1,6 @@
 import React, { FunctionComponent } from 'react';
+import 'typeface-lato';
+import 'typeface-source-code-pro';
 import MetaData from '../MetaData/MetaData';
 import Footer from '../Footer/Footer';
 import './Layout.scss';
