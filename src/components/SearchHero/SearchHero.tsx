@@ -1,18 +1,33 @@
 import React, { FunctionComponent } from 'react';
+import styled from 'styled-components';
 import Search from '../Search';
-import './SearchHero.scss';
+import Container from '../ui/Container';
+import Center from '../ui/Center';
+import Text from '../ui/Text';
+import breakpoint from '../../theme/breakpoints';
+
+const HeroText = styled(Text)`
+  font-size: 3rem !important;
+`;
+
+const SearchContainer = styled.div`
+  width: 50%;
+  margin: 0 auto 5rem auto;
+
+  ${breakpoint('md', 'max')`
+    width: 100%;
+  `};
+`;
 
 const SearchHero: FunctionComponent = () => (
-  <div className="hero container">
-    <div className="row center-xs">
-      <div className="col-xs hero-text align-center">How can we help you?</div>
-    </div>
-    <div className="row center-xs">
-      <div className="col-xs-10 col-sm-8 col-md-6">
-        <Search compact={false} />
-      </div>
-    </div>
-  </div>
+  <Container>
+    <Center>
+      <HeroText inverted={true}>How can we help you?</HeroText>
+    </Center>
+    <SearchContainer>
+      <Search compact={false} fullSize={true} />
+    </SearchContainer>
+  </Container>
 );
 
 export default SearchHero;

@@ -1,5 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { Link } from 'gatsby';
+import Heading from '../ui/Heading';
+import Text from '../ui/Text';
+import Link from '../Link';
+import styled from 'styled-components';
 
 interface Props {
   page: {
@@ -11,17 +14,19 @@ interface Props {
   };
 }
 
+const PageHeading = styled(Heading)`
+  margin-bottom: 0;
+`;
+
 const PageItem: FunctionComponent<Props> = ({ page }) => (
-  <div className="category-page">
+  <>
     <Link to={`/${page.slug}`}>
-      <div className="row">
-        <div className="category-page-description col-xs col-no-gutter">
-          <h3>{page.title}</h3>
-          {page.childMdx.excerpt}
-        </div>
-      </div>
+      <PageHeading as="h3">{page.title}</PageHeading>
+      <Text muted={true} noMargin={true}>
+        {page.childMdx.excerpt}
+      </Text>
     </Link>
-  </div>
+  </>
 );
 
 export default PageItem;

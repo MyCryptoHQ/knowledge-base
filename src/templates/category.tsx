@@ -1,12 +1,17 @@
 import React, { FunctionComponent } from 'react';
 import { graphql } from 'gatsby';
-import Header from '../components/Header';
-import SubHeader from '../components/SubHeader';
+import PageContainer from '../components/ui/PageContainer';
+import Header from '../components/ui/Header';
+import SubHeader from '../components/ui/SubHeader';
 import { Category as CategoryData } from '../models/category';
 import Breadcrumbs from '../components/Breadcrumbs';
 import PageItem from '../components/PageItem';
-import SubCategoryItem from '../components/SubCategoryItem';
+import CategoryItem from '../components/CategoryItem';
 import MetaData from '../components/MetaData';
+import Section from '../components/ui/Section';
+import Container from '../components/ui/Container';
+import Heading from '../components/ui/Heading';
+import ThematicBreak from '../components/ui/ThematicBreak';
 
 interface Props {
   pathContext: {
@@ -18,40 +23,31 @@ interface Props {
 }
 
 const Category: FunctionComponent<Props> = ({ data: { category } }) => (
-  <div className="full-width">
+  <PageContainer>
     <MetaData title={category.title} description={category.description} />
 
     <Header />
     <SubHeader>
-      <div className="container">
-        <div className="row center-xs">
-          <div className="col-xs-10 col-gutter-lr">
-            <Breadcrumbs parent={category.parent} />
-          </div>
-        </div>
-      </div>
+      <Breadcrumbs parent={category.parent} />
     </SubHeader>
 
-    <div className="container">
-      <div className="category row center-xs">
-        <div className="col-xs-10 col-md-6 col-gutter-lr">
-          <section>
-            <h2>{category.title}</h2>
-            {category.childrenCategory && (
-              <>
-                {category.childrenCategory.map(subCategory => (
-                  <SubCategoryItem key={subCategory.slug} category={subCategory} />
-                ))}
-                {category.childrenPage && <hr />}
-              </>
-            )}
-            {category.childrenPage &&
-              category.childrenPage.map(page => <PageItem key={page.slug} page={page} />)}
-          </section>
-        </div>
-      </div>
-    </div>
-  </div>
+    <Section>
+      <Container>
+        <Heading as="h2">{category.title}</Heading>
+        {category.childrenCategory &&
+          category.childrenCategory.length > 0 && (
+            <>
+              {category.childrenCategory.map(subCategory => (
+                <CategoryItem key={subCategory.slug} category={subCategory} />
+              ))}
+              {category.childrenPage && <ThematicBreak />}
+            </>
+          )}
+        {category.childrenPage &&
+          category.childrenPage.map(page => <PageItem key={page.slug} page={page} />)}
+      </Container>
+    </Section>
+  </PageContainer>
 );
 
 export const query = graphql`

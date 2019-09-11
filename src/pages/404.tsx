@@ -1,33 +1,30 @@
 import React, { FunctionComponent } from 'react';
-import Header from '../components/Header';
+import PageContainer from '../components/ui/PageContainer';
+import Header from '../components/ui/Header';
 import MetaData from '../components/MetaData';
 import Breadcrumbs from '../components/Breadcrumbs';
-import SubHeader from '../components/SubHeader';
+import SubHeader from '../components/ui/SubHeader';
+import Section from '../components/ui/Section';
+import Container from '../components/ui/Container';
+import Heading from '../components/ui/Heading';
+import Text from '../components/ui/Text';
 
 const Error404: FunctionComponent = () => (
-  <div className="full-width flex-wrapper">
+  <PageContainer>
     <MetaData title="Page not found" noIndex={true} />
 
     <Header />
     <SubHeader>
-      <div className="container">
-        <div className="row center-xs">
-          <div className="col-xs-10 col-gutter-lr">
-            <Breadcrumbs parent={{ title: 'Page not found', slug: '404' }} />
-          </div>
-        </div>
-      </div>
+      <Breadcrumbs parent={{ title: 'Page not found', slug: '404' }} />
     </SubHeader>
 
-    <div className="row middle-xs center-xs full-height">
-      <div className="col-xs-10 col-gutter-lr">
-        <section className="align-center">
-          <h2>Page not found</h2>
-          <p>The page you are looking for could not be found.</p>
-        </section>
-      </div>
-    </div>
-  </div>
+    <Section>
+      <Container>
+        <Heading as="h2">Page not found</Heading>
+        <Text>The page you are looking for could not be found.</Text>
+      </Container>
+    </Section>
+  </PageContainer>
 );
 
 export default Error404;

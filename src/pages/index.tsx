@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import Header from '../components/Header';
-import SubHeader from '../components/SubHeader';
+import PageContainer from '../components/ui/PageContainer';
+import Header from '../components/ui/Header';
+import SubHeader from '../components/ui/SubHeader';
 import SearchHero from '../components/SearchHero';
 import FeaturedCategories from '../components/FeaturedCategories';
 import PopularArticles from '../components/PopularArticles';
 import Contributing from '../components/Contributing';
 
 const Index: FunctionComponent = () => (
-  <div className="full-width">
+  <PageContainer>
     <Header showSearch={false}>
       <SearchHero />
     </Header>
@@ -16,7 +17,7 @@ const Index: FunctionComponent = () => (
     </SubHeader>
     <PopularArticles />
     <Contributing />
-  </div>
+  </PageContainer>
 );
 
 export default Index;

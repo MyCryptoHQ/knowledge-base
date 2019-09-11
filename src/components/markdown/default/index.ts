@@ -21,7 +21,7 @@ import TableHead from './Table/TableHead';
 import TableRow from './Table/TableRow';
 import TableHeading from './Table/TableHeading';
 import TableCell from './Table/TableCell';
-import ThematicBreak from './ThematicBreak';
+import ThematicBreak from '../../ui/ThematicBreak';
 import Link from './Link';
 import Image from './Image';
 

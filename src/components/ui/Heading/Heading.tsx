@@ -6,28 +6,28 @@ type Size = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 const ranges: { [key in Size]: { fromSize: string; toSize: string } } = {
   h1: {
-    fromSize: '2.25em',
-    toSize: '2.5em'
+    fromSize: '2.25rem',
+    toSize: '2.5rem'
   },
   h2: {
-    fromSize: '2em',
-    toSize: '2.25em'
+    fromSize: '2rem',
+    toSize: '2.25rem'
   },
   h3: {
-    fromSize: '1.75em',
-    toSize: '2em'
+    fromSize: '1.75rem',
+    toSize: '2rem'
   },
   h4: {
-    fromSize: '1.5em',
-    toSize: '1.75em'
+    fromSize: '1.5rem',
+    toSize: '1.75rem'
   },
   h5: {
-    fromSize: '1.25em',
-    toSize: '1.5em'
+    fromSize: '1.25rem',
+    toSize: '1.5rem'
   },
   h6: {
-    fromSize: '1em',
-    toSize: '1.25em'
+    fromSize: '1rem',
+    toSize: '1.25rem'
   }
 };
 

@@ -29,11 +29,15 @@ declare module 'styled-components' {
     /**
      * Own theme.
      */
+    secondary: string;
     textMuted: string;
+    textInverted: string;
     border: string;
     borderRadius: string;
     borderRadiusLarge: string;
+    subHeaderBackground: string;
 
+    fontFamily: string;
     monoFontFamily: string;
   }
 }

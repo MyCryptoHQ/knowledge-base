@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
+import Text from '../ui/Text';
 
 interface Props {
   parent?: {
@@ -14,7 +15,7 @@ const StyledBreadcrumbs = styled.ul`
   padding: 0;
 `;
 
-const Breadcrumb = styled.li`
+const Breadcrumb = styled(Text).attrs({ as: 'li', small: true })`
   display: inline;
 
   &:after {
@@ -29,6 +30,7 @@ const Breadcrumb = styled.li`
   a {
     text-decoration: none;
     color: inherit;
+    font-weight: normal;
   }
 `;
 

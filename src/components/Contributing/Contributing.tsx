@@ -1,18 +1,22 @@
 import React, { FunctionComponent } from 'react';
+import styled from 'styled-components';
 import { Link } from 'gatsby';
-import './Contributing.scss';
+import Text from '../ui/Text';
+
+const StyledContributing = styled.div`
+  text-align: center;
+  height: 50px;
+  background: ${({ theme }) => theme.subHeaderBackground};
+  border-top: 1px solid ${({ theme }) => theme.border};
+`;
 
 const Contributing: FunctionComponent = () => (
-  <div className="contributing">
-    <div className="row">
-      <div className="col-xs-12 col-gutter-lr">
-        <p>
-          Are you a developer and looking to contribute to MyCrypto? See{' '}
-          <Link to="/developers">our guides for developers and contributors.</Link>
-        </p>
-      </div>
-    </div>
-  </div>
+  <StyledContributing>
+    <Text small={true} muted={true}>
+      Are you a developer and looking to contribute to MyCrypto? See{' '}
+      <Link to="/developers">our guides for developers and contributors.</Link>
+    </Text>
+  </StyledContributing>
 );
 
 export default Contributing;
