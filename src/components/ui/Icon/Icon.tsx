@@ -8,7 +8,7 @@ import * as medium from '../../../assets/images/icons/social/medium.svg';
 import * as reddit from '../../../assets/images/icons/social/reddit.svg';
 import * as twitter from '../../../assets/images/icons/social/twitter.svg';
 
-const icons = {
+export const icons = {
   discord,
   facebook,
   github,

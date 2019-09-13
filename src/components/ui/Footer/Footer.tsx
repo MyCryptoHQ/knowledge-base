@@ -1,58 +1,47 @@
 import React, { FunctionComponent } from 'react';
-import HorizontalRule from './HorizontalRule';
-import VerticalRule from './VerticalRule';
-import LogoBox from './LogoBox';
-import DonateAndSubscribe from './DonateAndSubscribe';
-import Linkset from './Linkset';
-import SocialsAndLegal from './SocialsAndLegal';
-import './Footer.scss';
+import styled from 'styled-components';
+import Heading from '../Heading';
+import Divider from './Divider';
+import AboutMyCrypto from './AboutMyCrypto';
+import LinkSet from './LinkSet';
+import Donate from './Donate';
 
-const MobileFooter: FunctionComponent = () => (
-  <div className="mobile-only">
-    <div className="footer">
-      <LogoBox />
-      <HorizontalRule />
-      <DonateAndSubscribe />
-      <HorizontalRule />
-      <Linkset />
-      <SocialsAndLegal />
-    </div>
-  </div>
-);
+const StyledFooter = styled.footer`
+  background: ${({ theme }) => theme.secondary};
+  border-top: 1px solid ${({ theme }) => theme.footerBorder};
+  color: ${({ theme }) => theme.textInverted};
 
-const TabletFooter: FunctionComponent = () => (
-  <div className="tablet-only">
-    <div className="footer">
-      <LogoBox />
-      <VerticalRule />
-      <div style={{ display: 'flex', flexDirection: 'column', flex: 5 }}>
-        <Linkset />
-        <DonateAndSubscribe />
-      </div>
-    </div>
-  </div>
-);
+  ${Heading} {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: ${({ theme }) => theme.textInverted};
+    margin: 0 0 7px;
+    padding: 0;
+  }
+`;
 
-const DesktopFooter: FunctionComponent = () => (
-  <div className="desktop-only">
-    <div className="footer-wrapper">
-      <div className="footer">
-        <LogoBox />
-        <VerticalRule />
-        <Linkset />
-        <VerticalRule />
-        <DonateAndSubscribe />
-      </div>
-    </div>
-  </div>
-);
+const FooterContainer = styled.div`
+  box-sizing: border-box;
+  margin: auto;
+  max-width: 1180px;
+  display: flex;
+  justify-content: center;
+  padding: 41px 33px;
+`;
 
+/**
+ * TODO: Responsiveness
+ */
 const Footer: FunctionComponent = () => (
-  <div className="footer-row">
-    <MobileFooter />
-    <TabletFooter />
-    <DesktopFooter />
-  </div>
+  <StyledFooter>
+    <FooterContainer>
+      <AboutMyCrypto />
+      <Divider />
+      <LinkSet />
+      <Divider />
+      <Donate />
+    </FooterContainer>
+  </StyledFooter>
 );
 
 export default Footer;

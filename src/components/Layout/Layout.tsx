@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import 'typeface-lato';
 import 'typeface-source-code-pro';
-import MetaData from '../MetaData/MetaData';
-import Footer from '../ui/Footer/Footer';
+import MetaData from '../MetaData';
+import Footer from '../ui/Footer';
 
 const StyledLayout = styled.div`
   display: flex;

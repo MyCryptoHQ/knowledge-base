@@ -12,6 +12,8 @@ const theme: DefaultTheme = {
   borderRadius: '0.125em',
   borderRadiusLarge: '0.375em',
   subHeaderBackground: '#fafafa',
+  footerBorder: '#3e546d',
+  footerLink: '#bbc2cb',
 
   fontFamily: `'Lato', sans-serif`,
   monoFontFamily: `'Source Code Pro', monospace`

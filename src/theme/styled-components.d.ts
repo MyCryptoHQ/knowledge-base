@@ -36,6 +36,8 @@ declare module 'styled-components' {
     borderRadius: string;
     borderRadiusLarge: string;
     subHeaderBackground: string;
+    footerBorder: string;
+    footerLink: string;
 
     fontFamily: string;
     monoFontFamily: string;
