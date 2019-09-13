@@ -1,16 +1,20 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import MetaData from '../components/MetaData/MetaData';
-import Header from '../components/Header/Header';
-import SubHeader from '../components/SubHeader/SubHeader';
+import { MDXProvider } from '@mdx-js/react';
+import PageContainer from '../components/ui/PageContainer';
+import MetaData from '../components/MetaData';
+import Header from '../components/ui/Header';
+import SubHeader from '../components/ui/SubHeader';
 import { formatDate } from '../utils/date';
 import * as githubIcon from '../assets/images/icons/social/github.svg';
 import { Page as PageData } from '../models/page';
-import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs';
-import Layout from '../components/Layout/Layout';
-import { MDXProvider } from '@mdx-js/react';
-import * as shortcodes from '../components/markdown';
+import Breadcrumbs from '../components/Breadcrumbs';
+import shortcodes from '../components/markdown';
+import Heading from '../components/ui/Heading';
+import Section from '../components/ui/Section';
+import Container from '../components/ui/Container';
+import PageFooter from '../components/PageFooter/PageFooter';
 
 interface Props {
   pathContext: {
@@ -32,51 +36,30 @@ const Page: FunctionComponent<Props> = ({ data: { page } }) => {
   );
 
   return (
-    <Layout>
-      <div className="full-width">
-        <MetaData title={`${page.title} · ${page.parent.title}`} description={page.description} />
+    <PageContainer>
+      <MetaData title={`${page.title} · ${page.parent.title}`} description={page.description} />
 
-        <Header />
-        <SubHeader>
-          <div className="container">
-            <div className="row center-xs">
-              <div className="col-xs-10 col-gutter-lr">
-                <Breadcrumbs parent={page.parent} />
+      <Header />
+      <SubHeader>
+        <Breadcrumbs parent={page.parent} />
+      </SubHeader>
+
+      <Section>
+        <Container>
+          <article>
+            <Heading>{page.title}</Heading>
+            <div className="page-metadata">Last updated: {dateModified}</div>
+            <MDXProvider components={shortcodes}>
+              <div className="page-markdown">
+                <MDXRenderer>{page.childMdx.body}</MDXRenderer>
               </div>
-            </div>
-          </div>
-        </SubHeader>
+            </MDXProvider>
+          </article>
+        </Container>
+      </Section>
 
-        <div className="container">
-          <div className="page row center-xs">
-            <div className="col-xs-10 col-gutter-lr">
-              <section className="page-content">
-                <article>
-                  <h1>{page.title}</h1>
-                  <div className="page-metadata">Last updated: {dateModified}</div>
-                  <MDXProvider components={shortcodes}>
-                    <div className="page-markdown">
-                      <MDXRenderer>{page.childMdx.body}</MDXRenderer>
-                    </div>
-                  </MDXProvider>
-                </article>
-              </section>
-              <section className="page-extra">
-                <a
-                  href={`https://github.com/MyCryptoHQ/knowledge-base-content/blob/master/${
-                    page.slug
-                  }.md`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={githubIcon} alt="Github icon" /> Improve this article
-                </a>
-              </section>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Layout>
+      <PageFooter slug={page.slug} />
+    </PageContainer>
   );
 };
 

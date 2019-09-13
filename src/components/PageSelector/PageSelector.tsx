@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import React, { FunctionComponent, useEffect, useState } from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
 import { Page } from '../../models/page';
-import PageItem from '../PageItem/PageItem';
+import PageItem from '../PageItem';
 
 interface Props {
   slug: string;
@@ -15,9 +15,9 @@ interface QueryData {
   };
 }
 
-const PageSelector: React.StatelessComponent<Props> = ({ slug }) => (
-  <StaticQuery
-    query={graphql`
+const PageSelector: FunctionComponent<Props> = ({ slug }) => {
+  const { allPage } = useStaticQuery<QueryData>(
+    graphql`
       query {
         allPage {
           edges {
@@ -31,17 +31,25 @@ const PageSelector: React.StatelessComponent<Props> = ({ slug }) => (
           }
         }
       }
-    `}
-    render={({ allPage: { edges } }: QueryData) => {
-      const page = edges.find(edge => edge.node.slug === slug);
+    `
+  );
+  const [page, setPage] = useState<Page>();
 
-      if (page) {
-        return <PageItem page={page.node} />;
+  useEffect(
+    () => {
+      const item = allPage.edges.find(edge => edge.node.slug === slug);
+      if (item) {
+        setPage(item.node);
       }
+    },
+    [allPage.edges]
+  );
 
-      return null;
-    }}
-  />
-);
+  if (page) {
+    return <PageItem page={page} />;
+  }
+
+  return null;
+};
 
 export default PageSelector;

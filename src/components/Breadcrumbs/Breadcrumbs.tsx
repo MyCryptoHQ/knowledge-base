@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import Link from 'gatsby-link';
+import styled from 'styled-components';
+import { Link } from 'gatsby';
+import Text from '../ui/Text';
 
 interface Props {
   parent?: {
@@ -8,17 +10,41 @@ interface Props {
   };
 }
 
+const StyledBreadcrumbs = styled.ul`
+  margin: 0;
+  padding: 0;
+`;
+
+const Breadcrumb = styled(Text).attrs({ as: 'li', small: true })`
+  display: inline;
+
+  &:after {
+    padding: 0 0.5em;
+    content: '>';
+  }
+
+  &:last-of-type:after {
+    content: '';
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: normal;
+  }
+`;
+
 const Breadcrumbs: FunctionComponent<Props> = ({ parent }) => (
-  <ul className="breadcrumbs">
-    <li>
+  <StyledBreadcrumbs>
+    <Breadcrumb>
       <Link to="/">Knowledge Base</Link>
-    </li>
+    </Breadcrumb>
     {parent && (
-      <li key={parent.slug}>
+      <Breadcrumb key={parent.slug}>
         <Link to={`/${parent.slug}`}>{parent.title}</Link>
-      </li>
+      </Breadcrumb>
     )}
-  </ul>
+  </StyledBreadcrumbs>
 );
 
 export default Breadcrumbs;

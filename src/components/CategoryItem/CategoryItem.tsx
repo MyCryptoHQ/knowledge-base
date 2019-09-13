@@ -1,19 +1,24 @@
-import * as React from 'react';
-import Link from 'gatsby-link';
+import React, { FunctionComponent } from 'react';
+import styled from 'styled-components';
 import { Category } from '../../models/category';
-import CategoryItemCount from './CategoryItemCount/CategoryItemCount';
+import CategoryItemCount from '../CategoryItemCount';
+import Link from '../Link';
+import Heading from '../ui/Heading';
 
 interface Props {
   category: Category;
 }
 
-const CategoryItem: React.StatelessComponent<Props> = ({ category }) => (
-  <div className="category-item">
+const CategoryHeading = styled(Heading)`
+  margin-bottom: 0;
+`;
+
+const CategoryItem: FunctionComponent<Props> = ({ category }) => (
+  <div className="category-page">
     <Link to={`/${category.slug}`}>
       <div className="row">
-        <div className="category-description col-xs col-no-gutter">
-          <h3>{category.title}</h3>
-          <p>{category.description}</p>
+        <div className="category-page-description col-xs col-no-gutter">
+          <CategoryHeading as="h3">{category.title}</CategoryHeading>
           <CategoryItemCount category={category} />
         </div>
       </div>
