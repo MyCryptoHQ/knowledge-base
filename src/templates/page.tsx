@@ -1,19 +1,14 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { graphql } from 'gatsby';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
-import { MDXProvider } from '@mdx-js/react';
 import PageContainer from '../components/ui/PageContainer';
 import MetaData from '../components/MetaData';
 import Header from '../components/ui/Header';
 import SubHeader from '../components/ui/SubHeader';
-import { formatDate } from '../utils/date';
-import * as githubIcon from '../assets/images/icons/social/github.svg';
 import { Page as PageData } from '../models/page';
 import Breadcrumbs from '../components/Breadcrumbs';
-import shortcodes from '../components/markdown';
-import Heading from '../components/ui/Heading';
 import Section from '../components/ui/Section';
 import Container from '../components/ui/Container';
+import Page from '../components/Page';
 import PageFooter from '../components/PageFooter/PageFooter';
 
 interface Props {
@@ -25,45 +20,26 @@ interface Props {
   };
 }
 
-const Page: FunctionComponent<Props> = ({ data: { page } }) => {
-  const [dateModified, setDateModified] = useState<string>();
+const PageTemplate: FunctionComponent<Props> = ({ data: { page } }) => (
+  <PageContainer>
+    <MetaData title={`${page.title} · ${page.parent.title}`} description={page.description} />
 
-  useEffect(
-    () => {
-      setDateModified(formatDate(page.dateModified));
-    },
-    [page.dateModified]
-  );
+    <Header />
+    <SubHeader>
+      <Breadcrumbs parent={page.parent} />
+    </SubHeader>
 
-  return (
-    <PageContainer>
-      <MetaData title={`${page.title} · ${page.parent.title}`} description={page.description} />
+    <Section>
+      <Container>
+        <Page page={page} />
+      </Container>
+    </Section>
 
-      <Header />
-      <SubHeader>
-        <Breadcrumbs parent={page.parent} />
-      </SubHeader>
+    <PageFooter slug={page.slug} />
+  </PageContainer>
+);
 
-      <Section>
-        <Container>
-          <article>
-            <Heading>{page.title}</Heading>
-            <div className="page-metadata">Last updated: {dateModified}</div>
-            <MDXProvider components={shortcodes}>
-              <div className="page-markdown">
-                <MDXRenderer>{page.childMdx.body}</MDXRenderer>
-              </div>
-            </MDXProvider>
-          </article>
-        </Container>
-      </Section>
-
-      <PageFooter slug={page.slug} />
-    </PageContainer>
-  );
-};
-
-export default Page;
+export default PageTemplate;
 
 export const query = graphql`
   query Page($slug: String!) {
@@ -74,6 +50,11 @@ export const query = graphql`
       dateModified
       childMdx {
         body
+        tableOfContents
+      }
+      childrenRelatedArticle {
+        title
+        url
       }
       parent {
         ... on Category {

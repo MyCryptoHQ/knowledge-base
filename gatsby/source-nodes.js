@@ -137,5 +137,78 @@ module.exports = async ({
     }
   };
 
+  /**
+   * Add all related article nodes to the new page nodes.
+   */
+  const getRelatedArticles = async () => {
+    const newPageNodes = getNodes().filter(node => node.internal.type === 'Page');
+
+    for (const pageNode of newPageNodes) {
+      const pageData = getNode(pageNode.children[0]);
+
+      if (pageData.frontmatter.related_articles) {
+        for (const relatedArticle of pageData.frontmatter.related_articles) {
+          let title;
+          let url;
+          let external;
+
+          // URL is a slug of another page
+          if (!relatedArticle.url.match(/https?:\/\//)) {
+            const relatedPage = newPageNodes.find(node => node.slug === relatedArticle.url);
+            if (!relatedPage) {
+              reporter.warn(
+                `Could not find page for related article '${relatedArticle.url}' in '${
+                  pageNode.slug
+                }', ignoring.`
+              );
+              continue;
+            }
+
+            title = relatedPage.title;
+            url = `/${relatedArticle.url}`;
+            external = false;
+          }
+
+          // URL is external
+          if (relatedArticle.url.match(/https?:\/\//)) {
+            if (!relatedArticle.title) {
+              reporter.warn(
+                `Missing title for related article '${relatedArticle.url}' in '${
+                  pageNode.slug
+                }', ignoring.`
+              );
+              continue;
+            }
+
+            title = relatedArticle.title;
+            url = relatedArticle.url;
+            external = true;
+          }
+
+          const nodeData = {
+            title,
+            url,
+            external
+          };
+
+          const child = {
+            ...nodeData,
+            id: createNodeId(`related-article-${relatedArticle.url}`),
+            parent: pageNode.id,
+            children: [],
+            internal: {
+              type: 'RelatedArticle',
+              contentDigest: createContentDigest(nodeData)
+            }
+          };
+
+          await createNode(child);
+          createParentChildLink({ parent: pageNode, child });
+        }
+      }
+    }
+  };
+
   await getCategories(null, '*/*');
+  await getRelatedArticles();
 };

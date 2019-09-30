@@ -1,5 +1,25 @@
 import { Category } from './category';
 
+export interface TableOfContents {
+  items: {
+    /**
+     * The title of an item.
+     */
+    title: string;
+
+    /**
+     * The URL (hash) of an item.
+     */
+    url: string;
+  }[];
+}
+
+export interface RelatedArticle {
+  title: string;
+  url: string;
+  external: boolean;
+}
+
 export interface Page {
   /**
    * The title of the page.
@@ -44,5 +64,8 @@ export interface Page {
   childMdx: {
     excerpt: string;
     body: any;
+    tableOfContents: TableOfContents;
   };
+
+  childrenRelatedArticle: RelatedArticle[];
 }
