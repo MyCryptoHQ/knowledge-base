@@ -2,9 +2,15 @@
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
-This repository contains the code for the new (WIP) [MyCrypto Knowledge Base](https://support.mycrypto.com). For the Knowledge Base content, see [MyCryptoHQ/knowledge-base-content](https://github.com/MyCryptoHQ/knowledge-base-content).
+This repository contains the code for the [MyCrypto Knowledge Base](https://support.mycrypto.com). For the Knowledge Base content, see [MyCryptoHQ/knowledge-base-content](https://github.com/MyCryptoHQ/knowledge-base-content).
 
 ## Getting Started
+
+In order for the knowledge base to compile locally, you need to make sure the content is fetched too. To do this, run the following command:
+
+```bash
+git submodule update --init --remote --recursive
+```
 
 ### Development
 
