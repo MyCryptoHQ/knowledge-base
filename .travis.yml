@@ -1,22 +1,29 @@
 language: node_js
 node_js: 10.14.2
+
 git:
   submodules: false
+
 cache:
   yarn: true
   directories:
-  - node_modules
-  - "$HOME/.cache"
+    - node_modules
+    - "$HOME/.cache"
+
 before_install:
-- git submodule update --init --remote --recursive
+  - git submodule update --init --remote --recursive
+
 install:
-- yarn --silent
+  - yarn --silent
+
 script:
-- yarn run prettier:diff
-- yarn run tslint
+  - yarn run prettier:diff
+  - yarn run tslint
+
 before_deploy:
-- yarn run clean
-- yarn run build --prefix-paths
+  - yarn run clean
+  - yarn run build --prefix-paths
+
 deploy:
   provider: pages
   skip-cleanup: true
@@ -24,6 +31,8 @@ deploy:
   local-dir: public
   on:
     branch: master
+    tags: true
+
 env:
   global:
     secure: Vo9/P1PXAqyRK8coenjvnljUPDwRYfyKI9M51y2lyMeTisX0IMYp+Vn8SYKFMmQ0n+mOXzt2PFHOOqrc7AFRmj/Q0rDOT2ViBlYw5oVE1ml2akEWBo6XBlJgZYyB1JvU7pSwq6nk/qNa54+sWoklB2NZbMgiRBqEDCayh5zIaZIt6gEoYxiMUZF5Pr/x0mOoIwDkYC3XbkFY2OKpFpPR3hidNmbDmmDuP16lgRdgjKGQWn12vNvjMsY2nEGTHon/xv6CgKm1SgxToAGKwq+/i6kZeLeZvX0kxcwDNTvBT3ICOTrh6ep03vIUjqY4o/xr5lI4tEcP5gQovZl/sA5Q3wsJnCzFCCPOQEr94i6EQVQbgITcKKbqOks66YLvblZf/7Jt9SgnYIgf/Cw4Avqon7IX3fh7WRNJhuBxwZxwpkiq9RwGBlBRm/iHe/EAeMMsauIjKmLcHjF5iFxHHY7icKKFCqR2aKkJZaKXHmoD0yGm51zJSELtYV5VvmOeD6bwyjOqFwphxYF58GQPCs3Cxl7oKp20IqjMaz4xLsdDKU/NG5js6UkGdc4xPafnwiEPSC36S1E+YT15voSaG6vWnn08G4Z/IhXmiJJLdhqOailywKKrogyCcl2+WS43msjERtUNkE9YnvG1X5Q8DUUtL4hmf3X5AbgT6oE4W4KCSvg=
