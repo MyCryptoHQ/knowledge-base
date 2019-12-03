@@ -4,6 +4,8 @@ import MetaData from '../components/MetaData/MetaData';
 import Layout from '../components/Layout/Layout';
 import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs';
 import SubHeader from '../components/SubHeader/SubHeader';
+import ExternalLink from '../components/ExternalLink/ExternalLink';
+import Banner from '../components/ui/Banner/Banner';
 
 const Error404: React.StatelessComponent = () => (
   <Layout>
@@ -11,6 +13,13 @@ const Error404: React.StatelessComponent = () => (
       <MetaData title="Page not found" noIndex={true} />
 
       <Header />
+      <Banner>
+        <span>
+          NEW! Join <ExternalLink to="https://winter.mycrypto.com">#MyCryptoWinter</ExternalLink> to
+          learn the latest support tips and tricks and win prizes! Head over to{' '}
+          <ExternalLink to="https://winter.mycrypto.com">winter.mycrypto.com</ExternalLink>
+        </span>
+      </Banner>
       <SubHeader>
         <div className="container">
           <div className="row center-xs">

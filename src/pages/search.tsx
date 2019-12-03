@@ -7,6 +7,8 @@ import { graphql } from 'gatsby';
 import Layout from '../components/Layout/Layout';
 import SearchPage from '../components/Search/SearchPage';
 import { Page } from '../models/page';
+import ExternalLink from '../components/ExternalLink/ExternalLink';
+import Banner from '../components/ui/Banner/Banner';
 
 interface Props {
   data: {
@@ -25,6 +27,13 @@ const Search: FunctionComponent<Props> = ({ data }) => {
         <MetaData title="Search" noIndex={true} />
 
         <Header />
+        <Banner>
+          <span>
+            NEW! Join <ExternalLink to="https://winter.mycrypto.com">#MyCryptoWinter</ExternalLink>{' '}
+            to learn the latest support tips and tricks and win prizes! Head over to{' '}
+            <ExternalLink to="https://winter.mycrypto.com">winter.mycrypto.com</ExternalLink>
+          </span>
+        </Banner>
         <SubHeader>
           <div className="container">
             <div className="row center-xs">

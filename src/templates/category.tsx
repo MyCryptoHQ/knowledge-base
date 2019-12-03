@@ -9,6 +9,8 @@ import { graphql } from 'gatsby';
 import { Page } from '../models/page';
 import MetaData from '../components/MetaData/MetaData';
 import Layout from '../components/Layout/Layout';
+import ExternalLink from '../components/ExternalLink/ExternalLink';
+import Banner from '../components/ui/Banner/Banner';
 
 interface Props {
   pathContext: {
@@ -42,6 +44,13 @@ const Category: React.StatelessComponent<Props> = ({
       <MetaData title={category.title} description={category.description} />
 
       <Header />
+      <Banner>
+        <span>
+          NEW! Join <ExternalLink to="https://winter.mycrypto.com">#MyCryptoWinter</ExternalLink> to
+          learn the latest support tips and tricks and win prizes! Head over to{' '}
+          <ExternalLink to="https://winter.mycrypto.com">winter.mycrypto.com</ExternalLink>
+        </span>
+      </Banner>
       <SubHeader>
         <div className="container">
           <div className="row center-xs">
