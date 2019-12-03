@@ -8,6 +8,8 @@ import { Page as PageData } from '../models/page';
 import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout/Layout';
+import ExternalLink from '../components/ExternalLink/ExternalLink';
+import Banner from '../components/ui/Banner/Banner';
 
 interface Props {
   pathContext: {
@@ -59,6 +61,14 @@ export default class Page extends React.PureComponent<Props, State> {
           <MetaData title={`${page.title} · ${page.parent.title}`} description={page.description} />
 
           <Header />
+          <Banner>
+            <span>
+              NEW! Join{' '}
+              <ExternalLink to="https://winter.mycrypto.com">#MyCryptoWinter</ExternalLink> to learn
+              the latest support tips and tricks and win prizes! Head over to{' '}
+              <ExternalLink to="https://winter.mycrypto.com">winter.mycrypto.com</ExternalLink>
+            </span>
+          </Banner>
           <SubHeader>
             <div className="container">
               <div className="row center-xs">

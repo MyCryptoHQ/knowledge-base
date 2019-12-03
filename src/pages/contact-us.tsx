@@ -5,6 +5,8 @@ import Header from '../components/Header/Header';
 import SubHeader from '../components/SubHeader/SubHeader';
 import Link from 'gatsby-link';
 import ContactForm from '../components/ContactForm/ContactForm';
+import ExternalLink from '../components/ExternalLink/ExternalLink';
+import Banner from '../components/ui/Banner/Banner';
 
 const ContactUs: React.StatelessComponent = () => (
   <Layout>
@@ -12,6 +14,13 @@ const ContactUs: React.StatelessComponent = () => (
       <MetaData title="Contact us" />
 
       <Header />
+      <Banner>
+        <span>
+          NEW! Join <ExternalLink to="https://winter.mycrypto.com">#MyCryptoWinter</ExternalLink> to
+          learn the latest support tips and tricks and win prizes! Head over to{' '}
+          <ExternalLink to="https://winter.mycrypto.com">winter.mycrypto.com</ExternalLink>
+        </span>
+      </Banner>
       <SubHeader>
         <div className="container">
           <div className="row center-xs">
