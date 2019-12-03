@@ -20,7 +20,7 @@ const Index: React.StatelessComponent = () => {
           <span>
             NEW! Join <ExternalLink to="https://winter.mycrypto.com">#MyCryptoWinter</ExternalLink>{' '}
             to learn the latest support tips and tricks and win prizes! Head over to{' '}
-            <ExternalLink to="https://winter.mycrypto.com">winter.mycrypto.com</ExternalLink>
+            <ExternalLink to="https://winter.mycrypto.com">winter.mycrypto.com</ExternalLink>.
           </span>
         </Banner>
         <SubHeader>
