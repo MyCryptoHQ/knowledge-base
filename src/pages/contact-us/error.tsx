@@ -4,8 +4,6 @@ import MetaData from '../../components/MetaData/MetaData';
 import Header from '../../components/Header/Header';
 import SubHeader from '../../components/SubHeader/SubHeader';
 import Link from 'gatsby-link';
-import ExternalLink from '../../components/ExternalLink/ExternalLink';
-import Banner from '../../components/ui/Banner/Banner';
 
 const ErrorPage: React.StatelessComponent = () => (
   <Layout>
@@ -13,13 +11,6 @@ const ErrorPage: React.StatelessComponent = () => (
       <MetaData title="Error · Contact us" noIndex={true} />
 
       <Header />
-      <Banner>
-        <span>
-          NEW! Join <ExternalLink to="https://winter.mycrypto.com">#MyCryptoWinter</ExternalLink> to
-          learn the latest support tips and tricks and win prizes! Head over to{' '}
-          <ExternalLink to="https://winter.mycrypto.com">winter.mycrypto.com</ExternalLink>.
-        </span>
-      </Banner>
       <SubHeader>
         <div className="container">
           <div className="row center-xs">
