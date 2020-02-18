@@ -10,20 +10,28 @@ interface Props {
 }
 
 const CategoryHeading = styled(Heading)`
+  font-size: 2rem;
+  vertical-align: middle;
+  margin-right: 1.5rem;
   margin-bottom: 0;
 `;
 
+const CategoryItemWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 3.6rem;
+`;
+
 const CategoryItem: FunctionComponent<Props> = ({ category }) => (
-  <div className="category-page">
+  <>
     <Link to={`/${category.slug}`}>
-      <div className="row">
-        <div className="category-page-description col-xs col-no-gutter">
-          <CategoryHeading as="h3">{category.title}</CategoryHeading>
-          <CategoryItemCount category={category} />
-        </div>
-      </div>
+      <CategoryItemWrapper>
+        <CategoryHeading as="h3">{category.title}</CategoryHeading>
+        <CategoryItemCount category={category} />
+      </CategoryItemWrapper>
     </Link>
-  </div>
+  </>
 );
 
 export default CategoryItem;

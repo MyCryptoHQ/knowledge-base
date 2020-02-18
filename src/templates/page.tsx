@@ -7,14 +7,13 @@ import MetaData from '../components/MetaData';
 import Header from '../components/ui/Header';
 import SubHeader from '../components/ui/SubHeader';
 import { formatDate } from '../utils/date';
-import * as githubIcon from '../assets/images/icons/social/github.svg';
 import { Page as PageData } from '../models/page';
 import Breadcrumbs from '../components/Breadcrumbs';
 import shortcodes from '../components/markdown';
-import Heading from '../components/ui/Heading';
 import Section from '../components/ui/Section';
 import Container from '../components/ui/Container';
 import PageFooter from '../components/PageFooter/PageFooter';
+import PageHeader from '../components/PageHeader/PageHeader';
 
 interface Props {
   pathContext: {
@@ -47,8 +46,7 @@ const Page: FunctionComponent<Props> = ({ data: { page } }) => {
       <Section>
         <Container>
           <article>
-            <Heading>{page.title}</Heading>
-            <div className="page-metadata">Last updated: {dateModified}</div>
+            <PageHeader title={page.title} dateModified={page.dateModified} />
             <MDXProvider components={shortcodes}>
               <div className="page-markdown">
                 <MDXRenderer>{page.childMdx.body}</MDXRenderer>

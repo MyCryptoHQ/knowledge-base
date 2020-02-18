@@ -4,7 +4,7 @@ import Container from '../Container';
 
 const StyledSubHeader = styled.div`
   min-height: 50px;
-  background: ${({ theme }) => theme.subHeaderBackground};
+  background: white;
   border-bottom: 1px solid ${({ theme }) => theme.border};
   display: flex;
 `;

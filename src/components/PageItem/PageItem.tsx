@@ -5,6 +5,8 @@ import Link from '../Link';
 import styled from 'styled-components';
 
 interface Props {
+  titleOnly?: boolean;
+  showReadMore?: boolean;
   page: {
     title: string;
     slug: string;
@@ -14,19 +16,33 @@ interface Props {
   };
 }
 
-const PageHeading = styled(Heading)`
-  margin-bottom: 0;
+const PageItemWrapper = styled.div<{ showReadMore: boolean }>`
+  margin-bottom: ${({ showReadMore }) => (showReadMore ? '3.5rem' : '0rem')};
 `;
 
-const PageItem: FunctionComponent<Props> = ({ page }) => (
-  <>
-    <Link to={`/${page.slug}`}>
-      <PageHeading as="h3">{page.title}</PageHeading>
-      <Text muted={true} noMargin={true}>
-        {page.childMdx.excerpt}
-      </Text>
-    </Link>
-  </>
+const PageHeading = styled(Heading)`
+  margin-bottom: 1.5rem;
+`;
+
+const ReadMore = styled(Text)`
+  color: ${({ theme }) => theme.link};
+  text-align: right;
+`;
+
+const PageItem: FunctionComponent<Props> = ({ page, titleOnly, showReadMore }) => (
+  <Link to={`/${page.slug}`}>
+    {titleOnly ? (
+      page.title
+    ) : (
+      <PageItemWrapper showReadMore={showReadMore}>
+        <PageHeading as="h3">{page.title}</PageHeading>
+        <Text muted={true} noMargin={true}>
+          {page.childMdx.excerpt}
+        </Text>
+        {showReadMore && <ReadMore>Read More</ReadMore>}
+      </PageItemWrapper>
+    )}
+  </Link>
 );
 
 export default PageItem;

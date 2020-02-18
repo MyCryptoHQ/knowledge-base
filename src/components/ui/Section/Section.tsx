@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Section = styled.section`
-  padding: 5.4em;
+  padding: 4.6em;
 `;
 
 export default Section;
