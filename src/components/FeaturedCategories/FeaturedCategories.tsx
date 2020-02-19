@@ -60,7 +60,7 @@ const FeaturedCategories: FunctionComponent = () => {
     <StyledFeaturedCategories>
       <OnboardingHeading as="h2">Onboarding</OnboardingHeading>
       {featuredCategories.map(category => (
-        <FeaturedCategory category={category.data!} image={category.image} />
+        <FeaturedCategory key={category.slug} category={category.data!} image={category.image} />
       ))}
     </StyledFeaturedCategories>
   );
