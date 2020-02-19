@@ -1,10 +1,11 @@
 import React, { ChangeEvent, FunctionComponent, useState } from 'react';
-import { object, string, ValidationError } from 'yup';
-import { Button, Dropdown, Input } from '@mycrypto/ui';
+import { number, object, string, ValidationError } from 'yup';
+import { Button, Input } from '@mycrypto/ui';
 import Recaptcha from 'react-google-recaptcha';
 import { useSiteMetadata } from '../../hooks';
 import Field from './Field';
 import Text from '../ui/Text';
+import { FORM_SUBJECTS } from '../../config/contact-form';
 
 interface FormData {
   name: string;
@@ -20,10 +21,8 @@ const schema = object<FormData>().shape({
   email: string()
     .email()
     .required(),
-  address: string().matches(/^(?:0x[a-fA-F0-9]{40})?$/),
-  subject: string()
-    .min(0)
-    .required(),
+  address: string().matches(/^(?:(?:0x[a-fA-F0-9]{40})|(?:.*\.eth))?$/),
+  subject: string().required(),
   body: string().required(),
   attachment: string()
 });
@@ -33,7 +32,7 @@ const ContactForm: FunctionComponent = () => {
     name: '',
     email: '',
     address: '',
-    subject: '',
+    subject: FORM_SUBJECTS[0],
     body: '',
     attachment: ''
   });
@@ -78,6 +77,7 @@ const ContactForm: FunctionComponent = () => {
         form.submit();
       })
       .catch((error: ValidationError) => {
+        console.log(error);
         setErrors([...errors, ...error.inner.map(innerError => innerError.path)]);
       });
   };
@@ -121,31 +121,13 @@ const ContactForm: FunctionComponent = () => {
       </Field>
 
       <Field label="Subject" hasError={errors.includes('subject')}>
-        {/* TODO: This does not work right now */}
-        <Dropdown
-          items={
-            new Set([
-              'Accessing wallet',
-              'Adding tokens',
-              'Coinbase buy widget',
-              'ENS',
-              'Exchanging / exchanges',
-              'Getting started',
-              'Keystore file',
-              'Ledger or TREZOR',
-              'Lost ETH / phishing / scam',
-              'Lost password',
-              'Lost private key',
-              'MetaMask',
-              'Nodes / networks',
-              'Private key',
-              'Sending transactions',
-              'Sending tokens',
-              'Swap',
-              'Other'
-            ])
-          }
-        />
+        <Input as="select" name="subject" value={formData.subject} onChange={handleChange}>
+          {FORM_SUBJECTS.map((subject, index) => (
+            <option key={`subject-${index}`} value={subject}>
+              {subject}
+            </option>
+          ))}
+        </Input>
       </Field>
 
       <Field label="More details" hasError={errors.includes('body')}>
@@ -186,31 +168,6 @@ const ContactForm: FunctionComponent = () => {
 
         {errors.includes('captcha') ? <Text>Please complete the captcha.</Text> : null}
       </Field>
-
-      {/*<div className={`field full-width ${errors.includes('subject') ? 'error' : ''}`}>
-        <label htmlFor="form-subject">Subject</label>
-        <select id="form-subject" name="subject" value={formData.subject} onChange={handleChange}>
-          <option value="">What can we help you with?</option>
-          <option>Accessing wallet</option>
-          <option>Adding tokens</option>
-          <option>Coinbase buy widget</option>
-          <option>ENS</option>
-          <option>Exchanging / exchanges</option>
-          <option>Getting started</option>
-          <option>Keystore file</option>
-          <option>Ledger or TREZOR</option>
-          <option>Lost ETH / phishing / scam</option>
-          <option>Lost password</option>
-          <option>Lost private key</option>
-          <option>MetaMask</option>
-          <option>Nodes / networks</option>
-          <option>Private key</option>
-          <option>Sending transactions</option>
-          <option>Sending tokens</option>
-          <option>Swap</option>
-          <option>Other</option>
-        </select>
-      </div>*/}
 
       <Button type="submit">Send message</Button>
     </form>

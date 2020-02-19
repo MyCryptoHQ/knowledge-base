@@ -34,7 +34,7 @@ const ContactUs: FunctionComponent = () => (
           Your information will be used only to improve our pages and to answer you. Your data will
           be processed by us, our hosting provider, and our support ticket provider. For more
           information have a look at our{' '}
-          <Link to="https://about.mycrypto.com/privacy/" external={true}>
+          <Link to="https://about.mycrypto.com/privacy/" external={true} newTab={true}>
             privacy policy
           </Link>
           .
