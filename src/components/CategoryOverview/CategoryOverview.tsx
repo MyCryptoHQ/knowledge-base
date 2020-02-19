@@ -4,10 +4,15 @@ import Heading from '../ui/Heading';
 import CategoryItem from '../CategoryItem';
 import PageItem from '../PageItem';
 import { Category } from '../../models/category';
+import breakpoint from '../../theme/breakpoints';
 
 const CategoryWrapper = styled.section`
   flex: 1;
   margin-left: 3.22rem;
+
+  ${breakpoint('lg', 'max')`
+    margin: 0;
+  `};
 `;
 
 const OverviewHeading = styled(Heading)`

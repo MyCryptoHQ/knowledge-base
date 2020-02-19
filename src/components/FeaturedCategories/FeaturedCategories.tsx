@@ -6,6 +6,7 @@ import { Category } from '../../models/category';
 import Section from '../ui/Section';
 import Heading from '../ui/Heading';
 import { FEATURED_CATEGORIES } from '../../config/categories';
+import breakpoint from '../../theme/breakpoints';
 
 interface QueryData {
   allCategory: {
@@ -18,6 +19,12 @@ interface QueryData {
 const StyledFeaturedCategories = styled(Section)`
   padding-left: 0;
   padding-right: 0;
+`;
+
+const OnboardingHeading = styled(Heading)`
+  ${breakpoint('lg', 'max')`
+    display: none;
+  `};
 `;
 
 const FeaturedCategories: FunctionComponent = () => {
@@ -51,7 +58,7 @@ const FeaturedCategories: FunctionComponent = () => {
 
   return (
     <StyledFeaturedCategories>
-      <Heading as="h2">Onboarding</Heading>
+      <OnboardingHeading as="h2">Onboarding</OnboardingHeading>
       {featuredCategories.map(category => (
         <FeaturedCategory category={category.data!} image={category.image} />
       ))}

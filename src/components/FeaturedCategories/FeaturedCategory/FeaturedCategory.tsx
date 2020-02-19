@@ -4,6 +4,7 @@ import Link from '../../Link';
 import Heading from '../../ui/Heading';
 import Text from '../../ui/Text';
 import styled from 'styled-components';
+import breakpoint from '../../../theme/breakpoints';
 
 interface Props {
   category: Category;
@@ -30,17 +31,26 @@ const Wrapper = styled.div`
       color: ${({ theme }) => theme.primary};
     }
   }
+
+  ${breakpoint('lg', 'max')`
+    width: 100%;
+    height: 10rem;
+  `};
 `;
 
 const StyledFeaturedCategoryItem = styled.div`
-  width: 49.8rem;
-  height: 22rem;
+  width: 100%;
+  height: 100%;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: url(${({ image }) => image}) no-repeat;
+
+  ${breakpoint('lg', 'max')`
+    background-size: cover;
+  `};
 `;
 
 const FeaturedCategory: FunctionComponent<Props> = ({ category, image }) => (

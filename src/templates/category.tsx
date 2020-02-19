@@ -11,6 +11,7 @@ import Container from '../components/ui/Container';
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
 import CategoryOverview from '../components/CategoryOverview';
+import breakpoint from '../theme/breakpoints';
 
 interface Props {
   pathContext: {
@@ -26,6 +27,8 @@ const CategoryContainer = styled(Container)`
   flex-direction: row;
 `;
 
+const CategorySection = styled(Section)``;
+
 const Category: FunctionComponent<Props> = ({ data: { category } }) => (
   <PageContainer>
     <MetaData title={category.title} description={category.description} />
@@ -35,12 +38,12 @@ const Category: FunctionComponent<Props> = ({ data: { category } }) => (
       <Breadcrumbs parent={category.parent} />
     </SubHeader>
 
-    <Section>
+    <CategorySection>
       <CategoryContainer>
         <Sidebar />
         <CategoryOverview category={category} />
       </CategoryContainer>
-    </Section>
+    </CategorySection>
   </PageContainer>
 );
 
