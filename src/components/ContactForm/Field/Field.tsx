@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Text from '../../ui/Text';
 
 interface Props {
@@ -10,11 +10,17 @@ interface Props {
 const StyledField = styled(Text).attrs({ as: 'label' })`
   display: block;
   margin-bottom: 2rem;
+
+  ${({ hasError }) =>
+    hasError &&
+    css`
+      color: #ff433d;
+    `};
 `;
 
-const Field: FunctionComponent<Props> = ({ label, children }) => (
-  <StyledField>
-    {label} <br />
+const Field: FunctionComponent<Props> = ({ label, hasError, children }) => (
+  <StyledField hasError={hasError}>
+    <strong>{label}</strong> <br />
     {children}
   </StyledField>
 );

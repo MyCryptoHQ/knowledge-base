@@ -1,0 +1,20 @@
+export const FORM_SUBJECTS = [
+  'Accessing wallet',
+  'Adding tokens',
+  'Coinbase buy widget',
+  'ENS',
+  'Exchanging / exchanges',
+  'Getting started',
+  'Keystore file',
+  'Ledger or TREZOR',
+  'Lost ETH / phishing / scam',
+  'Lost password',
+  'Lost private key',
+  'MetaMask',
+  'Nodes / networks',
+  'Private key',
+  'Sending transactions',
+  'Sending tokens',
+  'Swap',
+  'Other'
+];

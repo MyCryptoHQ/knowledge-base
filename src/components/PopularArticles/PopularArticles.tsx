@@ -20,7 +20,7 @@ const PopularArticles: FunctionComponent = () => (
   <CategoriesSection>
     <PaddedHeading as="h2">Popular Articles</PaddedHeading>
     {POPULAR_ARTICLES.map(slug => (
-      <PopularArticle slug={slug} />
+      <PopularArticle key={slug} slug={slug} />
     ))}
   </CategoriesSection>
 );
