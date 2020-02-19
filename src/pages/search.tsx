@@ -1,12 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import Header from '../components/Header/Header';
-import SubHeader from '../components/SubHeader/SubHeader';
-import Link from 'gatsby-link';
-import MetaData from '../components/MetaData/MetaData';
 import { graphql } from 'gatsby';
-import Layout from '../components/Layout/Layout';
-import SearchPage from '../components/Search/SearchPage';
+import PageContainer from '../components/ui/PageContainer';
+import Header from '../components/ui/Header';
+import SubHeader from '../components/ui/SubHeader';
+import MetaData from '../components/MetaData';
+import SearchPage from '../components/SearchPage';
 import { Page } from '../models/page';
+import Breadcrumbs from '../components/Breadcrumbs';
+import Section from '../components/ui/Section';
+import Container from '../components/ui/Container';
 
 interface Props {
   data: {
@@ -18,39 +20,22 @@ interface Props {
   };
 }
 
-const Search: FunctionComponent<Props> = ({ data }) => {
-  return (
-    <Layout>
-      <div className="full-width">
-        <MetaData title="Search" noIndex={true} />
+const Search: FunctionComponent<Props> = ({ data }) => (
+  <PageContainer>
+    <MetaData title="Search" noIndex={true} />
 
-        <Header />
-        <SubHeader>
-          <div className="container">
-            <div className="row center-xs">
-              <div className="col-xs-10 col-gutter-lr">
-                <div className="breadcrumbs">
-                  <li>
-                    <Link to="/">Knowledge Base</Link>
-                  </li>
-                  <li>Search</li>
-                </div>
-              </div>
-            </div>
-          </div>
-        </SubHeader>
+    <Header />
+    <SubHeader>
+      <Breadcrumbs parent={{ title: 'Search', slug: 'search' }} />
+    </SubHeader>
 
-        <div className="container">
-          <div className="category row center-xs">
-            <div className="col-xs-10 col-md-6 col-gutter-lr">
-              <SearchPage allPages={data.allPage.edges.map(edge => edge.node)} />
-            </div>
-          </div>
-        </div>
-      </div>
-    </Layout>
-  );
-};
+    <Section>
+      <Container>
+        <SearchPage allPages={data.allPage.edges.map(edge => edge.node)} />
+      </Container>
+    </Section>
+  </PageContainer>
+);
 
 export default Search;
 
@@ -62,7 +47,9 @@ export const query = graphql`
           title
           description
           slug
-          excerpt
+          childMdx {
+            excerpt
+          }
         }
       }
     }

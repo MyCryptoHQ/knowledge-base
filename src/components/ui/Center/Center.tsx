@@ -1,13 +1,11 @@
-import * as React from 'react';
-import * as classNames from 'classnames';
-import './Center.scss';
+import React, { FunctionComponent } from 'react';
+import styled from 'styled-components';
 
-type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+const StyledCenter = styled.div`
+  margin: 0 auto;
+  text-align: center;
+`;
 
-const Center: React.StatelessComponent<Props> = ({ className, children, ...props }) => (
-  <div className={classNames(className, 'center')} {...props}>
-    {children}
-  </div>
-);
+const Center: FunctionComponent = ({ children }) => <StyledCenter>{children}</StyledCenter>;
 
 export default Center;

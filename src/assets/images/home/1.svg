@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="498px" height="220px" viewBox="0 0 498 220" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60 (88103) - https://sketch.com -->
+    <title>Group 20 Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="498" height="220" rx="2"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-20-Copy">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Mask-Copy-2"></g>
+            <g id="Group-18" mask="url(#mask-2)">
+                <g transform="translate(-72.000000, -44.000000)">
+                    <path d="M33,44 L253.091815,3 C196.491824,31.4669674 161.48014,67.6735391 148.056764,111.619715 C127.9217,177.538979 178.341876,195.417168 182,246.869532 C184,275 182,304 161.418232,332.371305 C135.869571,367.589313 98.0519406,398 55.3869172,398 L33,398 L33,44 Z" id="Fill-7" fill="#77E1F2"></path>
+                    <path d="M574.474391,44 C532.500194,44 498.474391,77.8019499 498.474391,119.5 C498.474391,161.196356 532.500194,195 574.474391,195 L574.474391,44" id="Fill-16" fill="#C8ADFF"></path>
+                    <path d="M232,50.5017033 C232,22.6090931 209.837864,0 182.5,0 C155.162136,0 133,22.6090931 133,50.5017033 C133,78.3875004 155.162136,101 182.5,101 C209.837864,101 232,78.3875004 232,50.5017033" id="Fill-17-Copy" fill="#007A99"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,249 +1,84 @@
 const path = require('path');
-const crypto = require('crypto');
-const yaml = require('js-yaml');
 const fs = require('fs');
+const yaml = require('js-yaml');
 
-const TEMPLATE_DIR = path.resolve(__dirname, '../src/templates');
+const REDIRECTS_FILE = path.resolve(__dirname, '../content/redirects.yml');
+const CATEGORY_TEMPLATE = path.resolve(__dirname, '../src/templates/category.tsx');
+const PAGE_TEMPLATE = path.resolve(__dirname, '../src/templates/page.tsx');
 
-/**
- * Create node data that can be used with `createNode`.
- * @param data
- * @param id
- * @param type
- * @param actions
- * @return {{id: *, children: Array, internal: {type: *, content: string, contentDigest: string}}}
- */
-const createNodeData = (data, id, type, actions) => {
-  const { createNodeId } = actions;
-
-  const nodeContent = JSON.stringify(data);
-
-  return {
-    ...data,
-    id: createNodeId(id),
-    children: [],
-    internal: {
-      type,
-      content: nodeContent,
-      contentDigest: crypto
-        .createHash('md5')
-        .update(nodeContent)
-        .digest('hex')
-    }
-  };
-};
-
-/**
- * Get all pages.
- * @param actions
- * @return {Promise<*[]>}
- */
-const getPages = async actions => {
-  const { graphql } = actions;
-
-  const {
-    data: {
-      allPage: { edges }
-    }
-  } = await graphql(`
-    query Pages {
-      allPage {
-        edges {
-          node {
-            id
-            title
-            slug
-            originalSlug
+module.exports = async ({ actions: { createPage, createRedirect }, graphql, reporter }) => {
+  /**
+   * Simple helper function to create pages from a GraphQL query. This assumes the node has a slug,
+   * which is used as `path` and `context`.
+   *
+   * @param {string} fieldName The GraphQL field name of the data
+   * @param {string} component Path to the React component to use for the page
+   * @returns {Promise<void>}
+   */
+  const createPages = async (fieldName, component) => {
+    const result = await graphql(`
+      query {
+        ${fieldName} {
+          edges {
+            node {
+              slug
+            }
           }
         }
       }
+    `);
+
+    if (result.errors) {
+      reporter.panicOnBuild('failed to fetch all content', result.errors);
+      return process.exit(1);
     }
-  `);
 
-  return edges.map(edge => edge.node);
-};
-
-/**
- * Register a page to Gatsby.
- * @param page
- * @param actions
- */
-const registerPage = (page, actions) => {
-  const { createPage } = actions;
-
-  createPage({
-    path: `/${page.slug}`,
-    component: path.join(TEMPLATE_DIR, 'page.tsx'),
-    context: {
-      slug: page.slug,
-      file: `${page.originalSlug}.md`
-    }
-  });
-};
-
-/**
- * Get all icons in `assets/images/icons` and parse them as a key-value object.
- * @param actions
- * @return {Promise<*>}
- */
-const getIcons = async actions => {
-  const { graphql } = actions;
-
-  const result = await graphql(`
-    query IconsQuery {
-      allFile(
-        filter: { sourceInstanceName: { eq: "images" }, relativeDirectory: { eq: "icons" } }
-      ) {
-        edges {
-          node {
-            name
-            publicURL
-          }
+    const data = result.data[fieldName];
+    data.edges.forEach(({ node: { slug } }) => {
+      createPage({
+        path: slug,
+        component,
+        context: {
+          slug
         }
-      }
-    }
-  `);
-
-  return result.data.allFile.edges.reduce((target, current) => {
-    target[current.node.name] = current.node.publicURL;
-    return target;
-  }, {});
-};
-
-/**
- * Add icon to categories.
- * @param actions
- * @return {void}
- */
-const addIconsToCategories = async actions => {
-  const { getNodes, createNode, createParentChildLink } = actions;
-
-  const nodes = getNodes();
-  const icons = await getIcons(actions);
-
-  nodes.filter(node => node.internal.type === 'Category').forEach(category => {
-    const iconData = {
-      icon: icons[category.icon],
-      parent: category.id
-    };
-
-    const node = createNodeData(iconData, `icon-data-${category.slug}`, `IconData`, actions);
-    createNode(node);
-    createParentChildLink({ parent: category, child: node });
-  });
-};
-
-const getCategories = async actions => {
-  const { graphql } = actions;
-
-  const {
-    data: {
-      allCategory: { edges }
-    }
-  } = await graphql(`
-    query Categories {
-      allCategory {
-        edges {
-          node {
-            slug
-          }
-        }
-      }
-    }
-  `);
-
-  return edges.map(edge => edge.node);
-};
-
-/**
- * Register a category to Gatsby.
- * @param category
- * @param actions
- * @return *{}
- */
-const registerCategory = async (category, actions) => {
-  const { createPage } = actions;
-
-  createPage({
-    path: `/${category.slug}`,
-    component: path.join(TEMPLATE_DIR, 'category.tsx'),
-    context: {
-      slug: category.slug
-    }
-  });
-};
-
-const registerTopLevelRedirects = actions => {
-  const { createRedirect } = actions;
-
-  let file;
-  try {
-    file = fs.readFileSync(path.join(__dirname, '../src/content/redirects.yml'), 'utf-8');
-  } catch (error) {
-    // Ignore error if file does not exist
-    if (error.code !== 'ENOENT') {
-      throw error;
-    }
-  }
-
-  if (file) {
-    const document = yaml.safeLoad(file);
-
-    document.redirects.forEach(redirect => {
-      createRedirect({
-        fromPath: `/${redirect.from}`,
-        toPath: `/${redirect.to}`,
-        isPermanent: true,
-        redirectInBrowser: true
       });
     });
-  }
-};
-
-/**
- * Setup redirects of a page.
- * @param page
- * @param actions
- * @return {void}
- */
-const registerPageRedirects = (page, actions) => {
-  const { createRedirect } = actions;
-
-  createRedirect({
-    fromPath: `/${page.slug}.html`,
-    toPath: `/${page.slug}`,
-    isPermanent: true,
-    redirectInBrowser: true
-  });
-};
-
-/**
- * Register categories and pages.
- * @param getNodes
- * @param actions
- * @param createNodeId
- * @param graphql
- * @return {Promise<void>}
- */
-module.exports = async ({ actions, createNodeId, graphql, getNodes }) => {
-  const gatsbyActions = {
-    ...actions,
-    createNodeId,
-    graphql,
-    getNodes
   };
 
-  await addIconsToCategories(gatsbyActions);
-  const categories = await getCategories(gatsbyActions);
-  categories.forEach(category => {
-    registerCategory(category, gatsbyActions);
-  });
+  /**
+   * Reads `content/redirects.yml` and registers all redirects.
+   *
+   * @returns {Promise<void>}
+   */
+  const createRedirects = async () => {
+    let file;
+    try {
+      file = fs.readFileSync(REDIRECTS_FILE, 'utf-8');
+    } catch (error) {
+      // Ignore error if file does not exist
+      if (error.code === 'ENOENT') {
+        reporter.warn('`content/redirects.yml` does not exist');
+        return process.exit(1);
+      }
 
-  const pages = await getPages(gatsbyActions);
-  pages.forEach(page => {
-    registerPage(page, gatsbyActions);
-    registerPageRedirects(page, gatsbyActions);
-  });
+      reporter.panicOnBuild('failed to read `content/redirects.yml`', error);
+      return process.exit(1);
+    }
 
-  registerTopLevelRedirects(gatsbyActions);
+    if (file) {
+      const document = yaml.safeLoad(file);
+      document.redirects.forEach(redirect =>
+        createRedirect({
+          fromPath: `/${redirect.from}`,
+          toPath: `/${redirect.to}`,
+          isPermanent: true,
+          redirectInBrowser: true
+        })
+      );
+    }
+  };
+
+  await createPages('allCategory', CATEGORY_TEMPLATE);
+  await createPages('allPage', PAGE_TEMPLATE);
+  await createRedirects();
 };

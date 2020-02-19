@@ -1,27 +1,32 @@
-import * as React from 'react';
-import Header from '../components/Header/Header';
-import SubHeader from '../components/SubHeader/SubHeader';
-import SearchHero from '../components/SearchHero/SearchHero';
-import Layout from '../components/Layout/Layout';
-import FeaturedCategories from '../components/FeaturedCategories/FeaturedCategories';
-import PopularArticles from '../components/PopularArticles/PopularArticles';
-import Contributing from '../components/Contributing/Contributing';
+import React, { FunctionComponent } from 'react';
+import PageContainer from '../components/ui/PageContainer';
+import Header from '../components/ui/Header';
+import SearchHero from '../components/SearchHero';
+import FeaturedCategories from '../components/FeaturedCategories';
+import PopularArticles from '../components/PopularArticles';
+import styled from 'styled-components';
+import Container from '../components/ui/Container';
+import breakpoint from '../theme/breakpoints';
 
-const Index: React.StatelessComponent = () => {
-  return (
-    <Layout>
-      <div className="full-width">
-        <Header showSearch={false}>
-          <SearchHero />
-        </Header>
-        <SubHeader>
-          <FeaturedCategories />
-        </SubHeader>
-        <PopularArticles />
-        <Contributing />
-      </div>
-    </Layout>
-  );
-};
+const HomeContainer = styled(Container)`
+  display: flex;
+  flex-direction: row;
+
+  ${breakpoint('lg', 'max')`
+    flex-direction: column;
+  `};
+`;
+
+const Index: FunctionComponent = () => (
+  <PageContainer>
+    <Header showSearch={false}>
+      <SearchHero />
+    </Header>
+    <HomeContainer>
+      <FeaturedCategories />
+      <PopularArticles />
+    </HomeContainer>
+  </PageContainer>
+);
 
 export default Index;

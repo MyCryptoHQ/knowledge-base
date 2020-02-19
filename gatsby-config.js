@@ -15,28 +15,14 @@ module.exports = {
     'gatsby-plugin-typescript',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-sass',
     'gatsby-plugin-sharp',
-    'gatsby-plugin-remove-trailing-slashes',
     'gatsby-plugin-catch-links',
+    'gatsby-plugin-styled-components',
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: 'gatsby-plugin-mdx',
       options: {
-        path: path.resolve(__dirname, 'src/content'),
-        name: 'content'
-      }
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: path.resolve(__dirname, 'src/assets/images'),
-        name: 'images'
-      }
-    },
-    {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: [
+        extensions: ['.mdx', '.md'],
+        gatsbyRemarkPlugins: [
           {
             resolve: 'gatsby-remark-images',
             options: {
@@ -50,8 +36,40 @@ module.exports = {
               rel: 'noopener noreferrer'
             }
           },
-          'gatsby-remark-static-images'
-        ]
+          {
+            resolve: 'gatsby-remark-static-images'
+          }
+        ],
+        plugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 750
+            }
+          }
+        ],
+        remarkPlugins: [require('remark-kbd')],
+        rehypePlugins: [require('rehype-slug')]
+      }
+    },
+    {
+      resolve: 'gatsby-transformer-yaml',
+      options: {
+        typeName: 'CategoryData'
+      }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: path.resolve(__dirname, 'content'),
+        name: 'content'
+      }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: path.resolve(__dirname, 'src/assets/images'),
+        name: 'images'
       }
     },
     {

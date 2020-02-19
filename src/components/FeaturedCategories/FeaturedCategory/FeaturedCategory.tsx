@@ -1,29 +1,67 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Category } from '../../../models/category';
-import FeaturedCategoryItem from './FeaturedCategoryItem/FeaturedCategoryItem';
+import Link from '../../Link';
+import Heading from '../../ui/Heading';
+import Text from '../../ui/Text';
+import styled from 'styled-components';
+import breakpoint from '../../../theme/breakpoints';
 
 interface Props {
-  category: string;
-  categories: Category[];
+  category: Category;
+  image: string;
 }
 
-interface State {
-  category?: Category;
-}
+const Wrapper = styled.div`
+  background: white;
+  width: 49.8rem;
+  height: 22rem;
+  margin-bottom: 1.1rem;
+  transition: box-shadow 0.2s;
 
-export default class FeaturedCategory extends React.PureComponent<Props, State> {
-  componentWillMount() {
-    const { category, categories } = this.props;
-    this.setState({
-      category: categories.find(c => c.slug === `${category}`)
-    });
+  ${Heading} {
+    font-size: 2.3rem;
+    margin-bottom: 0.75rem;
+    transition: color 0.2s;
   }
 
-  render() {
-    const { category } = this.state;
-    if (category) {
-      return <FeaturedCategoryItem category={category} />;
+  &:hover {
+    box-shadow: 0 4px 9px -2px rgba(0, 0, 0, 0.2);
+
+    ${Heading} {
+      color: ${({ theme }) => theme.primary};
     }
-    return null;
   }
-}
+
+  ${breakpoint('lg', 'max')`
+    width: 100%;
+    height: 10rem;
+  `};
+`;
+
+const StyledFeaturedCategoryItem = styled.div`
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url(${({ image }) => image}) no-repeat;
+
+  ${breakpoint('lg', 'max')`
+    background-size: cover;
+  `};
+`;
+
+const FeaturedCategory: FunctionComponent<Props> = ({ category, image }) => (
+  <Wrapper>
+    <Link to={`/${category.slug}`}>
+      <StyledFeaturedCategoryItem image={image}>
+        <Heading as="h2">{category.title}</Heading>
+        <Text noMargin={true}>{category.description}</Text>
+      </StyledFeaturedCategoryItem>
+    </Link>
+  </Wrapper>
+);
+
+export default FeaturedCategory;

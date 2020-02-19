@@ -1,26 +1,43 @@
 import React, { FunctionComponent } from 'react';
-import MetaData from '../MetaData/MetaData';
-import Footer from '../Footer/Footer';
-import './Layout.scss';
-import '../../sass/index.scss';
+import styled, { createGlobalStyle } from 'styled-components';
+import 'typeface-lato';
+import 'typeface-source-code-pro';
+import MetaData from '../MetaData';
+import Footer from '../ui/Footer';
 
-interface Props {
-  className?: string;
-  hideFooter?: boolean;
-}
+const StyledLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
 
-const Layout: FunctionComponent<Props> = ({ children, className = '', hideFooter = false }) => {
+const GlobalStyle = createGlobalStyle`
+  html, body, #___gatsby {
+    margin: 0;
+    height: 100%;
+  }
+  
+  html {
+    font-size: 62.5%;
+  }
+  
+  body {
+    font-size: 1.45rem;
+    font-family: ${({ theme }) => theme.fontFamily};
+    background: ${({ theme }) => theme.background};
+  }
+`;
+
+const Layout: FunctionComponent = ({ children }) => {
   return (
-    <div className={`layout row full-width ${className}`}>
+    <StyledLayout>
+      <GlobalStyle />
       <MetaData />
 
-      <div className="row full-width content">{children}</div>
-      {!hideFooter && (
-        <div className="row full-width bottom-xs">
-          <Footer />
-        </div>
-      )}
-    </div>
+      {children}
+
+      <Footer />
+    </StyledLayout>
   );
 };
 

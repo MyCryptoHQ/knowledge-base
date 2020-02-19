@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="498px" height="220px" viewBox="0 0 498 220" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60 (88103) - https://sketch.com -->
+    <title>Group 23 Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="498" height="220" rx="2"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-23-Copy">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Rectangle-Copy-25"></g>
+            <g id="Group-16" mask="url(#mask-2)">
+                <g transform="translate(63.000000, 164.000000) rotate(-162.000000) translate(-63.000000, -164.000000) translate(-22.000000, 105.000000)">
+                    <polygon id="Path-16" fill="#C8ADFF" transform="translate(28.229945, 39.656596) rotate(99.000000) translate(-28.229945, -39.656596) " points="-7.19669036 36.6830544 54.1537406 16.6993439 63.6565809 40.8233228 4.10234174 62.6138487"></polygon>
+                    <polygon id="Path-16-Copy" fill="#C8ADFF" transform="translate(89.979698, 42.037600) rotate(135.000000) translate(-89.979698, -42.037600) " points="54.5899703 39.0874373 115.893635 19.0392147 125.369426 43.1804428 65.8588431 65.0359859"></polygon>
+                    <polygon id="Path-16-Copy-2" fill="#027999" transform="translate(130.354405, 87.256716) rotate(168.000000) translate(-130.354405, -87.256716) " points="94.9973751 84.2810442 156.229704 64.2518548 165.711434 88.4222101 106.271592 110.261578"></polygon>
+                </g>
+            </g>
+            <g id="Group-18" mask="url(#mask-2)">
+                <g transform="translate(-76.000000, -693.000000)">
+                    <g id="Group-17" stroke-width="1" fill="none" transform="translate(533.474391, 1157.000000) rotate(22.000000) translate(-533.474391, -1157.000000) translate(291.474391, 813.000000)">
+                        <rect id="Rectangle-Copy-21" fill="#4C94AE" transform="translate(307.000000, 171.500000) rotate(-90.000000) translate(-307.000000, -171.500000) " x="136" y="-5" width="342" height="353" rx="26"></rect>
+                    </g>
+                    <rect id="Rectangle" fill="#77E1F2" transform="translate(549.974391, 673.500000) rotate(-13.000000) translate(-549.974391, -673.500000) " x="495.474391" y="619" width="109" height="109"></rect>
+                    <path d="M31.1144204,492.887652 C77.6139134,444.732183 141.955873,410.880248 180.955873,439.515212 C219.955873,468.150177 169.455873,529.943912 183.455873,579.515212 C197.455873,629.086513 288.583192,641.268487 222.455873,683.515212 C156.328554,725.761938 91.7330473,719.751727 41.8217383,685 C-8.08957071,650.248273 -15.3850726,541.043121 31.1144204,492.887652 Z" id="Path-17" fill="#C8ADFF"></path>
+                    <g id="Group-13" stroke-width="1" fill="none" transform="translate(482.000000, 697.000000)">
+                        <polygon id="Rectangle" fill="#FFD04E" transform="translate(41.500000, 41.500000) rotate(-45.000000) translate(-41.500000, -41.500000) " points="24.5184295 0.0440705128 58.5440705 0.0184294872 58.4815705 82.9559295 24.4559295 82.9815705"></polygon>
+                        <polygon id="Rectangle-Copy-7" fill="#FFD04E" transform="translate(41.500000, 41.500000) scale(-1, 1) rotate(-45.000000) translate(-41.500000, -41.500000) " points="24.5184295 0.0440705128 58.5440705 0.0184294872 58.4815705 82.9559295 24.4559295 82.9815705"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

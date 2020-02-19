@@ -1,14 +1,52 @@
 import React, { ChangeEvent, FunctionComponent, KeyboardEvent } from 'react';
+import styled from 'styled-components';
 import { navigate } from 'gatsby';
+import * as searchIcon from '../../assets/images/icons/search.svg';
 import { useDispatch, useSelector } from '../../hooks';
 import { search } from '../../store/search';
-import './Search.scss';
+import breakpoint from '../../theme/breakpoints';
 
 interface Props {
   compact: boolean;
+  fullSize?: boolean;
 }
 
-const Search: FunctionComponent<Props> = ({ compact }) => {
+const SearchContainer = styled.div<Props>`
+  margin-left: auto;
+  background: ${({ theme }) => theme.controlBackground};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  width: 100%;
+  max-width: ${({ fullSize }) => (fullSize ? '100%' : '30rem')};
+  height: ${({ compact }) => (compact ? '37px' : '42px')};
+
+  ${breakpoint('lg', 'max')`
+    max-width: 100%;
+    margin-top: 2.5rem;
+  `};
+`;
+
+const SearchInput = styled.input`
+  width: 100%;
+  height: 100%;
+  text-indent: 44px;
+  background: url(${searchIcon}) no-repeat 13px 13px;
+  background-size: 17px;
+  border: none;
+  font-family: ${({ theme }) => theme.font};
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
+`;
+
+const Search: FunctionComponent<Props> = ({ compact, fullSize }) => {
   const searchText = useSelector(state => state.search.searchText);
   const dispatch = useDispatch();
 
@@ -31,16 +69,15 @@ const Search: FunctionComponent<Props> = ({ compact }) => {
   };
 
   return (
-    <div className={`search ${compact ? 'compact' : ''}`}>
-      <input
+    <SearchContainer compact={compact} fullSize={fullSize}>
+      <SearchInput
         type="search"
-        className="search-input"
         placeholder="Search"
         value={searchText}
         onChange={handleChange}
         onKeyPress={handleKeyPress}
       />
-    </div>
+    </SearchContainer>
   );
 };
 

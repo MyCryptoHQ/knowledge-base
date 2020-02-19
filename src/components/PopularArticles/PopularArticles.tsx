@@ -1,52 +1,28 @@
-import * as React from 'react';
-import PageSelector from '../PageSelector/PageSelector';
+import React, { FunctionComponent } from 'react';
+import Section from '../ui/Section';
+import Heading from '../ui/Heading';
+import PopularArticle from './PopularArticle';
+import styled from 'styled-components';
+import { POPULAR_ARTICLES } from '../../config/articles';
+import breakpoint from '../../theme/breakpoints';
 
-const PopularArticles: React.StatelessComponent = () => (
-  <div className="container">
-    <div className="home row center-xs">
-      <div className="col-xs-10">
-        <section>
-          <div className="row">
-            <div className="col-xs col-gutter-lr">
-              <h2>Popular Articles</h2>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-xs-12 col-md-6">
-              <PageSelector slug="how-to/getting-started/how-to-get-started-on-mycrypto" />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <PageSelector slug="troubleshooting/tokens/adding-new-token-and-sending-custom-tokens" />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-xs-12 col-md-6">
-              <PageSelector slug="staying-safe/protecting-yourself-and-your-funds" />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <PageSelector slug="general-knowledge/ethereum-blockchain/more-help-support-and-communities" />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-xs-12 col-md-6">
-              <PageSelector slug="staying-safe/hardware-wallet-recommendations" />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <PageSelector slug="how-to/offline/how-to-run-mycrypto-offline-and-locally" />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-xs-12 col-md-6">
-              <PageSelector slug="general-knowledge/ethereum-blockchain/a-glossary-of-common-terms-in-the-ethereum-crypto-space" />
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <PageSelector slug="general-knowledge/ethereum-blockchain/what-is-nonce" />
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-  </div>
+const PaddedHeading = styled(Heading)`
+  padding-left: 2.4rem;
+`;
+
+const CategoriesSection = styled(Section)`
+  ${breakpoint('lg', 'max')`
+    padding: 0 0 4.6rem 0;
+  `};
+`;
+
+const PopularArticles: FunctionComponent = () => (
+  <CategoriesSection>
+    <PaddedHeading as="h2">Popular Articles</PaddedHeading>
+    {POPULAR_ARTICLES.map(slug => (
+      <PopularArticle key={slug} slug={slug} />
+    ))}
+  </CategoriesSection>
 );
 
 export default PopularArticles;

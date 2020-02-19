@@ -1,87 +1,54 @@
-import * as React from 'react';
-import Header from '../components/Header/Header';
-import SubHeader from '../components/SubHeader/SubHeader';
-import { Category as CategoryData } from '../models/category';
-import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs';
-import PageItem from '../components/PageItem/PageItem';
-import SubCategoryItem from '../components/SubCategoryItem/SubCategoryItem';
+import React, { FunctionComponent } from 'react';
 import { graphql } from 'gatsby';
-import { Page } from '../models/page';
-import MetaData from '../components/MetaData/MetaData';
-import Layout from '../components/Layout/Layout';
+import PageContainer from '../components/ui/PageContainer';
+import Header from '../components/ui/Header';
+import SubHeader from '../components/ui/SubHeader';
+import { Category as CategoryData } from '../models/category';
+import Breadcrumbs from '../components/Breadcrumbs';
+import MetaData from '../components/MetaData';
+import Section from '../components/ui/Section';
+import Container from '../components/ui/Container';
+import styled from 'styled-components';
+import Sidebar from '../components/Sidebar';
+import CategoryOverview from '../components/CategoryOverview';
+import breakpoint from '../theme/breakpoints';
 
 interface Props {
   pathContext: {
     slug: string;
   };
   data: {
-    site: {
-      siteMetadata: {
-        title: string;
-      };
-    };
     category: CategoryData;
-    allCategory: {
-      edges: {
-        node: CategoryData;
-      }[];
-    };
-    allPage: {
-      edges: {
-        node: Page;
-      }[];
-    };
   };
 }
 
-const Category: React.StatelessComponent<Props> = ({
-  data: { site, category, allCategory: subCategories, allPage: pages }
-}) => (
-  <Layout>
-    <div className="full-width">
-      <MetaData title={category.title} description={category.description} />
+const CategoryContainer = styled(Container)`
+  display: flex;
+  flex-direction: row;
+`;
 
-      <Header />
-      <SubHeader>
-        <div className="container">
-          <div className="row center-xs">
-            <div className="col-xs-10 col-gutter-lr">
-              <Breadcrumbs breadcrumbs={category.breadcrumbs} />
-            </div>
-          </div>
-        </div>
-      </SubHeader>
+const CategorySection = styled(Section)``;
 
-      <div className="container">
-        <div className="category row center-xs">
-          <div className="col-xs-10 col-md-6 col-gutter-lr">
-            <section>
-              <h2>{category.title}</h2>
-              {subCategories && (
-                <>
-                  {subCategories.edges.map(({ node: subCategory }) => (
-                    <SubCategoryItem key={subCategory.slug} category={subCategory} />
-                  ))}
-                  {pages && <hr />}
-                </>
-              )}
-              {pages &&
-                pages.edges.map(({ node: page }) => <PageItem key={page.slug} page={page} />)}
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Layout>
+const Category: FunctionComponent<Props> = ({ data: { category } }) => (
+  <PageContainer>
+    <MetaData title={category.title} description={category.description} />
+
+    <Header />
+    <SubHeader>
+      <Breadcrumbs parent={category.parent} />
+    </SubHeader>
+
+    <CategorySection>
+      <CategoryContainer>
+        <Sidebar />
+        <CategoryOverview category={category} />
+      </CategoryContainer>
+    </CategorySection>
+  </PageContainer>
 );
 
 export const query = graphql`
   query Category($slug: String!) {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     category(slug: { eq: $slug }) {
       title
       slug
@@ -90,30 +57,24 @@ export const query = graphql`
         title
         slug
         description
-      }
-      breadcrumbs {
-        title
-        slug
-      }
-    }
-    allCategory(filter: { parentSlug: { eq: $slug } }, sort: { fields: [priority], order: DESC }) {
-      edges {
-        node {
+        childrenPage {
           title
-          slug
-          description
-          childrenPage {
-            title
-          }
+        }
+        childrenCategory {
+          title
         }
       }
-    }
-    allPage(filter: { parentSlug: { eq: $slug } }, sort: { fields: [priority], order: DESC }) {
-      edges {
-        node {
+      childrenPage {
+        title
+        slug
+        childMdx {
+          excerpt(pruneLength: 500)
+        }
+      }
+      parent {
+        ... on Category {
           title
           slug
-          excerpt
         }
       }
     }
