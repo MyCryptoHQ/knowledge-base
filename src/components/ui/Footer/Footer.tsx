@@ -5,6 +5,7 @@ import Divider from './Divider';
 import AboutMyCrypto from './AboutMyCrypto';
 import LinkSet from './LinkSet';
 import Donate from './Donate';
+import breakpoint from '../../../theme/breakpoints';
 
 const StyledFooter = styled.footer`
   background: ${({ theme }) => theme.secondary};
@@ -27,11 +28,13 @@ const FooterContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 41px 33px;
+
+  ${breakpoint('lg', 'max')`
+    flex-direction: column;
+    text-align: center;
+  `};
 `;
 
-/**
- * TODO: Responsiveness
- */
 const Footer: FunctionComponent = () => (
   <StyledFooter>
     <FooterContainer>

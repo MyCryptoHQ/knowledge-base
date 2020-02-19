@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Logo from './Logo';
 import Text from '../../Text';
 import Socials from './Socials';
+import breakpoint from '../../../../theme/breakpoints';
 
 const StyledAboutMyCrypto = styled.section``;
 
@@ -13,6 +14,10 @@ const AboutText = styled(Text)`
   font-weight: 300;
   max-width: 250px;
   margin-bottom: 15px;
+
+  ${breakpoint('lg', 'max')`
+    margin: auto;
+  `};
 `;
 
 const AboutMyCrypto: FunctionComponent = () => (

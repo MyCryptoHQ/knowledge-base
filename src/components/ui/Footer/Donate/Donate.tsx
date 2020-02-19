@@ -6,9 +6,14 @@ import Text from '../../Text';
 import * as ether from '../../../../assets/images/donate/ether.png';
 import * as bitcoin from '../../../../assets/images/donate/bitcoin.png';
 import Check from './Check';
+import breakpoint from '../../../../theme/breakpoints';
 
 const StyledDonate = styled.div`
   min-width: 250px;
+
+  ${breakpoint('lg', 'max')`
+    margin: auto;
+  `};
 `;
 
 const DonateButtons = styled.div`
