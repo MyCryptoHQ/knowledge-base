@@ -1,19 +1,16 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { graphql } from 'gatsby';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
-import { MDXProvider } from '@mdx-js/react';
 import PageContainer from '../components/ui/PageContainer';
 import MetaData from '../components/MetaData';
 import Header from '../components/ui/Header';
 import SubHeader from '../components/ui/SubHeader';
-import { formatDate } from '../utils/date';
 import { Page as PageData } from '../models/page';
 import Breadcrumbs from '../components/Breadcrumbs';
-import shortcodes from '../components/markdown';
 import Section from '../components/ui/Section';
 import Container from '../components/ui/Container';
 import PageFooter from '../components/PageFooter/PageFooter';
 import PageHeader from '../components/PageHeader/PageHeader';
+import PageBody from '../components/PageBody';
 
 interface Props {
   pathContext: {
@@ -24,42 +21,27 @@ interface Props {
   };
 }
 
-const Page: FunctionComponent<Props> = ({ data: { page } }) => {
-  const [dateModified, setDateModified] = useState<string>();
+const Page: FunctionComponent<Props> = ({ data: { page } }) => (
+  <PageContainer>
+    <MetaData title={page.title} description={page.description} />
 
-  useEffect(
-    () => {
-      setDateModified(formatDate(page.dateModified));
-    },
-    [page.dateModified]
-  );
+    <Header />
+    <SubHeader>
+      <Breadcrumbs parent={page.parent} />
+    </SubHeader>
 
-  return (
-    <PageContainer>
-      <MetaData title={`${page.title} · ${page.parent.title}`} description={page.description} />
+    <Section>
+      <Container>
+        <article>
+          <PageHeader title={page.title} dateModified={page.dateModified} />
+          <PageBody body={page.childMdx.body} />
+        </article>
+      </Container>
+    </Section>
 
-      <Header />
-      <SubHeader>
-        <Breadcrumbs parent={page.parent} />
-      </SubHeader>
-
-      <Section>
-        <Container>
-          <article>
-            <PageHeader title={page.title} dateModified={page.dateModified} />
-            <MDXProvider components={shortcodes}>
-              <div className="page-markdown">
-                <MDXRenderer>{page.childMdx.body}</MDXRenderer>
-              </div>
-            </MDXProvider>
-          </article>
-        </Container>
-      </Section>
-
-      <PageFooter slug={page.slug} />
-    </PageContainer>
-  );
-};
+    <PageFooter slug={page.slug} />
+  </PageContainer>
+);
 
 export default Page;
 

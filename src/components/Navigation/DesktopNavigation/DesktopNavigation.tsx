@@ -29,6 +29,10 @@ const NavigationItem = styled.li`
     letter-spacing: 1px;
     display: flex;
     align-items: center;
+
+    :hover {
+      color: ${({ theme }) => theme.textInverted};
+    }
   }
 `;
 

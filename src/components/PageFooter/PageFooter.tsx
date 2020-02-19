@@ -11,32 +11,43 @@ interface Props {
 }
 
 const PageFooterSection = styled(Section)`
-  padding: 0 2.7rem 2.7rem 2.7rem;
-`;
-
-const StyledPageFooter = styled(Container)`
+  padding: 4.6rem 0;
   border-top: 1px solid ${({ theme }) => theme.border};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    font-weight: normal;
+  }
 `;
 
 const FooterIcon = styled.img`
-  width: 36px;
+  width: 2.6rem;
   vertical-align: middle;
-  margin-right: 6px;
+  margin-right: 0.6rem;
 `;
 
 const PageFooter: FunctionComponent<Props> = ({ slug }) => (
-  <PageFooterSection>
-    <StyledPageFooter>
-      <Text>
-        <Link
-          to={`https://github.com/MyCryptoHQ/knowledge-base-content/blob/master/${slug}.md`}
-          external={true}
-        >
-          <FooterIcon src={githubIcon} alt="GitHub" /> Improve this article
-        </Link>
-      </Text>
-    </StyledPageFooter>
-  </PageFooterSection>
+  <Container>
+    <PageFooterSection>
+      <section>
+        <Text>
+          Do you still need help? Feel free to <Link to="/contact-us">reach out to us here!</Link>
+        </Text>
+      </section>
+      <section>
+        <Text small={true}>
+          <Link
+            to={`https://github.com/MyCryptoHQ/knowledge-base-content/blob/master/${slug}.md`}
+            external={true}
+          >
+            <FooterIcon src={githubIcon} alt="GitHub" /> Edit this article on GitHub
+          </Link>
+        </Text>
+      </section>
+    </PageFooterSection>
+  </Container>
 );
 
 export default PageFooter;

@@ -10,6 +10,12 @@ interface Props {
 
 const linkCss = css`
   text-decoration: none;
+  color: ${({ theme }) => theme.link};
+  transition: color 0.2s;
+
+  :hover {
+    color: ${({ theme }) => theme.linkHover};
+  }
 `;
 
 const StyledLink = styled(GatsbyLink)`

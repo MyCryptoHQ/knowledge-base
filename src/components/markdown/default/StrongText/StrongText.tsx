@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import Text from '../../../ui/Text';
 
-const StyledStrongText = styled(Text)`
+const StyledStrongText = styled.strong`
   font-weight: bold;
 `;
 

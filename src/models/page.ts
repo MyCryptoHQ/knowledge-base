@@ -1,5 +1,7 @@
 import { Category } from './category';
 
+export type MarkdownBody = any;
+
 export interface Page {
   /**
    * The title of the page.
@@ -43,6 +45,6 @@ export interface Page {
 
   childMdx: {
     excerpt: string;
-    body: any;
+    body: MarkdownBody;
   };
 }
