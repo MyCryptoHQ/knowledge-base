@@ -5,6 +5,7 @@ import PageItem from '../PageItem';
 
 interface Props {
   slug: string;
+  titleOnly?: boolean;
 }
 
 interface QueryData {
@@ -15,7 +16,7 @@ interface QueryData {
   };
 }
 
-const PageSelector: FunctionComponent<Props> = ({ slug }) => {
+const PageSelector: FunctionComponent<Props> = ({ slug, titleOnly }) => {
   const { allPage } = useStaticQuery<QueryData>(
     graphql`
       query {
@@ -46,7 +47,7 @@ const PageSelector: FunctionComponent<Props> = ({ slug }) => {
   );
 
   if (page) {
-    return <PageItem page={page} />;
+    return <PageItem page={page} titleOnly={titleOnly} />;
   }
 
   return null;

@@ -4,47 +4,24 @@ import { fluidRange } from 'polished';
 
 type Size = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
-const ranges: { [key in Size]: { fromSize: string; toSize: string } } = {
-  h1: {
-    fromSize: '2.25rem',
-    toSize: '2.5rem'
-  },
-  h2: {
-    fromSize: '2rem',
-    toSize: '2.25rem'
-  },
-  h3: {
-    fromSize: '1.75rem',
-    toSize: '2rem'
-  },
-  h4: {
-    fromSize: '1.5rem',
-    toSize: '1.75rem'
-  },
-  h5: {
-    fromSize: '1.25rem',
-    toSize: '1.5rem'
-  },
-  h6: {
-    fromSize: '1rem',
-    toSize: '1.25rem'
-  }
+const sizes: { [key in Size]: string } = {
+  h1: '2.6rem',
+  h2: '2.4rem',
+  h3: '1.6rem',
+  h4: '1.5rem',
+  h5: '1.4rem',
+  h6: '1.3rem'
 };
 
 interface Props {
   as: Size;
 }
 
-const Heading = styled(UIHeading)<Props>`
-  ${({ as = 'h1' }: Props) =>
-    fluidRange(
-      {
-        prop: 'font-size',
-        ...ranges[as]
-      },
-      '400px',
-      '1000px'
-    )};
+const Heading = styled.h1<Props>`
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  color: ${({ theme }) => theme.secondary};
+  font-size: ${({ as = 'h1' }) => sizes[as as Size]};
 `;
 
 export default Heading;

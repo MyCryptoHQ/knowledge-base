@@ -5,13 +5,13 @@ import Header from '../components/ui/Header';
 import SubHeader from '../components/ui/SubHeader';
 import { Category as CategoryData } from '../models/category';
 import Breadcrumbs from '../components/Breadcrumbs';
-import PageItem from '../components/PageItem';
-import CategoryItem from '../components/CategoryItem';
 import MetaData from '../components/MetaData';
 import Section from '../components/ui/Section';
 import Container from '../components/ui/Container';
-import Heading from '../components/ui/Heading';
-import ThematicBreak from '../components/ui/ThematicBreak';
+import styled from 'styled-components';
+import Sidebar from '../components/Sidebar';
+import CategoryOverview from '../components/CategoryOverview';
+import breakpoint from '../theme/breakpoints';
 
 interface Props {
   pathContext: {
@@ -22,6 +22,13 @@ interface Props {
   };
 }
 
+const CategoryContainer = styled(Container)`
+  display: flex;
+  flex-direction: row;
+`;
+
+const CategorySection = styled(Section)``;
+
 const Category: FunctionComponent<Props> = ({ data: { category } }) => (
   <PageContainer>
     <MetaData title={category.title} description={category.description} />
@@ -31,22 +38,12 @@ const Category: FunctionComponent<Props> = ({ data: { category } }) => (
       <Breadcrumbs parent={category.parent} />
     </SubHeader>
 
-    <Section>
-      <Container>
-        <Heading as="h2">{category.title}</Heading>
-        {category.childrenCategory &&
-          category.childrenCategory.length > 0 && (
-            <>
-              {category.childrenCategory.map(subCategory => (
-                <CategoryItem key={subCategory.slug} category={subCategory} />
-              ))}
-              {category.childrenPage && <ThematicBreak />}
-            </>
-          )}
-        {category.childrenPage &&
-          category.childrenPage.map(page => <PageItem key={page.slug} page={page} />)}
-      </Container>
-    </Section>
+    <CategorySection>
+      <CategoryContainer>
+        <Sidebar />
+        <CategoryOverview category={category} />
+      </CategoryContainer>
+    </CategorySection>
   </PageContainer>
 );
 
@@ -71,7 +68,7 @@ export const query = graphql`
         title
         slug
         childMdx {
-          excerpt
+          excerpt(pruneLength: 500)
         }
       }
       parent {

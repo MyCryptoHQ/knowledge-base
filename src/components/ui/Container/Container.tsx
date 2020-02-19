@@ -3,7 +3,7 @@ import breakpoint from '../../../theme/breakpoints';
 
 const Container = styled.div`
   width: 100%;
-  max-width: 113rem;
+  max-width: 120rem;
   margin: auto;
   box-sizing: border-box;
 

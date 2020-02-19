@@ -9,9 +9,7 @@ interface Props {
 }
 
 const Text = styled(Typography)<Props>`
-  ${({ small }) =>
-    small &&
-    fluidRange({ prop: 'font-size', fromSize: '12px', toSize: '14px' }, '400px', '1000px')};
+  font-size: ${({ small }) => (small ? '1.4rem' : '1.6rem')} !important;
 
   ${({ noMargin }) =>
     noMargin &&

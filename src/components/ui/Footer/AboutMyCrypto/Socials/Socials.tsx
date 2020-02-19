@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import Link from '../../../../Link';
 import Icon, { icons } from '../../../Icon';
+import breakpoint from '../../../../../theme/breakpoints';
 
 const SOCIAL_MEDIA_LINKS: { url: string; icon: keyof typeof icons }[] = [
   {
@@ -37,6 +38,15 @@ const SOCIAL_MEDIA_LINKS: { url: string; icon: keyof typeof icons }[] = [
 const StyledSocials = styled.section`
   display: flex;
   justify-content: space-between;
+
+  ${breakpoint('lg', 'max')`
+    justify-content: center;
+    margin: 1.5rem 0;
+
+    a {
+      margin-right: 1.5rem;
+    }
+  `};
 `;
 
 const Socials: FunctionComponent = () => (

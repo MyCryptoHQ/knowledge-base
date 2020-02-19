@@ -1,12 +1,14 @@
 import React, { FunctionComponent } from 'react';
+import Heading from '../../ui/Heading';
+import List from '../../ui/List';
+import ListItem from '../../ui/ListItem';
+import PageSelector from '../../PageSelector';
 import styled from 'styled-components';
+import { FEATURED_CATEGORIES } from '../../../config/categories';
 import { graphql, useStaticQuery } from 'gatsby';
-import FeaturedCategory from './FeaturedCategory';
-import { Category } from '../../models/category';
-import Section from '../ui/Section';
-import Heading from '../ui/Heading';
-import { FEATURED_CATEGORIES } from '../../config/categories';
-import breakpoint from '../../theme/breakpoints';
+import { Category } from '../../../models/category';
+import Link from '../../Link';
+import Text from '../../ui/Text';
 
 interface QueryData {
   allCategory: {
@@ -16,18 +18,12 @@ interface QueryData {
   };
 }
 
-const StyledFeaturedCategories = styled(Section)`
-  padding-left: 0;
-  padding-right: 0;
-`;
-
-const OnboardingHeading = styled(Heading)`
-  ${breakpoint('lg', 'max')`
-    display: none;
-  `};
+const FeaturedCategoriesWrapper = styled.section`
+  margin-bottom: 7.5rem;
 `;
 
 const FeaturedCategories: FunctionComponent = () => {
+  // TODO: This can probably be combined with `components/FeaturedCateogries`
   const { allCategory } = useStaticQuery<QueryData>(
     graphql`
       query {
@@ -57,12 +53,16 @@ const FeaturedCategories: FunctionComponent = () => {
   }).filter(category => category.data !== undefined);
 
   return (
-    <StyledFeaturedCategories>
-      <OnboardingHeading as="h2">Onboarding</OnboardingHeading>
-      {featuredCategories.map(category => (
-        <FeaturedCategory category={category.data!} image={category.image} />
-      ))}
-    </StyledFeaturedCategories>
+    <FeaturedCategoriesWrapper>
+      <Heading as="h3">Onboarding</Heading>
+      <List>
+        {featuredCategories.map(category => (
+          <ListItem key={category.slug}>
+            <Link to={category.slug}>{category.data!.title}</Link>
+          </ListItem>
+        ))}
+      </List>
+    </FeaturedCategoriesWrapper>
   );
 };
 
