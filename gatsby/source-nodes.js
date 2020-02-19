@@ -124,7 +124,7 @@ module.exports = async ({
 
       await createNode(child);
       const pageCount = await getPages(child);
-      reporter.info(`Registered new category '${slug}' with ${pageCount} pages`);
+      reporter.info(`registered new category '${slug}' with ${pageCount} pages`);
 
       if (parent) {
         createParentChildLink({
