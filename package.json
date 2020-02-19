@@ -86,12 +86,10 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "prettier --write --config ./.prettierrc --config-precedence file-override",
-      "tslint --project .",
-      "git add"
+      "tslint --project ."
     ],
     "*.js": [
-      "prettier --write --config ./.prettierrc --config-precedence file-override",
-      "git add"
+      "prettier --write --config ./.prettierrc --config-precedence file-override"
     ]
   },
   "husky": {
