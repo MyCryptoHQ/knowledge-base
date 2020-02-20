@@ -13,7 +13,7 @@ module.exports = {
   pathPrefix: '/',
   plugins: [
     'gatsby-plugin-typescript',
-    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-react-helmet-async',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-sharp',
     'gatsby-plugin-catch-links',

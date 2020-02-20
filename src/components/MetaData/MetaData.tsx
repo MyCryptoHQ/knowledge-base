@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import * as banner from '../../assets/images/banner.png';
 import { useSiteMetadata } from '../../hooks';
 
