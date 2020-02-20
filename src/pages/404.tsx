@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import PageContainer from '../components/ui/PageContainer';
-import Header from '../components/ui/Header';
 import MetaData from '../components/MetaData';
 import Breadcrumbs from '../components/Breadcrumbs';
 import SubHeader from '../components/ui/SubHeader';
@@ -13,7 +12,6 @@ const Error404: FunctionComponent = () => (
   <PageContainer>
     <MetaData title="Page not found" noIndex={true} />
 
-    <Header />
     <SubHeader>
       <Breadcrumbs parent={{ title: 'Page not found', slug: '404' }} />
     </SubHeader>

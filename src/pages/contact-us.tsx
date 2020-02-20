@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import PageContainer from '../components/ui/PageContainer';
 import MetaData from '../components/MetaData';
-import Header from '../components/ui/Header';
 import SubHeader from '../components/ui/SubHeader';
 import ContactForm from '../components/ContactForm';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -15,7 +14,6 @@ const ContactUs: FunctionComponent = () => (
   <PageContainer>
     <MetaData title="Contact us" />
 
-    <Header />
     <SubHeader>
       <Breadcrumbs parent={{ title: 'Contact us', slug: 'contact-us' }} />
     </SubHeader>

@@ -33,7 +33,6 @@ const Category: FunctionComponent<Props> = ({ data: { category } }) => (
   <PageContainer>
     <MetaData title={category.title} description={category.description} />
 
-    <Header />
     <SubHeader>
       <Breadcrumbs parent={category.parent} />
     </SubHeader>

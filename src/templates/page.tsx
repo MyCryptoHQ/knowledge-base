@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import { graphql } from 'gatsby';
 import PageContainer from '../components/ui/PageContainer';
 import MetaData from '../components/MetaData';
-import Header from '../components/ui/Header';
 import SubHeader from '../components/ui/SubHeader';
 import { Page as PageData } from '../models/page';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -25,7 +24,6 @@ const Page: FunctionComponent<Props> = ({ data: { page } }) => (
   <PageContainer>
     <MetaData title={page.title} description={page.description} />
 
-    <Header />
     <SubHeader>
       <Breadcrumbs parent={page.parent} />
     </SubHeader>

@@ -1,12 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import PageContainer from '../components/ui/PageContainer';
-import Header from '../components/ui/Header';
-import SearchHero from '../components/SearchHero';
 import FeaturedCategories from '../components/FeaturedCategories';
 import PopularArticles from '../components/PopularArticles';
 import styled from 'styled-components';
 import Container from '../components/ui/Container';
 import breakpoint from '../theme/breakpoints';
+import Header from '../components/Header';
+import Link from '../components/Link';
+import Search from '../components/Search';
+import HeaderButton from '../components/Header/HeaderButton';
 
 const HomeContainer = styled(Container)`
   display: flex;
@@ -19,9 +21,9 @@ const HomeContainer = styled(Container)`
 
 const Index: FunctionComponent = () => (
   <PageContainer>
-    <Header showSearch={false}>
+    {/*<Header showSearch={false}>
       <SearchHero />
-    </Header>
+    </Header>*/}
     <HomeContainer>
       <FeaturedCategories />
       <PopularArticles />

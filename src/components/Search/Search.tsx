@@ -12,12 +12,12 @@ interface Props {
 }
 
 const SearchContainer = styled.div<Props>`
-  margin-left: auto;
   background: ${({ theme }) => theme.controlBackground};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 100%;
   max-width: ${({ fullSize }) => (fullSize ? '100%' : '30rem')};
-  height: ${({ compact }) => (compact ? '37px' : '42px')};
+  height: ${({ compact }) => (compact ? '3.9rem' : '4.2rem')};
+  margin: 0 2.5rem;
 
   ${breakpoint('lg', 'max')`
     max-width: 100%;
@@ -27,10 +27,11 @@ const SearchContainer = styled.div<Props>`
 
 const SearchInput = styled.input`
   width: 100%;
+  min-width: 30rem;
   height: 100%;
   text-indent: 44px;
-  background: url(${searchIcon}) no-repeat 13px 13px;
-  background-size: 17px;
+  background: url(${searchIcon}) no-repeat 1.3rem 1rem;
+  background-size: 1.7rem;
   border: none;
   font-family: ${({ theme }) => theme.font};
 
