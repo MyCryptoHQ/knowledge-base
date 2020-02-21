@@ -8,14 +8,14 @@
     "module": "commonjs",
     "target": "es2017",
     "jsx": "react",
-    "allowJs": true,
     "noEmitOnError": true,
     "strict": true,
     "experimentalDecorators": true,
     "skipLibCheck": true
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "./gatsby/**/*"
   ],
   "exclude": [
     "node_modules"

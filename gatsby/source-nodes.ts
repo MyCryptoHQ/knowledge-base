@@ -1,4 +1,16 @@
+import { Node, SourceNodesArgs } from 'gatsby';
+
 const minimatch = require('minimatch');
+
+type PageNode = Node & {
+  frontmatter: {
+    title: string;
+    description: string;
+    priority: string;
+    date_published: string;
+    date_modified: string;
+  };
+};
 
 module.exports = async ({
   actions: { createNode, createParentChildLink },
@@ -7,18 +19,18 @@ module.exports = async ({
   getNode,
   getNodes,
   reporter
-}) => {
-  const nodes = getNodes();
-  const pageNodes = nodes.filter(node => node.internal.type === 'Mdx');
+}: SourceNodesArgs) => {
+  const nodes: Node[] = getNodes();
+  const pageNodes: PageNode[] = nodes.filter(node => node.internal.type === 'Mdx') as PageNode[];
   const categoryNodes = nodes.filter(node => node.internal.type === 'CategoryData');
 
   /**
    * Get a slug from a page data node.
    *
-   * @param node The page data node to get the slug for.
+   * @param node {Node} The page data node to get the slug for.
    * @return {string} The slug for the page.
    */
-  const getPageSlug = node => {
+  const getPageSlug = (node: Node) => {
     const parent = getNode(node.parent);
     return parent.relativePath.replace(/\.md$/, '');
   };
@@ -29,7 +41,7 @@ module.exports = async ({
    * @param categoryNode The category to register the pages for.
    * @return {number} The number of pages registered for the category.
    */
-  const getPages = async categoryNode => {
+  const getPages = async (categoryNode: Node) => {
     const pageDataNodes = pageNodes.filter(node => {
       const parent = getNode(node.parent);
       return minimatch(parent.relativePath, `${categoryNode.slug}/*`);
@@ -56,14 +68,15 @@ module.exports = async ({
         slug
       };
 
-      const node = {
+      const node: Node = {
         ...nodeData,
         id: createNodeId(`page-${slug}`),
         parent: categoryNode.id,
         children: [],
         internal: {
           type: 'Page',
-          contentDigest: createContentDigest(nodeData)
+          contentDigest: createContentDigest(nodeData),
+          owner: ''
         }
       };
 
@@ -78,10 +91,10 @@ module.exports = async ({
   /**
    * Get a slug from a category data node.
    *
-   * @param node The category data node to get the slug for.
+   * @param {Node} node The category data node to get the slug for.
    * @return {string} The slug for the category.
    */
-  const getCategorySlug = node => {
+  const getCategorySlug = (node: Node) => {
     const parent = getNode(node.parent);
     return parent.relativePath.replace('/category.yml', '');
   };
@@ -89,13 +102,13 @@ module.exports = async ({
   /**
    * Register all categories for `pattern`.
    *
-   * @param parent The parent of the category nodes.
-   * @param pattern The glob pattern to get all category file nodes for.
+   * @param {Node | null} parent The parent of the category nodes.
+   * @param {string} pattern The glob pattern to get all category file nodes for.
    */
-  const getCategories = async (parent, pattern) => {
+  const getCategories = async (parent: Node | null, pattern: string) => {
     const categoryDataNodes = categoryNodes.filter(node => {
-      const parent = getNode(node.parent);
-      return minimatch(parent.relativePath, pattern);
+      const parentNode = getNode(node.parent);
+      return minimatch(parentNode.relativePath, pattern);
     });
 
     for (const dataNode of categoryDataNodes) {
@@ -111,14 +124,15 @@ module.exports = async ({
         isTopLevel: !parent
       };
 
-      const child = {
+      const child: Node = {
         ...nodeData,
         id: createNodeId(`category-${slug}`),
-        parent: parent ? parent.id : null,
+        parent: parent ? parent.id : (null as any),
         children: [],
         internal: {
           type: 'Category',
-          contentDigest: createContentDigest(nodeData)
+          contentDigest: createContentDigest(nodeData),
+          owner: ''
         }
       };
 
