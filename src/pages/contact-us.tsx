@@ -22,7 +22,7 @@ const ContactUs: FunctionComponent = () => (
       <Container>
         <Heading as="h2">Contact us</Heading>
         <Text>
-          Before you send us a message, please try searching the knowledge base first or try{' '}
+          Before you send us a message, please try searching the knowledge base first, or try{' '}
           <Link to="/general-knowledge/ethereum-blockchain/more-help-support-and-communities">
             this list of communities
           </Link>{' '}
