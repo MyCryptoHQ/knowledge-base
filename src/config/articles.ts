@@ -10,5 +10,5 @@ export const POPULAR_ARTICLES: string[] = [
   'how-to/migrating/moving-from-mycrypto-to-ledger',
   'how-to/migrating/moving-from-mycrypto-to-trezor',
   'troubleshooting/tokens/adding-new-token-and-sending-custom-tokens',
-  'how-to/offline/how-to-run-mycrypto-offline-and-locally'
+  '/general-knowledge/ethereum-blockchain/a-glossary-of-common-terms-in-the-ethereum-crypto-space'
 ];
