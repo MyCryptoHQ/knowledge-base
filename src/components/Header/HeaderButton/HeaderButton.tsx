@@ -31,6 +31,11 @@ const HeaderButton = styled.li`
       width: 100%;
       padding: 2rem 1.5rem;
     }
+
+    & > div {
+      width: 100%;
+      margin: 0 1.5rem;
+    }
   `};
 `;
 
