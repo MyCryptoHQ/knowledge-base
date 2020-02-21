@@ -6,6 +6,7 @@ const StyledCode = styled.code`
   font-family: ${({ theme }) => theme.monoFontFamily};
   background: ${({ theme }) => theme.controlBorder};
   padding: 1.6em;
+  overflow: auto;
 `;
 
 const Code: FunctionComponent = ({ children, ...rest }) => (
