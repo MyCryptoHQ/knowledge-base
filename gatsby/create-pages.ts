@@ -1,12 +1,34 @@
-const path = require('path');
-const fs = require('fs');
-const yaml = require('js-yaml');
+const { resolve } = require('path');
+const { readFileSync } = require('fs');
+const { safeLoad } = require('js-yaml');
+import { CreatePagesArgs } from 'gatsby';
 
-const REDIRECTS_FILE = path.resolve(__dirname, '../content/redirects.yml');
-const CATEGORY_TEMPLATE = path.resolve(__dirname, '../src/templates/category.tsx');
-const PAGE_TEMPLATE = path.resolve(__dirname, '../src/templates/page.tsx');
+const REDIRECTS_FILE = resolve(__dirname, '../content/redirects.yml');
+const CATEGORY_TEMPLATE = resolve(__dirname, '../src/templates/category.tsx');
+const PAGE_TEMPLATE = resolve(__dirname, '../src/templates/page.tsx');
 
-module.exports = async ({ actions: { createPage, createRedirect }, graphql, reporter }) => {
+interface QueryData {
+  [key: string]: {
+    edges: {
+      node: {
+        slug: string;
+      };
+    }[];
+  };
+}
+
+interface RedirectsDocument {
+  redirects: {
+    from: string;
+    to: string;
+  }[];
+}
+
+module.exports = async ({
+  actions: { createPage, createRedirect },
+  graphql,
+  reporter
+}: CreatePagesArgs) => {
   /**
    * Simple helper function to create pages from a GraphQL query. This assumes the node has a slug,
    * which is used as `path` and `context`.
@@ -15,8 +37,8 @@ module.exports = async ({ actions: { createPage, createRedirect }, graphql, repo
    * @param {string} component Path to the React component to use for the page
    * @returns {Promise<void>}
    */
-  const createPages = async (fieldName, component) => {
-    const result = await graphql(`
+  const createPages = async (fieldName: string, component: string) => {
+    const result = await graphql<QueryData>(`
       query {
         ${fieldName} {
           edges {
@@ -28,7 +50,7 @@ module.exports = async ({ actions: { createPage, createRedirect }, graphql, repo
       }
     `);
 
-    if (result.errors) {
+    if (!result.data || result.errors) {
       reporter.panicOnBuild('failed to fetch all content', result.errors);
       return process.exit(1);
     }
@@ -53,7 +75,7 @@ module.exports = async ({ actions: { createPage, createRedirect }, graphql, repo
   const createRedirects = async () => {
     let file;
     try {
-      file = fs.readFileSync(REDIRECTS_FILE, 'utf-8');
+      file = readFileSync(REDIRECTS_FILE, 'utf-8');
     } catch (error) {
       // Ignore error if file does not exist
       if (error.code === 'ENOENT') {
@@ -66,7 +88,7 @@ module.exports = async ({ actions: { createPage, createRedirect }, graphql, repo
     }
 
     if (file) {
-      const document = yaml.safeLoad(file);
+      const document: RedirectsDocument = safeLoad(file);
       document.redirects.forEach(redirect =>
         createRedirect({
           fromPath: `/${redirect.from}`,
