@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
 const StyledLink = styled.a`
-  color: ${({ theme }) => theme.link};
   text-decoration: none;
-  font-weight: bold;
+  color: ${({ theme }) => theme.link};
+  transition: color 0.2s;
 
   :hover {
     color: ${({ theme }) => theme.linkHover};
