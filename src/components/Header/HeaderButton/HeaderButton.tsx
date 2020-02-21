@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import breakpoint from '../../../theme/breakpoints';
 
 const HeaderButton = styled.li`
   display: inline-flex;
@@ -22,6 +23,15 @@ const HeaderButton = styled.li`
       background: ${({ theme }) => theme.navigationHover};
     }
   }
+
+  ${breakpoint('lg', 'max')`
+    width: 100%;
+
+    & > a {
+      width: 100%;
+      padding: 2rem 1.5rem;
+    }
+  `};
 `;
 
 export default HeaderButton;
