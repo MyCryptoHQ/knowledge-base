@@ -5,6 +5,8 @@ import breakpoint from '../../theme/breakpoints';
 import Toggle from './Toggle';
 import Drawer from './Drawer';
 import Logo from './Logo';
+import { useDispatch, useSelector } from '../../hooks';
+import { setDrawerOpen } from '../../store/navigation';
 
 interface Props {
   left: ReactElement[];
@@ -76,14 +78,15 @@ const LeftDesktopButtons = styled(DesktopButtons)`
 `;
 
 const Header: FunctionComponent<Props> = ({ left, right, navigation }) => {
-  const [isOpen, setOpen] = useState<boolean>(false);
+  const isDrawerOpen = useSelector(state => state.navigation.isDrawerOpen);
+  const dispatch = useDispatch();
 
   const handleToggle = () => {
-    setOpen(!isOpen);
+    dispatch(setDrawerOpen(!isDrawerOpen));
   };
 
   const handleClose = () => {
-    setOpen(false);
+    dispatch(setDrawerOpen(false));
   };
 
   const navigationMenu = (
@@ -109,23 +112,21 @@ const Header: FunctionComponent<Props> = ({ left, right, navigation }) => {
   const rightMenu = (
     <HeaderButtons>
       {right.map((button, index) => (
-        <HeaderButton key={`right-header-button-${index}`} onClick={handleClose}>
-          {button}
-        </HeaderButton>
+        <HeaderButton key={`right-header-button-${index}`}>{button}</HeaderButton>
       ))}
     </HeaderButtons>
   );
 
   return (
     <HeaderWrapper>
-      <Drawer isOpen={isOpen}>
+      <Drawer isOpen={isDrawerOpen}>
         {navigationMenu}
         {leftMenu}
         {rightMenu}
       </Drawer>
 
       <HeaderContainer>
-        <Toggle isOpen={isOpen} onClick={handleToggle} />
+        <Toggle isOpen={isDrawerOpen} onClick={handleToggle} />
         <LeftDesktopButtons position="flex-start">{leftMenu}</LeftDesktopButtons>
         <Logo />
         <DesktopButtons position="flex-end">{rightMenu}</DesktopButtons>

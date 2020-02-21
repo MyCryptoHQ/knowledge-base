@@ -1,10 +1,11 @@
 import React, { ChangeEvent, FunctionComponent, KeyboardEvent } from 'react';
 import styled from 'styled-components';
 import { navigate } from 'gatsby';
-import * as searchIcon from '../../assets/images/icons/search.svg';
 import { useDispatch, useSelector } from '../../hooks';
-import { search } from '../../store/search';
+import { search } from '../../store/navigation';
 import breakpoint from '../../theme/breakpoints';
+import Input from '../ui/Input';
+import * as searchIcon from '../../assets/images/icons/search.svg';
 
 interface Props {
   compact: boolean;
@@ -25,30 +26,26 @@ const SearchContainer = styled.div<Props>`
   `};
 `;
 
-const SearchInput = styled.input`
+const SearchInput = styled(Input as any)`
   width: 100%;
   min-width: 30rem;
   height: 100%;
-  text-indent: 44px;
-  background: url(${searchIcon}) no-repeat 1.3rem 1rem;
-  background-size: 1.7rem;
-  border: none;
-  font-family: ${({ theme }) => theme.font};
 
-  &:focus {
-    outline: none;
-  }
+  ${breakpoint('lg', 'max')`
+    min-width: auto;
+    width: auto;
+  `};
 
-  &::-webkit-search-decoration,
-  &::-webkit-search-cancel-button,
-  &::-webkit-search-results-button,
-  &::-webkit-search-results-decoration {
+  ::-webkit-search-decoration,
+  ::-webkit-search-cancel-button,
+  ::-webkit-search-results-button,
+  ::-webkit-search-results-decoration {
     display: none;
   }
 `;
 
 const Search: FunctionComponent<Props> = ({ compact, fullSize }) => {
-  const searchText = useSelector(state => state.search.searchText);
+  const searchText = useSelector(state => state.navigation.searchText);
   const dispatch = useDispatch();
 
   const handleSearch = () => {
@@ -72,6 +69,7 @@ const Search: FunctionComponent<Props> = ({ compact, fullSize }) => {
   return (
     <SearchContainer compact={compact} fullSize={fullSize}>
       <SearchInput
+        icon={searchIcon}
         type="search"
         placeholder="Search"
         value={searchText}

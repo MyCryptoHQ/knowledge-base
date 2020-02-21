@@ -5,10 +5,6 @@ import PopularArticles from '../components/PopularArticles';
 import styled from 'styled-components';
 import Container from '../components/ui/Container';
 import breakpoint from '../theme/breakpoints';
-import Header from '../components/Header';
-import Link from '../components/Link';
-import Search from '../components/Search';
-import HeaderButton from '../components/Header/HeaderButton';
 
 const HomeContainer = styled(Container)`
   display: flex;
@@ -21,9 +17,6 @@ const HomeContainer = styled(Container)`
 
 const Index: FunctionComponent = () => (
   <PageContainer>
-    {/*<Header showSearch={false}>
-      <SearchHero />
-    </Header>*/}
     <HomeContainer>
       <FeaturedCategories />
       <PopularArticles />

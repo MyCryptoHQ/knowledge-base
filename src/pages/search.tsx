@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { graphql } from 'gatsby';
 import PageContainer from '../components/ui/PageContainer';
-import Header from '../components/ui/Header';
 import SubHeader from '../components/ui/SubHeader';
 import MetaData from '../components/MetaData';
 import SearchPage from '../components/SearchPage';
@@ -47,7 +46,7 @@ export const query = graphql`
           description
           slug
           childMdx {
-            excerpt
+            excerpt(pruneLength: 500)
           }
         }
       }

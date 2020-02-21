@@ -5,9 +5,8 @@ import { Page } from '../../models/page';
 import * as Fuse from 'fuse.js';
 import { useSelector } from '../../hooks';
 import Heading from '../ui/Heading';
-import Section from '../ui/Section';
 
-const fuse = new Fuse<Page>([], {
+const fuse = new Fuse<Page, {}>([], {
   keys: [
     {
       name: 'title',
@@ -37,23 +36,20 @@ const _paq: (string | boolean | number)[][] =
 /* tslint:enable */
 
 const SearchPage: FunctionComponent<Props> = ({ allPages }) => {
-  const searchQuery = useSelector(state => state.search.searchQuery);
+  const searchQuery = useSelector(state => state.navigation.searchQuery);
   const [results, setResults] = useState<Page[]>([]);
 
-  useMemo(
-    () => {
-      fuse.setCollection(allPages);
+  useMemo(() => {
+    fuse.setCollection(allPages);
 
-      const searchResults = fuse.search(searchQuery, {
-        limit: 15
-      });
+    const searchResults = fuse.search(searchQuery, {
+      limit: 10
+    });
 
-      _paq.push(['trackSiteSearch', searchQuery, false, searchResults.length]);
+    _paq.push(['trackSiteSearch', searchQuery, false, searchResults.length]);
 
-      setResults(searchResults);
-    },
-    [searchQuery]
-  );
+    setResults(searchResults);
+  }, [searchQuery]);
 
   if (searchQuery) {
     return (
@@ -62,7 +58,7 @@ const SearchPage: FunctionComponent<Props> = ({ allPages }) => {
           <>
             <Heading as="h2">Results for "{searchQuery}"</Heading>
             {results.map(page => (
-              <PageItem key={page.slug} page={page} />
+              <PageItem key={page.slug} page={page} showReadMore={true} />
             ))}
           </>
         ) : (

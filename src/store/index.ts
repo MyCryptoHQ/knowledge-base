@@ -1,7 +1,7 @@
-import { SearchState } from './search';
+import { NavigationState } from './navigation';
 
 export interface ApplicationState {
-  search: SearchState;
+  navigation: NavigationState;
 }
 
 export * from './configureStore';

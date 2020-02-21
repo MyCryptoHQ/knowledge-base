@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { ApplicationState } from './index';
-import { searchReducer, SearchActions } from './search';
+import { navigationReducer, SearchActions } from './navigation';
 
 export type ApplicationActions = SearchActions;
 
 const rootReducer = combineReducers<ApplicationState>({
-  search: searchReducer
+  navigation: navigationReducer
 });
 
 export default rootReducer;
