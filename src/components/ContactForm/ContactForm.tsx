@@ -1,11 +1,12 @@
 import React, { ChangeEvent, FunctionComponent, useState } from 'react';
 import { number, object, string, ValidationError } from 'yup';
-import { Button, Input } from '@mycrypto/ui';
+import { Button } from '@mycrypto/ui';
 import Recaptcha from 'react-google-recaptcha';
 import { useSiteMetadata } from '../../hooks';
 import Field from './Field';
 import Text from '../ui/Text';
 import { FORM_SUBJECTS } from '../../config/contact-form';
+import Input from '../ui/Input';
 
 interface FormData {
   name: string;
@@ -131,7 +132,7 @@ const ContactForm: FunctionComponent = () => {
       </Field>
 
       <Field label="More details" hasError={errors.includes('body')}>
-        <Text noMargin={true}>
+        <Text small={true} noMargin={true}>
           Please include all the necessary info, so that we can help you. Not doing so may cause
           delays. <strong>Do not send us your private key.</strong>
         </Text>
@@ -141,12 +142,12 @@ const ContactForm: FunctionComponent = () => {
           name="body"
           value={formData.body}
           onChange={handleChange}
-          placeholder="e.g. I was attempting to unlock by wallet but when I did I got the error message &quot;Unknown Error: file is not defined.&quot; ..."
+          placeholder='e.g. I was attempting to unlock by wallet but when I did I got the error message "Unknown Error: file is not defined." ...'
         />
       </Field>
 
       <Field label="Screenshot (optional)" hasError={errors.includes('attachment')}>
-        <Text noMargin={true}>
+        <Text small={true} noMargin={true}>
           Image files only. Do not send your private key or passport. Do not send a screenshot of
           your transaction history, but include a link instead.
         </Text>
