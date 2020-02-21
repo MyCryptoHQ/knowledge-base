@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import styled from 'styled-components';
-import * as CopyToClipboard from 'react-copy-to-clipboard';
 
 interface Props {
   address: string;
+
   onCopy?(): void;
 }
 

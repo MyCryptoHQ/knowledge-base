@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { Heading as UIHeading } from '@mycrypto/ui';
-import { fluidRange } from 'polished';
 
 type Size = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 

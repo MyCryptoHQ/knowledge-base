@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import * as open from '../../../assets/images/icons/hamburger.svg';
-import * as close from '../../../assets/images/icons/close.svg';
 import styled from 'styled-components';
+import * as close from '../../../assets/images/icons/close.svg';
+import * as open from '../../../assets/images/icons/hamburger.svg';
 import breakpoint from '../../../theme/breakpoints';
 
 interface Props {

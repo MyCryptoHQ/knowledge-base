@@ -7,8 +7,6 @@ const StyledTableHead = styled.thead`
   background: ${({ theme }) => theme.tableHeadBackground};
 `;
 
-const TableHead: FunctionComponent = ({ children, ...rest }) => (
-  <StyledTableHead {...rest}>{children}</StyledTableHead>
-);
+const TableHead: FunctionComponent = ({ children, ...rest }) => <StyledTableHead {...rest}>{children}</StyledTableHead>;
 
 export default TableHead;

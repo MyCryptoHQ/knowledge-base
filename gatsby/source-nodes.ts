@@ -1,6 +1,8 @@
 import { Node, SourceNodesArgs } from 'gatsby';
 
+/* tslint:disable */
 const minimatch = require('minimatch');
+/* tslint:enable */
 
 type PageNode = Node & {
   frontmatter: {
@@ -50,13 +52,7 @@ module.exports = async ({
     for (const dataNode of pageDataNodes) {
       const slug = getPageSlug(dataNode);
       const {
-        frontmatter: {
-          title,
-          description,
-          priority,
-          date_published: datePublished,
-          date_modified: dateModified
-        }
+        frontmatter: { title, description, priority, date_published: datePublished, date_modified: dateModified }
       } = dataNode;
 
       const nodeData = {
@@ -127,7 +123,7 @@ module.exports = async ({
       const child: Node = {
         ...nodeData,
         id: createNodeId(`category-${slug}`),
-        parent: parent ? parent.id : (null as any),
+        parent: parent ? parent.id : (null as any), // tslint:disable-line
         children: [],
         internal: {
           type: 'Category',

@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
+import styled from 'styled-components';
+import Link from '../Link';
 import Heading from '../ui/Heading';
 import Text from '../ui/Text';
-import Link from '../Link';
-import styled from 'styled-components';
 
 interface Props {
   titleOnly?: boolean;

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import Heading from '../ui/Heading';
 import styled from 'styled-components';
+import Heading from '../ui/Heading';
 import Text from '../ui/Text';
 
 interface Props {

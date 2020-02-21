@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import PageContainer from '../../components/ui/PageContainer';
-import MetaData from '../../components/MetaData';
-import Header from '../../components/ui/Header';
-import SubHeader from '../../components/ui/SubHeader';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import MetaData from '../../components/MetaData';
+import PageContainer from '../../components/ui/PageContainer';
+import SubHeader from '../../components/ui/SubHeader';
 
 const SuccessPage: FunctionComponent = () => (
   <PageContainer>

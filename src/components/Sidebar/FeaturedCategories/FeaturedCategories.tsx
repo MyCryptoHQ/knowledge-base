@@ -1,14 +1,12 @@
+import { graphql, useStaticQuery } from 'gatsby';
 import React, { FunctionComponent } from 'react';
+import styled from 'styled-components';
+import { FEATURED_CATEGORIES } from '../../../config/categories';
+import { Category } from '../../../models/category';
+import Link from '../../Link';
 import Heading from '../../ui/Heading';
 import List from '../../ui/List';
 import ListItem from '../../ui/ListItem';
-import PageSelector from '../../PageSelector';
-import styled from 'styled-components';
-import { FEATURED_CATEGORIES } from '../../../config/categories';
-import { graphql, useStaticQuery } from 'gatsby';
-import { Category } from '../../../models/category';
-import Link from '../../Link';
-import Text from '../../ui/Text';
 
 interface QueryData {
   allCategory: {
@@ -27,10 +25,7 @@ const FeaturedCategories: FunctionComponent = () => {
   const { allCategory } = useStaticQuery<QueryData>(
     graphql`
       query {
-        allCategory(
-          filter: { isTopLevel: { eq: true } }
-          sort: { fields: [priority], order: DESC }
-        ) {
+        allCategory(filter: { isTopLevel: { eq: true } }, sort: { fields: [priority], order: DESC }) {
           edges {
             node {
               title

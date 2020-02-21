@@ -1,17 +1,15 @@
-import React, { FunctionComponent } from 'react';
 import { graphql } from 'gatsby';
+import React, { FunctionComponent } from 'react';
+import styled from 'styled-components';
+import Breadcrumbs from '../components/Breadcrumbs';
+import CategoryOverview from '../components/CategoryOverview';
+import MetaData from '../components/MetaData';
+import Sidebar from '../components/Sidebar';
+import Container from '../components/ui/Container';
 import PageContainer from '../components/ui/PageContainer';
-import Header from '../components/ui/Header';
+import Section from '../components/ui/Section';
 import SubHeader from '../components/ui/SubHeader';
 import { Category as CategoryData } from '../models/category';
-import Breadcrumbs from '../components/Breadcrumbs';
-import MetaData from '../components/MetaData';
-import Section from '../components/ui/Section';
-import Container from '../components/ui/Container';
-import styled from 'styled-components';
-import Sidebar from '../components/Sidebar';
-import CategoryOverview from '../components/CategoryOverview';
-import breakpoint from '../theme/breakpoints';
 
 interface Props {
   pathContext: {

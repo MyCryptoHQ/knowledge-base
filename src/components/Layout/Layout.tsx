@@ -1,14 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import MetaData from '../MetaData';
-import Footer from '../ui/Footer';
-import Link from '../Link';
-import Search from '../Search';
-import HeaderButton from '../Header/HeaderButton';
-import Header from '../Header';
-import { LEFT_HEADER_ITEMS, NAVIGATION_ITEMS } from '../../config/navigation';
 import 'typeface-lato';
 import 'typeface-source-code-pro';
+import { LEFT_HEADER_ITEMS, NAVIGATION_ITEMS } from '../../config/navigation';
+import Header from '../Header';
+import Link from '../Link';
+import MetaData from '../MetaData';
+import Search from '../Search';
+import Footer from '../ui/Footer';
 
 const StyledLayout = styled.div`
   display: flex;

@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Heading from '../../Heading';
-import DonateButton from './DonateButton';
-import Text from '../../Text';
-import * as ether from '../../../../assets/images/donate/ether.png';
 import * as bitcoin from '../../../../assets/images/donate/bitcoin.png';
-import Check from './Check';
+import * as ether from '../../../../assets/images/donate/ether.png';
 import breakpoint from '../../../../theme/breakpoints';
+import Heading from '../../Heading';
+import Text from '../../Text';
+import Check from './Check';
+import DonateButton from './DonateButton';
 
 const StyledDonate = styled.div`
   min-width: 250px;
@@ -36,18 +36,15 @@ const DonateMessage = styled(Text)`
 const Donate: FunctionComponent = () => {
   const [displayMessage, setDisplayMessage] = useState<boolean>();
 
-  useEffect(
-    () => {
-      if (displayMessage) {
-        const id = setTimeout(() => {
-          setDisplayMessage(false);
-        }, 3000);
+  useEffect(() => {
+    if (displayMessage) {
+      const id = setTimeout(() => {
+        setDisplayMessage(false);
+      }, 3000);
 
-        return () => clearTimeout(id);
-      }
-    },
-    [displayMessage]
-  );
+      return () => clearTimeout(id);
+    }
+  }, [displayMessage]);
 
   const handleCopy = () => {
     setDisplayMessage(true);

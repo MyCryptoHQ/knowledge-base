@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import Heading from '../../Heading';
 import Link from '../../../Link';
+import Heading from '../../Heading';
 
 const LINK_COLUMNS: {
   heading: string;
@@ -57,8 +57,7 @@ const LINK_COLUMNS: {
     links: [
       {
         title: 'EtherAddressLookup',
-        url:
-          'https://chrome.google.com/webstore/detail/etheraddresslookup/pdknmigbbbhmllnmgdfalmedcmcefdfn'
+        url: 'https://chrome.google.com/webstore/detail/etheraddresslookup/pdknmigbbbhmllnmgdfalmedcmcefdfn'
       },
       {
         title: 'CryptoScamDB',

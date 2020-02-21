@@ -1,12 +1,12 @@
-import React, { ChangeEvent, FunctionComponent, useState } from 'react';
-import { number, object, string, ValidationError } from 'yup';
 import { Button } from '@mycrypto/ui';
+import React, { ChangeEvent, FunctionComponent, useState } from 'react';
 import Recaptcha from 'react-google-recaptcha';
-import { useSiteMetadata } from '../../hooks';
-import Field from './Field';
-import Text from '../ui/Text';
+import { object, string, ValidationError } from 'yup';
 import { FORM_SUBJECTS } from '../../config/contact-form';
+import { useSiteMetadata } from '../../hooks';
 import Input from '../ui/Input';
+import Text from '../ui/Text';
+import Field from './Field';
 
 interface FormData {
   name: string;
@@ -41,9 +41,7 @@ const ContactForm: FunctionComponent = () => {
   const [isVerified, setVerified] = useState<boolean>(false);
   const { recaptchaSitekey } = useSiteMetadata();
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value
@@ -78,7 +76,6 @@ const ContactForm: FunctionComponent = () => {
         form.submit();
       })
       .catch((error: ValidationError) => {
-        console.log(error);
         setErrors([...errors, ...error.inner.map(innerError => innerError.path)]);
       });
   };
@@ -89,16 +86,9 @@ const ContactForm: FunctionComponent = () => {
       encType="multipart/form-data"
       acceptCharset="utf-8"
       action="https://webhook.frontapp.com/forms/myetherwallet/tMA_4BxSeE05bwxsN62-Ue5xP4jz_W7LGlgKNgGTKEchjFw7-6M8q-9q9ZqxsSYDl2BXv7Gx17Vqev1Km0akl8qVZtPM5LYl"
-      onSubmit={handleSubmit}
-    >
+      onSubmit={handleSubmit}>
       <Field label="Your name" hasError={errors.includes('name')}>
-        <Input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="e.g. Taylor"
-        />
+        <Input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="e.g. Taylor" />
       </Field>
 
       <Field label="Your email" hasError={errors.includes('email')}>
@@ -133,8 +123,8 @@ const ContactForm: FunctionComponent = () => {
 
       <Field label="More details" hasError={errors.includes('body')}>
         <Text small={true} noMargin={true}>
-          Please include all the necessary info, so that we can help you. Not doing so may cause
-          delays. <strong>Do not send us your private key.</strong>
+          Please include all the necessary info, so that we can help you. Not doing so may cause delays.{' '}
+          <strong>Do not send us your private key.</strong>
         </Text>
 
         <Input
@@ -148,8 +138,8 @@ const ContactForm: FunctionComponent = () => {
 
       <Field label="Screenshot (optional)" hasError={errors.includes('attachment')}>
         <Text small={true} noMargin={true}>
-          Image files only. Do not send your private key or passport. Do not send a screenshot of
-          your transaction history, but include a link instead.
+          Image files only. Do not send your private key or passport. Do not send a screenshot of your transaction
+          history, but include a link instead.
         </Text>
 
         <Input

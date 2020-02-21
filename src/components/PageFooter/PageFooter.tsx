@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import Section from '../ui/Section';
-import Container from '../ui/Container';
-import Link from '../Link';
 import * as githubIcon from '../../assets/images/icons/social/github-black.svg';
+import Link from '../Link';
+import Container from '../ui/Container';
+import Section from '../ui/Section';
 import Text from '../ui/Text';
 
 interface Props {
@@ -38,10 +38,7 @@ const PageFooter: FunctionComponent<Props> = ({ slug }) => (
       </section>
       <section>
         <Text small={true}>
-          <Link
-            to={`https://github.com/MyCryptoHQ/knowledge-base-content/blob/master/${slug}.md`}
-            external={true}
-          >
+          <Link to={`https://github.com/MyCryptoHQ/knowledge-base-content/blob/master/${slug}.md`} external={true}>
             <FooterIcon src={githubIcon} alt="GitHub" /> Edit this article on GitHub
           </Link>
         </Text>

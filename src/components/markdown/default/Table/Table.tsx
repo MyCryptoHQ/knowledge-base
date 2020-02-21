@@ -9,8 +9,6 @@ const StyledTable = styled.table`
   border-collapse: collapse;
 `;
 
-const Table: FunctionComponent = ({ children, ...rest }) => (
-  <StyledTable {...rest}>{children}</StyledTable>
-);
+const Table: FunctionComponent = ({ children, ...rest }) => <StyledTable {...rest}>{children}</StyledTable>;
 
 export default Table;

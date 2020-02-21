@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useMemo, useState } from 'react';
+import Fuse from 'fuse.js';
 import { navigate } from 'gatsby';
-import PageItem from '../PageItem';
-import { Page } from '../../models/page';
-import * as Fuse from 'fuse.js';
+import React, { FunctionComponent, useMemo, useState } from 'react';
 import { useSelector } from '../../hooks';
+import { Page } from '../../models/page';
+import PageItem from '../PageItem';
 import Heading from '../ui/Heading';
 
 const fuse = new Fuse<Page, {}>([], {
@@ -31,8 +31,7 @@ interface Props {
 }
 
 /* tslint:disable */
-const _paq: (string | boolean | number)[][] =
-  (typeof window !== 'undefined' && (window as any)._paq) || [];
+const _paq: (string | boolean | number)[][] = (typeof window !== 'undefined' && (window as any)._paq) || [];
 /* tslint:enable */
 
 const SearchPage: FunctionComponent<Props> = ({ allPages }) => {

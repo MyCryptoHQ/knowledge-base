@@ -1,7 +1,7 @@
+import { Link } from 'gatsby';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import logo from '../../../assets/images/logo-2.svg';
-import { Link } from 'gatsby';
 
 const LogoContainer = styled.div`
   display: flex;

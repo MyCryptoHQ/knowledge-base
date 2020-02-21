@@ -11,8 +11,6 @@ const StyledLink = styled.a`
   }
 `;
 
-const Link: FunctionComponent = ({ children, ...rest }) => (
-  <StyledLink {...rest}>{children}</StyledLink>
-);
+const Link: FunctionComponent = ({ children, ...rest }) => <StyledLink {...rest}>{children}</StyledLink>;
 
 export default Link;

@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from 'react';
-import styled, { css } from 'styled-components';
 import { Link as GatsbyLink } from 'gatsby';
+import React, { FunctionComponent } from 'react';
+import styled, { css, DefaultTheme } from 'styled-components';
 
 interface Props {
   to: string;
@@ -10,11 +10,11 @@ interface Props {
 
 const linkCss = css`
   text-decoration: none;
-  color: ${({ theme }) => theme.link};
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.link};
   transition: color 0.2s;
 
   :hover {
-    color: ${({ theme }) => theme.linkHover};
+    color: ${({ theme }: { theme: DefaultTheme }) => theme.linkHover};
   }
 `;
 

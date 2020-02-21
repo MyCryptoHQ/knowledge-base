@@ -1,11 +1,11 @@
-import React, { ChangeEvent, FunctionComponent, KeyboardEvent } from 'react';
-import styled from 'styled-components';
 import { navigate } from 'gatsby';
+import React, { ChangeEvent, FunctionComponent, KeyboardEvent } from 'react';
+import styled, { AnyStyledComponent } from 'styled-components';
+import * as searchIcon from '../../assets/images/icons/search.svg';
 import { useDispatch, useSelector } from '../../hooks';
 import { search } from '../../store/navigation';
 import breakpoint from '../../theme/breakpoints';
 import Input from '../ui/Input';
-import * as searchIcon from '../../assets/images/icons/search.svg';
 
 interface Props {
   compact: boolean;
@@ -26,7 +26,7 @@ const SearchContainer = styled.div<Props>`
   `};
 `;
 
-const SearchInput = styled(Input as any)`
+const SearchInput = styled(Input as AnyStyledComponent)`
   width: 100%;
   min-width: 30rem;
   height: 100%;

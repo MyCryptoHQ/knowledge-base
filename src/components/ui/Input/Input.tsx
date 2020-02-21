@@ -1,6 +1,6 @@
+import { transparentize } from 'polished';
 import React, { DetailedHTMLProps, FunctionComponent, InputHTMLAttributes, useRef } from 'react';
 import styled, { css } from 'styled-components';
-import { transparentize } from 'polished';
 import Text from '../Text';
 
 const InputContainer = styled.div`
@@ -65,7 +65,7 @@ const Input: FunctionComponent<Props> = ({ className, icon, as = 'input', ...res
   return (
     <InputContainer className={className} onClick={handleClick}>
       {icon && <Icon src={icon} />}
-      <StyledInput ref={input} as={as as any} withIcon={!!icon} {...rest} />
+      <StyledInput ref={input} as={as as 'input' & 'select' & 'textarea' & 'file'} withIcon={!!icon} {...rest} />
     </InputContainer>
   );
 };

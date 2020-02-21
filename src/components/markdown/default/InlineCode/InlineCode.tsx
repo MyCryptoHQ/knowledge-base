@@ -11,8 +11,6 @@ const StyledCode = styled.code`
   vertical-align: middle;
 `;
 
-const InlineCode: FunctionComponent = ({ children, ...rest }) => (
-  <StyledCode {...rest}>{children}</StyledCode>
-);
+const InlineCode: FunctionComponent = ({ children, ...rest }) => <StyledCode {...rest}>{children}</StyledCode>;
 
 export default InlineCode;

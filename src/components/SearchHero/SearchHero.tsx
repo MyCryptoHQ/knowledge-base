@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import Search from '../Search';
-import Container from '../ui/Container';
-import Center from '../ui/Center';
-import Text from '../ui/Text';
 import breakpoint from '../../theme/breakpoints';
+import Search from '../Search';
+import Center from '../ui/Center';
+import Container from '../ui/Container';
+import Text from '../ui/Text';
 
 const HeroText = styled(Text)`
   font-size: 3rem !important;

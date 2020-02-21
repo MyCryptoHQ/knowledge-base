@@ -1,9 +1,7 @@
-import components from './default';
 import Clearfix from './Clearfix';
-import TokenInfo from './TokenInfo';
+import components from './default';
 
 export default {
   ...components,
-  Clearfix,
-  TokenInfo
+  Clearfix
 };

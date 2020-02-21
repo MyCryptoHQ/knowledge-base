@@ -1,6 +1,6 @@
-import { DefaultTheme } from 'styled-components';
 import { light } from '@mycrypto/ui';
 import { transparentize } from 'polished';
+import { DefaultTheme } from 'styled-components';
 
 const theme: DefaultTheme = {
   ...light,

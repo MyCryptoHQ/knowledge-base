@@ -8,8 +8,6 @@ const StyledCode = styled.code`
   padding: 1.6em;
 `;
 
-const Code: FunctionComponent = ({ children, ...rest }) => (
-  <StyledCode {...rest}>{children}</StyledCode>
-);
+const Code: FunctionComponent = ({ children, ...rest }) => <StyledCode {...rest}>{children}</StyledCode>;
 
 export default Code;

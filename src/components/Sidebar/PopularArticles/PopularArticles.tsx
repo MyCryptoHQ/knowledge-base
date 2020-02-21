@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import PageSelector from '../../PageSelector';
+import styled from 'styled-components';
 import { POPULAR_ARTICLES } from '../../../config/articles';
+import PageSelector from '../../PageSelector';
+import Heading from '../../ui/Heading';
 import List from '../../ui/List';
 import ListItem from '../../ui/ListItem';
-import styled from 'styled-components';
-import Heading from '../../ui/Heading';
 
 const PopularArticlesWrapper = styled.section``;
 
