@@ -9,7 +9,6 @@ const SuccessPage: FunctionComponent = () => (
   <PageContainer>
     <MetaData title="Success · Contact us" noIndex={true} />
 
-    <Header />
     <SubHeader>
       <Breadcrumbs parent={{ title: 'Contact us', slug: 'contact-us' }} />
     </SubHeader>

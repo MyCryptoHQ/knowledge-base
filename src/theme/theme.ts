@@ -16,7 +16,10 @@ const theme: DefaultTheme = {
   footerLink: '#bbc2cb',
 
   fontFamily: `'Lato', sans-serif`,
-  monoFontFamily: `'Source Code Pro', monospace`
+  monoFontFamily: `'Source Code Pro', monospace`,
+
+  headerBorder: '#3e546d',
+  navigationHover: '#304b6a'
 };
 
 export default theme;

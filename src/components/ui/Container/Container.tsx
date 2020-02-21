@@ -8,7 +8,7 @@ const Container = styled.div`
   box-sizing: border-box;
 
   ${breakpoint('xl', 'max')`
-    padding: 0 3%;
+    padding: 0 1.5rem;
   `};
 `;
 

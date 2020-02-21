@@ -1,9 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import 'typeface-lato';
-import 'typeface-source-code-pro';
 import MetaData from '../MetaData';
 import Footer from '../ui/Footer';
+import Link from '../Link';
+import Search from '../Search';
+import HeaderButton from '../Header/HeaderButton';
+import Header from '../Header';
+import { LEFT_HEADER_ITEMS, NAVIGATION_ITEMS } from '../../config/navigation';
+import 'typeface-lato';
+import 'typeface-source-code-pro';
 
 const StyledLayout = styled.div`
   display: flex;
@@ -16,11 +21,11 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     height: 100%;
   }
-  
+
   html {
     font-size: 62.5%;
   }
-  
+
   body {
     font-size: 1.45rem;
     font-family: ${({ theme }) => theme.fontFamily};
@@ -28,17 +33,29 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Layout: FunctionComponent = ({ children }) => {
-  return (
-    <StyledLayout>
-      <GlobalStyle />
-      <MetaData />
+const Layout: FunctionComponent = ({ children }) => (
+  <StyledLayout>
+    <GlobalStyle />
+    <MetaData />
 
-      {children}
+    <Header
+      left={LEFT_HEADER_ITEMS.map(item => (
+        <Link key={`navigation-${item.to}`} to={item.to} external={item.external}>
+          {item.title}
+        </Link>
+      ))}
+      right={[<Search key="search" compact={true} />]}
+      navigation={NAVIGATION_ITEMS.map(item => (
+        <Link key={`navigation-${item.to}`} to={item.to}>
+          {item.title}
+        </Link>
+      ))}
+    />
 
-      <Footer />
-    </StyledLayout>
-  );
-};
+    {children}
+
+    <Footer />
+  </StyledLayout>
+);
 
 export default Layout;
