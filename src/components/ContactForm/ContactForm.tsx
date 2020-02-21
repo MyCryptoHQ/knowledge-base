@@ -132,7 +132,7 @@ const ContactForm: FunctionComponent = () => {
       </Field>
 
       <Field label="More details" hasError={errors.includes('body')}>
-        <Text noMargin={true}>
+        <Text small={true} noMargin={true}>
           Please include all the necessary info, so that we can help you. Not doing so may cause
           delays. <strong>Do not send us your private key.</strong>
         </Text>
@@ -147,7 +147,7 @@ const ContactForm: FunctionComponent = () => {
       </Field>
 
       <Field label="Screenshot (optional)" hasError={errors.includes('attachment')}>
-        <Text noMargin={true}>
+        <Text small={true} noMargin={true}>
           Image files only. Do not send your private key or passport. Do not send a screenshot of
           your transaction history, but include a link instead.
         </Text>

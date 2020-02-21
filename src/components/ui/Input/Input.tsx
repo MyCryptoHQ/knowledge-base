@@ -1,5 +1,5 @@
 import React, { DetailedHTMLProps, FunctionComponent, InputHTMLAttributes, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
 import Text from '../Text';
 
@@ -28,11 +28,18 @@ const StyledInput = styled(Text)<InputProps>`
   border: none;
   outline: none;
   padding: ${({ withIcon }) => (withIcon ? '1rem 1.5rem 1rem 0rem' : '1rem 1.5rem')};
+  margin: 0 !important;
 
   ::placeholder {
     color: ${({ theme }) => theme.text};
     opacity: 0.55;
   }
+
+  ${({ as }) =>
+    as === 'textarea' &&
+    css`
+      resize: vertical;
+    `};
 `;
 
 const Icon = styled.img`
@@ -43,7 +50,7 @@ const Icon = styled.img`
 
 interface OwnProps {
   icon?: string;
-  as?: 'input' | 'select';
+  as?: 'input' | 'select' | 'textarea' | 'file';
 }
 
 type Props = OwnProps & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
@@ -58,7 +65,7 @@ const Input: FunctionComponent<Props> = ({ className, icon, as = 'input', ...res
   return (
     <InputContainer className={className} onClick={handleClick}>
       {icon && <Icon src={icon} />}
-      <StyledInput ref={input} as={as} withIcon={!!icon} {...rest} />
+      <StyledInput ref={input} as={as as any} withIcon={!!icon} {...rest} />
     </InputContainer>
   );
 };

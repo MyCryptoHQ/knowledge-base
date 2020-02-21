@@ -16,11 +16,20 @@ const StyledField = styled(Text).attrs({ as: 'label' })`
     css`
       color: #ff433d;
     `};
+
+  ${Text} {
+    margin-bottom: 0.5rem;
+  }
+`;
+
+const LabelTitle = styled.div`
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 `;
 
 const Field: FunctionComponent<Props> = ({ label, hasError, children }) => (
   <StyledField hasError={hasError}>
-    <strong>{label}</strong> <br />
+    <LabelTitle>{label}</LabelTitle>
     {children}
   </StyledField>
 );
