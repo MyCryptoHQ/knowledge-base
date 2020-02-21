@@ -1,12 +1,12 @@
-import React, { FunctionComponent, ReactElement, useState } from 'react';
-import styled from 'styled-components';
-import HeaderButton from './HeaderButton';
-import breakpoint from '../../theme/breakpoints';
-import Toggle from './Toggle';
-import Drawer from './Drawer';
-import Logo from './Logo';
+import React, { FunctionComponent, ReactElement } from 'react';
+import styled, { DefaultTheme } from 'styled-components';
 import { useDispatch, useSelector } from '../../hooks';
 import { setDrawerOpen } from '../../store/navigation';
+import breakpoint from '../../theme/breakpoints';
+import Drawer from './Drawer';
+import HeaderButton from './HeaderButton';
+import Logo from './Logo';
+import Toggle from './Toggle';
 
 interface Props {
   left: ReactElement[];
@@ -42,7 +42,7 @@ const HeaderButtons = styled.ul<HeaderButtonProps>`
     flex-direction: column;
     width: 100%;
     padding: 1.5rem 0;
-    border-bottom: 1px solid ${({ theme }) => theme.headerBorder};
+    border-bottom: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.headerBorder};
   `};
 `;
 

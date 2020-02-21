@@ -1,6 +1,5 @@
-import styled, { css } from 'styled-components';
-import { fluidRange } from 'polished';
 import { Typography } from '@mycrypto/ui';
+import styled, { css } from 'styled-components';
 
 interface Props {
   small?: boolean;

@@ -1,7 +1,10 @@
+import { CreatePagesArgs } from 'gatsby';
+
+/* tslint:disable */
 const { resolve } = require('path');
 const { readFileSync } = require('fs');
 const { safeLoad } = require('js-yaml');
-import { CreatePagesArgs } from 'gatsby';
+/* tslint:enable */
 
 const REDIRECTS_FILE = resolve(__dirname, '../content/redirects.yml');
 const CATEGORY_TEMPLATE = resolve(__dirname, '../src/templates/category.tsx');
@@ -24,11 +27,7 @@ interface RedirectsDocument {
   }[];
 }
 
-module.exports = async ({
-  actions: { createPage, createRedirect },
-  graphql,
-  reporter
-}: CreatePagesArgs) => {
+module.exports = async ({ actions: { createPage, createRedirect }, graphql, reporter }: CreatePagesArgs) => {
   /**
    * Simple helper function to create pages from a GraphQL query. This assumes the node has a slug,
    * which is used as `path` and `context`.

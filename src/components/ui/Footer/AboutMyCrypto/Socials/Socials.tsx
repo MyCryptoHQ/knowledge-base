@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+import breakpoint from '../../../../../theme/breakpoints';
 import Link from '../../../../Link';
 import Icon, { icons } from '../../../Icon';
-import breakpoint from '../../../../../theme/breakpoints';
 
 const SOCIAL_MEDIA_LINKS: { url: string; icon: keyof typeof icons }[] = [
   {

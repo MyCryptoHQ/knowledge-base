@@ -9,8 +9,6 @@ const StyledCode = styled.code`
   overflow: auto;
 `;
 
-const Code: FunctionComponent = ({ children, ...rest }) => (
-  <StyledCode {...rest}>{children}</StyledCode>
-);
+const Code: FunctionComponent = ({ children, ...rest }) => <StyledCode {...rest}>{children}</StyledCode>;
 
 export default Code;

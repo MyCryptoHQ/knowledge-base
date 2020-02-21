@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import Heading from '../Heading';
-import Divider from './Divider';
-import AboutMyCrypto from './AboutMyCrypto';
-import LinkSet from './LinkSet';
-import Donate from './Donate';
 import breakpoint from '../../../theme/breakpoints';
+import Heading from '../Heading';
+import AboutMyCrypto from './AboutMyCrypto';
+import Divider from './Divider';
+import Donate from './Donate';
+import LinkSet from './LinkSet';
 
 const StyledFooter = styled.footer`
   background: ${({ theme }) => theme.secondary};

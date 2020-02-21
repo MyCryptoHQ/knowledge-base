@@ -6,8 +6,6 @@ const StyledTableRow = styled.td`
   padding: 1em;
 `;
 
-const TableCell: FunctionComponent = ({ children, ...rest }) => (
-  <StyledTableRow {...rest}>{children}</StyledTableRow>
-);
+const TableCell: FunctionComponent = ({ children, ...rest }) => <StyledTableRow {...rest}>{children}</StyledTableRow>;
 
 export default TableCell;

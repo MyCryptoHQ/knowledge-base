@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import PopularArticles from './PopularArticles';
-import FeaturedCategories from './FeaturedCategories';
 import breakpoint from '../../theme/breakpoints';
+import FeaturedCategories from './FeaturedCategories';
+import PopularArticles from './PopularArticles';
 
 const SidebarWrapper = styled.section`
   width: 30rem;

@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { Category } from '../../models/category';
+import breakpoint from '../../theme/breakpoints';
 import CategoryItemCount from '../CategoryItemCount';
 import Link from '../Link';
 import Heading from '../ui/Heading';
-import breakpoint from '../../theme/breakpoints';
 
 interface Props {
   category: Category;

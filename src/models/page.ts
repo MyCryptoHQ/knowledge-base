@@ -1,5 +1,6 @@
 import { Category } from './category';
 
+// tslint:disable-next-line
 export type MarkdownBody = any;
 
 export interface Page {

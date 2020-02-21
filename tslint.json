@@ -1,32 +1,22 @@
 {
-  "defaultSeverity": "error",
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
-  "jsRules": {
-    "quotemark": false,
-    "max-line-length": false,
-    "trailing-comma": false,
-    "object-literal-sort-keys": false
-  },
   "rules": {
-    "quotemark": false,
-    "trailing-comma": false,
-    "object-literal-sort-keys": false,
-    "arrow-return-shorthand": true,
-    "prefer-method-signature": true,
     "arrow-parens": false,
+    "curly": true,
+    "interface-name": [true, "never-prefix"],
+    "jsdoc-format": [true, "check-multiline-start"],
+    "member-access": [true, "no-public"],
+    "no-any": true,
     "no-unnecessary-type-assertion": true,
-    "array-type": [true, "array"],
-    "jsx-no-lambda": false,
-    "interface-name": false,
-    "no-duplicate-imports": true,
-    "no-console": false,
-    "no-var-requires": false,
-    "jsx-wrap-multiline": false,
-    "comment-format": false,
-    "ordered-imports": false,
-    "react-anchor-blank-noopener": true,
-    "no-http-string": [true, "http://localhost:.*"],
-    "member-access": [true, "no-public"]
+    "object-literal-sort-keys": false,
+    "ordered-imports": true,
+    "origin-ordered-imports": [true, "no-blank-lines"],
+    "prefer-method-signature": true,
+    "quotemark": [true, "single", "jsx-double", "avoid-escape"],
+    "trailing-comma": false
   },
-  "rulesDirectory": ["node_modules/tslint-microsoft-contrib"]
+  "defaultSeverity": "error",
+  "rulesDirectory": [
+    "node_modules/tslint-origin-ordered-imports-rule/dist"
+  ]
 }

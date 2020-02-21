@@ -8,5 +8,5 @@ import { ApplicationState } from '../store';
  * @template S
  */
 export const useSelector = <S>(selector: (state: ApplicationState) => S): S => {
-  return useReduxSelector<ApplicationState, any>(selector);
+  return useReduxSelector<ApplicationState, S>(selector);
 };

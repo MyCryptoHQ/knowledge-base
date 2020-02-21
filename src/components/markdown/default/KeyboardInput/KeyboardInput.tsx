@@ -1,6 +1,6 @@
+import { darken } from 'polished';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { darken } from 'polished';
 
 const StyledKeyboardInput = styled.kbd`
   background: ${({ theme }) => theme.controlBorder};

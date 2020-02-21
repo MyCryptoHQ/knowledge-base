@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src/",
-    "sourceMap": true,
-    "strictNullChecks": true,
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
+    "outDir": "lib",
+    "target": "esnext",
     "module": "commonjs",
-    "target": "es2017",
     "jsx": "react",
-    "noEmitOnError": true,
     "strict": true,
-    "experimentalDecorators": true,
+    "noEmitOnError": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "skipLibCheck": true
   },
   "include": [

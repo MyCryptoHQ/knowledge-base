@@ -1,5 +1,5 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Page } from '../../models/page';
 import PageItem from '../PageItem';
 
@@ -36,15 +36,12 @@ const PageSelector: FunctionComponent<Props> = ({ slug, titleOnly }) => {
   );
   const [page, setPage] = useState<Page>();
 
-  useEffect(
-    () => {
-      const item = allPage.edges.find(edge => edge.node.slug === slug);
-      if (item) {
-        setPage(item.node);
-      }
-    },
-    [allPage.edges]
-  );
+  useEffect(() => {
+    const item = allPage.edges.find(edge => edge.node.slug === slug);
+    if (item) {
+      setPage(item.node);
+    }
+  }, [allPage.edges]);
 
   if (page) {
     return <PageItem page={page} titleOnly={titleOnly} />;

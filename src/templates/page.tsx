@@ -1,15 +1,15 @@
-import React, { FunctionComponent } from 'react';
 import { graphql } from 'gatsby';
-import PageContainer from '../components/ui/PageContainer';
-import MetaData from '../components/MetaData';
-import SubHeader from '../components/ui/SubHeader';
-import { Page as PageData } from '../models/page';
+import React, { FunctionComponent } from 'react';
 import Breadcrumbs from '../components/Breadcrumbs';
-import Section from '../components/ui/Section';
-import Container from '../components/ui/Container';
+import MetaData from '../components/MetaData';
+import PageBody from '../components/PageBody';
 import PageFooter from '../components/PageFooter/PageFooter';
 import PageHeader from '../components/PageHeader/PageHeader';
-import PageBody from '../components/PageBody';
+import Container from '../components/ui/Container';
+import PageContainer from '../components/ui/PageContainer';
+import Section from '../components/ui/Section';
+import SubHeader from '../components/ui/SubHeader';
+import { Page as PageData } from '../models/page';
 
 interface Props {
   pathContext: {

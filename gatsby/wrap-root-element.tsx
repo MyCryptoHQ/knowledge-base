@@ -1,5 +1,5 @@
-import React from 'react';
 import { WrapRootElementBrowserArgs } from 'gatsby';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { configureStore } from '../src/store';

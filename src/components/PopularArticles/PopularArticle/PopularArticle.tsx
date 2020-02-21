@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import styled from 'styled-components';
-import PageSelector from '../../PageSelector';
+import styled, { DefaultTheme } from 'styled-components';
 import breakpoint from '../../../theme/breakpoints';
+import PageSelector from '../../PageSelector';
 
 const ArticleWrapper = styled.div`
   a {
@@ -15,7 +15,7 @@ const ArticleWrapper = styled.div`
       margin-bottom: 1.5rem;
 
       h3 {
-        color: ${({ theme }) => theme.primary};
+        color: ${({ theme }: { theme: DefaultTheme }) => theme.primary};
       }
     `};
 

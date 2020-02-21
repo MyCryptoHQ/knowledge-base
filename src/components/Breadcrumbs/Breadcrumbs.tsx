@@ -1,6 +1,6 @@
+import { Link } from 'gatsby';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
 import Text from '../ui/Text';
 
 interface Props {
