@@ -39,16 +39,24 @@ const LINK_COLUMNS: {
     heading: 'Support Us',
     links: [
       {
-        title: 'Ledger Wallet',
+        title: 'Get a Ledger',
         url: 'https://www.ledgerwallet.com/r/1985?path=/products/'
       },
       {
-        title: 'TREZOR',
+        title: 'Get a Trezor',
         url: 'https://shop.trezor.io/?offer_id=10&aff_id=1735'
       },
       {
-        title: 'ether.card',
-        url: 'https://ether.cards/?utm_source=mycrypto&utm_medium=cpm&utm_campaign=site'
+        title: 'Get QuikNode',
+        url: 'https://quiknode.io?tap_a=67226-09396e&tap_s=860550-6c3251'
+      },
+      {
+        title: 'Buy ETH on Coinbase',
+        url: 'https://coinbase-consumer.sjv.io/RVmkN'
+      },
+      {
+        title: 'Unstoppable Domains',
+        url: 'https://unstoppabledomains.com/r/mycrypto'
       }
     ]
   },
