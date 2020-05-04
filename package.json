@@ -45,7 +45,7 @@
     "@types/styled-components": "^5.0.0",
     "@types/yup": "^0.26.32",
     "babel-plugin-styled-components": "^1.10.7",
-    "gatsby": "^2.19.18",
+    "gatsby": "^2.21.11",
     "gatsby-plugin-catch-links": "^2.1.25",
     "gatsby-plugin-favicons": "^1.0.4",
     "gatsby-plugin-matomo": "^0.8.0",
@@ -58,7 +58,7 @@
     "gatsby-remark-external-links": "^0.0.4",
     "gatsby-remark-images": "^3.1.44",
     "gatsby-remark-static-images": "^1.0.1",
-    "gatsby-source-filesystem": "^2.1.48",
+    "gatsby-source-filesystem": "^2.3.0",
     "gatsby-transformer-yaml": "^2.2.25",
     "gh-pages": "^2.2.0",
     "husky": "^4.2.3",
@@ -74,7 +74,7 @@
     "tslint-origin-ordered-imports-rule": "^1.2.2",
     "tslint-react": "^4.2.0",
     "typescript": "^3.7.5",
-    "webpack": "^4.41.6"
+    "webpack": "^4.43.0"
   },
   "scripts": {
     "clean": "gatsby clean",
