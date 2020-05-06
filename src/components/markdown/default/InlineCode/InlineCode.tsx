@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledCode = styled.code`
   padding: 0.2em 0.4em;
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   background-color: ${({ theme }) => theme.controlBorder};
   border-radius: ${({ theme }) => theme.borderRadius};
   font-family: ${({ theme }) => theme.monoFontFamily};

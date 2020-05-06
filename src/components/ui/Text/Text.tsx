@@ -9,6 +9,7 @@ interface Props {
 
 const Text = styled(Typography)<Props>`
   font-size: ${({ small }) => (small ? '1.4rem' : '1.6rem')} !important;
+  margin: 1.25rem 0;
 
   ${({ noMargin }) =>
     noMargin &&
