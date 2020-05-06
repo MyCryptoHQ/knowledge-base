@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import breakpoint from '../../../theme/breakpoints';
 
-const Container = styled.div`
+interface Props {
+  maxWidth?: string;
+}
+
+const Container = styled.div<Props>`
   width: 100%;
-  max-width: 120rem;
+  max-width: ${({ maxWidth = '120rem' }) => maxWidth};
   margin: auto;
   box-sizing: border-box;
 

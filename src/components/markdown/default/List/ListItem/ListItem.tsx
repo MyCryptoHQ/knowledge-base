@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Text from '../../../../ui/Text';
 
 const StyledListItem = styled(Text)`
+  font-size: 1.7rem !important;
   margin-top: 0;
   margin-bottom: 0;
 

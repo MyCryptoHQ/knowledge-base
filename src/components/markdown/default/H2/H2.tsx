@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import Heading from '../../../ui/Heading';
+import Heading from '../Heading';
 
 const H2: FunctionComponent = ({ children, ...rest }) => (
   <Heading as="h2" {...rest}>

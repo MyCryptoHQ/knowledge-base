@@ -29,7 +29,7 @@ const Page: FunctionComponent<Props> = ({ data: { page } }) => (
     </SubHeader>
 
     <Section>
-      <Container>
+      <Container maxWidth="74rem">
         <article>
           <PageHeader title={page.title} dateModified={page.dateModified} />
           <PageBody body={page.childMdx.body} />
