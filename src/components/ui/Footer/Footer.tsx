@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import breakpoint from '../../../theme/breakpoints';
 import Heading from '../Heading';
+import Text from '../Text';
 import AboutMyCrypto from './AboutMyCrypto';
 import Divider from './Divider';
 import Donate from './Donate';
@@ -18,6 +19,11 @@ const StyledFooter = styled.footer`
     color: ${({ theme }) => theme.textInverted};
     margin: 0 0 7px;
     padding: 0;
+  }
+
+  ${Text} {
+    font-weight: 300;
+    color: ${({ theme }) => theme.footerLink};
   }
 `;
 

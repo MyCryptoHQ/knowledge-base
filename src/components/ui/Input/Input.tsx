@@ -22,7 +22,7 @@ interface InputProps {
   withIcon: boolean;
 }
 
-const StyledInput = styled(Text)<InputProps>`
+export const StyledInput = styled(Text)<InputProps>`
   width: 100%;
   background: none;
   border: none;
