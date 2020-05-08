@@ -5,6 +5,7 @@ import * as ether from '../../../../assets/images/donate/ether.png';
 import breakpoint from '../../../../theme/breakpoints';
 import Heading from '../../Heading';
 import Text from '../../Text';
+import Subscribe from '../Subscribe';
 import Check from './Check';
 import DonateButton from './DonateButton';
 
@@ -15,6 +16,8 @@ const StyledDonate = styled.div`
     margin: auto;
   `};
 `;
+
+const DonateWrapper = styled.section``;
 
 const DonateButtons = styled.div`
   display: flex;
@@ -52,23 +55,28 @@ const Donate: FunctionComponent = () => {
 
   return (
     <StyledDonate>
-      <Heading as="h2">Donate</Heading>
-      <DonateButtons>
-        <DonateButton address="0x4bbeEB066eD09B7AEd07bF39EEe0460DFa261520" onCopy={handleCopy}>
-          <DonateIcon src={ether} alt="Ethereum" />
-          Ethereum
-        </DonateButton>
-        <DonateButton address="32oirLEzZRhi33RCXDF9WHJjEb8RsrSss3" onCopy={handleCopy}>
-          <DonateIcon src={bitcoin} alt="Bitcoin" />
-          Bitcoin
-        </DonateButton>
-      </DonateButtons>
-      {displayMessage && (
+      <DonateWrapper>
+        <Heading as="h2">Donate</Heading>
+        <DonateButtons>
+          <DonateButton address="0x4bbeEB066eD09B7AEd07bF39EEe0460DFa261520" onCopy={handleCopy}>
+            <DonateIcon src={ether} alt="Ethereum" />
+            Ethereum
+          </DonateButton>
+          <DonateButton address="32oirLEzZRhi33RCXDF9WHJjEb8RsrSss3" onCopy={handleCopy}>
+            <DonateIcon src={bitcoin} alt="Bitcoin" />
+            Bitcoin
+          </DonateButton>
+        </DonateButtons>
         <DonateMessage>
-          <Check />
-          Address Copied to Clipboard!
+          {(displayMessage && (
+            <>
+              <Check />
+              Address Copied to Clipboard!
+            </>
+          )) || <>&nbsp;</>}
         </DonateMessage>
-      )}
+      </DonateWrapper>
+      <Subscribe />
     </StyledDonate>
   );
 };
