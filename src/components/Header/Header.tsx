@@ -23,7 +23,7 @@ const HeaderWrapper = styled.header`
   `};
 `;
 
-const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div`
   position: relative;
   width: 100%;
   min-height: 7.7rem;

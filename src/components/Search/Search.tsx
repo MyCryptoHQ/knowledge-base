@@ -9,14 +9,14 @@ import Input from '../ui/Input';
 
 interface Props {
   compact: boolean;
-  fullSize?: boolean;
+  maxWidth?: string;
 }
 
 const SearchContainer = styled.div<Props>`
   background: ${({ theme }) => theme.controlBackground};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 100%;
-  max-width: ${({ fullSize }) => (fullSize ? '100%' : '30rem')};
+  max-width: ${({ maxWidth = '30rem' }) => maxWidth};
   height: ${({ compact }) => (compact ? '3.9rem' : '4.2rem')};
   margin: 0 2.5rem;
 
@@ -30,6 +30,7 @@ const SearchInput = styled(Input as AnyStyledComponent)`
   width: 100%;
   min-width: 30rem;
   height: 100%;
+  min-height: 100%;
 
   ${breakpoint('lg', 'max')`
     min-width: auto;
@@ -44,7 +45,7 @@ const SearchInput = styled(Input as AnyStyledComponent)`
   }
 `;
 
-const Search: FunctionComponent<Props> = ({ compact, fullSize }) => {
+const Search: FunctionComponent<Props> = ({ compact, maxWidth }) => {
   const searchText = useSelector(state => state.navigation.searchText);
   const dispatch = useDispatch();
 
@@ -67,7 +68,7 @@ const Search: FunctionComponent<Props> = ({ compact, fullSize }) => {
   };
 
   return (
-    <SearchContainer compact={compact} fullSize={fullSize}>
+    <SearchContainer compact={compact} maxWidth={maxWidth}>
       <SearchInput
         icon={searchIcon}
         type="search"
