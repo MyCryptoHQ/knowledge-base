@@ -41,6 +41,10 @@ const StyledAlert = styled.div<Required<Props>>`
   box-shadow: 0 4px 9px -2px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
+
+  ${Text} {
+    margin: 0;
+  }
 `;
 
 const Icon = styled.img`
@@ -51,7 +55,7 @@ const Icon = styled.img`
 const Alert: FunctionComponent<Props> = ({ type = 'info', children }) => (
   <StyledAlert type={type}>
     <Icon {...getIcon(type)} />
-    <Text noMargin={true}>{children}</Text>
+    {children}
   </StyledAlert>
 );
 
