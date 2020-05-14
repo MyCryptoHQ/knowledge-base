@@ -1,3 +1,4 @@
+import { useLocation } from '@reach/router';
 import React, { FunctionComponent } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import 'typeface-lato';
@@ -32,29 +33,34 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Layout: FunctionComponent = ({ children }) => (
-  <StyledLayout>
-    <GlobalStyle />
-    <MetaData />
+const Layout: FunctionComponent = ({ children }) => {
+  const location = useLocation();
+  const right = location.pathname === '/' ? [] : [<Search key="search" compact={true} />];
 
-    <Header
-      left={LEFT_HEADER_ITEMS.map(item => (
-        <Link key={`navigation-${item.to}`} to={item.to} external={item.external}>
-          {item.title}
-        </Link>
-      ))}
-      right={[<Search key="search" compact={true} />]}
-      navigation={NAVIGATION_ITEMS.map(item => (
-        <Link key={`navigation-${item.to}`} to={item.to}>
-          {item.title}
-        </Link>
-      ))}
-    />
+  return (
+    <StyledLayout>
+      <GlobalStyle />
+      <MetaData />
 
-    {children}
+      <Header
+        left={LEFT_HEADER_ITEMS.map(item => (
+          <Link key={`navigation-${item.to}`} to={item.to} external={item.external}>
+            {item.title}
+          </Link>
+        ))}
+        right={right}
+        navigation={NAVIGATION_ITEMS.map(item => (
+          <Link key={`navigation-${item.to}`} to={item.to}>
+            {item.title}
+          </Link>
+        ))}
+      />
 
-    <Footer />
-  </StyledLayout>
-);
+      {children}
+
+      <Footer />
+    </StyledLayout>
+  );
+};
 
 export default Layout;
