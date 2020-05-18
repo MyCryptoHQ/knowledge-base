@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+import * as minus from '../../../assets/images/icons/minus.svg';
+import * as plus from '../../../assets/images/icons/plus.svg';
 import * as discord from '../../../assets/images/icons/social/discord.svg';
 import * as facebook from '../../../assets/images/icons/social/facebook.svg';
 import * as github from '../../../assets/images/icons/social/github.svg';
@@ -15,14 +17,16 @@ export const icons = {
   linkedin,
   medium,
   reddit,
-  twitter
+  twitter,
+  minus,
+  plus
 };
 
 interface Props {
   icon: keyof typeof icons;
 }
 
-const StyledIcon = styled.img`
+export const StyledIcon = styled.img`
   width: 20px;
   vertical-align: middle;
 `;

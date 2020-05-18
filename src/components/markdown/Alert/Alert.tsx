@@ -34,7 +34,7 @@ const getIcon = (type: Type): { src: string; alt: string } => {
   }
 };
 
-const StyledAlert = styled.div<Required<Props>>`
+export const StyledAlert = styled.div<Required<Props>>`
   background: ${({ type }) => getBackground(type)};
   margin: 2rem 0;
   padding: 2.5rem 3rem;
