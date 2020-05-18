@@ -1,15 +1,13 @@
-import * as moment from 'moment';
+import format from 'date-fns/format';
+import parseISO from 'date-fns/parseISO';
 
 /**
- * Format a date as calendar time (e.g. 'yesterday', 'last wednesday')
+ * Format a date as string
+ *
  * @param {string} date
  * @return {string}
  */
 export const formatDate = (date: string): string => {
-  return moment.utc(date).calendar(undefined, {
-    sameDay: '[Today]',
-    lastDay: '[Yesterday]',
-    lastWeek: '[Last] dddd',
-    sameElse: 'YYYY/MM/DD'
-  });
+  const parsedDate = parseISO(date);
+  return format(parsedDate, 'PPP');
 };
