@@ -1,3 +1,7 @@
+/**
+ * MDX v2.x.x (currently in beta) provides its own TypeScript definitions, but the plugin we're using
+ * relies on v1.x.x, so we have to provide our own types for now.
+ */
 declare module '@mdx-js/react' {
   import React from 'react';
 
@@ -30,7 +34,8 @@ declare module '@mdx-js/react' {
     | 'img'
     | string;
 
-  export type Components = { [key in ComponentType]?: React.ComponentType };
+  // tslint:disable-next-line:no-any
+  export type Components = { [key in ComponentType]?: React.ComponentType<any> };
 
   export interface MDXProviderProps {
     children: React.ReactNode;
