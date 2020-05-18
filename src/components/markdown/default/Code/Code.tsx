@@ -7,6 +7,7 @@ const StyledCode = styled.code`
   background: ${({ theme }) => theme.controlBorder};
   padding: 1.6em;
   overflow: auto;
+  margin: 3rem 0;
 `;
 
 const Code: FunctionComponent = ({ children, ...rest }) => <StyledCode {...rest}>{children}</StyledCode>;
