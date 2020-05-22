@@ -44,6 +44,7 @@ export const query = graphql`
         node {
           title
           description
+          tags
           slug
           childMdx {
             excerpt(pruneLength: 500)
