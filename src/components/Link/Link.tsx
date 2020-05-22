@@ -6,6 +6,7 @@ interface Props {
   to: string;
   external?: boolean;
   newTab?: boolean;
+  className?: string;
 }
 
 const linkCss = css`
@@ -26,16 +27,24 @@ const StyledExternalLink = styled.a`
   ${linkCss};
 `;
 
-const Link: FunctionComponent<Props> = ({ to, external = false, newTab = false, children }) => {
+const Link: FunctionComponent<Props> = ({ to, external = false, newTab = false, children, className }) => {
   if (external) {
     return (
-      <StyledExternalLink href={to} target={newTab ? '_blank' : '_self'} rel="noopener noreferrer">
+      <StyledExternalLink
+        href={to}
+        target={newTab ? '_blank' : '_self'}
+        rel="noopener noreferrer"
+        className={className}>
         {children}
       </StyledExternalLink>
     );
   }
 
-  return <StyledLink to={to}>{children}</StyledLink>;
+  return (
+    <StyledLink to={to} className={className}>
+      {children}
+    </StyledLink>
+  );
 };
 
 export default Link;

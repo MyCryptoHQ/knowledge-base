@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import { formatDate } from '../../utils/date';
 import Heading from '../ui/Heading';
 import Text from '../ui/Text';
+import Tags from './Tags';
 
 interface Props {
   title: string;
+  tags: string[];
   dateModified: string;
 }
 
@@ -22,10 +24,12 @@ const PageMetaData = styled(Text)`
   color: ${({ theme }) => theme.textMuted};
 `;
 
-const PageHeader: FunctionComponent<Props> = ({ title, dateModified }) => (
+const PageHeader: FunctionComponent<Props> = ({ title, tags, dateModified }) => (
   <PageHeaderContainer>
     <PageHeading>{title}</PageHeading>
-    <PageMetaData small={true}>Last updated: {formatDate(dateModified)}</PageMetaData>
+    <PageMetaData small={true}>
+      Last updated: {formatDate(dateModified)} &middot; <Tags tags={tags} />
+    </PageMetaData>
   </PageHeaderContainer>
 );
 

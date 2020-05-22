@@ -22,7 +22,7 @@ interface Props {
 
 const Page: FunctionComponent<Props> = ({ data: { page } }) => (
   <PageContainer>
-    <MetaData title={page.title} description={page.description} />
+    <MetaData title={page.title} description={page.description} keyWords={page.tags} />
 
     <SubHeader>
       <Breadcrumbs parent={page.parent} />
@@ -31,7 +31,7 @@ const Page: FunctionComponent<Props> = ({ data: { page } }) => (
     <Section>
       <Container maxWidth="74rem">
         <article>
-          <PageHeader title={page.title} dateModified={page.dateModified} />
+          <PageHeader title={page.title} tags={page.tags} dateModified={page.dateModified} />
           <PageBody body={page.childMdx.body} />
         </article>
       </Container>
@@ -48,6 +48,7 @@ export const query = graphql`
     page(slug: { eq: $slug }) {
       title
       slug
+      tags
       description
       dateModified
       childMdx {

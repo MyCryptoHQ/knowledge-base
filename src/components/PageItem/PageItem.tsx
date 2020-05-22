@@ -36,9 +36,11 @@ const PageItem: FunctionComponent<Props> = ({ page, titleOnly, showReadMore }) =
     ) : (
       <PageItemWrapper showReadMore={showReadMore}>
         <PageHeading as="h3">{page.title}</PageHeading>
-        <Text muted={true} noMargin={true}>
-          {page.childMdx.excerpt}
-        </Text>
+        {page.childMdx && (
+          <Text muted={true} noMargin={true}>
+            {page.childMdx.excerpt}
+          </Text>
+        )}
         {showReadMore && <ReadMore>Read More</ReadMore>}
       </PageItemWrapper>
     )}

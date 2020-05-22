@@ -25,8 +25,6 @@ const CategoryContainer = styled(Container)`
   flex-direction: row;
 `;
 
-const CategorySection = styled(Section)``;
-
 const Category: FunctionComponent<Props> = ({ data: { category } }) => (
   <PageContainer>
     <MetaData title={category.title} description={category.description} />
@@ -35,12 +33,12 @@ const Category: FunctionComponent<Props> = ({ data: { category } }) => (
       <Breadcrumbs parent={category.parent} />
     </SubHeader>
 
-    <CategorySection>
+    <Section>
       <CategoryContainer>
         <Sidebar />
         <CategoryOverview category={category} />
       </CategoryContainer>
-    </CategorySection>
+    </Section>
   </PageContainer>
 );
 

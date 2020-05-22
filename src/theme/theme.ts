@@ -19,7 +19,9 @@ const theme: DefaultTheme = {
   monoFontFamily: `'Source Code Pro', monospace`,
 
   headerBorder: '#3e546d',
-  navigationHover: '#304b6a'
+  navigationHover: '#304b6a',
+
+  tagBackground: '#e3e3e3'
 };
 
 export default theme;
