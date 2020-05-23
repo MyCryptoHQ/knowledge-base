@@ -10,13 +10,8 @@ interface Props {
 const TagsContainer = styled.ul`
   list-style-type: none;
   display: inline-block;
-  margin: 0;
+  margin: -1rem 0 0 0;
   padding: 0;
-`;
-
-const TagItem = styled.li`
-  display: inline-block;
-  margin: 0;
 `;
 
 // tslint:disable-next-line
@@ -28,6 +23,12 @@ const Tag = styled<any>(Link)`
   border-radius: ${({ theme }) => theme.borderRadius};
   color: ${({ theme }) => lighten(0.1, theme.text)} !important;
   font-weight: normal !important;
+`;
+
+const TagItem = styled.li`
+  display: inline-block;
+  margin: 1rem 0 0 0;
+  font-size: 1.4rem;
 `;
 
 const Tags: FunctionComponent<Props> = ({ tags }) => (
