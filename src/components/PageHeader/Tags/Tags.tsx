@@ -1,6 +1,7 @@
 import { lighten } from 'polished';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+import { encodeTag } from '../../../utils/tags';
 import Link from '../../Link';
 
 interface Props {
@@ -35,7 +36,7 @@ const Tags: FunctionComponent<Props> = ({ tags }) => (
   <TagsContainer>
     {tags.map(tag => (
       <TagItem key={tag}>
-        <Tag to={`/tag/${tag.toLowerCase()}`}>{tag}</Tag>
+        <Tag to={`/tag/${encodeTag(tag)}`}>{tag}</Tag>
       </TagItem>
     ))}
   </TagsContainer>

@@ -110,6 +110,10 @@ module.exports = async ({ actions: { createPage, createRedirect }, graphql, repo
     }
   };
 
+  const encodeTag = (tag: string): string => {
+    return tag.toLowerCase().replace(/\s/g, '-');
+  };
+
   const createTags = async () => {
     const result = await graphql<TagsQueryData>(`
       query {
@@ -128,7 +132,7 @@ module.exports = async ({ actions: { createPage, createRedirect }, graphql, repo
 
     tags.forEach(tag => {
       createPage({
-        path: `/tag/${tag.toLowerCase()}`,
+        path: `/tag/${encodeTag(tag)}`,
         component: TAG_TEMPLATE,
         context: {
           tag: [tag],
