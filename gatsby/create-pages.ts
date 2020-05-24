@@ -9,12 +9,23 @@ const { safeLoad } = require('js-yaml');
 const REDIRECTS_FILE = resolve(__dirname, '../content/redirects.yml');
 const CATEGORY_TEMPLATE = resolve(__dirname, '../src/templates/category.tsx');
 const PAGE_TEMPLATE = resolve(__dirname, '../src/templates/page.tsx');
+const TAG_TEMPLATE = resolve(__dirname, '../src/templates/tag.tsx');
 
 interface QueryData {
   [key: string]: {
     edges: {
       node: {
         slug: string;
+      };
+    }[];
+  };
+}
+
+interface TagsQueryData {
+  allPage: {
+    edges: {
+      node: {
+        tags: string[];
       };
     }[];
   };
@@ -99,7 +110,40 @@ module.exports = async ({ actions: { createPage, createRedirect }, graphql, repo
     }
   };
 
+  const encodeTag = (tag: string): string => {
+    return tag.toLowerCase().replace(/\s/g, '-');
+  };
+
+  const createTags = async () => {
+    const result = await graphql<TagsQueryData>(`
+      query {
+        allPage {
+          edges {
+            node {
+              tags
+            }
+          }
+        }
+      }
+    `);
+
+    const pages = result.data!.allPage.edges.map(edge => edge.node);
+    const tags = new Set(pages.flatMap(page => page.tags));
+
+    tags.forEach(tag => {
+      createPage({
+        path: `/tag/${encodeTag(tag)}`,
+        component: TAG_TEMPLATE,
+        context: {
+          tag: [tag],
+          tagName: tag
+        }
+      });
+    });
+  };
+
   await createPages('allCategory', CATEGORY_TEMPLATE);
   await createPages('allPage', PAGE_TEMPLATE);
   await createRedirects();
+  await createTags();
 };

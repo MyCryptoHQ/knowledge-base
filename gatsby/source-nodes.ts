@@ -8,6 +8,7 @@ type PageNode = Node & {
   frontmatter: {
     title: string;
     description: string;
+    tags: string[];
     priority: string;
     date_published: string;
     date_modified: string;
@@ -52,12 +53,13 @@ module.exports = async ({
     for (const dataNode of pageDataNodes) {
       const slug = getPageSlug(dataNode);
       const {
-        frontmatter: { title, description, priority, date_published: datePublished, date_modified: dateModified }
+        frontmatter: { title, description, tags, priority, date_published: datePublished, date_modified: dateModified }
       } = dataNode;
 
       const nodeData = {
         title,
         description,
+        tags: tags ?? [],
         priority,
         datePublished,
         dateModified,

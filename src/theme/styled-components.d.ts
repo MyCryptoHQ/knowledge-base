@@ -42,6 +42,8 @@ declare module 'styled-components' {
     fontFamily: string;
     monoFontFamily: string;
 
+    tagBackground: string;
+
     /**
      * GAU navigation stuff.
      */

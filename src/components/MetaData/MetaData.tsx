@@ -6,10 +6,11 @@ import { useSiteMetadata } from '../../hooks';
 interface Props {
   title?: string;
   description?: string;
+  keyWords?: string[];
   noIndex?: boolean;
 }
 
-const MetaData: FunctionComponent<Props> = ({ title, description, noIndex = false }) => {
+const MetaData: FunctionComponent<Props> = ({ title, description, keyWords, noIndex = false }) => {
   const siteMetadata = useSiteMetadata();
 
   return (
@@ -17,6 +18,7 @@ const MetaData: FunctionComponent<Props> = ({ title, description, noIndex = fals
       <title>{`${title ? `${title} | ` : ''}${siteMetadata.title}`}</title>
       <meta name="apple-mobile-web-app-title" content={siteMetadata.title} />
       <meta name="description" content={description ? description : siteMetadata.description} />
+      {keyWords && keyWords.length > 0 && <meta name="keywords" content={keyWords.join(', ')} />}
 
       <meta property="og:title" content={title ? title : siteMetadata.title} />
       <meta property="og:site_name" content={siteMetadata.title} />

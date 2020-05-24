@@ -10,11 +10,15 @@ const fuse = new Fuse<Page, {}>([], {
   keys: [
     {
       name: 'title',
-      weight: 0.6
+      weight: 0.3
     },
     {
       name: 'description',
-      weight: 0.2
+      weight: 0.1
+    },
+    {
+      name: 'tags',
+      weight: 0.4
     },
     {
       name: 'childMdx.excerpt',

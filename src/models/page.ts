@@ -15,6 +15,11 @@ export interface Page {
   description: string;
 
   /**
+   * Tags for the page.
+   */
+  tags: string[];
+
+  /**
    * An excerpt of the page content.
    */
   excerpt: string;
