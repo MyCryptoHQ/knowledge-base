@@ -1,5 +1,4 @@
 language: node_js
-node_js: 10.14.2
 
 git:
   submodules: false
@@ -20,18 +19,23 @@ script:
   - yarn run lint
 
 before_deploy:
+  - pip install --user awscli
   - yarn run clean
-  - yarn run build --prefix-paths
+  - yarn run build
 
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: "$GITHUB_TOKEN"
-  local-dir: public
+  provider: script
+  script: yarn run deploy
+  cleanup: false
+  edge: true
   on:
-    branch: master
     tags: true
+
+# after_deploy:
+#   - aws configure set preview.cloudfront true
+#   - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
 
 env:
   global:
-    - secure: Vo9/P1PXAqyRK8coenjvnljUPDwRYfyKI9M51y2lyMeTisX0IMYp+Vn8SYKFMmQ0n+mOXzt2PFHOOqrc7AFRmj/Q0rDOT2ViBlYw5oVE1ml2akEWBo6XBlJgZYyB1JvU7pSwq6nk/qNa54+sWoklB2NZbMgiRBqEDCayh5zIaZIt6gEoYxiMUZF5Pr/x0mOoIwDkYC3XbkFY2OKpFpPR3hidNmbDmmDuP16lgRdgjKGQWn12vNvjMsY2nEGTHon/xv6CgKm1SgxToAGKwq+/i6kZeLeZvX0kxcwDNTvBT3ICOTrh6ep03vIUjqY4o/xr5lI4tEcP5gQovZl/sA5Q3wsJnCzFCCPOQEr94i6EQVQbgITcKKbqOks66YLvblZf/7Jt9SgnYIgf/Cw4Avqon7IX3fh7WRNJhuBxwZxwpkiq9RwGBlBRm/iHe/EAeMMsauIjKmLcHjF5iFxHHY7icKKFCqR2aKkJZaKXHmoD0yGm51zJSELtYV5VvmOeD6bwyjOqFwphxYF58GQPCs3Cxl7oKp20IqjMaz4xLsdDKU/NG5js6UkGdc4xPafnwiEPSC36S1E+YT15voSaG6vWnn08G4Z/IhXmiJJLdhqOailywKKrogyCcl2+WS43msjERtUNkE9YnvG1X5Q8DUUtL4hmf3X5AbgT6oE4W4KCSvg=
+    - secure: 3fAPbQlawootm+xXpb0ak9aW1f6NhtuYgGp2OAqLSoL9Rl/0nyxCTi5cYROyy/SWFaxg2v40bEugICZRn+TkaC2K76+PLijboctkWcn48Mn38AalChz1rMSyCL+KHnPj+3gLuWxBXYtKSk3B16CVLK4GslwF5uUu4LZEQBAKch1yaOLzDPyu2C5J7YG4FWCJ6G/6b5lGwaQeYLbgmSRkaWGb9M8qP/rcJRbTLPcxG27WtHaoRSBRr8Kc1gvmIaHsqGHg0fLBEG/WrDUYXeslV/PzTU/jcOrHYgpEeiRY8AsMXKG2ghTJQLPaFSexhyv1AohCWseD2+VUQiTIltpZEESZ4Cb5+vxRopWP0O3wZq/FgP/rNbcp7hcOad4VU9xkaxmLBWqC1ONgsL6nk+qwtuHLs+I7skG3GeBqv7erFx2/liCgYd1VfP3qISJLbloOlPHN//HXESPZrQKBs7TsAejm9EXjDRuwYHn+k6AKxycmXBv9hiFDTfaXM0oZj8FZB1LcV48ZItdk6vfPA88oTKYEU9OKkLJq6plhpm1dkJgIZiMxHUqz1wDdzrBkdWV1cgQgOKUhTImbVAoPTN6qcMLwOnseIbfA4hP0TUfWXOjkaAt01Dp0xjMfapaKsD5qVKpEuyAf7xIKTu5CrcyuK6aWPdNvwsskmUiJ3fEIvZE=
+    - secure: wyHMi2x7oqP2ulThY5YPc7HT/nsMlhZJADu9HAYZ82OZKXigB7pjhTfTSCnpUcOkkae7r9pgQFTk9xHp5l0fMPf9KiskcS3ZbkNMhwbJBUddiqJQxsLcHcdwH+Wu64r5LF83epKwKlabI9Hsg2mz6UNtCXWWUA4mkB+atCddF3Iz9IVm0jx50FPLDu5Qr0QSnHhq/R6p70I+zj1BhopS9x3ZbfxZUOY9Mt1I6EiQh4rPW8JYkBws54Eam39FymfJgucZiZHrbamw4AwjrwI7AtEd4EREqO/vF2nPn1Gh1QSZaiM8eyNEqgy9E+s7DZ5Ea9wis3HHmXBLq0dA48hx/BtHf/UfyfRe7eUKzDeJXtR7h3O0Y9NWUGMsyLrZiET3f9Xqd+oj96/itoPYu2wdDSJSNEjMt3LHgoL41yOvrEq4He9mOfWEvsUvzVKVPzlSWdxbs0eTaKsDnz5Qg0axCEsRufVAhK+rCXKcejvgLmyl1cLKxhWbdjmXi9SsiGlPr8zdjlznCOO9UtYr3TdvkFX/wrcavaC5iFcuHICr7NjaqNWGHfX3CHqhvBn1/2hg/1KZ4Nf2NoX+a1laoCrPV6pU3zSCy53mmU+1Nx5g4hLj7t/W8nC0wEENdISOwjLCuBFYwDwrKlRIZA95l2bP7pEDOOUcyxeSZWk9UOPDHzg=
