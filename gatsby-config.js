@@ -6,5 +6,5 @@ const { resolve } = require('path');
  */
 module.exports = generateConfig({
   configDir: resolve(__dirname, 'gatsby'),
-  tsNode: true
+  babel: true
 });

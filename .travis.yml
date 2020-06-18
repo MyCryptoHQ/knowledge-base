@@ -17,11 +17,11 @@ install:
 
 script:
   - yarn run lint
+  - yarn run clean
+  - yarn run build
 
 before_deploy:
   - pip install --user awscli
-  - yarn run clean
-  - yarn run build
 
 deploy:
   provider: script
