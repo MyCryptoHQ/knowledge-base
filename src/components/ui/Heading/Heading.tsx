@@ -19,7 +19,7 @@ const Heading = styled.h1<Props>`
   margin-top: 0;
   margin-bottom: 2.5rem;
   color: ${({ theme }) => theme.secondary};
-  font-size: ${({ as = 'h1' }) => sizes[as as Size]};
+  font-size: ${({ as = 'h1' }) => sizes[as]};
 `;
 
 export default Heading;

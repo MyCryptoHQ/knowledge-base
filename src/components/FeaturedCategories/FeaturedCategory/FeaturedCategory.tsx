@@ -38,7 +38,11 @@ const Wrapper = styled.div`
   `};
 `;
 
-const StyledFeaturedCategoryItem = styled.div`
+interface StyledFeaturedCategoryItemProps {
+  image: string;
+}
+
+const StyledFeaturedCategoryItem = styled.div<StyledFeaturedCategoryItemProps>`
   width: 100%;
   height: 100%;
   text-align: center;

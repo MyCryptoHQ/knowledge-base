@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 import { useDispatch, useSelector } from '../../hooks';
 import { setDrawerOpen } from '../../store/navigation';
 import breakpoint from '../../theme/breakpoints';
@@ -32,17 +32,17 @@ export const HeaderContainer = styled.div`
   display: flex;
 `;
 
-const HeaderButtons = styled.ul<HeaderButtonProps>`
+const HeaderButtons = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
 
-  ${breakpoint('lg', 'max')`
+  ${({ theme }) => breakpoint('lg', 'max')`
     justify-content: normal;
     flex-direction: column;
     width: 100%;
     padding: 1.5rem 0;
-    border-bottom: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.headerBorder};
+    border-bottom: 1px solid ${theme.headerBorder};
   `};
 `;
 
@@ -54,11 +54,11 @@ const HeaderBottom = styled(HeaderContainer)`
   `};
 `;
 
-interface HeaderButtonProps {
+interface DesktopButtonsProps {
   position: 'flex-start' | 'center' | 'flex-end';
 }
 
-const DesktopButtons = styled.div<HeaderButtonProps>`
+const DesktopButtons = styled.div<DesktopButtonsProps>`
   display: flex;
   flex-direction: row;
   justify-content: ${({ position }) => position};

@@ -33,7 +33,7 @@ const PageMetaData = styled(Text)`
 
 const PageHeader: FunctionComponent<Props> = ({ title, tags, dateModified }) => (
   <PageHeaderContainer>
-    <PageHeading>{title}</PageHeading>
+    <PageHeading as="h1">{title}</PageHeading>
     <PageMetaDataContainer>
       <PageMetaData small={true}>Last updated: {formatDate(dateModified)}</PageMetaData>
       <Tags tags={tags} />

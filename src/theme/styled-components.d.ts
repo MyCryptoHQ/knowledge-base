@@ -23,6 +23,7 @@ declare module 'styled-components' {
     primaryDarker: string;
     tableHeadBackground: string;
     tableHeadBorder: string;
+    tableRowBorder: string;
     switchBackgroundGreyable: string;
     text: string;
 
