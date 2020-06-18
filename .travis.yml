@@ -1,5 +1,4 @@
 language: node_js
-node_js: 10.14.2
 
 git:
   submodules: false
@@ -20,18 +19,22 @@ script:
   - yarn run lint
 
 before_deploy:
+  - pip install --user awscli
   - yarn run clean
-  - yarn run build --prefix-paths
+  - yarn run build
 
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: "$GITHUB_TOKEN"
-  local-dir: public
+  provider: script
+  script: yarn run deploy
+  cleanup: false
+  edge: true
   on:
-    branch: master
     tags: true
+
+# after_deploy:
+#   - aws configure set preview.cloudfront true
+#   - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
 
 env:
   global:
-    - secure: Vo9/P1PXAqyRK8coenjvnljUPDwRYfyKI9M51y2lyMeTisX0IMYp+Vn8SYKFMmQ0n+mOXzt2PFHOOqrc7AFRmj/Q0rDOT2ViBlYw5oVE1ml2akEWBo6XBlJgZYyB1JvU7pSwq6nk/qNa54+sWoklB2NZbMgiRBqEDCayh5zIaZIt6gEoYxiMUZF5Pr/x0mOoIwDkYC3XbkFY2OKpFpPR3hidNmbDmmDuP16lgRdgjKGQWn12vNvjMsY2nEGTHon/xv6CgKm1SgxToAGKwq+/i6kZeLeZvX0kxcwDNTvBT3ICOTrh6ep03vIUjqY4o/xr5lI4tEcP5gQovZl/sA5Q3wsJnCzFCCPOQEr94i6EQVQbgITcKKbqOks66YLvblZf/7Jt9SgnYIgf/Cw4Avqon7IX3fh7WRNJhuBxwZxwpkiq9RwGBlBRm/iHe/EAeMMsauIjKmLcHjF5iFxHHY7icKKFCqR2aKkJZaKXHmoD0yGm51zJSELtYV5VvmOeD6bwyjOqFwphxYF58GQPCs3Cxl7oKp20IqjMaz4xLsdDKU/NG5js6UkGdc4xPafnwiEPSC36S1E+YT15voSaG6vWnn08G4Z/IhXmiJJLdhqOailywKKrogyCcl2+WS43msjERtUNkE9YnvG1X5Q8DUUtL4hmf3X5AbgT6oE4W4KCSvg=
+    - secure: cz0WtgtwXhUQPdSoNFX43lj5/duBrqDDLOBAL7p0cCI7G2sKksR4YsUW1SoGVCr3WHckESTeoJ5QX3mbcIIffk+jBd/8e4xZ36W9dxfh/bKIR2AGClWQ04iz0RbHqO8yaPupNn3laSgJYhI4G7XEhUT2zLSCzvqTvZrqR/AkVmM8mUe+PEDOejz7em1lFLXSlOmWRoLnIB+EutfhoAYbc+u3WjIJRPWK4n8F0+vA868LptVwtpUKx5IQ7NgXWrRM215a6ckEolhU/TycqEFdcVuiVoWl5TEBmU/xBF5BBwO4G3QgHcIS0qTu2dxy6XnWgoYmsdC+ve0c3VpXxsj0vd0girzuRiWKTSlqmuo5OUU96578FvxNGmbuSzq1GX7Xh+XfddpTWrXEB2kHhLRHI8Jd6P0IUcAnE4Aqu5BUBaN+1CF1XqglsNgW9lRKuRJAK8TiUB9QUIwm3LtXtxTYj4domYRGkhRYZ3EGy6j1fx1SL5rsXhw4qz2nq8TaVU4yMxWZHhHalc+bONnl9EImYwatpcJoz+8IWEYbQdmxAIuQ+g12nJuc2ICouGxn4TODxy5mdeopxdGS5g5WlU9u4qr4/JnAaix8rN4Gy29KpPwciODBKOQ/zlUgV4ULdfNNwLJ5Kb/AMdJNLq74KO6jbFOaYe9QJjNMYHBp8BRSTW0=

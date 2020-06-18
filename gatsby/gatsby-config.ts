@@ -94,6 +94,20 @@ const config: GatsbyConfig = {
         siteUrl: 'https://support.mycrypto.com/',
         disableCookies: true
       }
+    },
+    {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: 'https://support.mycrypto.com'
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-s3',
+      options: {
+        bucketName: 'support.mycrypto.com',
+        protocol: 'https',
+        hostname: 'support.mycrypto.com'
+      }
     }
   ]
 };
