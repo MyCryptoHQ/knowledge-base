@@ -3,13 +3,18 @@
     "outDir": "lib",
     "target": "esnext",
     "module": "commonjs",
+    "moduleResolution": "node",
     "jsx": "react",
     "strict": true,
     "noEmitOnError": true,
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "lib": [
+      "dom",
+      "es2019.array"
+    ]
   },
   "include": [
     "./src/**/*",
