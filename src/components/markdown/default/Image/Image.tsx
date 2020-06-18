@@ -2,7 +2,12 @@ import React, { FunctionComponent } from 'react';
 import styled, { css } from 'styled-components';
 import breakpoint from '../../../../theme/breakpoints';
 
-const StyledImage = styled.img`
+interface Props {
+  float?: 'left' | 'right';
+  max?: string;
+}
+
+const StyledImage = styled.img<Props>`
   border-style: none;
   max-width: 100%;
   box-sizing: content-box;
@@ -30,11 +35,6 @@ const StyledImage = styled.img`
     `};
     `};
 `;
-
-interface Props {
-  float?: 'left' | 'right';
-  max?: string;
-}
 
 const Image: FunctionComponent<Props> = ({ float, max, children, ...rest }) => (
   <StyledImage float={float} max={max} {...rest}>

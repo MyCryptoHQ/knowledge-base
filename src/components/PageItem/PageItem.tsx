@@ -34,7 +34,7 @@ const PageItem: FunctionComponent<Props> = ({ page, titleOnly, showReadMore }) =
     {titleOnly ? (
       page.title
     ) : (
-      <PageItemWrapper showReadMore={showReadMore}>
+      <PageItemWrapper showReadMore={showReadMore ?? false}>
         <PageHeading as="h3">{page.title}</PageHeading>
         {page.childMdx && (
           <Text muted={true} noMargin={true}>

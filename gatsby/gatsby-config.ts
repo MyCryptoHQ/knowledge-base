@@ -106,7 +106,8 @@ const config: GatsbyConfig = {
       options: {
         bucketName: 'support.mycrypto.com',
         protocol: 'https',
-        hostname: 'support.mycrypto.com'
+        hostname: 'support.mycrypto.com',
+        generateRedirectObjectsForPermanentRedirects: true
       }
     }
   ]
