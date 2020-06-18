@@ -61,7 +61,6 @@
     "gatsby-remark-static-images": "^1.0.1",
     "gatsby-source-filesystem": "^2.3.0",
     "gatsby-transformer-yaml": "^2.2.25",
-    "gh-pages": "^2.2.0",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.7",
     "prettier": "^1.19.1",
