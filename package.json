@@ -26,10 +26,7 @@
     "yup": "^0.28.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.6",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
-    "@babel/preset-typescript": "^7.9.0",
-    "@babel/register": "^7.9.0",
+    "@babel/core": "^7.10.2",
     "@mdx-js/mdx": "^1.6.1",
     "@mdx-js/react": "^1.6.1",
     "@types/classnames": "^2.2.9",
@@ -46,7 +43,7 @@
     "@types/styled-components": "^5.1.0",
     "@types/yup": "^0.26.32",
     "babel-plugin-styled-components": "^1.10.7",
-    "gatsby": "^2.21.11",
+    "gatsby": "^2.23.4",
     "gatsby-plugin-catch-links": "^2.1.25",
     "gatsby-plugin-favicons": "^1.0.4",
     "gatsby-plugin-matomo": "^0.8.0",
@@ -55,7 +52,8 @@
     "gatsby-plugin-sharp": "^2.4.5",
     "gatsby-plugin-sitemap": "^2.2.27",
     "gatsby-plugin-styled-components": "^3.1.19",
-    "gatsby-plugin-typescript": "^2.4.3",
+    "gatsby-plugin-ts-config": "^0.2.3",
+    "gatsby-plugin-typescript": "^2.4.6",
     "gatsby-remark-external-links": "^0.0.4",
     "gatsby-remark-images": "^3.1.44",
     "gatsby-remark-static-images": "^1.0.1",
@@ -69,13 +67,13 @@
     "remark-kbd": "^1.0.21",
     "remove-markdown": "^0.3.0",
     "slash": "^3.0.0",
+    "ts-node": "^8.10.2",
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-microsoft-contrib": "^6.2.0",
     "tslint-origin-ordered-imports-rule": "^1.2.2",
     "tslint-react": "^4.2.0",
-    "typescript": "^3.9.3",
-    "webpack": "^4.43.0"
+    "typescript": "^3.9.5"
   },
   "scripts": {
     "clean": "gatsby clean",
