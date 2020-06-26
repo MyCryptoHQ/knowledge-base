@@ -3,6 +3,7 @@ import { CreatePagesArgs, GatsbyNode, Node, SourceNodesArgs } from 'gatsby';
 import { safeLoad } from 'js-yaml';
 import minimatch from 'minimatch';
 import { resolve } from 'path';
+import { titleCase } from 'title-case';
 
 const REDIRECTS_FILE = resolve(__dirname, '../content/redirects.yml');
 const CATEGORY_TEMPLATE = resolve(__dirname, '../src/templates/category.tsx');
@@ -69,7 +70,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
       } = dataNode;
 
       const nodeData = {
-        title,
+        title: titleCase(title),
         description,
         tags: tags ?? [],
         priority,

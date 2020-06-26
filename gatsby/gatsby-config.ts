@@ -1,5 +1,6 @@
 import { GatsbyConfig } from 'gatsby';
 import { resolve } from 'path';
+import capitalize from './plugins/capitalize';
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -49,7 +50,7 @@ const config: GatsbyConfig = {
             }
           }
         ],
-        remarkPlugins: [require('remark-kbd')],
+        remarkPlugins: [require('remark-kbd'), capitalize],
         rehypePlugins: [require('rehype-slug')]
       }
     },
