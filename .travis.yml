@@ -1,16 +1,10 @@
 language: node_js
 
-git:
-  submodules: false
-
 cache:
   yarn: true
   directories:
     - node_modules
     - "$HOME/.cache"
-
-before_install:
-  - git submodule update --init --remote --recursive
 
 install:
   - yarn --silent

@@ -6,12 +6,6 @@ This repository contains the code for the [MyCrypto Knowledge Base](https://supp
 
 ## Getting Started
 
-In order for the knowledge base to compile locally, you need to make sure the content is fetched too. To do this, run the following command:
-
-```bash
-git submodule update --init --remote --recursive
-```
-
 ### Development
 
 To start a development server, run the following command
@@ -30,11 +24,7 @@ To build a static version of the Knowledge Base for production, run the followin
 yarn run build
 ```
 
-If you want to deploy the Knowledge Base to Github Pages, you can use the following command instead, which will also build the Knowledge Base
-
-```bash
-yarn run deploy
-```
+The Knowledge Base is automatically deployed by Travis when tagged.
 
 ## License
 
