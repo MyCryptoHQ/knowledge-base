@@ -1,6 +1,4 @@
-import { readFileSync } from 'fs';
 import { CreatePagesArgs, GatsbyNode, Node, SourceNodesArgs } from 'gatsby';
-import { safeLoad } from 'js-yaml';
 import minimatch from 'minimatch';
 import { resolve } from 'path';
 

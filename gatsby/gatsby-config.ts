@@ -25,7 +25,8 @@ const config: GatsbyConfig = {
         name: 'content',
         remote: 'https://github.com/MyCryptoHQ/knowledge-base-content',
         branch: 'master',
-        patterns: ['**/*.yml', '**/*.md', 'assets/**/*']
+        local: resolve(__dirname, '../content'),
+        patterns: ['**/*.yml', '**/*.md', 'assets/**/*', '!README.md']
       }
     },
     {
