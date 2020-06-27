@@ -20,6 +20,15 @@ const config: GatsbyConfig = {
     'gatsby-plugin-catch-links',
     'gatsby-plugin-styled-components',
     {
+      resolve: 'gatsby-source-git',
+      options: {
+        name: 'content',
+        remote: 'https://github.com/MyCryptoHQ/knowledge-base-content',
+        branch: 'master',
+        patterns: ['**/*.yml', '**/*.md', 'assets/**/*']
+      }
+    },
+    {
       resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: ['.mdx', '.md'],
@@ -56,14 +65,7 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-transformer-yaml',
       options: {
-        typeName: 'CategoryData'
-      }
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: resolve(__dirname, '../content'),
-        name: 'content'
+        typeName: 'Yaml'
       }
     },
     {
