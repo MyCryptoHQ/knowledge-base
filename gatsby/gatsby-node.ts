@@ -4,7 +4,6 @@ import { safeLoad } from 'js-yaml';
 import minimatch from 'minimatch';
 import { resolve } from 'path';
 
-const REDIRECTS_FILE = resolve(__dirname, '../content/redirects.yml');
 const CATEGORY_TEMPLATE = resolve(__dirname, '../src/templates/category.tsx');
 const PAGE_TEMPLATE = resolve(__dirname, '../src/templates/page.tsx');
 const TAG_TEMPLATE = resolve(__dirname, '../src/templates/tag.tsx');
@@ -37,7 +36,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
 }: SourceNodesArgs): Promise<void> => {
   const nodes: Node[] = getNodes();
   const pageNodes: PageNode[] = nodes.filter(node => node.internal.type === 'Mdx') as PageNode[];
-  const categoryNodes = nodes.filter(node => node.internal.type === 'CategoryData');
+  const categoryNodes = nodes
+    .filter(node => node.internal.type === 'Yaml')
+    .filter(node => node.relativePath !== 'redirects.yml');
 
   /**
    * Get a slug from a page data node.
@@ -184,13 +185,6 @@ interface TagsQueryData {
   };
 }
 
-interface RedirectsDocument {
-  redirects: {
-    from: string;
-    to: string;
-  }[];
-}
-
 /**
  * Creates pages from the sourced page and category nodes.
  */
@@ -238,36 +232,36 @@ export const createPages: GatsbyNode['createPages'] = async ({
   };
 
   /**
-   * Reads `content/redirects.yml` and registers all redirects.
+   * Reads `redirects.yml` from the content repository and registers all redirects.
    *
    * @returns {Promise<void>}
    */
   const createRedirects = async () => {
-    let file;
-    try {
-      file = readFileSync(REDIRECTS_FILE, 'utf-8');
-    } catch (error) {
-      // Ignore error if file does not exist
-      if (error.code === 'ENOENT') {
-        reporter.warn('`content/redirects.yml` does not exist');
-        return process.exit(1);
+    const { errors, data } = await graphql<{ file: { childYaml: { redirects: { from: string; to: string }[] } } }>(`
+      query {
+        file(relativePath: { eq: "redirects.yml" }) {
+          childYaml {
+            redirects {
+              from
+              to
+            }
+          }
+        }
       }
+    `);
 
-      reporter.panicOnBuild('failed to read `content/redirects.yml`', error);
+    if (errors) {
+      reporter.panicOnBuild('Failed to read redirects', errors);
       return process.exit(1);
     }
 
-    if (file) {
-      const document: RedirectsDocument = safeLoad(file);
-      document.redirects.forEach(redirect =>
-        createRedirect({
-          fromPath: `/${redirect.from}`,
-          toPath: `/${redirect.to}`,
-          isPermanent: true,
-          redirectInBrowser: true
-        })
-      );
-    }
+    data?.file.childYaml.redirects.forEach(redirect => {
+      createRedirect({
+        fromPath: `/${redirect.from}`,
+        toPath: `/${redirect.to}`,
+        isPermanent: true
+      });
+    });
   };
 
   const encodeTag = (tag: string): string => {
