@@ -7135,10 +7135,10 @@ gatsby-remark-images@^3.1.44:
     unist-util-select "^1.5.0"
     unist-util-visit-parents "^2.1.2"
 
-gatsby-remark-static-images@^1.0.1:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-static-images/-/gatsby-remark-static-images-1.2.0.tgz#70c28963683c7ac44a106863fbbc9abb2144f8be"
-  integrity sha512-3O+ZcKT4DINuUvAWNq2vkMLav1XwdazJDIVZDGIFv1d7Ufeh6jdjIyxZEAii8olqaRj2KfkCtHo7yZIJByH36w==
+gatsby-remark-static-images@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-static-images/-/gatsby-remark-static-images-1.2.1.tgz#3bdbf6ac0e5c9fee0cdb24d6109f941448fc5e3b"
+  integrity sha512-v8zXFRmVFXm0w6c3NWkXT0CISvFMBteVtPzzbH4C/k+fJiWdewAyhl/VZuZkqGz9YRoq2mAiUIJmStMp+cgZHQ==
   dependencies:
     himalaya "^1.1.0"
     is-relative-url "^2.0.0"
