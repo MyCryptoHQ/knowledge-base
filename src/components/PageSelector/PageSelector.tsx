@@ -34,17 +34,10 @@ const PageSelector: FunctionComponent<Props> = ({ slug, titleOnly }) => {
       }
     `
   );
-  const [page, setPage] = useState<Page>();
 
-  useEffect(() => {
-    const item = allPage.edges.find(edge => edge.node.slug === slug);
-    if (item) {
-      setPage(item.node);
-    }
-  }, [allPage.edges]);
-
+  const page = allPage.edges.find(edge => edge.node.slug === slug);
   if (page) {
-    return <PageItem page={page} titleOnly={titleOnly} />;
+    return <PageItem page={page.node} titleOnly={titleOnly} />;
   }
 
   return null;
