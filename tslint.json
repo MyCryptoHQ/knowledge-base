@@ -16,7 +16,5 @@
     "trailing-comma": false
   },
   "defaultSeverity": "error",
-  "rulesDirectory": [
-    "node_modules/tslint-origin-ordered-imports-rule/dist"
-  ]
+  "rulesDirectory": ["node_modules/tslint-origin-ordered-imports-rule/dist"]
 }

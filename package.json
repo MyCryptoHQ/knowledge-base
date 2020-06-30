@@ -44,7 +44,14 @@
     "@types/react-redux": "^7.1.7",
     "@types/styled-components": "^5.1.0",
     "@types/yup": "^0.26.32",
+    "@typescript-eslint/eslint-plugin": "^3.5.0",
+    "@typescript-eslint/parser": "^3.5.0",
     "babel-plugin-styled-components": "^1.10.7",
+    "eslint": "^7.3.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-react": "^7.20.2",
+    "eslint-plugin-react-hooks": "^4.0.5",
     "gatsby": "^2.23.4",
     "gatsby-plugin-canonical-urls": "^2.3.4",
     "gatsby-plugin-catch-links": "^2.1.25",
@@ -73,11 +80,6 @@
     "slash": "^3.0.0",
     "title-case": "^3.0.2",
     "ts-node": "^8.10.2",
-    "tslint": "^6.0.0",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-microsoft-contrib": "^6.2.0",
-    "tslint-origin-ordered-imports-rule": "^1.2.2",
-    "tslint-react": "^4.2.0",
     "typescript": "^3.9.5",
     "unist-util-visit": "^2.0.2"
   },
@@ -87,18 +89,18 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "deploy": "gatsby-plugin-s3 deploy --yes",
-    "lint": "yarn run lint:tsc && yarn run lint:tslint && yarn run lint:prettier",
+    "lint": "yarn run lint:tsc && yarn run lint:eslint && yarn run lint:prettier",
     "lint:tsc": "tsc --noEmit",
-    "lint:tslint": "tslint --project .",
-    "lint:prettier": "prettier --check 'src/**/*.{ts,tsx}'",
-    "prettier": "prettier --write '**/*.{ts,tsx}'"
+    "lint:eslint": "eslint . --ignore-path .gitignore --ext .ts,.tsx,.js,.jsx",
+    "lint:prettier": "prettier --check '**/*.{ts,tsx,js,json}' --ignore-path .gitignore",
+    "prettier": "prettier --write '**/*.{ts,tsx,js,json}' --ignore-path .gitignore"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
       "prettier --write",
-      "tslint --project . --fix"
+      "eslint --fix"
     ],
-    "*.js": [
+    "*.{js,json}": [
       "prettier --write"
     ]
   },

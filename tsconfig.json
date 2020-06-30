@@ -11,16 +11,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "skipLibCheck": true,
-    "lib": [
-      "dom",
-      "es2019.array"
-    ]
+    "lib": ["dom", "es2019.array"]
   },
-  "include": [
-    "./src/**/*",
-    "./gatsby/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["./src/**/*", "./gatsby/**/*"],
+  "exclude": ["node_modules"]
 }

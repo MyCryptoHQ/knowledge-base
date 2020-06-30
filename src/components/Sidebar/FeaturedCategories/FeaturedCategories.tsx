@@ -10,9 +10,9 @@ import ListItem from '../../ui/ListItem';
 
 interface QueryData {
   allCategory: {
-    edges: {
+    edges: Array<{
       node: Category;
-    }[];
+    }>;
   };
 }
 

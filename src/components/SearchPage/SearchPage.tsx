@@ -6,7 +6,7 @@ import { Page } from '../../models/page';
 import PageItem from '../PageItem';
 import Heading from '../ui/Heading';
 
-const fuse = new Fuse<Page, {}>([], {
+const fuse = new Fuse<Page, Record<string, unknown>>([], {
   keys: [
     {
       name: 'title',
@@ -34,9 +34,8 @@ interface Props {
   allPages: Page[];
 }
 
-/* tslint:disable */
-const _paq: (string | boolean | number)[][] = (typeof window !== 'undefined' && (window as any)._paq) || [];
-/* tslint:enable */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const _paq: Array<Array<string | boolean | number>> = (typeof window !== 'undefined' && (window as any)._paq) || [];
 
 const SearchPage: FunctionComponent<Props> = ({ allPages }) => {
   const searchQuery = useSelector(state => state.navigation.searchQuery);

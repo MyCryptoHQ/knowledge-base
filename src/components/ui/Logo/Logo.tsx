@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import * as logo from '../../../assets/images/logo.svg';
+import logo from '../../../assets/images/logo.svg';
 
 const StyledLogo = styled.img`
   width: 42px;

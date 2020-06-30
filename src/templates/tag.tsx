@@ -17,9 +17,9 @@ interface Props {
   };
   data: {
     allPage: {
-      edges: {
+      edges: Array<{
         node: Pick<PageData, 'title' | 'slug' | 'childMdx'>;
-      }[];
+      }>;
     };
   };
 }

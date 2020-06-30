@@ -1,6 +1,6 @@
 import { Category } from './category';
 
-// tslint:disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type MarkdownBody = any;
 
 export interface Page {
