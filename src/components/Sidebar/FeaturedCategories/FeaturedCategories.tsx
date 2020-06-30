@@ -53,7 +53,7 @@ const FeaturedCategories: FunctionComponent = () => {
       <List>
         {featuredCategories.map(category => (
           <ListItem key={category.slug}>
-            <Link to={category.slug}>{category.data!.title}</Link>
+            <Link to={`/${category.slug}`}>{category.data!.title}</Link>
           </ListItem>
         ))}
       </List>
