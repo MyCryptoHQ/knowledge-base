@@ -1,5 +1,6 @@
 import { graphql } from 'gatsby';
 import React, { FunctionComponent } from 'react';
+import styled from 'styled-components';
 import Breadcrumbs from '../components/Breadcrumbs';
 import MetaData from '../components/MetaData';
 import PageBody from '../components/PageBody';
@@ -20,6 +21,10 @@ interface Props {
   };
 }
 
+const Article = styled.article`
+  word-break: break-word;
+`;
+
 const Page: FunctionComponent<Props> = ({ data: { page } }) => (
   <PageContainer>
     <MetaData title={page.title} description={page.description} keyWords={page.tags} />
@@ -30,10 +35,10 @@ const Page: FunctionComponent<Props> = ({ data: { page } }) => (
 
     <Section>
       <Container maxWidth="74rem">
-        <article>
+        <Article>
           <PageHeader title={page.title} tags={page.tags} dateModified={page.dateModified} />
           <PageBody body={page.childMdx.body} />
-        </article>
+        </Article>
       </Container>
     </Section>
 
