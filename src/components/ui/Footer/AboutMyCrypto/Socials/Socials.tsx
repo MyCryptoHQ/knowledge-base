@@ -4,7 +4,7 @@ import breakpoint from '../../../../../theme/breakpoints';
 import Link from '../../../../Link';
 import Icon, { icons } from '../../../Icon';
 
-const SOCIAL_MEDIA_LINKS: { url: string; icon: keyof typeof icons }[] = [
+const SOCIAL_MEDIA_LINKS: Array<{ url: string; icon: keyof typeof icons }> = [
   {
     url: 'https://twitter.com/mycrypto',
     icon: 'twitter'

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import * as githubIcon from '../../assets/images/icons/social/github-black.svg';
+import githubIcon from '../../assets/images/icons/social/github-black.svg';
 import Link from '../Link';
 import Container from '../ui/Container';
 import Section from '../ui/Section';

@@ -12,9 +12,9 @@ import { Page } from '../models/page';
 interface Props {
   data: {
     allPage: {
-      edges: {
+      edges: Array<{
         node: Page;
-      }[];
+      }>;
     };
   };
 }

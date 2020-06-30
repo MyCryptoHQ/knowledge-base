@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import * as myCryptoLogo from '../../../../../assets/images/logo-2.svg';
+import myCryptoLogo from '../../../../../assets/images/logo-2.svg';
 
 const StyledLogo = styled.img`
   width: 152px;

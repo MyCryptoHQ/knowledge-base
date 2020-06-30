@@ -1,5 +1,5 @@
-const { generateConfig } = require('gatsby-plugin-ts-config');
 const { resolve } = require('path');
+const { generateConfig } = require('gatsby-plugin-ts-config');
 
 /**
  * Config files are stored in the `gatsby` folder.

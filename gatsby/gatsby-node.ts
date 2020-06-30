@@ -1,6 +1,6 @@
+import { resolve } from 'path';
 import { CreatePagesArgs, GatsbyNode, Node, SourceNodesArgs } from 'gatsby';
 import minimatch from 'minimatch';
-import { resolve } from 'path';
 import { titleCase } from 'title-case';
 
 const CATEGORY_TEMPLATE = resolve(__dirname, '../src/templates/category.tsx');
@@ -137,7 +137,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
       const child: Node = {
         ...nodeData,
         id: createNodeId(`category-${slug}`),
-        parent: parent ? parent.id : (null as any), // tslint:disable-line
+        parent: parent ? parent.id : (null as any), // eslint-disable-line @typescript-eslint/no-explicit-any
         children: [],
         internal: {
           type: 'Category',
@@ -166,21 +166,21 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
 
 interface QueryData {
   [key: string]: {
-    edges: {
+    edges: Array<{
       node: {
         slug: string;
       };
-    }[];
+    }>;
   };
 }
 
 interface TagsQueryData {
   allPage: {
-    edges: {
+    edges: Array<{
       node: {
         tags: string[];
       };
-    }[];
+    }>;
   };
 }
 
@@ -236,7 +236,9 @@ export const createPages: GatsbyNode['createPages'] = async ({
    * @returns {Promise<void>}
    */
   const createRedirects = async () => {
-    const { errors, data } = await graphql<{ file: { childYaml: { redirects: { from: string; to: string }[] } } }>(`
+    const { errors, data } = await graphql<{
+      file: { childYaml: { redirects: Array<{ from: string; to: string }> } };
+    }>(`
       query {
         file(relativePath: { eq: "redirects.yml" }) {
           childYaml {

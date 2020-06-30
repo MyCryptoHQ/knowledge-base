@@ -10,9 +10,9 @@ interface Props {
 
 interface QueryData {
   allPage: {
-    edges: {
+    edges: Array<{
       node: Page;
-    }[];
+    }>;
   };
 }
 

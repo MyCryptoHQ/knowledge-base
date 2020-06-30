@@ -15,7 +15,7 @@ const TagsContainer = styled.ul`
   padding: 0;
 `;
 
-// tslint:disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Tag = styled<any>(Link)`
   display: inline-block;
   margin: 0 0.3rem;

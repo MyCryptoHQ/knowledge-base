@@ -10,9 +10,9 @@ import FeaturedCategory from './FeaturedCategory';
 
 interface QueryData {
   allCategory: {
-    edges: {
+    edges: Array<{
       node: Category;
-    }[];
+    }>;
   };
 }
 

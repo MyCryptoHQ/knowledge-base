@@ -15,8 +15,8 @@ const theme: DefaultTheme = {
   footerBorder: '#3e546d',
   footerLink: '#bbc2cb',
 
-  fontFamily: `'Lato', sans-serif`,
-  monoFontFamily: `'Source Code Pro', monospace`,
+  fontFamily: '"Lato", sans-serif',
+  monoFontFamily: '"Source Code Pro", monospace',
 
   headerBorder: '#3e546d',
   navigationHover: '#304b6a',

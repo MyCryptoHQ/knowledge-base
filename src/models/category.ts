@@ -24,10 +24,10 @@ export interface Category {
   /**
    * The redirects for this category, e.g. `/category/from` will redirect to `/category/to`.
    */
-  redirects?: {
+  redirects?: Array<{
     from: string;
     to: string;
-  }[];
+  }>;
 
   /**
    * Sub-categories for this category.

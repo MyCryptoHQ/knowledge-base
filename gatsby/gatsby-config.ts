@@ -1,5 +1,5 @@
-import { GatsbyConfig } from 'gatsby';
 import { resolve } from 'path';
+import { GatsbyConfig } from 'gatsby';
 import capitalize from './plugins/capitalize';
 
 const config: GatsbyConfig = {

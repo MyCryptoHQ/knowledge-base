@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { ApplicationState } from './index';
 import { navigationReducer, SearchActions } from './navigation';
+import { ApplicationState } from './index';
 
 export type ApplicationActions = SearchActions;
 

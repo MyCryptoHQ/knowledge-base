@@ -1,4 +1,4 @@
-import { css, SimpleInterpolation } from 'styled-components';
+import { css, FlattenSimpleInterpolation, SimpleInterpolation } from 'styled-components';
 
 export const breakpoints: { [key: string]: number } = {
   xs: 320,
@@ -11,11 +11,11 @@ export const breakpoints: { [key: string]: number } = {
 const breakpoint = (key: keyof typeof breakpoints, type: 'min' | 'max' = 'min') => (
   first: TemplateStringsArray,
   ...interpolations: SimpleInterpolation[]
-) =>
+): FlattenSimpleInterpolation =>
   css`
-      @media screen and (${type}-width: ${breakpoints[key]}px) {
-        ${css(first, ...interpolations)};
-      }
-    `;
+    @media screen and (${type}-width: ${breakpoints[key]}px) {
+      ${css(first, ...interpolations)};
+    }
+  `;
 
 export default breakpoint;

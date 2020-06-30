@@ -20,7 +20,7 @@ const OverviewHeading = styled(Heading)`
 
 interface Props {
   tagName: string;
-  pages: Pick<PageData, 'title' | 'slug' | 'childMdx'>[];
+  pages: Array<Pick<PageData, 'title' | 'slug' | 'childMdx'>>;
 }
 
 const TagOverview: FunctionComponent<Props> = ({ tagName, pages }) => (

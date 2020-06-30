@@ -6,7 +6,7 @@ interface TextNode extends Node {
   value: string;
 }
 
-const capitalize = () => (tree: Node) => {
+const capitalize = () => (tree: Node): void => {
   visit(tree, 'heading', node => {
     visit<TextNode>(node, 'text', textNode => {
       const text = textNode.value ?? '';

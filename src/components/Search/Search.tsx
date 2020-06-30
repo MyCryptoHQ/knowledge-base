@@ -1,7 +1,7 @@
 import { navigate } from 'gatsby';
 import React, { ChangeEvent, FunctionComponent, KeyboardEvent } from 'react';
 import styled, { AnyStyledComponent } from 'styled-components';
-import * as searchIcon from '../../assets/images/icons/search.svg';
+import searchIcon from '../../assets/images/icons/search.svg';
 import { useDispatch, useSelector } from '../../hooks';
 import { search } from '../../store/navigation';
 import breakpoint from '../../theme/breakpoints';

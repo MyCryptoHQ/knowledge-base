@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import Link from '../../../Link';
 import Heading from '../../Heading';
 
-const LINK_COLUMNS: {
+const LINK_COLUMNS: Array<{
   heading: string;
-  links: {
+  links: Array<{
     title: string;
     url: string;
-  }[];
-}[] = [
+  }>;
+}> = [
   {
     heading: 'Company',
     links: [
