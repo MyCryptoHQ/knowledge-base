@@ -21,13 +21,17 @@ const config: GatsbyConfig = {
     'gatsby-plugin-catch-links',
     'gatsby-plugin-styled-components',
     {
-      resolve: 'gatsby-source-git',
+      resolve: 'gatsby-plugin-git-clone',
       options: {
-        name: 'content',
-        remote: 'https://github.com/MyCryptoHQ/knowledge-base-content',
-        branch: 'master',
-        local: resolve(__dirname, '../content'),
-        patterns: ['**/*.yml', '**/*.md', 'assets/**/*', '!README.md']
+        repository: 'https://github.com/MyCryptoHQ/knowledge-base-content',
+        path: resolve(__dirname, '../content')
+      }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: resolve(__dirname, '../content'),
+        name: 'content'
       }
     },
     {
