@@ -56,6 +56,7 @@
     "gatsby-plugin-canonical-urls": "^2.3.4",
     "gatsby-plugin-catch-links": "^2.1.25",
     "gatsby-plugin-favicons": "^1.0.4",
+    "gatsby-plugin-git-clone": "^0.1.0",
     "gatsby-plugin-matomo": "^0.8.0",
     "gatsby-plugin-mdx": "^1.0.73",
     "gatsby-plugin-react-helmet-async": "^1.0.15",

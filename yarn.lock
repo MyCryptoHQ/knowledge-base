@@ -1706,6 +1706,18 @@
     core-js "^3.4.1"
     regenerator-runtime "^0.13.3"
 
+"@kwsites/file-exists@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@kwsites/file-exists/-/file-exists-1.1.1.tgz#ad1efcac13e1987d8dbaf235ef3be5b0d96faa99"
+  integrity sha512-m9/5YGR18lIwxSFDwfE3oA7bWuq9kdau6ugN4H2rJeyhFQZcG9AgSHkQtSD15a8WvTgfz9aikZMrKPHvbpqFiw==
+  dependencies:
+    debug "^4.1.1"
+
+"@kwsites/promise-deferred@^1.0.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@kwsites/promise-deferred/-/promise-deferred-1.1.1.tgz#8ace5259254426ccef57f3175bc64ed7095ed919"
+  integrity sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==
+
 "@mdx-js/mdx@^1.6.1", "@mdx-js/mdx@^1.6.5", "@mdx-js/mdx@^1.6.6":
   version "1.6.6"
   resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-1.6.6.tgz#6e235f0ca47c8652f4c744cf7bc46a1015bcaeaa"
@@ -7170,6 +7182,13 @@ gatsby-plugin-favicons@^1.0.4:
   integrity sha512-nCJtbhm1tRcnwc7re7nsSq4p1bse3cri6v1PiQsRw3YAlCwj0jmQP7n7a5EnjcjGuqjM+zhLcKsT8zOyysSlow==
   dependencies:
     favicons-webpack-plugin "^0.0.9"
+
+gatsby-plugin-git-clone@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-git-clone/-/gatsby-plugin-git-clone-0.1.0.tgz#f771f6bc57d63b794f004723387594eaee07218b"
+  integrity sha512-6d017UkYPSa5SltU5di22w1S8YuXLH7pwdfHITz4OKe9L/aTv6X2m84cYG3c+VpQ8GinVA4vNiIt8xdZJrI8pQ==
+  dependencies:
+    simple-git "^2.11.0"
 
 gatsby-plugin-matomo@^0.8.0:
   version "0.8.3"
@@ -14361,6 +14380,15 @@ simple-git@^1.105.0:
   integrity sha512-xauHm1YqCTom1sC9eOjfq3/9RKiUA9iPnxBbrY2DdL8l4ADMu0jjM5l5lphQP5YWNqAL2aXC/OeuQ76vHtW5fg==
   dependencies:
     debug "^4.0.1"
+
+simple-git@^2.11.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-2.11.0.tgz#5bd99fe3465dcbcb82f0eb23ab3c1615cb947374"
+  integrity sha512-wFePCEQYY6BzVOg/BuUVEhr3jZPF/cPG/BN2UXgax6NHc3bJ9UrDc5AME281gs2C7J1UZ6BGRJYT64khx9T+ng==
+  dependencies:
+    "@kwsites/file-exists" "^1.1.1"
+    "@kwsites/promise-deferred" "^1.0.1"
+    debug "^4.1.1"
 
 simple-swizzle@^0.2.2:
   version "0.2.2"
