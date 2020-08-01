@@ -3,7 +3,7 @@ import React, { DetailedHTMLProps, FunctionComponent, InputHTMLAttributes, useRe
 import styled, { css } from 'styled-components';
 import Text from '../Text';
 
-const InputContainer = styled.div`
+export const InputContainer = styled.div`
   background: ${({ theme }) => theme.controlBackground};
   border: 2px solid ${({ theme }) => theme.controlBorder};
   border-radius: 0.25rem;

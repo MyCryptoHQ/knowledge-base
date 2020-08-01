@@ -1,1 +1,1 @@
-export { default, StyledInput } from './Input';
+export { default, StyledInput, InputContainer } from './Input';
