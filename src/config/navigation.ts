@@ -12,7 +12,7 @@ export const LEFT_HEADER_ITEMS: HeaderItem[] = [
   },
   {
     title: 'Latest news',
-    to: 'https://medium.com/@mycrypto',
+    to: 'https://medium.com/mycrypto',
     external: true
   }
 ];
