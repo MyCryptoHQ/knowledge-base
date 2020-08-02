@@ -27,7 +27,7 @@ const Article = styled.article`
 
 const Page: FunctionComponent<Props> = ({ data: { page } }) => (
   <PageContainer>
-    <MetaData title={page.title} description={page.description} keyWords={page.tags} />
+    <MetaData title={page.title} keyWords={page.tags} />
 
     <SubHeader>
       <Breadcrumbs parent={page.parent} />
