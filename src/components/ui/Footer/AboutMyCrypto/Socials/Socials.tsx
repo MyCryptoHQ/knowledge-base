@@ -14,7 +14,7 @@ const SOCIAL_MEDIA_LINKS: Array<{ url: string; icon: keyof typeof icons }> = [
     icon: 'facebook'
   },
   {
-    url: 'https://medium.com/@mycrypto',
+    url: 'https://medium.com/mycrypto',
     icon: 'medium'
   },
   {
