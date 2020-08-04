@@ -1,10 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import Text from '../../../ui/Text';
+import styled from 'styled-components';
+
+const StyledEmphasizedText = styled.em`
+  font-style: italic;
+`;
 
 const EmphasizedText: FunctionComponent = ({ children, ...rest }) => (
-  <Text as="em" {...rest}>
+  <StyledEmphasizedText as="em" {...rest}>
     {children}
-  </Text>
+  </StyledEmphasizedText>
 );
 
 export default EmphasizedText;
