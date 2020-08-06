@@ -3,6 +3,7 @@ import Alert from './Alert';
 import Clearfix from './Clearfix';
 import TokenInputData from './TokenInputData';
 import UnitConverter from './UnitConverter';
+import YouTubeEmbed from './YouTubeEmbed';
 import components from './default';
 
 export default {
@@ -12,5 +13,6 @@ export default {
   Alert,
   Clearfix,
   TokenInputData,
-  UnitConverter
+  UnitConverter,
+  YouTubeEmbed
 };
