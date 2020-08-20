@@ -4,13 +4,9 @@ import Paragraph from '../Paragraph';
 const List = styled.ul`
   margin: 3rem 0;
 
-  & & {
-    list-style-type: upper-roman;
+  ul,
+  ol {
     margin: 0;
-  }
-
-  & & & {
-    list-style-type: lower-alpha;
   }
 
   ${Paragraph} {
