@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { StyledAlert } from '../Alert';
+import { StyledAlert } from '../../ui/Alert';
 
 const Accordion = styled.ul`
   list-style-type: none;
