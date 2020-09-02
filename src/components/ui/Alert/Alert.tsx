@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import infoIcon from '../../../assets/images/icons/info.svg';
 import warningIcon from '../../../assets/images/icons/warning.svg';
-import Text from '../../ui/Text';
+import Text from '../Text';
 
 type Type = 'info' | 'warning';
 

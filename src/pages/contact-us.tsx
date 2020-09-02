@@ -3,6 +3,7 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import ContactForm from '../components/ContactForm';
 import Link from '../components/Link';
 import MetaData from '../components/MetaData';
+import Alert from '../components/ui/Alert';
 import Container from '../components/ui/Container';
 import Heading from '../components/ui/Heading';
 import PageContainer from '../components/ui/PageContainer';
@@ -36,6 +37,15 @@ const ContactUs: FunctionComponent = () => (
           </Link>
           .
         </Text>
+        <Alert>
+          <Text>
+            <strong>The network is very busy currently, causing the average gas prices to go up a lot.</strong> If your
+            transaction is <strong>pending</strong> or <strong>stuck</strong>, please refer to this article:{' '}
+            <Link to="/how-to/sending/checking-or-replacing-a-transaction-after-it-has-been-sent">
+              How To Cancel or Replace a Stuck Transaction
+            </Link>
+          </Text>
+        </Alert>
         <ContactForm />
       </Container>
     </Section>

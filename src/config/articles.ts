@@ -3,9 +3,9 @@
  * of the article.
  */
 export const POPULAR_ARTICLES: string[] = [
+  'how-to/sending/checking-or-replacing-a-transaction-after-it-has-been-sent',
   'how-to/getting-started/how-to-buy-ether-with-usd',
   'how-to/getting-started/how-to-create-a-wallet',
-  'general-knowledge/ethereum-blockchain/difference-between-wallet-types',
   'staying-safe/protecting-yourself-and-your-funds',
   'how-to/migrating/moving-from-mycrypto-to-ledger',
   'how-to/migrating/moving-from-mycrypto-to-trezor',
