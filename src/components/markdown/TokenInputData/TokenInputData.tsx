@@ -26,7 +26,7 @@ const TokenInputData: FunctionComponent = () => {
     setData('');
 
     if (tokenDecimals && toAddress && amount) {
-      const actualAmount = BigNumber.from(amount).mul(BigNumber.from(tokenDecimals));
+      const actualAmount = BigNumber.from(amount).mul(BigNumber.from(10).pow(BigNumber.from(tokenDecimals)));
 
       try {
         const encodedData = `0x${TRANSFER_ID}${defaultAbiCoder
