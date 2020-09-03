@@ -1,5 +1,5 @@
 import { defaultAbiCoder } from '@ethersproject/abi';
-import { BigNumber } from '@ethersproject/bignumber';
+import BigNumber from 'bignumber.js';
 import React, { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
 import Field from '../../ContactForm/Field';
 import Link from '../../Link';
@@ -26,11 +26,11 @@ const TokenInputData: FunctionComponent = () => {
     setData('');
 
     if (tokenDecimals && toAddress && amount) {
-      const actualAmount = BigNumber.from(amount).mul(BigNumber.from(10).pow(BigNumber.from(tokenDecimals)));
+      const actualAmount = new BigNumber(amount).multipliedBy(new BigNumber(10).pow(new BigNumber(tokenDecimals)));
 
       try {
         const encodedData = `0x${TRANSFER_ID}${defaultAbiCoder
-          .encode(['address', 'uint256'], [toAddress, actualAmount])
+          .encode(['address', 'uint256'], [toAddress, `0x${actualAmount.toString(16)}`])
           .slice(2)}`;
         setData(encodedData);
       } catch {
