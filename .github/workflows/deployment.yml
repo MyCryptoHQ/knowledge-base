@@ -24,14 +24,16 @@ jobs:
         with:
           python-version: 3.x
 
-      - name: Install AWS CLI
-        run: pip install --user awscli
-
       - name: Cache Dependencies
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            node_modules
+            ~/.cache/pip
           key: yarn-${{ hashFiles('yarn.lock') }}
+
+      - name: Install AWS CLI
+        run: pip install --user awscli
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
