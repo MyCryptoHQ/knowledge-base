@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { Category } from '../../models/category';
 import breakpoint from '../../theme/breakpoints';
+import { Yaml } from '../../types/category';
 import CategoryItem from '../CategoryItem';
 import PageItem from '../PageItem';
 import Heading from '../ui/Heading';
@@ -24,22 +24,21 @@ const SubCategories = styled.div`
 `;
 
 interface Props {
-  category: Category;
+  category: Yaml;
 }
 
 const CategoryOverview: FunctionComponent<Props> = ({ category }) => (
   <CategoryWrapper>
     <OverviewHeading as="h2">{category.title}</OverviewHeading>
-    {category.childrenCategory && category.childrenCategory.length > 0 && (
+    {category.categories && category.categories.length > 0 && (
       <SubCategories>
-        {category.childrenCategory.map(subCategory => (
+        {category.categories.map(subCategory => (
           <CategoryItem key={subCategory.slug} category={subCategory} />
         ))}
       </SubCategories>
     )}
 
-    {category.childrenPage &&
-      category.childrenPage.map(page => <PageItem key={page.slug} page={page} showReadMore={true} />)}
+    {category.pages && category.pages.map(page => <PageItem key={page.slug} page={page} showReadMore={true} />)}
   </CategoryWrapper>
 );
 

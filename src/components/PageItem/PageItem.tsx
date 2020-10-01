@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+import { Mdx } from '../../types/page';
 import Link from '../Link';
 import Heading from '../ui/Heading';
 import Text from '../ui/Text';
@@ -7,13 +8,7 @@ import Text from '../ui/Text';
 interface Props {
   titleOnly?: boolean;
   showReadMore?: boolean;
-  page: {
-    title: string;
-    slug: string;
-    childMdx: {
-      excerpt: string;
-    };
-  };
+  page: Mdx;
 }
 
 const PageItemWrapper = styled.div<{ showReadMore: boolean }>`
@@ -32,15 +27,13 @@ const ReadMore = styled(Text)`
 const PageItem: FunctionComponent<Props> = ({ page, titleOnly, showReadMore }) => (
   <Link to={`/${page.slug}`}>
     {titleOnly ? (
-      page.title
+      page.frontmatter.title
     ) : (
       <PageItemWrapper showReadMore={showReadMore ?? false}>
-        <PageHeading as="h3">{page.title}</PageHeading>
-        {page.childMdx && (
-          <Text muted={true} noMargin={true}>
-            {page.childMdx.excerpt}
-          </Text>
-        )}
+        <PageHeading as="h3">{page.frontmatter.title}</PageHeading>
+        <Text muted={true} noMargin={true}>
+          {page.excerpt}
+        </Text>
         {showReadMore && <ReadMore>Read More</ReadMore>}
       </PageItemWrapper>
     )}

@@ -2,17 +2,15 @@ import { graphql, useStaticQuery } from 'gatsby';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { FEATURED_CATEGORIES } from '../../config/categories';
-import { Category } from '../../models/category';
 import breakpoint from '../../theme/breakpoints';
+import { Yaml } from '../../types/category';
 import Heading from '../ui/Heading';
 import Section from '../ui/Section';
 import FeaturedCategory from './FeaturedCategory';
 
 interface QueryData {
-  allCategory: {
-    edges: Array<{
-      node: Category;
-    }>;
+  allYaml: {
+    nodes: Yaml[];
   };
 }
 
@@ -28,24 +26,21 @@ const OnboardingHeading = styled(Heading)`
 `;
 
 const FeaturedCategories: FunctionComponent = () => {
-  const { allCategory } = useStaticQuery<QueryData>(
+  const { allYaml } = useStaticQuery<QueryData>(
     graphql`
       query {
-        allCategory(filter: { isTopLevel: { eq: true } }, sort: { fields: [priority], order: DESC }) {
-          edges {
-            node {
-              title
-              slug
-            }
+        allYaml(filter: { categoryId: { eq: null } }, sort: { fields: [priority], order: DESC }) {
+          nodes {
+            title
+            slug
           }
         }
       }
     `
   );
 
-  const categories = allCategory.edges.map(edge => edge.node);
   const featuredCategories = FEATURED_CATEGORIES.map(category => {
-    const categoryData = categories.find(item => item.slug === category.slug);
+    const categoryData = allYaml.nodes.find(item => item.slug === category.slug);
 
     return {
       ...category,

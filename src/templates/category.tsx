@@ -9,14 +9,14 @@ import Container from '../components/ui/Container';
 import PageContainer from '../components/ui/PageContainer';
 import Section from '../components/ui/Section';
 import SubHeader from '../components/ui/SubHeader';
-import { Category as CategoryData } from '../models/category';
+import { Yaml } from '../types/category';
 
 interface Props {
   pathContext: {
     slug: string;
   };
   data: {
-    category: CategoryData;
+    yaml: Yaml;
   };
 }
 
@@ -25,18 +25,18 @@ const CategoryContainer = styled(Container)`
   flex-direction: row;
 `;
 
-const Category: FunctionComponent<Props> = ({ data: { category } }) => (
+const Category: FunctionComponent<Props> = ({ data: { yaml } }) => (
   <PageContainer>
-    <MetaData title={category.title} description={category.description} />
+    <MetaData title={yaml.title} description={yaml.description} />
 
     <SubHeader>
-      <Breadcrumbs parent={category.parent} />
+      <Breadcrumbs parent={yaml.category} />
     </SubHeader>
 
     <Section>
       <CategoryContainer>
         <Sidebar />
-        <CategoryOverview category={category} />
+        <CategoryOverview category={yaml} />
       </CategoryContainer>
     </Section>
   </PageContainer>
@@ -44,33 +44,27 @@ const Category: FunctionComponent<Props> = ({ data: { category } }) => (
 
 export const query = graphql`
   query Category($slug: String!) {
-    category(slug: { eq: $slug }) {
+    yaml(slug: { eq: $slug }) {
       title
       slug
       description
-      childrenCategory {
+      categories {
         title
         slug
         description
-        childrenPage {
-          title
-        }
-        childrenCategory {
-          title
-        }
-      }
-      childrenPage {
-        title
-        slug
-        childMdx {
-          excerpt(pruneLength: 500)
-        }
-      }
-      parent {
-        ... on Category {
-          title
+        pages {
           slug
         }
+        categories {
+          slug
+        }
+      }
+      pages {
+        slug
+        frontmatter {
+          title
+        }
+        excerpt(pruneLength: 500)
       }
     }
   }

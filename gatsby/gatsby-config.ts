@@ -31,7 +31,8 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: resolve(__dirname, '../content'),
-        name: 'content'
+        name: 'content',
+        ignore: ['**/README.md', '**/.github/**', '**/redirects.yml']
       }
     },
     {
