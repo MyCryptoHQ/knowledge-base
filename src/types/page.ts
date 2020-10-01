@@ -1,3 +1,4 @@
+import { MarkdownBody } from '@mdx-js/react';
 import { Yaml } from './category';
 
 /**
@@ -8,7 +9,7 @@ export interface Mdx {
   frontmatter: MdxFrontmatter;
   rawBody: string;
   fileAbsolutePath: string;
-  body: string;
+  body: MarkdownBody;
   excerpt: string;
   headings: MdxHeading[];
   html: string;
