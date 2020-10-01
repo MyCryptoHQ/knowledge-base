@@ -1,6 +1,5 @@
 import { Node } from 'gatsby';
 
-
 declare module 'gatsby' {
   /**
    * https://www.gatsbyjs.com/docs/node-model/
