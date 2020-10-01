@@ -2,7 +2,7 @@ import { Button } from '@mycrypto/ui';
 import React, { ChangeEvent, FunctionComponent, useState } from 'react';
 import Recaptcha from 'react-google-recaptcha';
 import { object, string, ValidationError } from 'yup';
-import { FORM_SUBJECTS } from '../../config/contact-form';
+import { FORM_SUBJECTS, FORM_TYPES, FormType } from '../../config/contact-form';
 import { useSiteMetadata } from '../../hooks';
 import Input from '../ui/Input';
 import Text from '../ui/Text';
@@ -15,6 +15,8 @@ interface FormData {
   subject: string;
   body: string;
   attachment: string;
+
+  [key: string]: string;
 }
 
 const schema = object<FormData>().shape({
@@ -29,6 +31,7 @@ const schema = object<FormData>().shape({
 });
 
 const ContactForm: FunctionComponent = () => {
+  const [type, setType] = useState<FormType>(FormType.GENERAL_INQUIRIES);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -40,6 +43,10 @@ const ContactForm: FunctionComponent = () => {
   const [errors, setErrors] = useState<string[]>([]);
   const [isVerified, setVerified] = useState<boolean>(false);
   const { recaptchaSitekey } = useSiteMetadata();
+
+  const handleChangeType = (event: ChangeEvent<HTMLInputElement>) => {
+    setType((event.target.value as unknown) as FormType);
+  };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -80,6 +87,8 @@ const ContactForm: FunctionComponent = () => {
       });
   };
 
+  const Component = FORM_TYPES[type].component;
+
   return (
     <form
       method="post"
@@ -101,56 +110,17 @@ const ContactForm: FunctionComponent = () => {
         />
       </Field>
 
-      <Field label="Your Ethereum address (optional)" hasError={errors.includes('address')}>
-        <Input
-          type="text"
-          name="address"
-          value={formData.address}
-          onChange={handleChange}
-          placeholder="e.g. 0x4bbeEB066eD09B7AEd07bF39EEe0460DFa261520"
-        />
-      </Field>
-
-      <Field label="Subject" hasError={errors.includes('subject')}>
-        <Input as="select" name="subject" value={formData.subject} onChange={handleChange}>
-          {FORM_SUBJECTS.map((subject, index) => (
-            <option key={`subject-${index}`} value={subject}>
-              {subject}
+      <Field label="Type" hasError={errors.includes('subject')}>
+        <Input as="select" name="type" value={type} onChange={handleChangeType}>
+          {Object.entries(FORM_TYPES).map(([type, { name }], index) => (
+            <option key={`type-${index}`} value={type}>
+              {name}
             </option>
           ))}
         </Input>
       </Field>
 
-      <Field label="More details" hasError={errors.includes('body')}>
-        <Text small={true} noMargin={true}>
-          Please include all the necessary info, so that we can help you. Not doing so may cause delays.{' '}
-          <strong>Do not send us your private key.</strong>
-        </Text>
-
-        <Input
-          as="textarea"
-          name="body"
-          value={formData.body}
-          onChange={handleChange}
-          placeholder='e.g. I was attempting to unlock by wallet but when I did I got the error message "Unknown Error: file is not defined." ...'
-        />
-      </Field>
-
-      <Field label="Screenshot (optional)" hasError={errors.includes('attachment')}>
-        <Text small={true} noMargin={true}>
-          Image files only. Do not send your private key or passport. Do not send a screenshot of your transaction
-          history, but include a link instead.
-        </Text>
-
-        <Input
-          type="file"
-          id="form-attachment"
-          name="attachment"
-          accept="image/x-png,image/gif,image/jpeg"
-          value={formData.attachment}
-          onChange={handleChange}
-        />
-      </Field>
+      <Component values={formData} errors={errors} onChange={handleChange} />
 
       <Field label="Captcha" hasError={errors.includes('captcha')}>
         <Text noMargin={true}>Sorry, we just need to make sure you are human.</Text>
