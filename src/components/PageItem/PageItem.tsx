@@ -18,6 +18,10 @@ interface Props {
 
 const PageItemWrapper = styled.div<{ showReadMore: boolean }>`
   margin-bottom: ${({ showReadMore }) => (showReadMore ? '3.5rem' : '0rem')};
+
+  ${Text} {
+    word-wrap: break-word;
+  }
 `;
 
 const PageHeading = styled(Heading)`
