@@ -37,7 +37,7 @@ const Breadcrumbs: FunctionComponent<Props> = ({ breadcrumbs }) => (
     <Breadcrumb>
       <Link to="/">Knowledge Base</Link>
     </Breadcrumb>
-    {[...breadcrumbs].reverse().map(breadcrumb => (
+    {breadcrumbs.map(breadcrumb => (
       <Breadcrumb key={breadcrumb.slug}>
         <Link to={`/${breadcrumb.slug}`}>{breadcrumb.title}</Link>
       </Breadcrumb>

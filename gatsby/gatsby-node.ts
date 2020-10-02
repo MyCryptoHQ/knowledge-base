@@ -222,6 +222,10 @@ const gatsbyNode: GatsbyNode = {
             const slug = getCategorySlug(node, nodeModel);
             const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
 
+            if (!node.categories) {
+              return;
+            }
+
             return (node.categories as string[])
               .map(category => `${slug}/${category}`)
               .map(categorySlug => {
@@ -239,6 +243,10 @@ const gatsbyNode: GatsbyNode = {
           resolve(node: Node, _, { nodeModel }): Node[] | undefined {
             const slug = getCategorySlug(node, nodeModel);
             const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Mdx' });
+
+            if (!node.articles) {
+              return;
+            }
 
             return (node.articles as string[])
               .map(page => `${slug}/${page}`)
