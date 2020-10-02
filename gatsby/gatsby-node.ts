@@ -59,7 +59,7 @@ const gatsbyNode: GatsbyNode = {
         title: String! @titleCase
         slug: String!
         category: Yaml @link(by: "id", from: "categoryId")
-        pages: [Mdx] @link(by: "categoryId", from: "id")
+        pages: [Mdx]
         categories: [Yaml]
         breadcrumbs: [Breadcrumb]!
       }
@@ -80,7 +80,7 @@ const gatsbyNode: GatsbyNode = {
   /**
    * Adds resolvers for the added GraphQL fields.
    */
-  async createResolvers({ createResolvers }: CreateResolversArgs): Promise<void> {
+  async createResolvers({ createResolvers, reporter }: CreateResolversArgs): Promise<void> {
     const getPageSlug = (node: Node, nodeModel: NodeModel): string => {
       const { relativePath } = nodeModel.getNodeById<FileNode>({ id: node.parent });
       return relativePath.replace(/\.md$/, '');
@@ -219,15 +219,37 @@ const gatsbyNode: GatsbyNode = {
 
         categories: {
           resolve(node: Node, _, { nodeModel }): Node[] | undefined {
-            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent });
-
+            const slug = getCategorySlug(node, nodeModel);
             const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
-            return nodes.filter(categoryNode => {
-              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
-              const directory = join(parent.relativeDirectory, '..');
 
-              return relativeDirectory === directory;
-            });
+            return (node.categories as string[])
+              .map(category => `${slug}/${category}`)
+              .map(categorySlug => {
+                const category = nodes.find(categoryNode => categorySlug === getCategorySlug(categoryNode, nodeModel));
+                if (!category) {
+                  reporter.panic(`Category ${categorySlug} specified, but not found`);
+                }
+
+                return category!;
+              });
+          }
+        },
+
+        pages: {
+          resolve(node: Node, _, { nodeModel }): Node[] | undefined {
+            const slug = getCategorySlug(node, nodeModel);
+            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Mdx' });
+
+            return (node.articles as string[])
+              .map(page => `${slug}/${page}`)
+              .map(pageNode => {
+                const page = nodes.find(categoryNode => pageNode === getPageSlug(categoryNode, nodeModel));
+                if (!page) {
+                  reporter.panic(`Page ${pageNode} specified, but not found`);
+                }
+
+                return page!;
+              });
           }
         },
 
