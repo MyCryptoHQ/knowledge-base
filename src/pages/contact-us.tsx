@@ -16,7 +16,7 @@ const ContactUs: FunctionComponent = () => (
     <MetaData title="Contact us" />
 
     <SubHeader>
-      <Breadcrumbs parent={{ title: 'Contact us', slug: 'contact-us' }} />
+      <Breadcrumbs breadcrumbs={[{ title: 'Contact us', slug: 'contact-us' }]} />
     </SubHeader>
 
     <Section>

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { Page as PageData } from '../../models/page';
 import breakpoint from '../../theme/breakpoints';
+import { Mdx } from '../../types/page';
 import PageItem from '../PageItem';
 import Heading from '../ui/Heading';
 
@@ -20,7 +20,7 @@ const OverviewHeading = styled(Heading)`
 
 interface Props {
   tagName: string;
-  pages: Array<Pick<PageData, 'title' | 'slug' | 'childMdx'>>;
+  pages: Mdx[];
 }
 
 const TagOverview: FunctionComponent<Props> = ({ tagName, pages }) => (

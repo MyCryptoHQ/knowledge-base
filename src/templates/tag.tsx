@@ -9,17 +9,15 @@ import Container from '../components/ui/Container';
 import PageContainer from '../components/ui/PageContainer';
 import Section from '../components/ui/Section';
 import SubHeader from '../components/ui/SubHeader';
-import { Page as PageData } from '../models/page';
+import { Mdx } from '../types/page';
 
 interface Props {
   pathContext: {
     tagName: string;
   };
   data: {
-    allPage: {
-      edges: Array<{
-        node: Pick<PageData, 'title' | 'slug' | 'childMdx'>;
-      }>;
+    allMdx: {
+      nodes: Mdx[];
     };
   };
 }
@@ -29,18 +27,20 @@ const TagContainer = styled(Container)`
   flex-direction: row;
 `;
 
-const Tag: FunctionComponent<Props> = ({ data: { allPage }, pathContext: { tagName } }) => (
+const Tag: FunctionComponent<Props> = ({ data: { allMdx }, pathContext: { tagName } }) => (
   <PageContainer>
     <MetaData title={tagName} />
 
     <SubHeader>
-      <Breadcrumbs />
+      <Breadcrumbs
+        breadcrumbs={[{ title: `Tag: ${tagName}`, slug: `tag/${tagName.toLowerCase().replace(/\\s/g, '-')}` }]}
+      />
     </SubHeader>
 
     <Section>
       <TagContainer>
         <Sidebar />
-        <TagOverview tagName={tagName} pages={allPage.edges.map(edge => edge.node)} />
+        <TagOverview tagName={tagName} pages={allMdx.nodes} />
       </TagContainer>
     </Section>
   </PageContainer>
@@ -50,14 +50,12 @@ export default Tag;
 
 export const query = graphql`
   query Tag($tag: [String]!) {
-    allPage(filter: { tags: { in: $tag } }) {
-      edges {
-        node {
+    allMdx(filter: { frontmatter: { tags: { in: $tag } } }) {
+      nodes {
+        slug
+        excerpt
+        frontmatter {
           title
-          slug
-          childMdx {
-            excerpt
-          }
         }
       }
     }

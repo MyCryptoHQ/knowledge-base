@@ -1,304 +1,400 @@
-import { resolve } from 'path';
-import { CreatePagesArgs, GatsbyNode, Node, SourceNodesArgs } from 'gatsby';
-import minimatch from 'minimatch';
+import { promises as fs } from 'fs';
+import { join, resolve } from 'path';
+import {
+  CreatePagesArgs,
+  CreateResolversArgs,
+  CreateSchemaCustomizationArgs,
+  GatsbyNode,
+  Node,
+  Resolvers,
+  NodeModel
+} from 'gatsby';
 import { titleCase } from 'title-case';
+import { parse } from 'yaml';
+import { Breadcrumb } from '../src/types/breadcrumb';
+import { YamlNode } from '../src/types/category';
+import { MdxNode } from '../src/types/page';
+
+const REDIRECTS_FILE = resolve(__dirname, '../content/redirects.yml');
 
 const CATEGORY_TEMPLATE = resolve(__dirname, '../src/templates/category.tsx');
 const PAGE_TEMPLATE = resolve(__dirname, '../src/templates/page.tsx');
 const TAG_TEMPLATE = resolve(__dirname, '../src/templates/tag.tsx');
 
-type PageNode = Node & {
-  frontmatter: {
-    title: string;
-    description: string;
-    tags: string[];
-    priority: string;
-    date_published: string;
-    date_modified: string;
-  };
-};
-
 type FileNode = Node & {
   relativePath: string;
+  relativeDirectory: string;
 };
 
-/**
- * Creates nodes for all categories and pages.
- */
-export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
-  actions: { createNode, createParentChildLink },
-  createNodeId,
-  createContentDigest,
-  getNode,
-  getNodes,
-  reporter
-}: SourceNodesArgs): Promise<void> => {
-  const nodes: Node[] = getNodes();
-  const pageNodes: PageNode[] = nodes.filter(node => node.internal.type === 'Mdx') as PageNode[];
-  const categoryNodes = nodes
-    .filter(node => node.internal.type === 'Yaml')
-    .filter(node => node.relativePath !== 'redirects.yml');
-
+const gatsbyNode: GatsbyNode = {
   /**
-   * Get a slug from a page data node.
-   *
-   * @param node {Node} The page data node to get the slug for.
-   * @return {string} The slug for the page.
+   * Customizes the GraphQL schema with knowledge base-specific fields.
    */
-  const getPageSlug = (node: Node) => {
-    const parent = getNode(node.parent) as FileNode;
-    return parent.relativePath.replace(/\.md$/, '');
-  };
+  async createSchemaCustomization({ actions }: CreateSchemaCustomizationArgs): Promise<void> {
+    const { createTypes, createFieldExtension } = actions;
 
-  /**
-   * Register all pages for `categoryNode`.
-   *
-   * @param categoryNode The category to register the pages for.
-   * @return {number} The number of pages registered for the category.
-   */
-  const getPages = async (categoryNode: Node) => {
-    const pageDataNodes = pageNodes.filter(node => {
-      const parent = getNode(node.parent) as FileNode;
-      return minimatch(parent.relativePath, `${categoryNode.slug}/*`);
-    });
-
-    for (const dataNode of pageDataNodes) {
-      const slug = getPageSlug(dataNode);
-      const {
-        frontmatter: { title, description, tags, priority, date_published: datePublished, date_modified: dateModified }
-      } = dataNode;
-
-      const nodeData = {
-        title: titleCase(title),
-        description,
-        tags: tags ?? [],
-        priority,
-        datePublished,
-        dateModified,
-        slug
-      };
-
-      const node: Node = {
-        ...nodeData,
-        id: createNodeId(`page-${slug}`),
-        parent: categoryNode.id,
-        children: [],
-        internal: {
-          type: 'Page',
-          contentDigest: createContentDigest(nodeData),
-          owner: ''
-        }
-      };
-
-      await createNode(node);
-      createParentChildLink({ parent: categoryNode, child: node });
-      createParentChildLink({ parent: node, child: dataNode });
-    }
-
-    return pageDataNodes.length;
-  };
-
-  /**
-   * Get a slug from a category data node.
-   *
-   * @param {Node} node The category data node to get the slug for.
-   * @return {string} The slug for the category.
-   */
-  const getCategorySlug = (node: Node) => {
-    const parent = getNode(node.parent) as FileNode;
-    return parent.relativePath.replace('/category.yml', '');
-  };
-
-  /**
-   * Register all categories for `pattern`.
-   *
-   * @param {Node | null} parent The parent of the category nodes.
-   * @param {string} pattern The glob pattern to get all category file nodes for.
-   */
-  const getCategories = async (parent: Node | null, pattern: string) => {
-    const categoryDataNodes = categoryNodes.filter(node => {
-      const parentNode = getNode(node.parent) as FileNode;
-      return minimatch(parentNode.relativePath, pattern);
-    });
-
-    for (const dataNode of categoryDataNodes) {
-      const slug = getCategorySlug(dataNode);
-      const { title, icon, description, priority } = dataNode;
-
-      const nodeData = {
-        title,
-        icon,
-        description,
-        priority,
-        slug,
-        isTopLevel: !parent
-      };
-
-      const child: Node = {
-        ...nodeData,
-        id: createNodeId(`category-${slug}`),
-        parent: parent ? parent.id : (null as any), // eslint-disable-line @typescript-eslint/no-explicit-any
-        children: [],
-        internal: {
-          type: 'Category',
-          contentDigest: createContentDigest(nodeData),
-          owner: ''
-        }
-      };
-
-      await createNode(child);
-      const pageCount = await getPages(child);
-      reporter.info(`registered new category '${slug}' with ${pageCount} pages`);
-
-      if (parent) {
-        createParentChildLink({
-          parent,
-          child
-        });
+    const typeDefs = `
+      type Breadcrumb {
+        title: String!
+        slug: String!
       }
 
-      await getCategories(child, `${slug}/*/*`);
-    }
-  };
+      type Mdx implements Node {
+        categoryId: ID!
+        category: Yaml!
+        slug: String!
+        frontmatter: MdxFrontmatter!
+        breadcrumbs: [Breadcrumb]!
+      }
 
-  await getCategories(null, '*/*');
-};
+      type MdxFrontmatter {
+        title: String! @titleCase
+        tags: [String]
+        datePublished: Date
+        dateModified: Date
+      }
 
-interface QueryData {
-  [key: string]: {
-    edges: Array<{
-      node: {
-        slug: string;
-      };
-    }>;
-  };
-}
+      type Yaml implements Node {
+        categoryId: ID
+        title: String! @titleCase
+        slug: String!
+        category: Yaml @link(by: "id", from: "categoryId")
+        pages: [Mdx]
+        categories: [Yaml]
+        breadcrumbs: [Breadcrumb]!
+      }
+    `;
 
-interface TagsQueryData {
-  allPage: {
-    edges: Array<{
-      node: {
-        tags: string[];
-      };
-    }>;
-  };
-}
+    createTypes(typeDefs);
 
-/**
- * Creates pages from the sourced page and category nodes.
- */
-export const createPages: GatsbyNode['createPages'] = async ({
-  actions: { createPage, createRedirect },
-  graphql,
-  reporter
-}: CreatePagesArgs): Promise<void> => {
+    createFieldExtension({
+      name: 'titleCase',
+      extend: () => ({
+        resolve(source: Node, _: null, __: null, info: { fieldName: string }) {
+          return titleCase(source[info.fieldName] as string);
+        }
+      })
+    });
+  },
+
   /**
-   * Simple helper function to create pages from a GraphQL query. This assumes the node has a slug,
-   * which is used as `path` and `context`.
-   *
-   * @param {string} fieldName The GraphQL field name of the data
-   * @param {string} component Path to the React component to use for the page
-   * @returns {Promise<void>}
+   * Adds resolvers for the added GraphQL fields.
    */
-  const createPagesFromNode = async (fieldName: string, component: string) => {
-    const result = await graphql<QueryData>(`
+  async createResolvers({ createResolvers, reporter }: CreateResolversArgs): Promise<void> {
+    const getPageSlug = (node: Node, nodeModel: NodeModel): string => {
+      const { relativePath } = nodeModel.getNodeById<FileNode>({ id: node.parent });
+      return relativePath.replace(/\.md$/, '');
+    };
+
+    const getCategorySlug = (node: Node, nodeModel: NodeModel): string => {
+      const parent = nodeModel.getNodeById<FileNode>({ id: node.parent });
+      return parent.relativePath.replace(/\/category\.yml$/, '');
+    };
+
+    const getBreadcrumbs = (breadcrumbs: Breadcrumb[], nodes: YamlNode[], nodeModel: NodeModel): Breadcrumb[] => {
+      const parentSlug = join(breadcrumbs[0].slug, '..');
+      if (parentSlug === '.') {
+        return breadcrumbs;
+      }
+
+      const parent = nodes.find(node => getCategorySlug(node, nodeModel) === parentSlug);
+      if (parent) {
+        const newBreadcrumbs = [
+          {
+            title: titleCase(parent.title),
+            slug: getCategorySlug(parent, nodeModel)
+          },
+          ...breadcrumbs
+        ];
+
+        return getBreadcrumbs(newBreadcrumbs, nodes, nodeModel);
+      }
+
+      return breadcrumbs;
+    };
+
+    const resolvers: Resolvers = {
+      Mdx: {
+        slug: {
+          resolve: (node: Node, _, { nodeModel }) => getPageSlug(node, nodeModel)
+        },
+
+        categoryId: {
+          resolve(node: Node, _, { nodeModel }): string {
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent });
+
+            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
+            const category = nodes.find(categoryNode => {
+              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
+              return parent.relativeDirectory === relativeDirectory;
+            })!;
+
+            return category.id;
+          }
+        },
+
+        category: {
+          resolve(node: Node, _, { nodeModel }): Node {
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent });
+
+            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
+            return nodes.find(categoryNode => {
+              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
+              return parent.relativeDirectory === relativeDirectory;
+            })!;
+          }
+        },
+
+        breadcrumbs: {
+          resolve(node: Node, _, { nodeModel }): Breadcrumb[] {
+            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
+            return getBreadcrumbs(
+              [
+                {
+                  title: (node as MdxNode).frontmatter.title as string,
+                  slug: getPageSlug(node, nodeModel)
+                }
+              ],
+              nodes,
+              nodeModel
+            );
+          }
+        }
+      },
+
+      MdxFrontmatter: {
+        datePublished: {
+          resolve(node: Node): string {
+            return node.date_published as string;
+          }
+        },
+
+        dateModified: {
+          resolve(node: Node): string {
+            return node.date_modified as string;
+          }
+        }
+      },
+
+      Yaml: {
+        slug: {
+          resolve: (node: Node, _, { nodeModel }) => getCategorySlug(node, nodeModel)
+        },
+
+        categoryId: {
+          resolve(node: Node, _, { nodeModel }): string | undefined {
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent });
+            const parentDirectory = join(relativeDirectory, '..');
+
+            if (parentDirectory === '.') {
+              return;
+            }
+
+            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
+            const category = nodes.find(categoryNode => {
+              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
+              return parent.relativeDirectory === parentDirectory;
+            });
+
+            return category?.id;
+          }
+        },
+
+        category: {
+          resolve(node: Node, _, { nodeModel }): Node | undefined {
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent });
+            const parentDirectory = join(relativeDirectory, '..');
+
+            if (parentDirectory === '.') {
+              return;
+            }
+
+            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
+            return nodes.find(categoryNode => {
+              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
+              return parent.relativeDirectory === parentDirectory;
+            });
+          }
+        },
+
+        categories: {
+          resolve(node: Node, _, { nodeModel }): Node[] | undefined {
+            const slug = getCategorySlug(node, nodeModel);
+            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
+
+            if (!node.categories) {
+              return;
+            }
+
+            return (node.categories as string[])
+              .map(category => `${slug}/${category}`)
+              .map(categorySlug => {
+                const category = nodes.find(categoryNode => categorySlug === getCategorySlug(categoryNode, nodeModel));
+                if (!category) {
+                  reporter.panic(`Category ${categorySlug} specified, but not found`);
+                }
+
+                return category!;
+              });
+          }
+        },
+
+        pages: {
+          resolve(node: Node, _, { nodeModel }): Node[] | undefined {
+            const slug = getCategorySlug(node, nodeModel);
+            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Mdx' });
+
+            if (!node.articles) {
+              return;
+            }
+
+            return (node.articles as string[])
+              .map(page => `${slug}/${page}`)
+              .map(pageNode => {
+                const page = nodes.find(categoryNode => pageNode === getPageSlug(categoryNode, nodeModel));
+                if (!page) {
+                  reporter.panic(`Page ${pageNode} specified, but not found`);
+                }
+
+                return page!;
+              });
+          }
+        },
+
+        breadcrumbs: {
+          resolve(node: Node, _, { nodeModel }): Breadcrumb[] {
+            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
+            return getBreadcrumbs(
+              [
+                {
+                  title: (node as YamlNode).title as string,
+                  slug: getCategorySlug(node, nodeModel)
+                }
+              ],
+              nodes,
+              nodeModel
+            );
+          }
+        }
+      }
+    };
+
+    createResolvers(resolvers);
+  },
+
+  async createPages({ actions: { createPage, createRedirect }, graphql, reporter }: CreatePagesArgs): Promise<void> {
+    type QueryData<T extends string> = {
+      [key in T]: {
+        nodes: Array<{
+          slug: string;
+        }>;
+      };
+    };
+
+    /**
+     * Simple helper function to create pages from a GraphQL query. This assumes the node has a slug,
+     * which is used as `path` and `context`.
+     *
+     * @param {string} fieldName The GraphQL field name of the data
+     * @param {string} component Path to the React component to use for the page
+     * @returns {Promise<void>}
+     */
+    const createPagesFromNode = async (fieldName: 'allMdx' | 'allYaml', component: string) => {
+      const result = await graphql<QueryData<typeof fieldName>>(`
       query {
         ${fieldName} {
-          edges {
-            node {
-              slug
-            }
+          nodes {
+            slug
           }
         }
       }
     `);
 
-    if (!result.data || result.errors) {
-      reporter.panicOnBuild('failed to fetch all content', result.errors);
-      return process.exit(1);
+      if (!result.data || result.errors) {
+        reporter.panicOnBuild('Failed to fetch all content', result.errors);
+        return process.exit(1);
+      }
+
+      const { nodes } = result.data[fieldName];
+      nodes.forEach(({ slug }) => {
+        createPage({
+          path: slug,
+          component,
+          context: {
+            slug
+          }
+        });
+      });
+    };
+
+    interface TagsQueryData {
+      allMdx: {
+        nodes: Array<{
+          frontmatter: {
+            tags: string[];
+          };
+        }>;
+      };
     }
 
-    const data = result.data[fieldName];
-    data.edges.forEach(({ node: { slug } }) => {
-      createPage({
-        path: slug,
-        component,
-        context: {
-          slug
-        }
-      });
-    });
-  };
+    const encodeTag = (tag: string): string => {
+      return tag.toLowerCase().replace(/\s/g, '-');
+    };
 
-  /**
-   * Reads `redirects.yml` from the content repository and registers all redirects.
-   *
-   * @returns {Promise<void>}
-   */
-  const createRedirects = async () => {
-    const { errors, data } = await graphql<{
-      file: { childYaml: { redirects: Array<{ from: string; to: string }> } };
-    }>(`
-      query {
-        file(relativePath: { eq: "redirects.yml" }) {
-          childYaml {
-            redirects {
-              from
-              to
+    const createTags = async () => {
+      const result = await graphql<TagsQueryData>(`
+        query {
+          allMdx {
+            nodes {
+              frontmatter {
+                tags
+              }
             }
           }
         }
+      `);
+
+      if (!result.data || result.errors) {
+        reporter.panicOnBuild('Failed to fetch tags', result.errors);
+        return process.exit(1);
       }
-    `);
 
-    if (errors) {
-      reporter.panicOnBuild('Failed to read redirects', errors);
-      return process.exit(1);
-    }
+      const tags = new Set(result.data.allMdx.nodes.flatMap(page => page.frontmatter.tags));
 
-    data?.file.childYaml.redirects.forEach(redirect => {
-      createRedirect({
-        fromPath: `/${redirect.from}`,
-        toPath: `/${redirect.to}`,
-        isPermanent: true
-      });
-    });
-  };
-
-  const encodeTag = (tag: string): string => {
-    return tag.toLowerCase().replace(/\s/g, '-');
-  };
-
-  const createTags = async () => {
-    const result = await graphql<TagsQueryData>(`
-      query {
-        allPage {
-          edges {
-            node {
-              tags
-            }
+      tags.forEach(tag => {
+        createPage({
+          path: `/tag/${encodeTag(tag)}`,
+          component: TAG_TEMPLATE,
+          context: {
+            tag: [tag],
+            tagName: tag
           }
-        }
-      }
-    `);
-
-    const pages = result.data!.allPage.edges.map(edge => edge.node);
-    const tags = new Set(pages.flatMap(page => page.tags));
-
-    tags.forEach(tag => {
-      createPage({
-        path: `/tag/${encodeTag(tag)}`,
-        component: TAG_TEMPLATE,
-        context: {
-          tag: [tag],
-          tagName: tag
-        }
+        });
       });
-    });
-  };
+    };
 
-  await createPagesFromNode('allCategory', CATEGORY_TEMPLATE);
-  await createPagesFromNode('allPage', PAGE_TEMPLATE);
-  await createRedirects();
-  await createTags();
+    /**
+     * Reads `redirects.yml` from the content repository and registers all redirects.
+     *
+     * @returns {Promise<void>}
+     */
+    const createRedirects = async () => {
+      const { redirects } = parse(await fs.readFile(REDIRECTS_FILE, 'utf-8'));
+
+      redirects.forEach((redirect: { from: string; to: string }) => {
+        createRedirect({
+          fromPath: `/${redirect.from}`,
+          toPath: `/${redirect.to}`,
+          isPermanent: true
+        });
+      });
+    };
+
+    await createPagesFromNode('allMdx', PAGE_TEMPLATE);
+    await createPagesFromNode('allYaml', CATEGORY_TEMPLATE);
+    await createTags();
+    await createRedirects();
+  }
 };
+
+export default gatsbyNode;

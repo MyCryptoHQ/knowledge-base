@@ -10,14 +10,14 @@ import Container from '../components/ui/Container';
 import PageContainer from '../components/ui/PageContainer';
 import Section from '../components/ui/Section';
 import SubHeader from '../components/ui/SubHeader';
-import { Page as PageData } from '../models/page';
+import { Mdx } from '../types/page';
 
 interface Props {
   pathContext: {
     slug: string;
   };
   data: {
-    page: PageData;
+    mdx: Mdx;
   };
 }
 
@@ -25,24 +25,28 @@ const Article = styled.article`
   word-break: break-word;
 `;
 
-const Page: FunctionComponent<Props> = ({ data: { page } }) => (
+const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
   <PageContainer>
-    <MetaData title={page.title} keyWords={page.tags} />
+    <MetaData title={mdx.frontmatter.title} keyWords={mdx.frontmatter.tags} />
 
     <SubHeader>
-      <Breadcrumbs parent={page.parent} />
+      <Breadcrumbs breadcrumbs={mdx.breadcrumbs} />
     </SubHeader>
 
     <Section>
       <Container maxWidth="74rem">
         <Article>
-          <PageHeader title={page.title} tags={page.tags} dateModified={page.dateModified} />
-          <PageBody body={page.childMdx.body} />
+          <PageHeader
+            title={mdx.frontmatter.title}
+            tags={mdx.frontmatter.tags}
+            dateModified={mdx.frontmatter.dateModified}
+          />
+          <PageBody body={mdx.body} />
         </Article>
       </Container>
     </Section>
 
-    <PageFooter slug={page.slug} />
+    <PageFooter slug={mdx.slug} />
   </PageContainer>
 );
 
@@ -50,20 +54,17 @@ export default Page;
 
 export const query = graphql`
   query Page($slug: String!) {
-    page(slug: { eq: $slug }) {
-      title
+    mdx(slug: { eq: $slug }) {
+      body
       slug
-      tags
-      description
-      dateModified
-      childMdx {
-        body
+      frontmatter {
+        title
+        tags
+        dateModified
       }
-      parent {
-        ... on Category {
-          title
-          slug
-        }
+      breadcrumbs {
+        title
+        slug
       }
     }
   }

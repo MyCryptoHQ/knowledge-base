@@ -13,7 +13,7 @@ const Error404: FunctionComponent = () => (
     <MetaData title="Page not found" noIndex={true} />
 
     <SubHeader>
-      <Breadcrumbs parent={{ title: 'Page not found', slug: '404' }} />
+      <Breadcrumbs breadcrumbs={[{ title: 'Page not found', slug: '404' }]} />
     </SubHeader>
 
     <Section>

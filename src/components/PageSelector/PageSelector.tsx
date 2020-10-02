@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import React, { FunctionComponent } from 'react';
-import { Page } from '../../models/page';
+import { Mdx } from '../../types/page';
 import PageItem from '../PageItem';
 
 interface Props {
@@ -9,25 +9,21 @@ interface Props {
 }
 
 interface QueryData {
-  allPage: {
-    edges: Array<{
-      node: Page;
-    }>;
+  allMdx: {
+    nodes: Mdx[];
   };
 }
 
 const PageSelector: FunctionComponent<Props> = ({ slug, titleOnly }) => {
-  const { allPage } = useStaticQuery<QueryData>(
+  const { allMdx } = useStaticQuery<QueryData>(
     graphql`
       query {
-        allPage {
-          edges {
-            node {
-              slug
+        allMdx {
+          nodes {
+            slug
+            excerpt
+            frontmatter {
               title
-              childMdx {
-                excerpt
-              }
             }
           }
         }
@@ -35,9 +31,9 @@ const PageSelector: FunctionComponent<Props> = ({ slug, titleOnly }) => {
     `
   );
 
-  const page = allPage.edges.find(edge => edge.node.slug === slug);
+  const page = allMdx.nodes.find(page => page.slug === slug);
   if (page) {
-    return <PageItem page={page.node} titleOnly={titleOnly} />;
+    return <PageItem page={page} titleOnly={titleOnly} />;
   }
 
   return null;
