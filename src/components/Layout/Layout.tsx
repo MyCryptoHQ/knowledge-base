@@ -44,7 +44,7 @@ const Layout: FunctionComponent = ({ children }) => {
 
       <Header
         left={LEFT_HEADER_ITEMS.map(item => (
-          <Link key={`navigation-${item.to}`} to={item.to} external={item.external}>
+          <Link key={`navigation-${item.to}`} to={item.to} external={item.external} newTab={true}>
             {item.title}
           </Link>
         ))}
