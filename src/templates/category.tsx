@@ -30,7 +30,7 @@ const Category: FunctionComponent<Props> = ({ data: { yaml } }) => (
     <MetaData title={yaml.title} description={yaml.description} />
 
     <SubHeader>
-      <Breadcrumbs parent={yaml.category} />
+      <Breadcrumbs breadcrumbs={yaml.breadcrumbs} />
     </SubHeader>
 
     <Section>
@@ -65,6 +65,10 @@ export const query = graphql`
           title
         }
         excerpt(pruneLength: 500)
+      }
+      breadcrumbs {
+        title
+        slug
       }
     }
   }

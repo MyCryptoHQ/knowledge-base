@@ -6,11 +6,14 @@ import {
   CreateSchemaCustomizationArgs,
   GatsbyNode,
   Node,
-  Resolvers
+  Resolvers,
+  NodeModel
 } from 'gatsby';
 import { titleCase } from 'title-case';
 import { parse } from 'yaml';
+import { Breadcrumb } from '../src/types/breadcrumb';
 import { YamlNode } from '../src/types/category';
+import { MdxNode } from '../src/types/page';
 
 const REDIRECTS_FILE = resolve(__dirname, '../content/redirects.yml');
 
@@ -31,11 +34,17 @@ const gatsbyNode: GatsbyNode = {
     const { createTypes, createFieldExtension } = actions;
 
     const typeDefs = `
+      type Breadcrumb {
+        title: String!
+        slug: String!
+      }
+
       type Mdx implements Node {
         categoryId: ID!
         category: Yaml!
         slug: String!
         frontmatter: MdxFrontmatter!
+        breadcrumbs: [Breadcrumb]!
       }
 
       type MdxFrontmatter {
@@ -52,6 +61,7 @@ const gatsbyNode: GatsbyNode = {
         category: Yaml @link(by: "id", from: "categoryId")
         pages: [Mdx] @link(by: "categoryId", from: "id")
         categories: [Yaml]
+        breadcrumbs: [Breadcrumb]!
       }
     `;
 
@@ -69,24 +79,44 @@ const gatsbyNode: GatsbyNode = {
 
   /**
    * Adds resolvers for the added GraphQL fields.
-   *
-   * ```
-   * Mdx
-   *  - categoryId
-   *  - slug
-   *  - frontmatter
-   *     - datePublished
-   *     - dateModified
-   * ```
    */
   async createResolvers({ createResolvers }: CreateResolversArgs): Promise<void> {
+    const getPageSlug = (node: Node, nodeModel: NodeModel): string => {
+      const { relativePath } = nodeModel.getNodeById<FileNode>({ id: node.parent });
+      return relativePath.replace(/\.md$/, '');
+    };
+
+    const getCategorySlug = (node: Node, nodeModel: NodeModel): string => {
+      const parent = nodeModel.getNodeById<FileNode>({ id: node.parent });
+      return parent.relativePath.replace(/\/category\.yml$/, '');
+    };
+
+    const getBreadcrumbs = (breadcrumbs: Breadcrumb[], nodes: YamlNode[], nodeModel: NodeModel): Breadcrumb[] => {
+      const parentSlug = join(breadcrumbs[0].slug, '..');
+      if (parentSlug === '.') {
+        return breadcrumbs;
+      }
+
+      const parent = nodes.find(node => getCategorySlug(node, nodeModel) === parentSlug);
+      if (parent) {
+        const newBreadcrumbs = [
+          {
+            title: titleCase(parent.title),
+            slug: getCategorySlug(parent, nodeModel)
+          },
+          ...breadcrumbs
+        ];
+
+        return getBreadcrumbs(newBreadcrumbs, nodes, nodeModel);
+      }
+
+      return breadcrumbs;
+    };
+
     const resolvers: Resolvers = {
       Mdx: {
         slug: {
-          resolve(node: Node, _, { nodeModel }): string {
-            const { relativePath } = nodeModel.getNodeById<FileNode>({ id: node.parent });
-            return relativePath.replace(/\.md$/, '');
-          }
+          resolve: (node: Node, _, { nodeModel }) => getPageSlug(node, nodeModel)
         },
 
         categoryId: {
@@ -105,14 +135,29 @@ const gatsbyNode: GatsbyNode = {
 
         category: {
           resolve(node: Node, _, { nodeModel }): Node {
-            const { relativePath } = nodeModel.getNodeById<FileNode>({ id: node.parent });
-            const parentSlug = relativePath.match(/(.*)\//)![1];
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent });
 
             const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
             return nodes.find(categoryNode => {
               const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
-              return parent.relativePath === `${parentSlug}/category.yml`;
+              return parent.relativeDirectory === relativeDirectory;
             })!;
+          }
+        },
+
+        breadcrumbs: {
+          resolve(node: Node, _, { nodeModel }): Breadcrumb[] {
+            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
+            return getBreadcrumbs(
+              [
+                {
+                  title: (node as MdxNode).frontmatter.title as string,
+                  slug: getPageSlug(node, nodeModel)
+                }
+              ],
+              nodes,
+              nodeModel
+            );
           }
         }
       },
@@ -133,10 +178,7 @@ const gatsbyNode: GatsbyNode = {
 
       Yaml: {
         slug: {
-          resolve(node: Node, _, { nodeModel }): string {
-            const parent = nodeModel.getNodeById<FileNode>({ id: node.parent });
-            return parent.relativePath.replace(/\/category\.yml$/, '');
-          }
+          resolve: (node: Node, _, { nodeModel }) => getCategorySlug(node, nodeModel)
         },
 
         categoryId: {
@@ -186,6 +228,22 @@ const gatsbyNode: GatsbyNode = {
 
               return relativeDirectory === directory;
             });
+          }
+        },
+
+        breadcrumbs: {
+          resolve(node: Node, _, { nodeModel }): Breadcrumb[] {
+            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
+            return getBreadcrumbs(
+              [
+                {
+                  title: (node as YamlNode).title as string,
+                  slug: getCategorySlug(node, nodeModel)
+                }
+              ],
+              nodes,
+              nodeModel
+            );
           }
         }
       }

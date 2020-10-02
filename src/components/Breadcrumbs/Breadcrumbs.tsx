@@ -1,13 +1,11 @@
 import { Link } from 'gatsby';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+import { Breadcrumb as BreadcrumbItem } from '../../types/breadcrumb';
 import Text from '../ui/Text';
 
 interface Props {
-  parent?: {
-    title: string;
-    slug: string;
-  };
+  breadcrumbs: BreadcrumbItem[];
 }
 
 const StyledBreadcrumbs = styled.ul`
@@ -34,16 +32,16 @@ const Breadcrumb = styled(Text).attrs({ as: 'li', small: true })`
   }
 `;
 
-const Breadcrumbs: FunctionComponent<Props> = ({ parent }) => (
+const Breadcrumbs: FunctionComponent<Props> = ({ breadcrumbs }) => (
   <StyledBreadcrumbs>
     <Breadcrumb>
       <Link to="/">Knowledge Base</Link>
     </Breadcrumb>
-    {parent && (
-      <Breadcrumb key={parent.slug}>
-        <Link to={`/${parent.slug}`}>{parent.title}</Link>
+    {[...breadcrumbs].reverse().map(breadcrumb => (
+      <Breadcrumb key={breadcrumb.slug}>
+        <Link to={`/${breadcrumb.slug}`}>{breadcrumb.title}</Link>
       </Breadcrumb>
-    )}
+    ))}
   </StyledBreadcrumbs>
 );
 

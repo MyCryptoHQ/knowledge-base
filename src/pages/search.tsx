@@ -22,7 +22,7 @@ const Search: FunctionComponent<Props> = ({ data }) => (
     <MetaData title="Search" noIndex={true} />
 
     <SubHeader>
-      <Breadcrumbs parent={{ title: 'Search', slug: 'search' }} />
+      <Breadcrumbs breadcrumbs={[{ title: 'Search', slug: 'search' }]} />
     </SubHeader>
 
     <Section>

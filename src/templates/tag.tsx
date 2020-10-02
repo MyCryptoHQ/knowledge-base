@@ -32,7 +32,9 @@ const Tag: FunctionComponent<Props> = ({ data: { allMdx }, pathContext: { tagNam
     <MetaData title={tagName} />
 
     <SubHeader>
-      <Breadcrumbs />
+      <Breadcrumbs
+        breadcrumbs={[{ title: `Tag: ${tagName}`, slug: `tag/${tagName.toLowerCase().replace(/\\s/g, '-')}` }]}
+      />
     </SubHeader>
 
     <Section>

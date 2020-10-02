@@ -17,7 +17,7 @@ interface Props {
     slug: string;
   };
   data: {
-    mdx: Pick<Mdx, 'body' | 'slug' | 'frontmatter'>;
+    mdx: Mdx;
   };
 }
 
@@ -30,8 +30,7 @@ const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
     <MetaData title={mdx.frontmatter.title} keyWords={mdx.frontmatter.tags} />
 
     <SubHeader>
-      {/* TODO */}
-      <Breadcrumbs />
+      <Breadcrumbs breadcrumbs={mdx.breadcrumbs} />
     </SubHeader>
 
     <Section>
@@ -53,7 +52,6 @@ const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
 
 export default Page;
 
-// TODO: Category parent
 export const query = graphql`
   query Page($slug: String!) {
     mdx(slug: { eq: $slug }) {
@@ -63,6 +61,10 @@ export const query = graphql`
         title
         tags
         dateModified
+      }
+      breadcrumbs {
+        title
+        slug
       }
     }
   }

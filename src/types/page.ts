@@ -1,4 +1,6 @@
 import { MarkdownBody } from '@mdx-js/react';
+import { Node } from 'gatsby';
+import { Breadcrumb } from './breadcrumb';
 import { Yaml } from './category';
 
 /**
@@ -18,6 +20,7 @@ export interface Mdx {
   timeToRead: string;
   wordCount: string;
   category: Yaml;
+  breadcrumbs: Breadcrumb[];
 }
 
 interface MdxFrontmatter {
@@ -32,3 +35,5 @@ interface MdxHeading {
   value: string;
   depth: number;
 }
+
+export type MdxNode = Mdx & Node;
