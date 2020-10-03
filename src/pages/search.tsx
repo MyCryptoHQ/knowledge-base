@@ -7,14 +7,12 @@ import Container from '../components/ui/Container';
 import PageContainer from '../components/ui/PageContainer';
 import Section from '../components/ui/Section';
 import SubHeader from '../components/ui/SubHeader';
-import { Page } from '../models/page';
+import { Mdx } from '../types/page';
 
 interface Props {
   data: {
-    allPage: {
-      edges: Array<{
-        node: Page;
-      }>;
+    allMdx: {
+      nodes: Mdx[];
     };
   };
 }
@@ -24,12 +22,12 @@ const Search: FunctionComponent<Props> = ({ data }) => (
     <MetaData title="Search" noIndex={true} />
 
     <SubHeader>
-      <Breadcrumbs parent={{ title: 'Search', slug: 'search' }} />
+      <Breadcrumbs breadcrumbs={[{ title: 'Search', slug: 'search' }]} />
     </SubHeader>
 
     <Section>
       <Container>
-        <SearchPage allPages={data.allPage.edges.map(edge => edge.node)} />
+        <SearchPage allPages={data.allMdx.nodes} />
       </Container>
     </Section>
   </PageContainer>
@@ -38,17 +36,15 @@ const Search: FunctionComponent<Props> = ({ data }) => (
 export default Search;
 
 export const query = graphql`
-  query SearchPage {
-    allPage {
-      edges {
-        node {
+  query {
+    allMdx {
+      nodes {
+        slug
+        excerpt(pruneLength: 500)
+        frontmatter {
           title
           description
           tags
-          slug
-          childMdx {
-            excerpt(pruneLength: 500)
-          }
         }
       }
     }

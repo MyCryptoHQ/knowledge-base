@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import breakpoint from '../../theme/breakpoints';
-import FeaturedCategories from './FeaturedCategories';
+import Categories from './Categories';
 import PopularArticles from './PopularArticles';
 
 const SidebarWrapper = styled.section`
@@ -19,7 +19,7 @@ const SidebarWrapper = styled.section`
 
 const Sidebar: FunctionComponent = () => (
   <SidebarWrapper>
-    <FeaturedCategories />
+    <Categories />
     <PopularArticles />
   </SidebarWrapper>
 );

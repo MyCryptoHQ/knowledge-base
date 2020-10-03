@@ -1,24 +1,24 @@
 import React, { FunctionComponent } from 'react';
-import { Category } from '../../models/category';
+import { Yaml } from '../../types/category';
 import Text from '../ui/Text';
 
 interface Props {
-  category: Category;
+  category: Yaml;
 }
 
 const CategoryItemCount: FunctionComponent<Props> = ({ category }) => (
   <Text muted={true} noMargin={true} small={true}>
-    {category.childrenPage && category.childrenPage.length > 0 && (
+    {category.pages && category.pages.length > 0 && (
       <>
-        {category.childrenPage.length} article
-        {category.childrenPage.length !== 1 && 's'}
+        {category.pages.length} article
+        {category.pages.length !== 1 && 's'}
       </>
     )}
 
-    {category.childrenCategory && category.childrenCategory.length > 0 && (
+    {category.categories && category.categories.length > 0 && (
       <>
-        {category.childrenPage.length > 0 && ', '}
-        {category.childrenCategory.length} {(category.childrenCategory.length === 1 && 'category') || 'categories'}
+        {category.pages && category.pages.length > 0 && ', '}
+        {category.categories.length} {(category.categories.length === 1 && 'category') || 'categories'}
       </>
     )}
   </Text>

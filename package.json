@@ -53,13 +53,13 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-react": "^7.20.2",
     "eslint-plugin-react-hooks": "^4.0.5",
-    "gatsby": "^2.23.4",
+    "gatsby": "^2.24.67",
     "gatsby-plugin-canonical-urls": "^2.3.4",
     "gatsby-plugin-catch-links": "^2.1.25",
     "gatsby-plugin-favicons": "^1.0.4",
     "gatsby-plugin-git-clone": "^0.1.0",
     "gatsby-plugin-matomo": "^0.8.0",
-    "gatsby-plugin-mdx": "^1.0.73",
+    "gatsby-plugin-mdx": "^1.2.43",
     "gatsby-plugin-react-helmet-async": "^1.0.15",
     "gatsby-plugin-s3": "^0.3.3",
     "gatsby-plugin-sharp": "^2.4.5",
@@ -82,7 +82,8 @@
     "title-case": "^3.0.2",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5",
-    "unist-util-visit": "^2.0.2"
+    "unist-util-visit": "^2.0.2",
+    "yaml": "^1.10.0"
   },
   "scripts": {
     "clean": "gatsby clean",

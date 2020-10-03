@@ -43,4 +43,7 @@ declare module '@mdx-js/react' {
   }
 
   export class MDXProvider extends React.Component<MDXProviderProps> {}
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  export type MarkdownBody = any;
 }

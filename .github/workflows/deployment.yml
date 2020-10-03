@@ -29,8 +29,9 @@ jobs:
         with:
           path: |
             node_modules
+            .cache
             ~/.cache/pip
-          key: yarn-${{ hashFiles('yarn.lock') }}
+          key: ${{ hashFiles('yarn.lock') }}-${{ hashFiles('gatsby/**/*') }}
 
       - name: Install AWS CLI
         run: pip install --user awscli

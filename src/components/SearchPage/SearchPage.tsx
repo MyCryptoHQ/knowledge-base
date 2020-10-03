@@ -2,36 +2,32 @@ import Fuse from 'fuse.js';
 import { navigate } from 'gatsby';
 import React, { FunctionComponent, useMemo, useState } from 'react';
 import { useSelector } from '../../hooks';
-import { Page } from '../../models/page';
+import { Mdx } from '../../types/page';
 import PageItem from '../PageItem';
 import Heading from '../ui/Heading';
 
-const fuse = new Fuse<Page, Record<string, unknown>>([], {
+const fuse = new Fuse<Mdx, Record<string, unknown>>([], {
   keys: [
     {
-      name: 'title',
-      weight: 0.3
-    },
-    {
-      name: 'description',
-      weight: 0.1
-    },
-    {
-      name: 'tags',
+      name: 'frontmatter.title',
       weight: 0.4
     },
     {
-      name: 'childMdx.excerpt',
+      name: 'frontmatter.tags',
       weight: 0.2
+    },
+    {
+      name: 'excerpt',
+      weight: 0.4
     }
   ],
   shouldSort: true,
   location: 0,
-  threshold: 0.6
+  threshold: 0.8
 });
 
 interface Props {
-  allPages: Page[];
+  allPages: Mdx[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -39,7 +35,7 @@ const _paq: Array<Array<string | boolean | number>> = (typeof window !== 'undefi
 
 const SearchPage: FunctionComponent<Props> = ({ allPages }) => {
   const searchQuery = useSelector(state => state.navigation.searchQuery);
-  const [results, setResults] = useState<Page[]>([]);
+  const [results, setResults] = useState<Mdx[]>([]);
 
   useMemo(() => {
     fuse.setCollection(allPages);

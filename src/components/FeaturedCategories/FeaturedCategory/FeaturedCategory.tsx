@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { Category } from '../../../models/category';
 import breakpoint from '../../../theme/breakpoints';
+import { Yaml } from '../../../types/category';
 import Link from '../../Link';
 import Heading from '../../ui/Heading';
 import Text from '../../ui/Text';
 
 interface Props {
-  category: Category;
+  category: Yaml;
   image: string;
 }
 

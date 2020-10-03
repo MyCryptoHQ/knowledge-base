@@ -13,7 +13,7 @@ const SuccessPage: FunctionComponent = () => (
     <MetaData title="Success · Contact us" noIndex={true} />
 
     <SubHeader>
-      <Breadcrumbs parent={{ title: 'Contact us', slug: 'contact-us' }} />
+      <Breadcrumbs breadcrumbs={[{ title: 'Contact us', slug: 'contact-us' }]} />
     </SubHeader>
 
     <Section>
