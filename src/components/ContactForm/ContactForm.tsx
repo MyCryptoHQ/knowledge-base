@@ -48,15 +48,16 @@ const ContactForm: FunctionComponent = () => {
     event.preventDefault();
 
     const form = event.currentTarget;
-    if (!isVerified) {
-      setErrors(currentErrors => [...currentErrors, 'captcha']);
-    }
-
     const schema = FORM_TYPES[type].schema;
-    const [error] = validate(formData, schema);
 
+    const [error] = validate(formData, schema);
     if (error) {
       setErrors(currentErrors => [...currentErrors, ...(error.path as string[])]);
+      return;
+    }
+
+    if (!isVerified) {
+      setErrors(currentErrors => [...currentErrors, 'captcha']);
       return;
     }
 
@@ -87,14 +88,14 @@ const ContactForm: FunctionComponent = () => {
           <Input
             type="email"
             name="email"
-            value={formData.email}
+            value={formData.email || ''}
             onChange={handleChange}
             placeholder="e.g. support@mycrypto.com"
           />
         </Field>
       </InlineField>
 
-      <Field label="Type" hasError={errors.includes('subject')}>
+      <Field label="Type">
         <Input as="select" name="type" value={type} onChange={handleChangeType}>
           {Object.entries(FORM_TYPES).map(([type, { name }], index) => (
             <option key={`type-${index}`} value={type}>

@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FunctionComponent } from 'react';
-import { object, optional, pattern, string } from 'superstruct';
+import { optional, pattern, string } from 'superstruct';
 import Input from '../../ui/Input';
 import Text from '../../ui/Text';
 import Field from '../Field';
@@ -11,12 +11,12 @@ interface Props {
   onChange(event: ChangeEvent<HTMLInputElement>): void;
 }
 
-export const IssuesObject = object({
+export const IssuesObject = {
   address: optional(pattern(string(), /^(?:(?:0x[a-fA-F0-9]{40})|(?:.*\.eth))?$/)),
   subject: optional(string()),
   body: string(),
   attachment: optional(string())
-});
+};
 
 const IssuesForm: FunctionComponent<Props> = ({ values, errors, onChange: handleChange }) => {
   return (
@@ -25,7 +25,7 @@ const IssuesForm: FunctionComponent<Props> = ({ values, errors, onChange: handle
         <Input
           type="text"
           name="address"
-          value={values.address}
+          value={values.address || ''}
           onChange={handleChange}
           placeholder="e.g. 0x4bbeEB066eD09B7AEd07bF39EEe0460DFa261520"
         />
@@ -35,7 +35,7 @@ const IssuesForm: FunctionComponent<Props> = ({ values, errors, onChange: handle
         <Input
           type="text"
           name="subject"
-          value={values.subject}
+          value={values.subject || ''}
           onChange={handleChange}
           placeholder="e.g. Unable to send a transaction"
         />
@@ -50,7 +50,7 @@ const IssuesForm: FunctionComponent<Props> = ({ values, errors, onChange: handle
         <Input
           as="textarea"
           name="body"
-          value={values.body}
+          value={values.body || ''}
           onChange={handleChange}
           placeholder='e.g. I was attempting to unlock by wallet but when I did I got the error message "Unknown Error: file is not defined." ...'
         />

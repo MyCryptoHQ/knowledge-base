@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FunctionComponent } from 'react';
-import { object, string } from 'superstruct';
+import { string } from 'superstruct';
 import Input from '../../ui/Input';
 import Text from '../../ui/Text';
 import Field from '../Field';
@@ -11,9 +11,9 @@ interface Props {
   onChange(event: ChangeEvent<HTMLInputElement>): void;
 }
 
-export const FeedbackObject = object({
+export const FeedbackObject = {
   body: string()
-});
+};
 
 const FeedbackForm: FunctionComponent<Props> = ({ values, errors, onChange: handleChange }) => (
   <>
@@ -24,7 +24,7 @@ const FeedbackForm: FunctionComponent<Props> = ({ values, errors, onChange: hand
         Thank you for taking the time to provide feedback, it is highly appreciated.
       </Text>
 
-      <Input as="textarea" name="body" value={values.body} onChange={handleChange} />
+      <Input as="textarea" name="body" value={values.body || ''} onChange={handleChange} />
     </Field>
   </>
 );
