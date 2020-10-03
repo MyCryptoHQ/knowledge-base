@@ -52,7 +52,7 @@ const Tag: FunctionComponent<Props> = ({ data: { allMdx, articles }, pathContext
 export default Tag;
 
 export const query = graphql`
-  query Tag($tag: [String]!) {
+  query Tag($tag: [String]!, $popularArticles: [String!]!) {
     allMdx(filter: { frontmatter: { tags: { in: $tag } } }) {
       nodes {
         slug
