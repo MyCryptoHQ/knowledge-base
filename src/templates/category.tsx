@@ -10,6 +10,7 @@ import PageContainer from '../components/ui/PageContainer';
 import Section from '../components/ui/Section';
 import SubHeader from '../components/ui/SubHeader';
 import { Yaml } from '../types/category';
+import { Mdx } from '../types/page';
 
 interface Props {
   pathContext: {
@@ -17,6 +18,9 @@ interface Props {
   };
   data: {
     yaml: Yaml;
+    allMdx: {
+      nodes: Mdx[];
+    };
   };
 }
 
@@ -25,7 +29,7 @@ const CategoryContainer = styled(Container)`
   flex-direction: row;
 `;
 
-const Category: FunctionComponent<Props> = ({ data: { yaml } }) => (
+const Category: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
   <PageContainer>
     <MetaData title={yaml.title} description={yaml.description} />
 
@@ -35,15 +39,17 @@ const Category: FunctionComponent<Props> = ({ data: { yaml } }) => (
 
     <Section>
       <CategoryContainer>
-        <Sidebar />
+        <Sidebar articles={allMdx.nodes} />
         <CategoryOverview category={yaml} />
       </CategoryContainer>
     </Section>
   </PageContainer>
 );
 
+export default Category;
+
 export const query = graphql`
-  query Category($slug: String!) {
+  query Category($slug: String!, $popularArticles: [String!]!) {
     yaml(slug: { eq: $slug }) {
       title
       slug
@@ -71,7 +77,15 @@ export const query = graphql`
         slug
       }
     }
+
+    allMdx(filter: { slug: { in: $popularArticles } }) {
+      nodes {
+        slug
+        excerpt
+        frontmatter {
+          title
+        }
+      }
+    }
   }
 `;
-
-export default Category;

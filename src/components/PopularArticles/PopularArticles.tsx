@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { POPULAR_ARTICLES } from '../../config/articles';
 import breakpoint from '../../theme/breakpoints';
+import { Mdx } from '../../types/page';
 import Heading from '../ui/Heading';
 import Section from '../ui/Section';
 import PopularArticle from './PopularArticle';
@@ -16,11 +17,15 @@ const CategoriesSection = styled(Section)`
   `};
 `;
 
-const PopularArticles: FunctionComponent = () => (
+interface Props {
+  articles: Mdx[];
+}
+
+const PopularArticles: FunctionComponent<Props> = ({ articles }) => (
   <CategoriesSection>
     <PaddedHeading as="h2">Popular Articles</PaddedHeading>
     {POPULAR_ARTICLES.map(slug => (
-      <PopularArticle key={slug} slug={slug} />
+      <PopularArticle key={slug} articles={articles} slug={slug} />
     ))}
   </CategoriesSection>
 );

@@ -19,6 +19,9 @@ interface Props {
     allMdx: {
       nodes: Mdx[];
     };
+    articles: {
+      nodes: Mdx[];
+    };
   };
 }
 
@@ -27,7 +30,7 @@ const TagContainer = styled(Container)`
   flex-direction: row;
 `;
 
-const Tag: FunctionComponent<Props> = ({ data: { allMdx }, pathContext: { tagName } }) => (
+const Tag: FunctionComponent<Props> = ({ data: { allMdx, articles }, pathContext: { tagName } }) => (
   <PageContainer>
     <MetaData title={tagName} />
 
@@ -39,7 +42,7 @@ const Tag: FunctionComponent<Props> = ({ data: { allMdx }, pathContext: { tagNam
 
     <Section>
       <TagContainer>
-        <Sidebar />
+        <Sidebar articles={articles.nodes} />
         <TagOverview tagName={tagName} pages={allMdx.nodes} />
       </TagContainer>
     </Section>
@@ -51,6 +54,16 @@ export default Tag;
 export const query = graphql`
   query Tag($tag: [String]!) {
     allMdx(filter: { frontmatter: { tags: { in: $tag } } }) {
+      nodes {
+        slug
+        excerpt
+        frontmatter {
+          title
+        }
+      }
+    }
+
+    articles: allMdx(filter: { slug: { in: $popularArticles } }) {
       nodes {
         slug
         excerpt

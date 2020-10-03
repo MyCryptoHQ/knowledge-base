@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import breakpoint from '../../theme/breakpoints';
+import { Mdx } from '../../types/page';
 import Categories from './Categories';
 import PopularArticles from './PopularArticles';
 
@@ -17,10 +18,14 @@ const SidebarWrapper = styled.section`
   `};
 `;
 
-const Sidebar: FunctionComponent = () => (
+interface Props {
+  articles: Mdx[];
+}
+
+const Sidebar: FunctionComponent<Props> = ({ articles }) => (
   <SidebarWrapper>
     <Categories />
-    <PopularArticles />
+    <PopularArticles articles={articles} />
   </SidebarWrapper>
 );
 
