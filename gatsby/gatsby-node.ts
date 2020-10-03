@@ -378,7 +378,8 @@ const gatsbyNode: GatsbyNode = {
           component: TAG_TEMPLATE,
           context: {
             tag: [tag],
-            tagName: tag
+            tagName: tag,
+            popularArticles: POPULAR_ARTICLES
           }
         });
       });
