@@ -1,1 +1,1 @@
-export { default } from './Field';
+export { default, StyledField } from './Field';
