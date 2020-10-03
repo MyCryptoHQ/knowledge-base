@@ -11,12 +11,14 @@ import {
 } from 'gatsby';
 import { titleCase } from 'title-case';
 import { parse } from 'yaml';
+import { POPULAR_ARTICLES } from '../src/config/articles';
 import { Breadcrumb } from '../src/types/breadcrumb';
 import { YamlNode } from '../src/types/category';
 import { MdxNode } from '../src/types/page';
 
 const REDIRECTS_FILE = resolve(__dirname, '../content/redirects.yml');
 
+const HOME_TEMPLATE = resolve(__dirname, '../src/templates/index.tsx');
 const CATEGORY_TEMPLATE = resolve(__dirname, '../src/templates/category.tsx');
 const PAGE_TEMPLATE = resolve(__dirname, '../src/templates/page.tsx');
 const TAG_TEMPLATE = resolve(__dirname, '../src/templates/tag.tsx');
@@ -283,6 +285,14 @@ const gatsbyNode: GatsbyNode = {
   },
 
   async createPages({ actions: { createPage, createRedirect }, graphql, reporter }: CreatePagesArgs): Promise<void> {
+    createPage({
+      path: '/',
+      component: HOME_TEMPLATE,
+      context: {
+        popularArticles: POPULAR_ARTICLES
+      }
+    });
+
     type QueryData<T extends string> = {
       [key in T]: {
         nodes: Array<{
@@ -321,7 +331,8 @@ const gatsbyNode: GatsbyNode = {
           path: slug,
           component,
           context: {
-            slug
+            slug,
+            popularArticles: POPULAR_ARTICLES
           }
         });
       });
@@ -367,7 +378,8 @@ const gatsbyNode: GatsbyNode = {
           component: TAG_TEMPLATE,
           context: {
             tag: [tag],
-            tagName: tag
+            tagName: tag,
+            popularArticles: POPULAR_ARTICLES
           }
         });
       });

@@ -1,20 +1,25 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { POPULAR_ARTICLES } from '../../../config/articles';
-import PageSelector from '../../PageSelector';
+import { Mdx } from '../../../types/page';
 import Heading from '../../ui/Heading';
 import List from '../../ui/List';
 import ListItem from '../../ui/ListItem';
+import PopularArticle from './PopularArticle';
 
 const PopularArticlesWrapper = styled.section``;
 
-const PopularArticles: FunctionComponent = () => (
+interface Props {
+  articles: Mdx[];
+}
+
+const PopularArticles: FunctionComponent<Props> = ({ articles }) => (
   <PopularArticlesWrapper>
     <Heading as="h3">Popular Articles</Heading>
     <List>
       {POPULAR_ARTICLES.map(slug => (
         <ListItem key={slug}>
-          <PageSelector slug={slug} titleOnly={true} />
+          <PopularArticle articles={articles} slug={slug} />
         </ListItem>
       ))}
     </List>

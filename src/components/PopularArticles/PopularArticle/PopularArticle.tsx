@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import breakpoint from '../../../theme/breakpoints';
-import PageSelector from '../../PageSelector';
+import { Mdx } from '../../../types/page';
+import PageItem from '../../PageItem';
 
 const ArticleWrapper = styled.div`
   a {
@@ -27,13 +28,21 @@ const ArticleWrapper = styled.div`
 `;
 
 interface Props {
+  articles: Mdx[];
   slug: string;
 }
 
-const PopularArticle: FunctionComponent<Props> = ({ slug }) => (
-  <ArticleWrapper key={slug}>
-    <PageSelector slug={slug} />
-  </ArticleWrapper>
-);
+const PopularArticle: FunctionComponent<Props> = ({ articles, slug }) => {
+  const article = articles.find(article => article.slug === slug);
+  if (article) {
+    return (
+      <ArticleWrapper key={slug}>
+        <PageItem page={article} titleOnly={false} />
+      </ArticleWrapper>
+    );
+  }
+
+  return null;
+};
 
 export default PopularArticle;
