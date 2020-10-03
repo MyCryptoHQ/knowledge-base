@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FunctionComponent } from 'react';
-import { object, optional, string } from 'superstruct';
+import { optional, string } from 'superstruct';
 import Input from '../../ui/Input';
 import Text from '../../ui/Text';
 import Field from '../Field';
@@ -11,11 +11,11 @@ interface Props {
   onChange(event: ChangeEvent<HTMLInputElement>): void;
 }
 
-export const GeneralObject = object({
+export const GeneralObject = {
   subject: optional(string()),
   body: string(),
   attachment: optional(string())
-});
+};
 
 const GeneralForm: FunctionComponent<Props> = ({ values, errors, onChange: handleChange }) => {
   return (
@@ -24,7 +24,7 @@ const GeneralForm: FunctionComponent<Props> = ({ values, errors, onChange: handl
         <Input
           type="text"
           name="subject"
-          value={values.subject}
+          value={values.subject || ''}
           onChange={handleChange}
           placeholder="e.g. Question about MyCrypto Membership"
         />
@@ -39,7 +39,7 @@ const GeneralForm: FunctionComponent<Props> = ({ values, errors, onChange: handl
         <Input
           as="textarea"
           name="body"
-          value={values.body}
+          value={values.body || ''}
           onChange={handleChange}
           placeholder='e.g. I was attempting to unlock by wallet but when I did I got the error message "Unknown Error: file is not defined." ...'
         />
