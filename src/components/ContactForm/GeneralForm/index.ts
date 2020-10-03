@@ -1,1 +1,1 @@
-export { default } from './GeneralForm';
+export { default, GeneralObject } from './GeneralForm';

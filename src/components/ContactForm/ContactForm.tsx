@@ -1,45 +1,21 @@
 import { Button } from '@mycrypto/ui';
 import React, { ChangeEvent, FunctionComponent, useState } from 'react';
 import Recaptcha from 'react-google-recaptcha';
-import { object, string, ValidationError } from 'yup';
-import { FORM_SUBJECTS, FORM_TYPES, FormType } from '../../config/contact-form';
+import { validate } from 'superstruct';
+import { FORM_TYPES, FormType } from '../../config/contact-form';
 import { useSiteMetadata } from '../../hooks';
 import Input from '../ui/Input';
 import Text from '../ui/Text';
 import Field from './Field';
+import InlineField from './InlineField';
 
 interface FormData {
-  name: string;
-  email: string;
-  address: string;
-  subject: string;
-  body: string;
-  attachment: string;
-
   [key: string]: string;
 }
 
-const schema = object<FormData>().shape({
-  name: string().required(),
-  email: string()
-    .email()
-    .required(),
-  address: string().matches(/^(?:(?:0x[a-fA-F0-9]{40})|(?:.*\.eth))?$/),
-  subject: string().required(),
-  body: string().required(),
-  attachment: string()
-});
-
 const ContactForm: FunctionComponent = () => {
   const [type, setType] = useState<FormType>(FormType.GENERAL_INQUIRIES);
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    address: '',
-    subject: FORM_SUBJECTS[0],
-    body: '',
-    attachment: ''
-  });
+  const [formData, setFormData] = useState<FormData>({});
   const [errors, setErrors] = useState<string[]>([]);
   const [isVerified, setVerified] = useState<boolean>(false);
   const { recaptchaSitekey } = useSiteMetadata();
@@ -72,19 +48,19 @@ const ContactForm: FunctionComponent = () => {
     event.preventDefault();
 
     const form = event.currentTarget;
-
     if (!isVerified) {
-      setErrors([...errors, 'captcha']);
+      setErrors(currentErrors => [...currentErrors, 'captcha']);
     }
 
-    schema
-      .validate(formData, { abortEarly: false })
-      .then(() => {
-        form.submit();
-      })
-      .catch((error: ValidationError) => {
-        setErrors([...errors, ...error.inner.map(innerError => innerError.path)]);
-      });
+    const schema = FORM_TYPES[type].schema;
+    const [error] = validate(formData, schema);
+
+    if (error) {
+      setErrors(currentErrors => [...currentErrors, ...(error.path as string[])]);
+      return;
+    }
+
+    form.submit();
   };
 
   const Component = FORM_TYPES[type].component;
@@ -96,19 +72,27 @@ const ContactForm: FunctionComponent = () => {
       acceptCharset="utf-8"
       action="https://webhook.frontapp.com/forms/myetherwallet/tMA_4BxSeE05bwxsN62-Ue5xP4jz_W7LGlgKNgGTKEchjFw7-6M8q-9q9ZqxsSYDl2BXv7Gx17Vqev1Km0akl8qVZtPM5LYl"
       onSubmit={handleSubmit}>
-      <Field label="Your name" hasError={errors.includes('name')}>
-        <Input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="e.g. Taylor" />
-      </Field>
+      <InlineField>
+        <Field label="Your name" hasError={errors.includes('name')}>
+          <Input
+            type="text"
+            name="name"
+            value={formData.name || ''}
+            onChange={handleChange}
+            placeholder="e.g. Taylor"
+          />
+        </Field>
 
-      <Field label="Your email" hasError={errors.includes('email')}>
-        <Input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="e.g. support@mycrypto.com"
-        />
-      </Field>
+        <Field label="Your email" hasError={errors.includes('email')}>
+          <Input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="e.g. support@mycrypto.com"
+          />
+        </Field>
+      </InlineField>
 
       <Field label="Type" hasError={errors.includes('subject')}>
         <Input as="select" name="type" value={type} onChange={handleChangeType}>

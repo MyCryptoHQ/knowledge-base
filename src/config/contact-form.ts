@@ -1,5 +1,12 @@
-import FeedbackForm from '../components/ContactForm/FeedbackForm';
-import GeneralForm from '../components/ContactForm/GeneralForm';
+import { intersection, object, pattern, string } from 'superstruct';
+import FeedbackForm, { FeedbackObject } from '../components/ContactForm/FeedbackForm';
+import GeneralForm, { GeneralObject } from '../components/ContactForm/GeneralForm';
+import IssuesForm, { IssuesObject } from '../components/ContactForm/IssuesForm';
+
+const FormObject = object({
+  name: string(),
+  email: pattern(string(), /^\S+@\S+$/)
+});
 
 export enum FormType {
   GENERAL_INQUIRIES = 0,
@@ -10,35 +17,17 @@ export enum FormType {
 export const FORM_TYPES = {
   [FormType.GENERAL_INQUIRIES]: {
     name: 'General Inquiries',
-    component: GeneralForm
+    component: GeneralForm,
+    schema: intersection([FormObject, GeneralObject])
   },
   [FormType.ISSUES]: {
     name: 'Issues with MyCrypto or the blockchain',
-    component: GeneralForm
+    component: IssuesForm,
+    schema: intersection([FormObject, IssuesObject])
   },
   [FormType.FEEDBACK]: {
     name: 'Feedback about MyCrypto',
-    component: FeedbackForm
+    component: FeedbackForm,
+    schema: intersection([FormObject, FeedbackObject])
   }
 };
-
-export const FORM_SUBJECTS = [
-  'Accessing wallet',
-  'Adding tokens',
-  'Coinbase buy widget',
-  'ENS',
-  'Exchanging / exchanges',
-  'Getting started',
-  'Keystore file',
-  'Ledger or TREZOR',
-  'Lost ETH / phishing / scam',
-  'Lost password',
-  'Lost private key',
-  'MetaMask',
-  'Nodes / networks',
-  'Private key',
-  'Sending transactions',
-  'Sending tokens',
-  'Swap',
-  'Other'
-];

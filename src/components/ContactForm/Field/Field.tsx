@@ -7,7 +7,7 @@ interface Props {
   hasError?: boolean;
 }
 
-const StyledField = styled(Text).attrs({ as: 'label' })`
+export const StyledField = styled(Text).attrs({ as: 'label' })`
   display: block;
   margin-bottom: 2rem;
 

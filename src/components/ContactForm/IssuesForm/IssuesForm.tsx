@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FunctionComponent } from 'react';
-import { object, optional, string } from 'superstruct';
+import { object, optional, pattern, string } from 'superstruct';
 import Input from '../../ui/Input';
 import Text from '../../ui/Text';
 import Field from '../Field';
@@ -11,22 +11,33 @@ interface Props {
   onChange(event: ChangeEvent<HTMLInputElement>): void;
 }
 
-export const GeneralObject = object({
+export const IssuesObject = object({
+  address: optional(pattern(string(), /^(?:(?:0x[a-fA-F0-9]{40})|(?:.*\.eth))?$/)),
   subject: optional(string()),
   body: string(),
   attachment: optional(string())
 });
 
-const GeneralForm: FunctionComponent<Props> = ({ values, errors, onChange: handleChange }) => {
+const IssuesForm: FunctionComponent<Props> = ({ values, errors, onChange: handleChange }) => {
   return (
     <>
+      <Field label="Your Ethereum address (optional)" hasError={errors.includes('address')}>
+        <Input
+          type="text"
+          name="address"
+          value={values.address}
+          onChange={handleChange}
+          placeholder="e.g. 0x4bbeEB066eD09B7AEd07bF39EEe0460DFa261520"
+        />
+      </Field>
+
       <Field label="Subject (optional)" hasError={errors.includes('subject')}>
         <Input
           type="text"
           name="subject"
           value={values.subject}
           onChange={handleChange}
-          placeholder="e.g. Question about MyCrypto Membership"
+          placeholder="e.g. Unable to send a transaction"
         />
       </Field>
 
@@ -64,4 +75,4 @@ const GeneralForm: FunctionComponent<Props> = ({ values, errors, onChange: handl
   );
 };
 
-export default GeneralForm;
+export default IssuesForm;
