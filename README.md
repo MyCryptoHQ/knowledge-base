@@ -24,7 +24,7 @@ To build a static version of the Knowledge Base for production, run the followin
 yarn run build
 ```
 
-The Knowledge Base is automatically deployed by Travis when tagged.
+The Knowledge Base is automatically deployed by [GitHub Actions](https://github.com/MyCryptoHQ/knowledge-base/blob/master/.github/workflows/deployment.yml) when tagged.
 
 ## License
 
