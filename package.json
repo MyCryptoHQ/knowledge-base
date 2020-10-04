@@ -10,7 +10,6 @@
     "@ethersproject/bignumber": "^5.0.8",
     "@mycrypto/ui": "^0.24.1",
     "bignumber.js": "^9.0.1",
-    "fuse.js": "^3.4.6",
     "polished": "^4.0.1",
     "react": "^16.14.0",
     "react-copy-to-clipboard": "^5.0.2",
