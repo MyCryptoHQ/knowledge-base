@@ -15,6 +15,7 @@ import { POPULAR_ARTICLES } from '../src/config/articles';
 import { Breadcrumb } from '../src/types/breadcrumb';
 import { YamlNode } from '../src/types/category';
 import { MdxNode } from '../src/types/page';
+import { encodeTag } from '../src/utils/tags';
 
 const REDIRECTS_FILE = resolve(__dirname, '../content/redirects.yml');
 
@@ -51,9 +52,6 @@ const gatsbyNode: GatsbyNode = {
 
       type MdxFrontmatter {
         title: String! @titleCase
-        tags: [String]
-        datePublished: Date
-        dateModified: Date
       }
 
       type Yaml implements Node {
@@ -160,20 +158,6 @@ const gatsbyNode: GatsbyNode = {
               nodes,
               nodeModel
             );
-          }
-        }
-      },
-
-      MdxFrontmatter: {
-        datePublished: {
-          resolve(node: Node): string {
-            return node.date_published as string;
-          }
-        },
-
-        dateModified: {
-          resolve(node: Node): string {
-            return node.date_modified as string;
           }
         }
       },
@@ -347,10 +331,6 @@ const gatsbyNode: GatsbyNode = {
         }>;
       };
     }
-
-    const encodeTag = (tag: string): string => {
-      return tag.toLowerCase().replace(/\s/g, '-');
-    };
 
     const createTags = async () => {
       const result = await graphql<TagsQueryData>(`

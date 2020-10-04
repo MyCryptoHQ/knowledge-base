@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { formatDate } from '../../utils/date';
 import Heading from '../ui/Heading';
 import Text from '../ui/Text';
 import Tags from './Tags';
@@ -35,7 +34,7 @@ const PageHeader: FunctionComponent<Props> = ({ title, tags, dateModified }) => 
   <PageHeaderContainer>
     <PageHeading as="h1">{title}</PageHeading>
     <PageMetaDataContainer>
-      <PageMetaData small={true}>Last updated: {formatDate(dateModified)}</PageMetaData>
+      <PageMetaData small={true}>Last updated: {dateModified}</PageMetaData>
       <Tags tags={tags} />
     </PageMetaDataContainer>
   </PageHeaderContainer>

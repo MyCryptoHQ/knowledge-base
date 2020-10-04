@@ -60,7 +60,7 @@ export const query = graphql`
       frontmatter {
         title
         tags
-        dateModified
+        dateModified: date_modified(formatString: "MMMM Do, YYYY")
       }
       breadcrumbs {
         title
