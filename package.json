@@ -10,7 +10,6 @@
     "@ethersproject/bignumber": "^5.0.1",
     "@mycrypto/ui": "^0.21.1",
     "bignumber.js": "^9.0.0",
-    "date-fns": "^2.13.0",
     "fuse.js": "^3.4.6",
     "js-yaml": "^3.13.1",
     "minimatch": "^3.0.4",
