@@ -9,10 +9,7 @@ const isNumeric = (value: string): boolean => {
 };
 
 const toPrecision = (value: BigNumber, multiplier: BigNumber): string => {
-  return value
-    .dividedBy(multiplier)
-    .precision(20)
-    .toString(10);
+  return value.dividedBy(multiplier).precision(20).toString(10);
 };
 
 interface Props {

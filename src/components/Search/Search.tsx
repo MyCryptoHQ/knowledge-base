@@ -46,7 +46,7 @@ const SearchInput = styled(Input as AnyStyledComponent)`
 `;
 
 const Search: FunctionComponent<Props> = ({ compact, maxWidth }) => {
-  const searchText = useSelector(state => state.navigation.searchText);
+  const searchText = useSelector((state) => state.navigation.searchText);
   const dispatch = useDispatch();
 
   const handleSearch = () => {

@@ -50,7 +50,7 @@ const ItemContent = styled.div<ContainerProps>`
 const AccordionItem: FunctionComponent<Props> = ({ title, children }) => {
   const [extended, setExtended] = useState<boolean>(false);
 
-  const handeToggle = () => setExtended(state => !state);
+  const handeToggle = () => setExtended((state) => !state);
 
   return (
     <Container extended={extended}>

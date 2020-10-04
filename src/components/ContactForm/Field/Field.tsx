@@ -7,7 +7,12 @@ interface Props {
   hasError?: boolean;
 }
 
-export const StyledField = styled(Text).attrs({ as: 'label' })`
+interface FieldProps {
+  hasError: boolean;
+  as: string;
+}
+
+export const StyledField = styled(Text)<FieldProps>`
   display: block;
   margin-bottom: 2rem;
 
@@ -28,7 +33,7 @@ const LabelTitle = styled.div`
 `;
 
 const Field: FunctionComponent<Props> = ({ label, hasError, children }) => (
-  <StyledField hasError={hasError}>
+  <StyledField as="label" hasError={hasError ?? false}>
     <LabelTitle>{label}</LabelTitle>
     {children}
   </StyledField>

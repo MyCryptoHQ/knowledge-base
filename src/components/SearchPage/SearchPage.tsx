@@ -34,7 +34,7 @@ interface Props {
 const _paq: Array<Array<string | boolean | number>> = (typeof window !== 'undefined' && (window as any)._paq) || [];
 
 const SearchPage: FunctionComponent<Props> = ({ allPages }) => {
-  const searchQuery = useSelector(state => state.navigation.searchQuery);
+  const searchQuery = useSelector((state) => state.navigation.searchQuery);
   const [results, setResults] = useState<Mdx[]>([]);
 
   useMemo(() => {
@@ -55,7 +55,7 @@ const SearchPage: FunctionComponent<Props> = ({ allPages }) => {
         {results.length > 0 ? (
           <>
             <Heading as="h2">Results for "{searchQuery}"</Heading>
-            {results.map(page => (
+            {results.map((page) => (
               <PageItem key={page.slug} page={page} showReadMore={true} />
             ))}
           </>

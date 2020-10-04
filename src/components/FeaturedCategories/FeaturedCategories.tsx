@@ -39,19 +39,19 @@ const FeaturedCategories: FunctionComponent = () => {
     `
   );
 
-  const featuredCategories = FEATURED_CATEGORIES.map(category => {
-    const categoryData = allYaml.nodes.find(item => item.slug === category.slug);
+  const featuredCategories = FEATURED_CATEGORIES.map((category) => {
+    const categoryData = allYaml.nodes.find((item) => item.slug === category.slug);
 
     return {
       ...category,
       data: categoryData
     };
-  }).filter(category => category.data !== undefined);
+  }).filter((category) => category.data !== undefined);
 
   return (
     <StyledFeaturedCategories>
       <OnboardingHeading as="h2">Onboarding</OnboardingHeading>
-      {featuredCategories.map(category => (
+      {featuredCategories.map((category) => (
         <FeaturedCategory key={category.slug} category={category.data!} image={category.image} />
       ))}
     </StyledFeaturedCategories>

@@ -26,7 +26,7 @@ interface Props {
 const TagOverview: FunctionComponent<Props> = ({ tagName, pages }) => (
   <TagWrapper>
     <OverviewHeading as="h2">Tag: {tagName}</OverviewHeading>
-    {pages.map(page => (
+    {pages.map((page) => (
       <PageItem key={page.slug} page={page} showReadMore={true} />
     ))}
   </TagWrapper>

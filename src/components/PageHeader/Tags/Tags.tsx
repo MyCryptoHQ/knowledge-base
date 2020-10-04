@@ -34,7 +34,7 @@ const TagItem = styled.li`
 
 const Tags: FunctionComponent<Props> = ({ tags }) => (
   <TagsContainer>
-    {tags.map(tag => (
+    {tags.map((tag) => (
       <TagItem key={tag}>
         <Tag to={`/tag/${encodeTag(tag)}`}>{tag}</Tag>
       </TagItem>

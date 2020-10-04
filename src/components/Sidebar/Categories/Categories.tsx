@@ -33,20 +33,20 @@ const Categories: FunctionComponent = () => {
     `
   );
 
-  const categories = FEATURED_CATEGORIES.map(category => {
-    const categoryData = allYaml.nodes.find(item => item.slug === category.slug);
+  const categories = FEATURED_CATEGORIES.map((category) => {
+    const categoryData = allYaml.nodes.find((item) => item.slug === category.slug);
 
     return {
       ...category,
       data: categoryData
     };
-  }).filter(category => category.data !== undefined);
+  }).filter((category) => category.data !== undefined);
 
   return (
     <CategoriesWrapper>
       <Heading as="h3">Onboarding</Heading>
       <List>
-        {categories.map(category => (
+        {categories.map((category) => (
           <ListItem key={category.slug}>
             <Link to={`/${category.slug}`}>{category.data!.title}</Link>
           </ListItem>

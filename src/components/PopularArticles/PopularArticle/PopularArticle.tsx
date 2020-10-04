@@ -33,7 +33,7 @@ interface Props {
 }
 
 const PopularArticle: FunctionComponent<Props> = ({ articles, slug }) => {
-  const article = articles.find(article => article.slug === slug);
+  const article = articles.find((article) => article.slug === slug);
   if (article) {
     return (
       <ArticleWrapper key={slug}>
