@@ -1,7 +1,8 @@
+import { useLocation } from '@reach/router';
 import { navigate } from 'gatsby';
+import { parse } from 'query-string';
 import { FunctionComponent, useEffect } from 'react';
-import { useSelector } from '../../hooks';
-import { useElasticSearch } from '../../hooks/useElasticSearch';
+import { useElasticSearch } from '../../hooks';
 import { PageResult, SearchResult } from '../../types/page';
 import PageItem from '../PageItem';
 import Heading from '../ui/Heading';
@@ -19,14 +20,20 @@ const getPageResult = (result: SearchResult): PageResult => ({
 });
 
 const SearchPage: FunctionComponent = () => {
-  const searchQuery = useSelector(state => state.navigation.searchQuery);
-  const { loading, results } = useElasticSearch(searchQuery);
+  const location = useLocation();
+  const { search, loading, results } = useElasticSearch();
+
+  const searchQuery = parse(location.search).query as string;
+
+  useEffect(() => {
+    search(searchQuery);
+  }, [searchQuery]);
 
   useEffect(() => {
     if (!loading) {
       _paq.push(['trackSiteSearch', searchQuery, false, results.length]);
     }
-  }, [loading, searchQuery]);
+  }, [loading]);
 
   if (loading) {
     return <p>Loading</p>;

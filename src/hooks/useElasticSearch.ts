@@ -15,14 +15,17 @@ interface SearchResponse {
   };
 }
 
+type SearchFunction = (query: string) => void;
+
 /**
  * A hook to use ElasticSearch to query for articles.
  *
  * @param {string} query
  * @return {{ loading: boolean, results: SearchResult[] }}
  */
-export const useElasticSearch = (query: string): { loading: boolean; results: SearchResult[] } => {
-  const [loading, setLoading] = useState<boolean>(false);
+export const useElasticSearch = (): { search: SearchFunction; loading: boolean; results: SearchResult[] } => {
+  const [query, setQuery] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
   const [results, setResults] = useState<SearchResult[]>([]);
 
   useMemo(() => {
@@ -53,6 +56,7 @@ export const useElasticSearch = (query: string): { loading: boolean; results: Se
   }, [query]);
 
   return {
+    search: setQuery,
     loading,
     results
   };
