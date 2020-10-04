@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-unfetch';
 import { useMemo, useState } from 'react';
 import { ELASTIC_ENDPOINT, ELASTIC_INDEX } from '../config/search';
 import { SearchResult } from '../types/page';
