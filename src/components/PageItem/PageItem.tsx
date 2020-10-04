@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { Mdx } from '../../types/page';
+import { PageResult } from '../../types/page';
 import Link from '../Link';
 import Heading from '../ui/Heading';
 import Text from '../ui/Text';
@@ -8,7 +8,7 @@ import Text from '../ui/Text';
 interface Props {
   titleOnly?: boolean;
   showReadMore?: boolean;
-  page: Mdx;
+  page: PageResult;
 }
 
 const PageItemWrapper = styled.div<{ showReadMore: boolean }>`

@@ -140,7 +140,7 @@ includePlugins([
             nodes {
               slug
               rawBody
-              excerpt
+              excerpt (pruneLength: 500)
               frontmatter {
                 title
               }

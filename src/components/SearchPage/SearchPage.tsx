@@ -1,23 +1,36 @@
 import { navigate } from 'gatsby';
-import { FunctionComponent, useMemo, useState } from 'react';
+import { FunctionComponent, useEffect } from 'react';
 import { useSelector } from '../../hooks';
-import { Mdx } from '../../types/page';
+import { useElasticSearch } from '../../hooks/useElasticSearch';
+import { PageResult, SearchResult } from '../../types/page';
 import PageItem from '../PageItem';
 import Heading from '../ui/Heading';
+import Text from '../ui/Text';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// const _paq: Array<Array<string | boolean | number>> = (typeof window !== 'undefined' && (window as any)._paq) || [];
+const _paq: Array<Array<string | boolean | number>> = (typeof window !== 'undefined' && (window as any)._paq) || [];
+
+const getPageResult = (result: SearchResult): PageResult => ({
+  slug: result.slug,
+  excerpt: result.excerpt,
+  frontmatter: {
+    title: result.title
+  }
+});
 
 const SearchPage: FunctionComponent = () => {
   const searchQuery = useSelector(state => state.navigation.searchQuery);
-  const [results, setResults] = useState<Mdx[]>([]);
+  const { loading, results } = useElasticSearch(searchQuery);
 
-  // TODO
-  useMemo(() => {
-    // _paq.push(['trackSiteSearch', searchQuery, false, searchResults.length]);
+  useEffect(() => {
+    if (!loading) {
+      _paq.push(['trackSiteSearch', searchQuery, false, results.length]);
+    }
+  }, [loading, searchQuery]);
 
-    setResults([]);
-  }, [searchQuery]);
+  if (loading) {
+    return <p>Loading</p>;
+  }
 
   if (searchQuery) {
     return (
@@ -25,12 +38,15 @@ const SearchPage: FunctionComponent = () => {
         {results.length > 0 ? (
           <>
             <Heading as="h2">Results for "{searchQuery}"</Heading>
-            {results.map((page) => (
+            {results.map(getPageResult).map(page => (
               <PageItem key={page.slug} page={page} showReadMore={true} />
             ))}
           </>
         ) : (
-          <Heading as="h2">Sorry, there are no results for "{searchQuery}"</Heading>
+          <>
+            <Heading as="h2">Sorry, there are no results for "{searchQuery}"</Heading>
+            <Text>Please try another search query.</Text>
+          </>
         )}
       </>
     );
