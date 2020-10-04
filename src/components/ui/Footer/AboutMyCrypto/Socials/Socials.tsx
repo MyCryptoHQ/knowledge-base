@@ -32,6 +32,10 @@ const SOCIAL_MEDIA_LINKS: Array<{ url: string; icon: keyof typeof icons }> = [
   {
     url: 'https://discord.gg/VSaTXEA',
     icon: 'discord'
+  },
+  {
+    url: 'https://t.me/mycryptohq',
+    icon: 'telegram'
   }
 ];
 

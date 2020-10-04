@@ -8,6 +8,7 @@ import github from '../../../assets/images/icons/social/github.svg';
 import linkedin from '../../../assets/images/icons/social/linkedin.svg';
 import medium from '../../../assets/images/icons/social/medium.svg';
 import reddit from '../../../assets/images/icons/social/reddit.svg';
+import telegram from '../../../assets/images/icons/social/telegram.svg';
 import twitter from '../../../assets/images/icons/social/twitter.svg';
 
 export const icons = {
@@ -18,6 +19,7 @@ export const icons = {
   medium,
   reddit,
   twitter,
+  telegram,
   minus,
   plus
 };
