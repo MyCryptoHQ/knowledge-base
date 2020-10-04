@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { GatsbyConfig } from 'gatsby';
+import { includePlugins } from 'gatsby-plugin-ts-config';
 import capitalize from './plugins/capitalize';
 
 const ENABLE_BUNDLE_ANALYZER = process.env.ANALYZE_BUNDLE ?? false;
@@ -13,7 +14,6 @@ const config: GatsbyConfig = {
     baseUrl: 'https://support.mycrypto.com',
     recaptchaSitekey: '6LcOl00UAAAAACVjGdVFkw918ohOhPIL0PHDtdGM'
   },
-  // Used for deployment to gh-pages
   pathPrefix: '/',
   plugins: [
     'gatsby-plugin-typescript',
@@ -126,5 +126,45 @@ const config: GatsbyConfig = {
     }
   ]
 };
+
+// TODO: Move plugin to separate package
+includePlugins([
+  {
+    resolve: resolve(__dirname, './plugins/gatsby-plugin-aws-elasticsearch'),
+    options: {
+      enabled: !!process.env.ELASTIC_AWS_SYNC,
+
+      query: `
+        query {
+          allMdx {
+            nodes {
+              slug
+              rawBody
+              excerpt
+              frontmatter {
+                title
+              }
+            }
+          }
+        }
+      `,
+
+      selector: (data: { allMdx: { nodes: unknown[] } }) => data.allMdx.nodes,
+      toDocument: (node: Record<string, unknown>) => ({
+        id: (node.slug as string).replace(/\//g, '-'),
+        slug: node.slug,
+        title: (node.frontmatter as Record<string, string>).title,
+        content: node.rawBody,
+        excerpt: node.excerpt
+      }),
+
+      endpoint: process.env.ELASTIC_AWS_ENDPOINT,
+      index: 'articles',
+
+      accessKeyId: process.env.ELASTIC_AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.ELASTIC_AWS_SECRET_ACCESS_KEY
+    }
+  }
+]);
 
 export default config;
