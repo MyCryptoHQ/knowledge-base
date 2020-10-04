@@ -31,13 +31,13 @@ const ContactForm: FunctionComponent = () => {
     });
 
     if (errors.includes(event.target.name)) {
-      setErrors(errors.filter(error => error !== event.target.name));
+      setErrors(errors.filter((error) => error !== event.target.name));
     }
   };
 
   const handleVerify = () => {
     setVerified(true);
-    setErrors(errors.filter(error => error !== 'captcha'));
+    setErrors(errors.filter((error) => error !== 'captcha'));
   };
 
   const handleExpired = () => {
@@ -52,12 +52,12 @@ const ContactForm: FunctionComponent = () => {
 
     const [error] = validate(formData, schema);
     if (error) {
-      setErrors(currentErrors => [...currentErrors, ...(error.path as string[])]);
+      setErrors((currentErrors) => [...currentErrors, ...(error.path as string[])]);
       return;
     }
 
     if (!isVerified) {
-      setErrors(currentErrors => [...currentErrors, 'captcha']);
+      setErrors((currentErrors) => [...currentErrors, 'captcha']);
       return;
     }
 

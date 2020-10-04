@@ -97,7 +97,7 @@ const gatsbyNode: GatsbyNode = {
         return breadcrumbs;
       }
 
-      const parent = nodes.find(node => getCategorySlug(node, nodeModel) === parentSlug);
+      const parent = nodes.find((node) => getCategorySlug(node, nodeModel) === parentSlug);
       if (parent) {
         const newBreadcrumbs = [
           {
@@ -124,7 +124,7 @@ const gatsbyNode: GatsbyNode = {
             const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent });
 
             const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
-            const category = nodes.find(categoryNode => {
+            const category = nodes.find((categoryNode) => {
               const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
               return parent.relativeDirectory === relativeDirectory;
             })!;
@@ -138,7 +138,7 @@ const gatsbyNode: GatsbyNode = {
             const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent });
 
             const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
-            return nodes.find(categoryNode => {
+            return nodes.find((categoryNode) => {
               const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
               return parent.relativeDirectory === relativeDirectory;
             })!;
@@ -177,7 +177,7 @@ const gatsbyNode: GatsbyNode = {
             }
 
             const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
-            const category = nodes.find(categoryNode => {
+            const category = nodes.find((categoryNode) => {
               const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
               return parent.relativeDirectory === parentDirectory;
             });
@@ -196,7 +196,7 @@ const gatsbyNode: GatsbyNode = {
             }
 
             const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
-            return nodes.find(categoryNode => {
+            return nodes.find((categoryNode) => {
               const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
               return parent.relativeDirectory === parentDirectory;
             });
@@ -213,9 +213,11 @@ const gatsbyNode: GatsbyNode = {
             }
 
             return (node.categories as string[])
-              .map(category => `${slug}/${category}`)
-              .map(categorySlug => {
-                const category = nodes.find(categoryNode => categorySlug === getCategorySlug(categoryNode, nodeModel));
+              .map((category) => `${slug}/${category}`)
+              .map((categorySlug) => {
+                const category = nodes.find(
+                  (categoryNode) => categorySlug === getCategorySlug(categoryNode, nodeModel)
+                );
                 if (!category) {
                   reporter.panic(`Category ${categorySlug} specified, but not found`);
                 }
@@ -235,9 +237,9 @@ const gatsbyNode: GatsbyNode = {
             }
 
             return (node.articles as string[])
-              .map(page => `${slug}/${page}`)
-              .map(pageNode => {
-                const page = nodes.find(categoryNode => pageNode === getPageSlug(categoryNode, nodeModel));
+              .map((page) => `${slug}/${page}`)
+              .map((pageNode) => {
+                const page = nodes.find((categoryNode) => pageNode === getPageSlug(categoryNode, nodeModel));
                 if (!page) {
                   reporter.panic(`Page ${pageNode} specified, but not found`);
                 }
@@ -350,9 +352,9 @@ const gatsbyNode: GatsbyNode = {
         return process.exit(1);
       }
 
-      const tags = new Set(result.data.allMdx.nodes.flatMap(page => page.frontmatter.tags));
+      const tags = new Set(result.data.allMdx.nodes.flatMap((page) => page.frontmatter.tags));
 
-      tags.forEach(tag => {
+      tags.forEach((tag) => {
         createPage({
           path: `/tag/${encodeTag(tag)}`,
           component: TAG_TEMPLATE,

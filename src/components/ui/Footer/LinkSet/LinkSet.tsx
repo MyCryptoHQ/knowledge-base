@@ -112,7 +112,7 @@ const LinkSet: FunctionComponent = () => (
     {LINK_COLUMNS.map((column, index) => (
       <Column key={`column-${index}`}>
         <Heading as="h2">{column.heading}</Heading>
-        {column.links.map(link => (
+        {column.links.map((link) => (
           <Link key={link.url} to={link.url} external={true}>
             {link.title}
           </Link>

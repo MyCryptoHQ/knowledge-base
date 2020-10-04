@@ -32,13 +32,13 @@ const CategoryOverview: FunctionComponent<Props> = ({ category }) => (
     <OverviewHeading as="h2">{category.title}</OverviewHeading>
     {category.categories && category.categories.length > 0 && (
       <SubCategories>
-        {category.categories.map(subCategory => (
+        {category.categories.map((subCategory) => (
           <CategoryItem key={subCategory.slug} category={subCategory} />
         ))}
       </SubCategories>
     )}
 
-    {category.pages && category.pages.map(page => <PageItem key={page.slug} page={page} showReadMore={true} />)}
+    {category.pages && category.pages.map((page) => <PageItem key={page.slug} page={page} showReadMore={true} />)}
   </CategoryWrapper>
 );
 

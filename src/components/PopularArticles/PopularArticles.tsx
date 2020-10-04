@@ -24,7 +24,7 @@ interface Props {
 const PopularArticles: FunctionComponent<Props> = ({ articles }) => (
   <CategoriesSection>
     <PaddedHeading as="h2">Popular Articles</PaddedHeading>
-    {POPULAR_ARTICLES.map(slug => (
+    {POPULAR_ARTICLES.map((slug) => (
       <PopularArticle key={slug} articles={articles} slug={slug} />
     ))}
   </CategoriesSection>

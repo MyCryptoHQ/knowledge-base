@@ -17,7 +17,7 @@ const PopularArticles: FunctionComponent<Props> = ({ articles }) => (
   <PopularArticlesWrapper>
     <Heading as="h3">Popular Articles</Heading>
     <List>
-      {POPULAR_ARTICLES.map(slug => (
+      {POPULAR_ARTICLES.map((slug) => (
         <ListItem key={slug}>
           <PopularArticle articles={articles} slug={slug} />
         </ListItem>

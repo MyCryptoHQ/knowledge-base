@@ -78,7 +78,7 @@ const LeftDesktopButtons = styled(DesktopButtons)`
 `;
 
 const Header: FunctionComponent<Props> = ({ left, right, navigation }) => {
-  const isDrawerOpen = useSelector(state => state.navigation.isDrawerOpen);
+  const isDrawerOpen = useSelector((state) => state.navigation.isDrawerOpen);
   const dispatch = useDispatch();
 
   const handleToggle = () => {

@@ -43,13 +43,13 @@ const Layout: FunctionComponent = ({ children }) => {
       <MetaData />
 
       <Header
-        left={LEFT_HEADER_ITEMS.map(item => (
+        left={LEFT_HEADER_ITEMS.map((item) => (
           <Link key={`navigation-${item.to}`} to={item.to} external={item.external} newTab={true}>
             {item.title}
           </Link>
         ))}
         right={right}
-        navigation={NAVIGATION_ITEMS.map(item => (
+        navigation={NAVIGATION_ITEMS.map((item) => (
           <Link key={`navigation-${item.to}`} to={item.to}>
             {item.title}
           </Link>
