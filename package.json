@@ -47,7 +47,7 @@
     "gatsby": "^2.24.67",
     "gatsby-plugin-canonical-urls": "^2.3.12",
     "gatsby-plugin-catch-links": "^2.3.14",
-    "gatsby-plugin-favicons": "^1.0.4",
+    "gatsby-plugin-favicons": "^2.0.0",
     "gatsby-plugin-git-clone": "^0.1.0",
     "gatsby-plugin-matomo": "^0.8.3",
     "gatsby-plugin-mdx": "^1.2.43",
@@ -74,6 +74,7 @@
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3",
     "unist-util-visit": "^2.0.3",
+    "webpack": "^4.44.2",
     "yaml": "^1.10.0"
   },
   "scripts": {
