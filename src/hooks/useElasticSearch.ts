@@ -49,8 +49,8 @@ export const useElasticSearch = (): { search: SearchFunction; loading: boolean; 
         }
       })
     })
-      .then(response => response.json())
-      .then((json: SearchResponse) => setResults(json.hits.hits.map(hit => hit._source)))
+      .then((response) => response.json())
+      .then((json: SearchResponse) => setResults(json.hits.hits.map((hit) => hit._source)))
       .catch(() => setResults([]))
       .finally(() => setLoading(false));
   }, [query]);

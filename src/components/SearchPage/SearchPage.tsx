@@ -45,7 +45,7 @@ const SearchPage: FunctionComponent = () => {
         {results.length > 0 ? (
           <>
             <Heading as="h2">Results for "{searchQuery}"</Heading>
-            {results.map(getPageResult).map(page => (
+            {results.map(getPageResult).map((page) => (
               <PageItem key={page.slug} page={page} showReadMore={true} />
             ))}
           </>
