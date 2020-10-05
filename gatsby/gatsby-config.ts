@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { GatsbyConfig } from 'gatsby';
+import removeMarkdown from 'remove-markdown';
 import capitalize from './plugins/capitalize';
 
 const ENABLE_BUNDLE_ANALYZER = process.env.ANALYZE_BUNDLE ?? false;
@@ -147,7 +148,7 @@ const config: GatsbyConfig = {
           id: (node.slug as string).replace(/\//g, '-'),
           slug: node.slug,
           title: (node.frontmatter as Record<string, string>).title,
-          content: node.rawBody,
+          content: removeMarkdown(node.rawBody as string),
           excerpt: node.excerpt
         }),
 
