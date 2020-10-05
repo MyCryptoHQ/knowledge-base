@@ -60,6 +60,7 @@
     "gatsby-plugin-canonical-urls": "^2.3.12",
     "gatsby-plugin-catch-links": "^2.3.14",
     "gatsby-plugin-favicons": "^2.0.0",
+    "gatsby-plugin-aws-elasticsearch": "^0.1.0",
     "gatsby-plugin-git-clone": "^0.1.0",
     "gatsby-plugin-matomo": "^0.8.3",
     "gatsby-plugin-mdx": "^1.2.43",
