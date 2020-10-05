@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 import { useMemo, useState } from 'react';
-import { ELASTIC_ENDPOINT, ELASTIC_INDEX } from '../config/search';
+import { ELASTIC_ENDPOINT } from '../config/search';
 import { SearchResult } from '../types/page';
 
 interface SearchResponse {
@@ -32,21 +32,13 @@ export const useElasticSearch = (): { search: SearchFunction; loading: boolean; 
     setLoading(true);
 
     // ElasticSearch supports GET requests for search, but the JS fetch API doesn't support bodies on GET requests
-    fetch(`${ELASTIC_ENDPOINT}/${ELASTIC_INDEX}/_search`, {
+    fetch(ELASTIC_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        _source: ['slug', 'title', 'excerpt'],
-        min_score: 2,
-        query: {
-          multi_match: {
-            query,
-            fields: ['title', 'content'],
-            fuzziness: 'AUTO'
-          }
-        }
+        query
       })
     })
       .then((response) => response.json())
