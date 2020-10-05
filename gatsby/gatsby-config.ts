@@ -86,13 +86,8 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-plugin-favicons',
       options: {
         logo: resolve(__dirname, '../src/assets/images/logo.svg'),
-        title: 'MyCrypto Knowledge Base',
-        background: '#1d334f',
-        icons: {
-          appleStartup: {
-            offset: 20
-          }
-        }
+        appName: 'MyCrypto Knowledge Base',
+        background: '#1d334f'
       }
     },
     {
