@@ -20,15 +20,23 @@ type SearchFunction = (query: string) => void;
 /**
  * A hook to use ElasticSearch to query for articles.
  *
- * @param {string} query
  * @return {{ loading: boolean, results: SearchResult[] }}
  */
-export const useElasticSearch = (): { search: SearchFunction; loading: boolean; results: SearchResult[] } => {
+export const useElasticSearch = (): {
+  search: SearchFunction;
+  loading: boolean;
+  results: SearchResult[] | undefined;
+} => {
   const [query, setQuery] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
-  const [results, setResults] = useState<SearchResult[]>([]);
+  const [results, setResults] = useState<SearchResult[] | undefined>();
 
   useMemo(() => {
+    if (!query) {
+      return;
+    }
+
+    setResults(undefined);
     setLoading(true);
 
     // ElasticSearch supports GET requests for search, but the JS fetch API doesn't support bodies on GET requests

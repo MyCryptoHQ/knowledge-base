@@ -50,9 +50,11 @@ const Search: FunctionComponent<Props> = ({ compact, maxWidth }) => {
   const dispatch = useDispatch();
 
   const handleSearch = () => {
-    const query = searchText;
-    dispatch(search());
-    navigate(`/search/?query=${encodeURI(query)}`);
+    if (searchText) {
+      const query = searchText;
+      dispatch(search());
+      navigate(`/search/?query=${encodeURI(query)}`);
+    }
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

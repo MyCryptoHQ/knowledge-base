@@ -30,13 +30,18 @@ const SearchPage: FunctionComponent = () => {
   }, [searchQuery]);
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && results) {
       _paq.push(['trackSiteSearch', searchQuery, false, results.length]);
     }
-  }, [loading]);
+  }, [loading, results]);
 
-  if (loading) {
-    return <p>Loading</p>;
+  if (loading || !results) {
+    return (
+      <>
+        <Heading as="h2">Results for "{searchQuery}"</Heading>
+        <Text>Loading...</Text>
+      </>
+    );
   }
 
   if (searchQuery) {
