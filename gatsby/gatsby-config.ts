@@ -159,7 +159,8 @@ const config: GatsbyConfig = {
             type: 'keyword'
           },
           title: {
-            type: 'text'
+            type: 'text',
+            boost: 2
           },
           tags: {
             type: 'text'

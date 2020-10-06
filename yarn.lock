@@ -9278,10 +9278,10 @@ gatsby-page-utils@^0.2.28:
     lodash "^4.17.20"
     micromatch "^4.0.2"
 
-gatsby-plugin-aws-elasticsearch@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-aws-elasticsearch/-/gatsby-plugin-aws-elasticsearch-0.2.0.tgz#3e542c8b7540a3457cb3854329d75e5ffe38b7c7"
-  integrity sha512-4YjSoFxh0pf6OMsdjYY3NATB+3Vo1jaZ/NGcFvkPz5YZ9lGaJZnnkVgJX0FyZmMDRbpS7I7TpCcHcF930pDPsg==
+gatsby-plugin-aws-elasticsearch@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-aws-elasticsearch/-/gatsby-plugin-aws-elasticsearch-0.2.1.tgz#c0cf9d7bee7f9fbd66ea48e04ce04b7959e4bc61"
+  integrity sha512-m0niHpzMdriREO8g5/7pigfiQbrhWdYsD5RrXbc3QRCbgawSDNR/ysFOF+4fTSV2KGQSsP3JMKriiBfUUEOEjg==
   dependencies:
     aws4 "^1.10.1"
     node-fetch "^2.6.1"
