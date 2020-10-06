@@ -143,8 +143,8 @@ const config: GatsbyConfig = {
         }
         `,
 
-        selector: (data: { allMdx: { nodes: unknown[] } }) => data.allMdx.nodes,
-        toDocument: (node: Record<string, unknown>) => ({
+        selector: (data: { allMdx: { nodes: unknown[] } }): unknown[] => data.allMdx.nodes,
+        toDocument: (node: Record<string, unknown>): Record<string, unknown> => ({
           id: (node.slug as string).replace(/\//g, '-'),
           slug: node.slug,
           title: (node.frontmatter as Record<string, string>).title,

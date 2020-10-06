@@ -16,7 +16,6 @@ import { Breadcrumb } from '../src/types/breadcrumb';
 import { YamlNode } from '../src/types/category';
 import { MdxNode } from '../src/types/page';
 import { encodeTag } from '../src/utils/tags';
-import { removeMarkdown } from './helpers/markdown';
 
 const REDIRECTS_FILE = resolve(__dirname, '../content/redirects.yml');
 
