@@ -27,7 +27,6 @@ jobs:
         with:
           path: |
             node_modules
-            .cache
           key: ${{ hashFiles('yarn.lock') }}-${{ hashFiles('gatsby/**/*') }}
 
       - name: Install Dependencies
@@ -53,7 +52,6 @@ jobs:
         with:
           path: |
             node_modules
-            .cache
           key: ${{ hashFiles('yarn.lock') }}-${{ hashFiles('gatsby/**/*') }}
 
       - name: Install Dependencies
