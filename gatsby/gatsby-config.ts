@@ -152,6 +152,22 @@ const config: GatsbyConfig = {
           excerpt: node.excerpt
         }),
 
+        mapping: {
+          slug: {
+            type: 'keyword'
+          },
+          title: {
+            type: 'text'
+          },
+          content: {
+            type: 'text'
+          },
+          excerpt: {
+            type: 'text',
+            index: false
+          }
+        },
+
         endpoint: process.env.ELASTIC_AWS_ENDPOINT,
         index: 'articles',
 
