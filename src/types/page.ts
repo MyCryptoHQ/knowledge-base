@@ -43,7 +43,8 @@ export interface PageResult {
   excerpt?: string;
   frontmatter: {
     title: string;
+    tags?: string[];
   };
 }
 
-export type SearchResult = Pick<Mdx, 'slug' | 'excerpt'> & { title: string };
+export type SearchResult = Pick<Mdx, 'slug' | 'excerpt'> & { title: string; tags: string[] };

@@ -129,25 +129,27 @@ const config: GatsbyConfig = {
       options: {
         enabled: !!process.env.ELASTIC_AWS_SYNC,
         query: `
-        query {
-          allMdx {
-            nodes {
-              slug
-              rawBody
-              excerpt (pruneLength: 500)
-              frontmatter {
-                title
+          query {
+            allMdx {
+              nodes {
+                slug
+                rawBody
+                excerpt (pruneLength: 500)
+                frontmatter {
+                  title
+                  tags
+                }
               }
             }
           }
-        }
         `,
 
         selector: (data: { allMdx: { nodes: unknown[] } }): unknown[] => data.allMdx.nodes,
         toDocument: (node: Record<string, unknown>): Record<string, unknown> => ({
           id: (node.slug as string).replace(/\//g, '-'),
           slug: node.slug,
-          title: (node.frontmatter as Record<string, string>).title,
+          title: (node.frontmatter as Record<string, unknown>).title,
+          tags: (node.frontmatter as Record<string, unknown>).tags,
           content: removeMarkdown(node.rawBody as string),
           excerpt: node.excerpt
         }),
@@ -157,6 +159,9 @@ const config: GatsbyConfig = {
             type: 'keyword'
           },
           title: {
+            type: 'text'
+          },
+          tags: {
             type: 'text'
           },
           content: {

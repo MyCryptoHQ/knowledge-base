@@ -15,7 +15,8 @@ const getPageResult = (result: SearchResult): PageResult => ({
   slug: result.slug,
   excerpt: result.excerpt,
   frontmatter: {
-    title: result.title
+    title: result.title,
+    tags: result.tags
   }
 });
 
