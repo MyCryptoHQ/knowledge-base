@@ -29,7 +29,6 @@ jobs:
         with:
           path: |
             node_modules
-            .cache
             ~/.cache/pip
           key: ${{ hashFiles('yarn.lock') }}-${{ hashFiles('gatsby/**/*') }}
 
