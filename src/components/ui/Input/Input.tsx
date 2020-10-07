@@ -64,7 +64,7 @@ const Input: FunctionComponent<Props> = ({ className, icon, as = 'input', ...res
 
   return (
     <InputContainer className={className} onClick={handleClick}>
-      {icon && <Icon src={icon} />}
+      {icon && <Icon alt="Search" src={icon} />}
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       <StyledInput ref={input as any} as={as as 'input' & 'select' & 'textarea' & 'file'} withIcon={!!icon} {...rest} />
     </InputContainer>

@@ -56,7 +56,7 @@ const AccordionItem: FunctionComponent<Props> = ({ title, children }) => {
     <Container extended={extended}>
       <ItemHeading onClick={handeToggle}>
         <Heading as="h2">{title}</Heading>
-        <Icon icon={extended ? 'minus' : 'plus'} />
+        <Icon name={extended ? 'Expand' : 'Contract'} icon={extended ? 'minus' : 'plus'} />
       </ItemHeading>
       <ItemContent extended={extended}>{children}</ItemContent>
     </Container>
