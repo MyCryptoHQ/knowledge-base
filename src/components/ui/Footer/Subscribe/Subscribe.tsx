@@ -29,6 +29,15 @@ const SubscribeButton = styled.button`
 `;
 
 const PrivacyPolicyText = styled(Text)`
+  a {
+    color: inherit;
+    text-decoration: underline;
+
+    :hover {
+      color: inherit;
+    }
+  }
+
   em {
     font-size: 1.12rem !important;
   }
@@ -64,7 +73,7 @@ const Subscribe: FunctionComponent = () => {
       <Heading as="h2">Subscribe to MyCrypto</Heading>
       <Text>Get updates from MyCrypto straight to your inbox!</Text>
       <SubscribeForm onSubmit={handleSubscribe}>
-        <Input type="text" placeholder="Email address" onChange={handleChange} />
+        <Input type="text" placeholder="Email address" onChange={handleChange} aria-label="Email address" />
         <SubscribeButton type="submit">Subscribe</SubscribeButton>
       </SubscribeForm>
       {isSubscribed && <Text>Your email was added to our mailing list!</Text>}

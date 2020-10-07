@@ -76,6 +76,7 @@ const Search: FunctionComponent<Props> = ({ compact, maxWidth }) => {
         value={searchText}
         onChange={handleChange}
         onKeyPress={handleKeyPress}
+        aria-label="Search"
       />
     </SearchContainer>
   );
