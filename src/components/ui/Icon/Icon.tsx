@@ -25,6 +25,7 @@ export const icons = {
 };
 
 interface Props {
+  name: string;
   icon: keyof typeof icons;
 }
 
@@ -33,6 +34,6 @@ export const StyledIcon = styled.img`
   vertical-align: middle;
 `;
 
-const Icon: FunctionComponent<Props> = ({ icon }) => <StyledIcon src={icons[icon]} />;
+const Icon: FunctionComponent<Props> = ({ name, icon }) => <StyledIcon alt={name} src={icons[icon]} />;
 
 export default Icon;
