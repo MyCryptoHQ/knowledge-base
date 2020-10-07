@@ -9,6 +9,6 @@ export const POPULAR_ARTICLES: string[] = [
   'staying-safe/protecting-yourself-and-your-funds',
   'how-to/migrating/moving-from-mycrypto-to-ledger',
   'how-to/migrating/moving-from-mycrypto-to-trezor',
-  'troubleshooting/tokens/adding-new-token-and-sending-custom-tokens',
+  'troubleshooting/tokens/unable-to-see-token-balance',
   'general-knowledge/ethereum-blockchain/a-glossary-of-common-terms-in-the-ethereum-crypto-space'
 ];
