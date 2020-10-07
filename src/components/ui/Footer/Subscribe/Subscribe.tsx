@@ -29,6 +29,15 @@ const SubscribeButton = styled.button`
 `;
 
 const PrivacyPolicyText = styled(Text)`
+  a {
+    color: inherit;
+    text-decoration: underline;
+
+    :hover {
+      color: inherit;
+    }
+  }
+
   em {
     font-size: 1.12rem !important;
   }
