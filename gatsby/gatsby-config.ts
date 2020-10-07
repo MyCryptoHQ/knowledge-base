@@ -96,7 +96,8 @@ const config: GatsbyConfig = {
         siteId: '3',
         matomoUrl: 'https://analytics.mycryptoapi.com',
         siteUrl: 'https://support.mycrypto.com/',
-        disableCookies: true
+        disableCookies: true,
+        localScript: '/vendor/piwik.js'
       }
     },
     {
