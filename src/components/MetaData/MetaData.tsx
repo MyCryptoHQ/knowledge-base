@@ -14,7 +14,7 @@ const MetaData: FunctionComponent<Props> = ({ title, description, keyWords, noIn
   const siteMetadata = useSiteMetadata();
 
   return (
-    <Helmet>
+    <Helmet htmlAttributes={{ lang: 'en-US' }}>
       <title>{`${title ? `${title} | ` : ''}${siteMetadata.title}`}</title>
       <meta name="apple-mobile-web-app-title" content={siteMetadata.title} />
       <meta name="description" content={description ? description : siteMetadata.description} />
