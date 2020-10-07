@@ -7,6 +7,6 @@ const StyledLogo = styled.img`
   height: 38px;
 `;
 
-const Logo: FunctionComponent = () => <StyledLogo src={myCryptoLogo} />;
+const Logo: FunctionComponent = () => <StyledLogo alt="MyCrypto" src={myCryptoLogo} />;
 
 export default Logo;
