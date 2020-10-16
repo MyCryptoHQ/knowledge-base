@@ -2,6 +2,8 @@ import { resolve } from 'path';
 import { GatsbyConfig } from 'gatsby';
 import capitalize from './plugins/capitalize';
 
+const ENABLE_BUNDLE_ANALYZER = process.env.ANALYZE_BUNDLE ?? false;
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: 'MyCrypto Knowledge Base',
@@ -113,6 +115,13 @@ const config: GatsbyConfig = {
         protocol: 'https',
         hostname: 'support.mycrypto.com',
         generateRedirectObjectsForPermanentRedirects: true
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
+      options: {
+        disable: !ENABLE_BUNDLE_ANALYZER,
+        analyzerPort: 8001
       }
     }
   ]

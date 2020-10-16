@@ -39,6 +39,7 @@
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
     "babel-plugin-styled-components": "^1.11.1",
+    "cross-env": "^7.0.2",
     "eslint": "^7.10.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-import": "^2.22.1",
@@ -58,6 +59,7 @@
     "gatsby-plugin-styled-components": "^3.3.12",
     "gatsby-plugin-ts-config": "^1.0.0",
     "gatsby-plugin-typescript": "^2.4.21",
+    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.13",
     "gatsby-remark-external-links": "^0.0.4",
     "gatsby-remark-images": "^3.3.32",
     "gatsby-remark-static-images": "^1.2.1",
@@ -80,6 +82,7 @@
   "scripts": {
     "clean": "gatsby clean",
     "start": "gatsby develop",
+    "analyze": "cross-env ANALYZE_BUNDLE=true yarn build",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "deploy": "gatsby-plugin-s3 deploy --yes",
