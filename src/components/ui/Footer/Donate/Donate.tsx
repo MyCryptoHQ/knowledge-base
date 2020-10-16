@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import bitcoin from '../../../../assets/images/donate/bitcoin.png';
 import ether from '../../../../assets/images/donate/ether.png';

@@ -1,5 +1,5 @@
 import { Link as GatsbyLink } from 'gatsby';
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import styled, { css, DefaultTheme } from 'styled-components';
 
 interface Props {

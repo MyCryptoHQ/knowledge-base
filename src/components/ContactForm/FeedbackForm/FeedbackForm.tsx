@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FunctionComponent } from 'react';
+import { ChangeEvent, FunctionComponent } from 'react';
 import { string } from 'superstruct';
 import Input from '../../ui/Input';
 import Text from '../../ui/Text';

@@ -1,5 +1,5 @@
 import { Button } from '@mycrypto/ui';
-import React, { ChangeEvent, FunctionComponent, useState } from 'react';
+import { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react';
 import Recaptcha from 'react-google-recaptcha';
 import { validate } from 'superstruct';
 import { FORM_TYPES, FormType } from '../../config/contact-form';
@@ -44,7 +44,7 @@ const ContactForm: FunctionComponent = () => {
     setVerified(false);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const form = event.currentTarget;

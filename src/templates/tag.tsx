@@ -1,5 +1,5 @@
 import { graphql } from 'gatsby';
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import Breadcrumbs from '../components/Breadcrumbs';
 import MetaData from '../components/MetaData';

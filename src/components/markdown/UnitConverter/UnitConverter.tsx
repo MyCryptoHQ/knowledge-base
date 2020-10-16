@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import React, { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useState } from 'react';
 import Unit from './Unit';
 
 const UnitConverter: FunctionComponent = () => {

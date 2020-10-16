@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import Heading from '../Heading';
 
 const H2: FunctionComponent = ({ children, ...rest }) => (

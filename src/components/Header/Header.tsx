@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import { FunctionComponent, ReactElement } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from '../../hooks';
 import { setDrawerOpen } from '../../store/navigation';
