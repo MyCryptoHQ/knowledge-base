@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import React, { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
+import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Input, { InputContainer, StyledInput } from '../../../ui/Input';
 import Text from '../../../ui/Text';

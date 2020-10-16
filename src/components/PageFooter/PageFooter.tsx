@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import githubIcon from '../../assets/images/icons/social/github-black.svg';
 import Link from '../Link';

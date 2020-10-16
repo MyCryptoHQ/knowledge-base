@@ -1,6 +1,6 @@
 import Fuse from 'fuse.js';
 import { navigate } from 'gatsby';
-import React, { FunctionComponent, useMemo, useState } from 'react';
+import { FunctionComponent, useMemo, useState } from 'react';
 import { useSelector } from '../../hooks';
 import { Mdx } from '../../types/page';
 import PageItem from '../PageItem';

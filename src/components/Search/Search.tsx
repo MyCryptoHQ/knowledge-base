@@ -1,5 +1,5 @@
 import { navigate } from 'gatsby';
-import React, { ChangeEvent, FunctionComponent, KeyboardEvent } from 'react';
+import { ChangeEvent, FunctionComponent, KeyboardEvent } from 'react';
 import styled, { AnyStyledComponent } from 'styled-components';
 import searchIcon from '../../assets/images/icons/search.svg';
 import { useDispatch, useSelector } from '../../hooks';

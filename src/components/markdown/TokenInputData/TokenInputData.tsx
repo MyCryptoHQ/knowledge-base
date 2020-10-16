@@ -1,6 +1,6 @@
 import { defaultAbiCoder } from '@ethersproject/abi';
 import BigNumber from 'bignumber.js';
-import React, { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
+import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
 import Field from '../../ContactForm/Field';
 import Link from '../../Link';
 import Input from '../../ui/Input';

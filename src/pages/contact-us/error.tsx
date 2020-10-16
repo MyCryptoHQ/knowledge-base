@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import Link from '../../components/Link';
 import MetaData from '../../components/MetaData';

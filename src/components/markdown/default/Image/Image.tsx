@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import styled, { css } from 'styled-components';
 import breakpoint from '../../../../theme/breakpoints';
 

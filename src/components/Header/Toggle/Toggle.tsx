@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import close from '../../../assets/images/icons/close.svg';
 import open from '../../../assets/images/icons/hamburger.svg';

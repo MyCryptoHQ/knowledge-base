@@ -1,5 +1,5 @@
 import { Link } from 'gatsby';
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import Text from '../ui/Text';
 

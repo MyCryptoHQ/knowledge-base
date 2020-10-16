@@ -1,5 +1,5 @@
 import { darken } from 'polished';
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
 const StyledKeyboardInput = styled.kbd`

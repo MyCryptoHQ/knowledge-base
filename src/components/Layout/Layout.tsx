@@ -1,5 +1,5 @@
 import { useLocation } from '@reach/router';
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import 'typeface-lato';
 import 'typeface-source-code-pro';

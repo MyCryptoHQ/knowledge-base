@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { Yaml } from '../../types/category';
 import Text from '../ui/Text';
 

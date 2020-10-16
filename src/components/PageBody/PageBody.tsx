@@ -1,6 +1,6 @@
 import { MarkdownBody, MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import shortcodes from '../markdown';
 
 interface Props {

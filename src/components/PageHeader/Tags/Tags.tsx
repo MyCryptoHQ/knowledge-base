@@ -1,5 +1,5 @@
 import { lighten } from 'polished';
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { encodeTag } from '../../../utils/tags';
 import Link from '../../Link';

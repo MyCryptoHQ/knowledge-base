@@ -1,5 +1,5 @@
 import { transparentize } from 'polished';
-import React, { DetailedHTMLProps, FunctionComponent, InputHTMLAttributes, useRef } from 'react';
+import { DetailedHTMLProps, FunctionComponent, InputHTMLAttributes, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import Text from '../Text';
 
