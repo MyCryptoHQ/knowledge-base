@@ -1,5 +1,5 @@
 import { graphql } from 'gatsby';
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import FeaturedCategories from '../components/FeaturedCategories';
 import Hero from '../components/Header/Hero';
