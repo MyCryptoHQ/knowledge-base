@@ -10,15 +10,10 @@
     "@ethersproject/bignumber": "^5.0.8",
     "@mycrypto/ui": "^0.24.1",
     "bignumber.js": "^9.0.1",
-<<<<<<< HEAD
     "polished": "^4.0.1",
     "react": "^16.14.0",
-=======
->>>>>>> bf408c5 (Strip markdown with Remark)
     "isomorphic-unfetch": "^3.1.0",
-    "polished": "^4.0.1",
     "query-string": "^6.13.5",
-    "react": "^16.13.1",
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.14.0",
     "react-google-recaptcha": "^2.1.0",
