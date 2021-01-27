@@ -4,14 +4,16 @@ import { ELASTIC_ENDPOINT } from '../config/search';
 import { SearchResult } from '../types/page';
 
 interface SearchResponse {
-  timed_out: boolean;
-  hits: {
-    total: {
-      value: number;
+  results: {
+    timed_out: boolean;
+    hits: {
+      total: {
+        value: number;
+      };
+      hits: Array<{
+        _source: SearchResult;
+      }>;
     };
-    hits: Array<{
-      _source: SearchResult;
-    }>;
   };
 }
 
@@ -50,7 +52,7 @@ export const useElasticSearch = (): {
       })
     })
       .then((response) => response.json())
-      .then((json: SearchResponse) => setResults(json.hits.hits.map((hit) => hit._source)))
+      .then((json: SearchResponse) => setResults(json.results.hits.hits.map((hit) => hit._source)))
       .catch(() => setResults([]))
       .finally(() => setLoading(false));
   }, [query]);
