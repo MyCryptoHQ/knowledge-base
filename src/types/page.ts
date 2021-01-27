@@ -37,3 +37,14 @@ interface MdxHeading {
 }
 
 export type MdxNode = Mdx & Node;
+
+export interface PageResult {
+  slug: string;
+  excerpt?: string;
+  frontmatter: {
+    title: string;
+    tags?: string[];
+  };
+}
+
+export type SearchResult = Pick<Mdx, 'slug' | 'excerpt'> & { title: string; tags: string[] };

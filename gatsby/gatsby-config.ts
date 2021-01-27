@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { GatsbyConfig } from 'gatsby';
+import { removeMarkdown } from './helpers/markdown';
 import capitalize from './plugins/capitalize';
 
 const ENABLE_BUNDLE_ANALYZER = process.env.ANALYZE_BUNDLE ?? false;
@@ -13,7 +14,6 @@ const config: GatsbyConfig = {
     baseUrl: 'https://support.mycrypto.com',
     recaptchaSitekey: '6LcOl00UAAAAACVjGdVFkw918ohOhPIL0PHDtdGM'
   },
-  // Used for deployment to gh-pages
   pathPrefix: '/',
   plugins: [
     'gatsby-plugin-typescript',
@@ -122,6 +122,63 @@ const config: GatsbyConfig = {
       options: {
         disable: !ENABLE_BUNDLE_ANALYZER,
         analyzerPort: 8001
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-aws-elasticsearch',
+      options: {
+        enabled: !!process.env.ELASTIC_AWS_SYNC,
+        query: `
+          query {
+            allMdx {
+              nodes {
+                slug
+                rawBody
+                excerpt (pruneLength: 500)
+                frontmatter {
+                  title
+                  tags
+                }
+              }
+            }
+          }
+        `,
+
+        selector: (data: { allMdx: { nodes: unknown[] } }): unknown[] => data.allMdx.nodes,
+        toDocument: (node: Record<string, unknown>): Record<string, unknown> => ({
+          id: (node.slug as string).replace(/\//g, '-'),
+          slug: node.slug,
+          title: (node.frontmatter as Record<string, unknown>).title,
+          tags: (node.frontmatter as Record<string, unknown>).tags,
+          content: removeMarkdown(node.rawBody as string),
+          excerpt: node.excerpt
+        }),
+
+        mapping: {
+          slug: {
+            type: 'keyword'
+          },
+          title: {
+            type: 'text',
+            boost: 2
+          },
+          tags: {
+            type: 'text'
+          },
+          content: {
+            type: 'text'
+          },
+          excerpt: {
+            type: 'text',
+            index: false
+          }
+        },
+
+        endpoint: process.env.ELASTIC_AWS_ENDPOINT,
+        index: 'articles',
+
+        accessKeyId: process.env.ELASTIC_AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.ELASTIC_AWS_SECRET_ACCESS_KEY
       }
     }
   ]

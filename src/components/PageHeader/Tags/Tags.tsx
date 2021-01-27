@@ -8,7 +8,7 @@ interface Props {
   tags: string[];
 }
 
-const TagsContainer = styled.ul`
+export const TagsContainer = styled.ul`
   list-style-type: none;
   display: inline-block;
   margin: -1rem 0 0 0;
@@ -26,7 +26,7 @@ const Tag = styled<any>(Link)`
   font-weight: normal !important;
 `;
 
-const TagItem = styled.li`
+export const TagItem = styled.li`
   display: inline-block;
   margin: 1rem 0 0 0;
   font-size: 1.4rem;

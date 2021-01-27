@@ -1,14 +1,15 @@
 import { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { Mdx } from '../../types/page';
+import { PageResult } from '../../types/page';
 import Link from '../Link';
+import Tags, { TagItem } from '../PageHeader/Tags';
 import Heading from '../ui/Heading';
 import Text from '../ui/Text';
 
 interface Props {
   titleOnly?: boolean;
   showReadMore?: boolean;
-  page: Mdx;
+  page: PageResult;
 }
 
 const PageItemWrapper = styled.div<{ showReadMore: boolean }>`
@@ -16,6 +17,10 @@ const PageItemWrapper = styled.div<{ showReadMore: boolean }>`
 
   ${Text} {
     word-wrap: break-word;
+  }
+
+  ${TagItem} {
+    margin: 1rem 0 1rem -0.3rem;
   }
 `;
 
@@ -35,6 +40,7 @@ const PageItem: FunctionComponent<Props> = ({ page, titleOnly, showReadMore }) =
     ) : (
       <PageItemWrapper showReadMore={showReadMore ?? false}>
         <PageHeading as="h3">{page.frontmatter.title}</PageHeading>
+        {page.frontmatter.tags && <Tags tags={page.frontmatter.tags} />}
         <Text muted={true} noMargin={true}>
           {page.excerpt}
         </Text>

@@ -1,4 +1,3 @@
-import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
 import Breadcrumbs from '../components/Breadcrumbs';
 import MetaData from '../components/MetaData';
@@ -7,17 +6,8 @@ import Container from '../components/ui/Container';
 import PageContainer from '../components/ui/PageContainer';
 import Section from '../components/ui/Section';
 import SubHeader from '../components/ui/SubHeader';
-import { Mdx } from '../types/page';
 
-interface Props {
-  data: {
-    allMdx: {
-      nodes: Mdx[];
-    };
-  };
-}
-
-const Search: FunctionComponent<Props> = ({ data }) => (
+const Search: FunctionComponent = () => (
   <PageContainer>
     <MetaData title="Search" noIndex={true} />
 
@@ -27,26 +17,10 @@ const Search: FunctionComponent<Props> = ({ data }) => (
 
     <Section>
       <Container>
-        <SearchPage allPages={data.allMdx.nodes} />
+        <SearchPage />
       </Container>
     </Section>
   </PageContainer>
 );
 
 export default Search;
-
-export const query = graphql`
-  query {
-    allMdx {
-      nodes {
-        slug
-        excerpt(pruneLength: 500)
-        frontmatter {
-          title
-          description
-          tags
-        }
-      }
-    }
-  }
-`;

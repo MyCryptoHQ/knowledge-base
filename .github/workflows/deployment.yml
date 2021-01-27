@@ -43,6 +43,11 @@ jobs:
 
       - name: Build
         run: yarn build
+        env:
+          ELASTIC_AWS_SYNC: true
+          ELASTIC_AWS_ENDPOINT: ${{ secrets.ELASTIC_AWS_ENDPOINT }}
+          ELASTIC_AWS_ACCESS_KEY_ID: ${{ secrets.ELASTIC_AWS_ACCESS_KEY_ID }}
+          ELASTIC_AWS_SECRET_ACCESS_KEY: ${{ secrets.ELASTIC_AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy
         run: yarn deploy
