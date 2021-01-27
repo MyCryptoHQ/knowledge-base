@@ -388,20 +388,6 @@ const gatsbyNode: GatsbyNode = {
     await createPagesFromNode('allYaml', CATEGORY_TEMPLATE);
     await createTags();
     await createRedirects();
-
-    /*const { data } = await graphql<{ mdx: { rawBody: string; } }>(`
-      query {
-        mdx {
-          rawBody
-        }
-      }
-    `);
-
-    await removeMarkdown(data!.mdx.rawBody);
-
-    console.log(data!.mdx.rawBody);
-    console.log('------------------------------------------------');
-    console.log(await removeMarkdown(data!.mdx.rawBody));*/
   }
 };
 
