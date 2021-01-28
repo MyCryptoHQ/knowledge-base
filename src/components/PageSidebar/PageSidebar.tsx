@@ -2,7 +2,7 @@ import { Button } from '@mycrypto/ui';
 import { useLocation } from '@reach/router';
 import { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { MYCRYPTO_DASHBOARD_PAGE, MYCRYPTO_EMAIL, MYCRYPTO_MEMBERSHIP_PAGE } from '../../config/links';
+import { MYCRYPTO_EMAIL } from '../../config/links';
 import breakpoint from '../../theme/breakpoints';
 import Link from '../Link';
 import Heading from '../ui/Heading';
@@ -26,6 +26,10 @@ const Card = styled.div`
   background: ${({ theme }) => theme.tagBackground};
   position: sticky;
   top: 3rem;
+
+  ${breakpoint('lg', 'max')`
+    top: 11rem;
+  `};
 `;
 
 const PageSidebar: FunctionComponent = () => {
@@ -35,7 +39,7 @@ const PageSidebar: FunctionComponent = () => {
     <Aside>
       <Card>
         <Heading as="h3">
-          MyCrypto is the number on way to manage <u>all</u> your Ethereum Accounts.
+          MyCrypto is the number one way to manage <u>all</u> your Ethereum Accounts.
         </Heading>
         <Text>
           You can always email us for one-on-one help using{' '}
@@ -44,17 +48,17 @@ const PageSidebar: FunctionComponent = () => {
           </Link>
           .
         </Text>
-        <Text>
+        {/* TODO: Uncomment when VIP support is live */}
+        {/*<Text>
           If you are a{' '}
           <Link to={MYCRYPTO_MEMBERSHIP_PAGE} external={true}>
             MyCrypto Member
           </Link>
-          , use the link on your{' '}
+          , use your custom VIP Support Link on your{' '}
           <Link to={MYCRYPTO_DASHBOARD_PAGE} external={true}>
             MyCrypto Dashboard
-          </Link>{' '}
-          for your custom VIP Support Link.
-        </Text>
+          </Link>.
+        </Text>*/}
         <Link to={`mailto:${MYCRYPTO_EMAIL}?body=%0D%0A%0D%0A%0D%0ARef%3A%20${href}`} external={true}>
           <Button>Send Us A Message</Button>
         </Link>
