@@ -1,8 +1,6 @@
 import { useLocation } from '@reach/router';
 import { FunctionComponent } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import 'typeface-lato';
-import 'typeface-source-code-pro';
 import { LEFT_HEADER_ITEMS, NAVIGATION_ITEMS } from '../../config/navigation';
 import Header from '../Header';
 import Link from '../Link';
