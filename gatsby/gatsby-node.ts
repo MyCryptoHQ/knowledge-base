@@ -82,12 +82,12 @@ const gatsbyNode: GatsbyNode = {
    */
   async createResolvers({ createResolvers, reporter }: CreateResolversArgs): Promise<void> {
     const getPageSlug = (node: Node, nodeModel: NodeModel): string => {
-      const { relativePath } = nodeModel.getNodeById<FileNode>({ id: node.parent });
+      const { relativePath } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
       return relativePath.replace(/\.md$/, '');
     };
 
     const getCategorySlug = (node: Node, nodeModel: NodeModel): string => {
-      const parent = nodeModel.getNodeById<FileNode>({ id: node.parent });
+      const parent = nodeModel.getNodeById<FileNode>({ id: node.parent! });
       return parent.relativePath.replace(/\/category\.yml$/, '');
     };
 
@@ -121,11 +121,11 @@ const gatsbyNode: GatsbyNode = {
 
         categoryId: {
           resolve(node: Node, _, { nodeModel }): string {
-            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent });
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
 
             const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
             const category = nodes.find((categoryNode) => {
-              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
+              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
               return parent.relativeDirectory === relativeDirectory;
             })!;
 
@@ -135,11 +135,11 @@ const gatsbyNode: GatsbyNode = {
 
         category: {
           resolve(node: Node, _, { nodeModel }): Node {
-            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent });
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
 
             const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
             return nodes.find((categoryNode) => {
-              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
+              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
               return parent.relativeDirectory === relativeDirectory;
             })!;
           }
@@ -169,7 +169,7 @@ const gatsbyNode: GatsbyNode = {
 
         categoryId: {
           resolve(node: Node, _, { nodeModel }): string | undefined {
-            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent });
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
             const parentDirectory = join(relativeDirectory, '..');
 
             if (parentDirectory === '.') {
@@ -178,7 +178,7 @@ const gatsbyNode: GatsbyNode = {
 
             const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
             const category = nodes.find((categoryNode) => {
-              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
+              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
               return parent.relativeDirectory === parentDirectory;
             });
 
@@ -188,7 +188,7 @@ const gatsbyNode: GatsbyNode = {
 
         category: {
           resolve(node: Node, _, { nodeModel }): Node | undefined {
-            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent });
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
             const parentDirectory = join(relativeDirectory, '..');
 
             if (parentDirectory === '.') {
@@ -197,7 +197,7 @@ const gatsbyNode: GatsbyNode = {
 
             const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
             return nodes.find((categoryNode) => {
-              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent });
+              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
               return parent.relativeDirectory === parentDirectory;
             });
           }
