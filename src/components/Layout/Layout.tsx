@@ -8,12 +8,6 @@ import MetaData from '../MetaData';
 import Search from '../Search';
 import Footer from '../ui/Footer';
 
-import '@fontsource/lato/300.css';
-import '@fontsource/lato/400.css';
-import '@fontsource/lato/500.css';
-import '@fontsource/lato/700.css';
-import '@fontsource/source-code-pro/400.css';
-
 const StyledLayout = styled.div`
   display: flex;
   flex-direction: column;
