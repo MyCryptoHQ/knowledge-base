@@ -1,14 +1,18 @@
 import { useLocation } from '@reach/router';
 import { FunctionComponent } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import 'typeface-lato';
-import 'typeface-source-code-pro';
 import { LEFT_HEADER_ITEMS, NAVIGATION_ITEMS } from '../../config/navigation';
 import Header from '../Header';
 import Link from '../Link';
 import MetaData from '../MetaData';
 import Search from '../Search';
 import Footer from '../ui/Footer';
+
+import '@fontsource/lato/300.css';
+import '@fontsource/lato/400.css';
+import '@fontsource/lato/500.css';
+import '@fontsource/lato/700.css';
+import '@fontsource/source-code-pro/400.css';
 
 const StyledLayout = styled.div`
   display: flex;
