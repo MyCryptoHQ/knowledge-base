@@ -19,21 +19,12 @@ jobs:
         with:
           node-version: 14.16.0
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.x
-
       - name: Cache Dependencies
         uses: actions/cache@v2
         with:
           path: |
             node_modules
-            ~/.cache/pip
           key: ${{ hashFiles('yarn.lock') }}-${{ hashFiles('gatsby/**/*') }}
-
-      - name: Install AWS CLI
-        run: pip install --user awscli
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
@@ -57,7 +48,6 @@ jobs:
 
       - name: Create Invalidation
         run: |
-          aws configure set preview.cloudfront true
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
