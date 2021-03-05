@@ -85,11 +85,13 @@ const config: GatsbyConfig = {
       }
     },
     {
-      resolve: 'gatsby-plugin-favicons',
+      resolve: 'gatsby-plugin-manifest',
       options: {
-        logo: resolve(__dirname, '../src/assets/images/logo.svg'),
-        appName: 'MyCrypto Knowledge Base',
-        background: '#1d334f'
+        icon: resolve(__dirname, '../src/assets/images/logo.svg'),
+        name: 'MyCrypto Knowledge Base',
+        short_name: 'MyCrypto KB',
+        start_url: '/',
+        background_color: '#1d334f'
       }
     },
     {
