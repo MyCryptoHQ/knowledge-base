@@ -12,7 +12,7 @@ import SubHeader from '../components/ui/SubHeader';
 import { Mdx } from '../types/page';
 
 interface Props {
-  pathContext: {
+  pageContext: {
     tagName: string;
   };
   data: {
@@ -30,7 +30,7 @@ const TagContainer = styled(Container)`
   flex-direction: row;
 `;
 
-const Tag: FunctionComponent<Props> = ({ data: { allMdx, articles }, pathContext: { tagName } }) => (
+const Tag: FunctionComponent<Props> = ({ data: { allMdx, articles }, pageContext: { tagName } }) => (
   <PageContainer>
     <MetaData title={tagName} />
 

@@ -15,7 +15,7 @@ import breakpoint from '../theme/breakpoints';
 import { Mdx } from '../types/page';
 
 interface Props {
-  pathContext: {
+  pageContext: {
     slug: string;
   };
   data: {

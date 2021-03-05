@@ -13,7 +13,7 @@ import { Yaml } from '../types/category';
 import { Mdx } from '../types/page';
 
 interface Props {
-  pathContext: {
+  pageContext: {
     slug: string;
   };
   data: {
