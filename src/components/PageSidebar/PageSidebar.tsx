@@ -39,7 +39,7 @@ const PageSidebar: FunctionComponent = () => {
     <Aside>
       <Card>
         <Heading as="h3">
-          MyCrypto is the number one way to manage <u>all</u> your Ethereum Accounts.
+          MyCrypto is the number one way to manage <u>all</u> of your Ethereum Accounts.
         </Heading>
         <Text>
           You can always email us for one-on-one help using{' '}
