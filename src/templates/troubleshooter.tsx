@@ -29,7 +29,7 @@ const CategoryContainer = styled(Container)`
   flex-direction: row;
 `;
 
-const Category: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
+const Troubleshooter: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
   <PageContainer>
     <MetaData title={yaml.title} />
 
@@ -40,19 +40,22 @@ const Category: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
     <Section>
       <CategoryContainer>
         <Sidebar articles={allMdx.nodes} />
-        <CategoryOverview category={yaml} />
+        <CategoryOverview category={yaml} showCount={false} />
       </CategoryContainer>
     </Section>
   </PageContainer>
 );
 
-export default Category;
+export default Troubleshooter;
 
 export const query = graphql`
-  query Category($slug: String!, $popularArticles: [String!]!) {
+  query Troubleshooter($slug: String!, $popularArticles: [String!]!) {
     yaml(slug: { eq: $slug }) {
       title
       slug
+      description {
+        body
+      }
       categories {
         title
         slug

@@ -8,6 +8,7 @@ import Heading from '../ui/Heading';
 
 interface Props {
   category: Yaml;
+  showCount?: boolean;
 }
 
 const CategoryContainer = styled.div`
@@ -48,12 +49,12 @@ const CategoryItemWrapper = styled.div`
   `};
 `;
 
-const CategoryItem: FunctionComponent<Props> = ({ category }) => (
+const CategoryItem: FunctionComponent<Props> = ({ category, showCount = true }) => (
   <CategoryContainer>
     <Link to={`/${category.slug}`}>
       <CategoryItemWrapper>
         <CategoryHeading as="h3">{category.title}</CategoryHeading>
-        <CategoryItemCount category={category} />
+        {showCount && <CategoryItemCount category={category} />}
       </CategoryItemWrapper>
     </Link>
   </CategoryContainer>

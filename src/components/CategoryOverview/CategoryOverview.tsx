@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import breakpoint from '../../theme/breakpoints';
 import { Yaml } from '../../types/category';
 import CategoryItem from '../CategoryItem';
+import PageBody from '../PageBody';
 import PageItem from '../PageItem';
 import Heading from '../ui/Heading';
 
@@ -25,15 +26,19 @@ const SubCategories = styled.div`
 
 interface Props {
   category: Yaml;
+  showCount?: boolean;
 }
 
-const CategoryOverview: FunctionComponent<Props> = ({ category }) => (
+const CategoryOverview: FunctionComponent<Props> = ({ category, showCount = true }) => (
   <CategoryWrapper>
     <OverviewHeading as="h2">{category.title}</OverviewHeading>
+
+    {category.description && <PageBody body={category.description.body} />}
+
     {category.categories && category.categories.length > 0 && (
       <SubCategories>
         {category.categories.map((subCategory) => (
-          <CategoryItem key={subCategory.slug} category={subCategory} />
+          <CategoryItem key={subCategory.slug} category={subCategory} showCount={showCount} />
         ))}
       </SubCategories>
     )}

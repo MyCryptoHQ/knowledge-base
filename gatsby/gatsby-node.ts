@@ -6,8 +6,8 @@ import {
   CreateSchemaCustomizationArgs,
   GatsbyNode,
   Node,
-  Resolvers,
-  NodeModel
+  NodeModel,
+  Resolvers
 } from 'gatsby';
 import { titleCase } from 'title-case';
 import { parse } from 'yaml';
@@ -21,6 +21,7 @@ const REDIRECTS_FILE = resolve(__dirname, '../content/redirects.yml');
 
 const HOME_TEMPLATE = resolve(__dirname, '../src/templates/index.tsx');
 const CATEGORY_TEMPLATE = resolve(__dirname, '../src/templates/category.tsx');
+const TROUBLESHOOTER_TEMPLATE = resolve(__dirname, '../src/templates/troubleshooter.tsx');
 const PAGE_TEMPLATE = resolve(__dirname, '../src/templates/page.tsx');
 const TAG_TEMPLATE = resolve(__dirname, '../src/templates/tag.tsx');
 
@@ -57,6 +58,7 @@ const gatsbyNode: GatsbyNode = {
       type Yaml implements Node {
         categoryId: ID
         title: String! @titleCase
+        description: Mdx
         slug: String!
         category: Yaml @link(by: "id", from: "categoryId")
         pages: [Mdx]
@@ -186,6 +188,18 @@ const gatsbyNode: GatsbyNode = {
           }
         },
 
+        description: {
+          resolve(node: Node, _, { nodeModel }): Node | undefined {
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
+
+            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Mdx' });
+            return nodes.find((categoryNode) => {
+              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
+              return parent.relativePath === `${relativeDirectory}/description.md`;
+            });
+          }
+        },
+
         category: {
           resolve(node: Node, _, { nodeModel }): Node | undefined {
             const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
@@ -218,6 +232,7 @@ const gatsbyNode: GatsbyNode = {
                 const category = nodes.find(
                   (categoryNode) => categorySlug === getCategorySlug(categoryNode, nodeModel)
                 );
+
                 if (!category) {
                   reporter.panic(`Category ${categorySlug} specified, but not found`);
                 }
@@ -293,9 +308,14 @@ const gatsbyNode: GatsbyNode = {
      *
      * @param {string} fieldName The GraphQL field name of the data
      * @param {string} component Path to the React component to use for the page
+     * @param shouldProcess
      * @returns {Promise<void>}
      */
-    const createPagesFromNode = async (fieldName: 'allMdx' | 'allYaml', component: string) => {
+    const createPagesFromNode = async (
+      fieldName: 'allMdx' | 'allYaml',
+      component: string,
+      shouldProcess?: (node: { slug: string }) => boolean
+    ) => {
       const result = await graphql<QueryData<typeof fieldName>>(`
       query {
         ${fieldName} {
@@ -312,12 +332,16 @@ const gatsbyNode: GatsbyNode = {
       }
 
       const { nodes } = result.data[fieldName];
-      nodes.forEach(({ slug }) => {
+      nodes.forEach((node) => {
+        if (!shouldProcess?.(node) ?? true) {
+          return;
+        }
+
         createPage({
-          path: slug,
+          path: node.slug,
           component,
           context: {
-            slug,
+            slug: node.slug,
             popularArticles: POPULAR_ARTICLES
           }
         });
@@ -355,6 +379,10 @@ const gatsbyNode: GatsbyNode = {
       const tags = new Set(result.data.allMdx.nodes.flatMap((page) => page.frontmatter.tags));
 
       tags.forEach((tag) => {
+        if (!tag) {
+          return;
+        }
+
         createPage({
           path: `/tag/${encodeTag(tag)}`,
           component: TAG_TEMPLATE,
@@ -385,7 +413,9 @@ const gatsbyNode: GatsbyNode = {
     };
 
     await createPagesFromNode('allMdx', PAGE_TEMPLATE);
-    await createPagesFromNode('allYaml', CATEGORY_TEMPLATE);
+    await createPagesFromNode('allYaml', CATEGORY_TEMPLATE, ({ slug }) => !slug.startsWith('troubleshooter'));
+    await createPagesFromNode('allYaml', TROUBLESHOOTER_TEMPLATE, ({ slug }) => slug.startsWith('troubleshooter'));
+
     await createTags();
     await createRedirects();
   }
