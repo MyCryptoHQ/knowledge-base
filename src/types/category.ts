@@ -4,6 +4,7 @@ import { Mdx } from './page';
 
 export interface Yaml {
   title: string;
+  displayTitle?: string;
   slug: string;
   description?: Mdx;
   category?: Yaml;

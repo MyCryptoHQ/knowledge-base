@@ -31,7 +31,7 @@ interface Props {
 
 const CategoryOverview: FunctionComponent<Props> = ({ category, showCount = true }) => (
   <CategoryWrapper>
-    <OverviewHeading as="h2">{category.title}</OverviewHeading>
+    <OverviewHeading as="h2">{category.displayTitle ?? category.title}</OverviewHeading>
 
     {category.description && <PageBody body={category.description.body} />}
 

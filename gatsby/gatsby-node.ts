@@ -58,6 +58,7 @@ const gatsbyNode: GatsbyNode = {
       type Yaml implements Node {
         categoryId: ID
         title: String! @titleCase
+        displayTitle: String @titleCase
         description: Mdx
         slug: String!
         category: Yaml @link(by: "id", from: "categoryId")
@@ -169,6 +170,22 @@ const gatsbyNode: GatsbyNode = {
           resolve: (node: Node, _, { nodeModel }) => getCategorySlug(node, nodeModel)
         },
 
+        displayTitle: {
+          resolve: (node: Node, _, { nodeModel }): string | undefined => {
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
+
+            const nodes = nodeModel.getAllNodes<MdxNode>({ type: 'Mdx' });
+            const descriptionNode = nodes.find((categoryNode) => {
+              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
+              return parent.relativePath === `${relativeDirectory}/description.md`;
+            });
+
+            if (descriptionNode?.frontmatter?.title) {
+              return titleCase(descriptionNode.frontmatter.title);
+            }
+          }
+        },
+
         categoryId: {
           resolve(node: Node, _, { nodeModel }): string | undefined {
             const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
@@ -192,7 +209,7 @@ const gatsbyNode: GatsbyNode = {
           resolve(node: Node, _, { nodeModel }): Node | undefined {
             const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
 
-            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Mdx' });
+            const nodes = nodeModel.getAllNodes<MdxNode>({ type: 'Mdx' });
             return nodes.find((categoryNode) => {
               const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
               return parent.relativePath === `${relativeDirectory}/description.md`;

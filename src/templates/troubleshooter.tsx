@@ -31,7 +31,7 @@ const CategoryContainer = styled(Container)`
 
 const Troubleshooter: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
   <PageContainer>
-    <MetaData title={yaml.title} />
+    <MetaData title={yaml.displayTitle ?? yaml.title} />
 
     <SubHeader>
       <Breadcrumbs breadcrumbs={yaml.breadcrumbs} />
@@ -52,12 +52,14 @@ export const query = graphql`
   query Troubleshooter($slug: String!, $popularArticles: [String!]!) {
     yaml(slug: { eq: $slug }) {
       title
+      displayTitle
       slug
       description {
         body
       }
       categories {
         title
+        displayTitle
         slug
         pages {
           slug
