@@ -331,7 +331,7 @@ const gatsbyNode: GatsbyNode = {
     const createPagesFromNode = async (
       fieldName: 'allMdx' | 'allYaml',
       component: string,
-      shouldProcess?: (node: { slug: string }) => boolean
+      shouldProcess: (node: { slug: string }) => boolean = () => true
     ) => {
       const result = await graphql<QueryData<typeof fieldName>>(`
       query {
@@ -350,7 +350,7 @@ const gatsbyNode: GatsbyNode = {
 
       const { nodes } = result.data[fieldName];
       nodes.forEach((node) => {
-        if (!shouldProcess?.(node) ?? true) {
+        if (!shouldProcess(node)) {
           return;
         }
 

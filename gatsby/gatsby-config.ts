@@ -183,7 +183,12 @@ const config: GatsbyConfig = {
         secretAccessKey: process.env.ELASTIC_AWS_SECRET_ACCESS_KEY
       }
     }
-  ]
+  ],
+  flags: {
+    FAST_DEV: true,
+    PARALLEL_SOURCING: true,
+    LMDB_STORE: true
+  }
 };
 
 export default config;
