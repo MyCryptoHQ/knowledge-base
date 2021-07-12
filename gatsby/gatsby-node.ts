@@ -6,8 +6,8 @@ import {
   CreateSchemaCustomizationArgs,
   GatsbyNode,
   Node,
-  Resolvers,
-  NodeModel
+  NodeModel,
+  Resolvers
 } from 'gatsby';
 import { titleCase } from 'title-case';
 import { parse } from 'yaml';
@@ -21,6 +21,7 @@ const REDIRECTS_FILE = resolve(__dirname, '../content/redirects.yml');
 
 const HOME_TEMPLATE = resolve(__dirname, '../src/templates/index.tsx');
 const CATEGORY_TEMPLATE = resolve(__dirname, '../src/templates/category.tsx');
+const TROUBLESHOOTER_TEMPLATE = resolve(__dirname, '../src/templates/troubleshooter.tsx');
 const PAGE_TEMPLATE = resolve(__dirname, '../src/templates/page.tsx');
 const TAG_TEMPLATE = resolve(__dirname, '../src/templates/tag.tsx');
 
@@ -57,6 +58,8 @@ const gatsbyNode: GatsbyNode = {
       type Yaml implements Node {
         categoryId: ID
         title: String! @titleCase
+        displayTitle: String @titleCase
+        description: Mdx
         slug: String!
         category: Yaml @link(by: "id", from: "categoryId")
         pages: [Mdx]
@@ -167,6 +170,22 @@ const gatsbyNode: GatsbyNode = {
           resolve: (node: Node, _, { nodeModel }) => getCategorySlug(node, nodeModel)
         },
 
+        displayTitle: {
+          resolve: (node: Node, _, { nodeModel }): string | undefined => {
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
+
+            const nodes = nodeModel.getAllNodes<MdxNode>({ type: 'Mdx' });
+            const descriptionNode = nodes.find((categoryNode) => {
+              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
+              return parent.relativePath === `${relativeDirectory}/description.md`;
+            });
+
+            if (descriptionNode?.frontmatter?.title) {
+              return titleCase(descriptionNode.frontmatter.title);
+            }
+          }
+        },
+
         categoryId: {
           resolve(node: Node, _, { nodeModel }): string | undefined {
             const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
@@ -183,6 +202,18 @@ const gatsbyNode: GatsbyNode = {
             });
 
             return category?.id;
+          }
+        },
+
+        description: {
+          resolve(node: Node, _, { nodeModel }): Node | undefined {
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
+
+            const nodes = nodeModel.getAllNodes<MdxNode>({ type: 'Mdx' });
+            return nodes.find((categoryNode) => {
+              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
+              return parent.relativePath === `${relativeDirectory}/description.md`;
+            });
           }
         },
 
@@ -218,6 +249,7 @@ const gatsbyNode: GatsbyNode = {
                 const category = nodes.find(
                   (categoryNode) => categorySlug === getCategorySlug(categoryNode, nodeModel)
                 );
+
                 if (!category) {
                   reporter.panic(`Category ${categorySlug} specified, but not found`);
                 }
@@ -293,9 +325,14 @@ const gatsbyNode: GatsbyNode = {
      *
      * @param {string} fieldName The GraphQL field name of the data
      * @param {string} component Path to the React component to use for the page
+     * @param shouldProcess
      * @returns {Promise<void>}
      */
-    const createPagesFromNode = async (fieldName: 'allMdx' | 'allYaml', component: string) => {
+    const createPagesFromNode = async (
+      fieldName: 'allMdx' | 'allYaml',
+      component: string,
+      shouldProcess: (node: { slug: string }) => boolean = () => true
+    ) => {
       const result = await graphql<QueryData<typeof fieldName>>(`
       query {
         ${fieldName} {
@@ -312,12 +349,16 @@ const gatsbyNode: GatsbyNode = {
       }
 
       const { nodes } = result.data[fieldName];
-      nodes.forEach(({ slug }) => {
+      nodes.forEach((node) => {
+        if (!shouldProcess(node)) {
+          return;
+        }
+
         createPage({
-          path: slug,
+          path: node.slug,
           component,
           context: {
-            slug,
+            slug: node.slug,
             popularArticles: POPULAR_ARTICLES
           }
         });
@@ -355,6 +396,10 @@ const gatsbyNode: GatsbyNode = {
       const tags = new Set(result.data.allMdx.nodes.flatMap((page) => page.frontmatter.tags));
 
       tags.forEach((tag) => {
+        if (!tag) {
+          return;
+        }
+
         createPage({
           path: `/tag/${encodeTag(tag)}`,
           component: TAG_TEMPLATE,
@@ -384,8 +429,10 @@ const gatsbyNode: GatsbyNode = {
       });
     };
 
-    await createPagesFromNode('allMdx', PAGE_TEMPLATE);
-    await createPagesFromNode('allYaml', CATEGORY_TEMPLATE);
+    await createPagesFromNode('allMdx', PAGE_TEMPLATE, ({ slug }) => !slug.startsWith('troubleshooter'));
+    await createPagesFromNode('allYaml', CATEGORY_TEMPLATE, ({ slug }) => !slug.startsWith('troubleshooter'));
+    await createPagesFromNode('allYaml', TROUBLESHOOTER_TEMPLATE, ({ slug }) => slug.startsWith('troubleshooter'));
+
     await createTags();
     await createRedirects();
   }

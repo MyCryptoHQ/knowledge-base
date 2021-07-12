@@ -34,8 +34,7 @@
         "plugin:@typescript-eslint/recommended",
         "plugin:eslint-plugin-react/recommended",
         "plugin:eslint-plugin-react-hooks/recommended",
-        "plugin:eslint-plugin-import/typescript",
-        "eslint-config-prettier/@typescript-eslint"
+        "plugin:eslint-plugin-import/typescript"
       ],
       "plugins": ["@typescript-eslint"],
       "rules": {

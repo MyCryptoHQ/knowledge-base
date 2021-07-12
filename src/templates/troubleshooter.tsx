@@ -24,12 +24,12 @@ interface Props {
   };
 }
 
-const CategoryContainer = styled(Container)`
+const TroubleshooterContainer = styled(Container)`
   display: flex;
   flex-direction: row;
 `;
 
-const Category: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
+const Troubleshooter: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
   <PageContainer>
     <MetaData title={yaml.title} />
 
@@ -38,26 +38,28 @@ const Category: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
     </SubHeader>
 
     <Section>
-      <CategoryContainer>
+      <TroubleshooterContainer>
         <Sidebar articles={allMdx.nodes} />
-        <CategoryOverview category={yaml} />
-      </CategoryContainer>
+        <CategoryOverview category={yaml} showCount={false} small={true} />
+      </TroubleshooterContainer>
     </Section>
   </PageContainer>
 );
 
-export default Category;
+export default Troubleshooter;
 
 export const query = graphql`
-  query Category($slug: String!, $popularArticles: [String!]!) {
+  query Troubleshooter($slug: String!, $popularArticles: [String!]!) {
     yaml(slug: { eq: $slug }) {
       title
+      displayTitle
       slug
       description {
         body
       }
       categories {
         title
+        displayTitle
         slug
         pages {
           slug
