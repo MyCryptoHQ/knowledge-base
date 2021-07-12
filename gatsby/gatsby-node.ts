@@ -429,7 +429,7 @@ const gatsbyNode: GatsbyNode = {
       });
     };
 
-    await createPagesFromNode('allMdx', PAGE_TEMPLATE);
+    await createPagesFromNode('allMdx', PAGE_TEMPLATE, ({ slug }) => !slug.startsWith('troubleshooter'));
     await createPagesFromNode('allYaml', CATEGORY_TEMPLATE, ({ slug }) => !slug.startsWith('troubleshooter'));
     await createPagesFromNode('allYaml', TROUBLESHOOTER_TEMPLATE, ({ slug }) => slug.startsWith('troubleshooter'));
 
