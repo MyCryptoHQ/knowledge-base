@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import breakpoint from '../../theme/breakpoints';
 import { Yaml } from '../../types/category';
 import CategoryItem from '../CategoryItem';
@@ -7,9 +7,20 @@ import PageBody from '../PageBody';
 import PageItem from '../PageItem';
 import Heading from '../ui/Heading';
 
-const CategoryWrapper = styled.section`
+interface CategoryWrapperProps {
+  small?: boolean;
+}
+
+const CategoryWrapper = styled.section<CategoryWrapperProps>`
   flex: 1;
   margin-left: 3.22rem;
+
+  ${({ small }) =>
+    small &&
+    css`
+      max-width: 500px;
+      margin: 0 auto;
+    `};
 
   ${breakpoint('lg', 'max')`
     margin: 0;
@@ -29,8 +40,12 @@ interface Props {
   showCount?: boolean;
 }
 
-const CategoryOverview: FunctionComponent<Props> = ({ category, showCount = true }) => (
-  <CategoryWrapper>
+const CategoryOverview: FunctionComponent<Props & CategoryWrapperProps> = ({
+  category,
+  showCount = true,
+  small = false
+}) => (
+  <CategoryWrapper small={small}>
     <OverviewHeading as="h2">{category.displayTitle ?? category.title}</OverviewHeading>
 
     {category.description && <PageBody body={category.description.body} />}

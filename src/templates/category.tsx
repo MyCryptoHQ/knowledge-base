@@ -53,6 +53,9 @@ export const query = graphql`
     yaml(slug: { eq: $slug }) {
       title
       slug
+      description {
+        body
+      }
       categories {
         title
         slug

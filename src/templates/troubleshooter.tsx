@@ -24,24 +24,24 @@ interface Props {
   };
 }
 
-const CategoryContainer = styled(Container)`
+const TroubleshooterContainer = styled(Container)`
   display: flex;
   flex-direction: row;
 `;
 
 const Troubleshooter: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
   <PageContainer>
-    <MetaData title={yaml.displayTitle ?? yaml.title} />
+    <MetaData title={yaml.title} />
 
     <SubHeader>
       <Breadcrumbs breadcrumbs={yaml.breadcrumbs} />
     </SubHeader>
 
     <Section>
-      <CategoryContainer>
+      <TroubleshooterContainer>
         <Sidebar articles={allMdx.nodes} />
-        <CategoryOverview category={yaml} showCount={false} />
-      </CategoryContainer>
+        <CategoryOverview category={yaml} showCount={false} small={true} />
+      </TroubleshooterContainer>
     </Section>
   </PageContainer>
 );
