@@ -14,7 +14,7 @@ import { parse } from 'yaml';
 import { POPULAR_ARTICLES } from '../src/config/articles';
 import { Breadcrumb } from '../src/types/breadcrumb';
 import { YamlNode } from '../src/types/category';
-import { MdxNode } from '../src/types/page';
+import { MdxNode, RelatedArticle } from '../src/types/page';
 import { encodeTag } from '../src/utils/tags';
 
 const REDIRECTS_FILE = resolve(__dirname, '../content/redirects.yml');
@@ -42,12 +42,19 @@ const gatsbyNode: GatsbyNode = {
         slug: String!
       }
 
+      type RelatedArticle {
+        title: String!
+        url: String!
+        isRelative: Boolean
+      }
+
       type Mdx implements Node {
         categoryId: ID!
         category: Yaml!
         slug: String!
         frontmatter: MdxFrontmatter!
         breadcrumbs: [Breadcrumb]!
+        relatedArticles: [RelatedArticle]!
       }
 
       type MdxFrontmatter {
@@ -113,6 +120,29 @@ const gatsbyNode: GatsbyNode = {
       return breadcrumbs;
     };
 
+    const getRelatedArticles = (node: MdxNode, nodeModel: NodeModel): RelatedArticle[] => {
+      const nodes = nodeModel.getAllNodes<MdxNode>({ type: 'Mdx' });
+
+      return node.frontmatter
+        .related_articles!.map((relatedArticle) => {
+          if (typeof relatedArticle === 'string') {
+            const relatedNode = nodes.find((mdxNode) => getPageSlug(mdxNode, nodeModel) === relatedArticle);
+            if (relatedNode) {
+              return {
+                title: relatedNode.frontmatter.title,
+                url: `/${getPageSlug(relatedNode, nodeModel)}`,
+                isRelative: true
+              };
+            }
+
+            return undefined;
+          }
+
+          return relatedArticle;
+        })
+        .filter(Boolean) as RelatedArticle[];
+    };
+
     const resolvers: Resolvers = {
       Mdx: {
         slug: {
@@ -158,6 +188,16 @@ const gatsbyNode: GatsbyNode = {
               nodes,
               nodeModel
             );
+          }
+        },
+
+        relatedArticles: {
+          resolve(node: Node, _, { nodeModel }): RelatedArticle[] {
+            if ((node as MdxNode).frontmatter.related_articles) {
+              return getRelatedArticles(node as MdxNode, nodeModel);
+            }
+
+            return [];
           }
         }
       },
