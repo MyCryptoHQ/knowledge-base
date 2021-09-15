@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import Breadcrumbs from '../components/Breadcrumbs';
 import MetaData from '../components/MetaData';
+import PageArticles from '../components/PageArticles';
 import PageBody from '../components/PageBody';
 import PageFooter from '../components/PageFooter/PageFooter';
 import PageHeader from '../components/PageHeader/PageHeader';
@@ -55,6 +56,7 @@ const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
               dateModified={mdx.frontmatter.dateModified}
             />
             <PageBody body={mdx.body} />
+            {mdx.relatedArticles && <PageArticles relatedArticles={mdx.relatedArticles} />}
           </Article>
           <PageSidebar />
         </Wrapper>
@@ -80,6 +82,11 @@ export const query = graphql`
       breadcrumbs {
         title
         slug
+      }
+      relatedArticles {
+        title
+        url
+        isRelative
       }
     }
   }
