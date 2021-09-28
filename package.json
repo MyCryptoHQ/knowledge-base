@@ -10,7 +10,7 @@
     "@ethersproject/bignumber": "^5.0.13",
     "@fontsource/lato": "^4.1.0",
     "@fontsource/source-code-pro": "^4.1.0",
-    "@mycrypto/ui": "^0.24.1",
+    "@mycrypto/ui": "^1.2.0",
     "bignumber.js": "^9.0.1",
     "isomorphic-unfetch": "^3.1.0",
     "polished": "^4.1.0",
