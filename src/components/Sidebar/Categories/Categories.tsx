@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { FEATURED_CATEGORIES } from '../../../config/categories';
 import { Yaml } from '../../../types/category';
-import Link from '../../Link';
+import { Link } from '../../Link';
 import Heading from '../../ui/Heading';
 import List from '../../ui/List';
 import ListItem from '../../ui/ListItem';
@@ -23,7 +23,7 @@ const Categories: FunctionComponent = () => {
   const { allYaml } = useStaticQuery<QueryData>(
     graphql`
       query {
-        allYaml(filter: { categoryId: { eq: null } }, sort: { fields: [priority], order: DESC }) {
+        allYaml(filter: { categoryId: { eq: null } }) {
           nodes {
             title
             slug

@@ -1,17 +1,13 @@
 import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import Breadcrumbs from '../components/Breadcrumbs';
-import MetaData from '../components/MetaData';
+import { Page as PageContainer, Section } from '../components';
 import PageArticles from '../components/PageArticles';
 import PageBody from '../components/PageBody';
 import PageFooter from '../components/PageFooter/PageFooter';
 import PageHeader from '../components/PageHeader/PageHeader';
 import PageSidebar from '../components/PageSidebar';
 import Container from '../components/ui/Container';
-import PageContainer from '../components/ui/PageContainer';
-import Section from '../components/ui/Section';
-import SubHeader from '../components/ui/SubHeader';
 import breakpoint from '../theme/breakpoints';
 import { Mdx } from '../types/page';
 
@@ -39,13 +35,7 @@ const Wrapper = styled.div`
 `;
 
 const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
-  <PageContainer>
-    <MetaData title={mdx.frontmatter.title} keyWords={mdx.frontmatter.tags} />
-
-    <SubHeader>
-      <Breadcrumbs breadcrumbs={mdx.breadcrumbs} />
-    </SubHeader>
-
+  <PageContainer title={mdx.frontmatter.title} keyWords={mdx.frontmatter.tags}>
     <Section>
       <Container maxWidth="120rem">
         <Wrapper>

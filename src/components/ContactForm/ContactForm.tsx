@@ -1,10 +1,9 @@
-import { Button } from '@mycrypto/ui';
+import { Button , Input } from '@mycrypto/ui';
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react';
 import Recaptcha from 'react-google-recaptcha';
 import { validate } from 'superstruct';
 import { FORM_TYPES, FormType } from '../../config/contact-form';
 import { useSiteMetadata } from '../../hooks';
-import Input from '../ui/Input';
 import Text from '../ui/Text';
 import Field from './Field';
 import InlineField from './InlineField';
@@ -14,14 +13,14 @@ interface FormData {
 }
 
 const ContactForm: FunctionComponent = () => {
-  const [type, setType] = useState<FormType>(FormType.GENERAL_INQUIRIES);
+  const [type, setType] = useState<FormType>(FormType.GeneralInquiries);
   const [formData, setFormData] = useState<FormData>({});
   const [errors, setErrors] = useState<string[]>([]);
   const [isVerified, setVerified] = useState<boolean>(false);
   const { recaptchaSitekey } = useSiteMetadata();
 
   const handleChangeType = (event: ChangeEvent<HTMLInputElement>) => {
-    setType((event.target.value as unknown) as FormType);
+    setType(event.target.value as unknown as FormType);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -72,7 +71,8 @@ const ContactForm: FunctionComponent = () => {
       encType="multipart/form-data"
       acceptCharset="utf-8"
       action="https://webhook.frontapp.com/forms/myetherwallet/tMA_4BxSeE05bwxsN62-Ue5xP4jz_W7LGlgKNgGTKEchjFw7-6M8q-9q9ZqxsSYDl2BXv7Gx17Vqev1Km0akl8qVZtPM5LYl"
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}
+    >
       <InlineField>
         <Field label="Your name" hasError={errors.includes('name')}>
           <Input

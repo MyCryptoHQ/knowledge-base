@@ -1,14 +1,8 @@
+import { Plural, Trans } from '@lingui/macro';
+import { Body, Box, Breadcrumb, Breadcrumbs, Container, Flex, Image, SubHeading } from '@mycrypto/ui';
 import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
-import styled from 'styled-components';
-import Breadcrumbs from '../components/Breadcrumbs';
-import CategoryOverview from '../components/CategoryOverview';
-import MetaData from '../components/MetaData';
-import Sidebar from '../components/Sidebar';
-import Container from '../components/ui/Container';
-import PageContainer from '../components/ui/PageContainer';
-import Section from '../components/ui/Section';
-import SubHeader from '../components/ui/SubHeader';
+import { Categories, Link, Page, Section } from '../components';
 import { Yaml } from '../types/category';
 import { Mdx } from '../types/page';
 
@@ -24,26 +18,40 @@ interface Props {
   };
 }
 
-const CategoryContainer = styled(Container)`
-  display: flex;
-  flex-direction: row;
-`;
-
 const Category: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
-  <PageContainer>
-    <MetaData title={yaml.title} description={yaml.description} />
-
-    <SubHeader>
-      <Breadcrumbs breadcrumbs={yaml.breadcrumbs} />
-    </SubHeader>
-
-    <Section>
-      <CategoryContainer>
-        <Sidebar articles={allMdx.nodes} />
-        <CategoryOverview category={yaml} />
-      </CategoryContainer>
+  <Page title={yaml.title} description={yaml.description}>
+    <Section marginBottom="4">
+      <Box marginBottom="4">
+        <Breadcrumbs>
+          <Breadcrumb>
+            <Link to="/">
+              <Trans>Homepage</Trans>
+            </Link>
+          </Breadcrumb>
+          {yaml.breadcrumbs.map(({ title, slug }) => (
+            <Breadcrumb key={`breadcrumb-${slug}`}>
+              <Link to={`/${slug}`}>{title}</Link>
+            </Breadcrumb>
+          ))}
+        </Breadcrumbs>
+      </Box>
+      <Flex flexDirection="column" alignItems="center" textAlign="center">
+        <Image src={yaml.parentCategory.icon?.large.publicURL} alt={yaml.title} maxWidth="170px" marginBottom="3" />
+        <Body variant="muted" fontSize="18px" lineHeight="22px" marginBottom="2" sx={{ textTransform: 'uppercase' }}>
+          <Plural value={allMdx.nodes.length} zero="No articles" one="# article" other="# articles" />
+        </Body>
+        <SubHeading fontSize="45px" lineHeight="54px" color="text.primary" marginBottom="3">
+          {yaml.title}
+        </SubHeading>
+        <Body fontSize="24px" lineHeight="29px">
+          {yaml.description}
+        </Body>
+      </Flex>
     </Section>
-  </PageContainer>
+    <Container flex="1">
+      <Categories exclude={yaml.slug} marginBottom="5" />
+    </Container>
+  </Page>
 );
 
 export default Category;
@@ -54,6 +62,13 @@ export const query = graphql`
       title
       slug
       description
+      parentCategory {
+        icon {
+          large {
+            publicURL
+          }
+        }
+      }
       categories {
         title
         slug

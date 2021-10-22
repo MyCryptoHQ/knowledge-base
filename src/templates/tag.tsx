@@ -1,14 +1,10 @@
 import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import Breadcrumbs from '../components/Breadcrumbs';
-import MetaData from '../components/MetaData';
+import { Page, Section } from '../components';
 import Sidebar from '../components/Sidebar';
 import TagOverview from '../components/TagOverview';
 import Container from '../components/ui/Container';
-import PageContainer from '../components/ui/PageContainer';
-import Section from '../components/ui/Section';
-import SubHeader from '../components/ui/SubHeader';
 import { Mdx } from '../types/page';
 
 interface Props {
@@ -31,22 +27,14 @@ const TagContainer = styled(Container)`
 `;
 
 const Tag: FunctionComponent<Props> = ({ data: { allMdx, articles }, pageContext: { tagName } }) => (
-  <PageContainer>
-    <MetaData title={tagName} />
-
-    <SubHeader>
-      <Breadcrumbs
-        breadcrumbs={[{ title: `Tag: ${tagName}`, slug: `tag/${tagName.toLowerCase().replace(/\\s/g, '-')}` }]}
-      />
-    </SubHeader>
-
+  <Page title={tagName}>
     <Section>
       <TagContainer>
         <Sidebar articles={articles.nodes} />
         <TagOverview tagName={tagName} pages={allMdx.nodes} />
       </TagContainer>
     </Section>
-  </PageContainer>
+  </Page>
 );
 
 export default Tag;

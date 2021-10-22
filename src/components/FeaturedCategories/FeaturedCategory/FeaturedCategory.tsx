@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import breakpoint from '../../../theme/breakpoints';
 import { Yaml } from '../../../types/category';
-import Link from '../../Link';
+import { Link } from '../../Link';
 import Heading from '../../ui/Heading';
 import Text from '../../ui/Text';
 
@@ -28,7 +28,7 @@ const Wrapper = styled.div`
     box-shadow: 0 4px 9px -2px rgba(0, 0, 0, 0.2);
 
     ${Heading} {
-      color: ${({ theme }) => theme.primary};
+      color: ${({ theme }) => theme.colors.primary};
     }
   }
 

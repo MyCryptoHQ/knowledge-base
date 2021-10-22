@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { MYCRYPTO_EMAIL } from '../../config/links';
 import breakpoint from '../../theme/breakpoints';
-import Link from '../Link';
+import { Link } from '../Link';
 import Heading from '../ui/Heading';
 import Text from '../ui/Text';
 

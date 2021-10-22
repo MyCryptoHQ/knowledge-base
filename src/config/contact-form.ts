@@ -9,23 +9,23 @@ const FormObject = {
 };
 
 export enum FormType {
-  GENERAL_INQUIRIES = 0,
-  ISSUES = 1,
-  FEEDBACK = 2
+  GeneralInquiries = 0,
+  Issues = 1,
+  Feedback = 2
 }
 
 export const FORM_TYPES = {
-  [FormType.GENERAL_INQUIRIES]: {
+  [FormType.GeneralInquiries]: {
     name: 'General Inquiries',
     component: GeneralForm,
     schema: object({ ...FormObject, ...GeneralObject })
   },
-  [FormType.ISSUES]: {
+  [FormType.Issues]: {
     name: 'Issues with MyCrypto or the blockchain',
     component: IssuesForm,
     schema: object({ ...FormObject, ...IssuesObject })
   },
-  [FormType.FEEDBACK]: {
+  [FormType.Feedback]: {
     name: 'Feedback about MyCrypto',
     component: FeedbackForm,
     schema: object({ ...FormObject, ...FeedbackObject })

@@ -1,0 +1,82 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2021-10-19 12:13+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/components/Header.tsx:21
+msgid "Contact"
+msgstr ""
+
+#: src/components/Hero.tsx:37
+msgid "For Developers/Contributors"
+msgstr ""
+
+#: src/components/Hero.tsx:32
+msgid "General Knowledge"
+msgstr ""
+
+#: src/components/Header.tsx:10
+#~ msgid "Home"
+#~ msgstr ""
+
+#: src/components/Hero.tsx:27
+msgid "How to Stay Safe"
+msgstr ""
+
+#: src/components/Hero.tsx:22
+msgid "How-To Guides"
+msgstr ""
+
+#: src/components/Header.tsx:24
+msgid "Latest"
+msgstr ""
+
+#: src/templates/index.tsx:28
+msgid "Latest Articles"
+msgstr ""
+
+#: src/templates/index.tsx:22
+msgid "Popular Articles"
+msgstr ""
+
+#: src/components/Article.tsx:33
+msgid "Read Now"
+msgstr ""
+
+#: src/components/Search.tsx:42
+msgid "Search"
+msgstr ""
+
+#: src/components/Hero.tsx:49
+msgid "Search or browse for articles to help you get started or get un-stuck."
+msgstr ""
+
+#: src/components/Hero.tsx:17
+msgid "Troubleshooting Issues"
+msgstr ""
+
+#: src/components/Search.tsx:38
+msgid "Try \"Cancel Transaction\" or \"MetaMask\""
+msgstr ""
+
+#: src/components/Hero.tsx:46
+msgid "What can we help you with?"
+msgstr ""
+
+#: src/components/Header.tsx:10
+msgid "app.mycrypto.com"
+msgstr ""
+
+#: src/components/Article.tsx:22
+msgid "{0} Min Read"
+msgstr ""

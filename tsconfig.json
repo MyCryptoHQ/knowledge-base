@@ -13,6 +13,6 @@
     "skipLibCheck": true,
     "lib": ["dom", "es2019.array"]
   },
-  "include": ["./src/**/*", "./gatsby/**/*"],
+  "include": ["./src/**/*", "./config/**/*", "./gatsby-node.ts"],
   "exclude": ["node_modules"]
 }

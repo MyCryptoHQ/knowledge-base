@@ -1,6 +1,6 @@
+import { Input } from '@mycrypto/ui';
 import { ChangeEvent, FunctionComponent } from 'react';
 import { optional, string } from 'superstruct';
-import Input from '../../ui/Input';
 import Text from '../../ui/Text';
 import Field from '../Field';
 

@@ -1,7 +1,7 @@
+import { Input } from '@mycrypto/ui';
 import BigNumber from 'bignumber.js';
 import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Input, { InputContainer, StyledInput } from '../../../ui/Input';
 import Text from '../../../ui/Text';
 
 const isNumeric = (value: string): boolean => {
@@ -25,10 +25,6 @@ const UnitContainer = styled.label`
   display: flex;
   flex-direction: row;
   align-items: center;
-
-  ${InputContainer}, ${StyledInput} {
-    flex: 1;
-  }
 `;
 
 const UnitLabel = styled(Text)`

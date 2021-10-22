@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { PageResult } from '../../types/page';
-import Link from '../Link';
+import { Link } from '../Link';
 import Tags, { TagItem } from '../PageHeader/Tags';
 import Heading from '../ui/Heading';
 import Text from '../ui/Text';

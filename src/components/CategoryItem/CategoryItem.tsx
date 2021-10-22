@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import breakpoint from '../../theme/breakpoints';
 import { Yaml } from '../../types/category';
 import CategoryItemCount from '../CategoryItemCount';
-import Link from '../Link';
+import { Link } from '../Link';
 import Heading from '../ui/Heading';
 
 interface Props {

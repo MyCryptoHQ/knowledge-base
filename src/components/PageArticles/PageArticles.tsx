@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { RelatedArticle } from '../../types/page';
-import Link from '../Link';
+import { Link } from '../Link';
 import H2 from '../markdown/default/H2';
 import ListItem from '../markdown/default/List/ListItem';
 import UnorderedList from '../markdown/default/List/UnorderedList';

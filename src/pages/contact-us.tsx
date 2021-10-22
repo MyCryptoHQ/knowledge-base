@@ -1,24 +1,13 @@
 import { FunctionComponent } from 'react';
-import Breadcrumbs from '../components/Breadcrumbs';
+import { Link, Page, Section } from '../components';
 import ContactForm from '../components/ContactForm';
-import Link from '../components/Link';
-import MetaData from '../components/MetaData';
 import Alert from '../components/ui/Alert';
 import Container from '../components/ui/Container';
 import Heading from '../components/ui/Heading';
-import PageContainer from '../components/ui/PageContainer';
-import Section from '../components/ui/Section';
-import SubHeader from '../components/ui/SubHeader';
 import Text from '../components/ui/Text';
 
 const ContactUs: FunctionComponent = () => (
-  <PageContainer>
-    <MetaData title="Contact us" />
-
-    <SubHeader>
-      <Breadcrumbs breadcrumbs={[{ title: 'Contact us', slug: 'contact-us' }]} />
-    </SubHeader>
-
+  <Page title="Contact us">
     <Section>
       <Container>
         <Heading as="h2">Contact us</Heading>
@@ -49,7 +38,7 @@ const ContactUs: FunctionComponent = () => (
         <ContactForm />
       </Container>
     </Section>
-  </PageContainer>
+  </Page>
 );
 
 export default ContactUs;

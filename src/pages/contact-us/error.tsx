@@ -1,22 +1,11 @@
 import { FunctionComponent } from 'react';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import Link from '../../components/Link';
-import MetaData from '../../components/MetaData';
+import { Link, Page, Section } from '../../components';
 import Container from '../../components/ui/Container';
 import Heading from '../../components/ui/Heading';
-import PageContainer from '../../components/ui/PageContainer';
-import Section from '../../components/ui/Section';
-import SubHeader from '../../components/ui/SubHeader';
 import Text from '../../components/ui/Text';
 
 const ErrorPage: FunctionComponent = () => (
-  <PageContainer>
-    <MetaData title="Error · Contact us" noIndex={true} />
-
-    <SubHeader>
-      <Breadcrumbs breadcrumbs={[{ title: 'Contact us', slug: 'contact-us' }]} />
-    </SubHeader>
-
+  <Page title="Error · Contact us" noIndex={true}>
     <Section>
       <Container>
         <Heading as="h2">Contact us</Heading>
@@ -30,7 +19,7 @@ const ErrorPage: FunctionComponent = () => (
         </Text>
       </Container>
     </Section>
-  </PageContainer>
+  </Page>
 );
 
 export default ErrorPage;

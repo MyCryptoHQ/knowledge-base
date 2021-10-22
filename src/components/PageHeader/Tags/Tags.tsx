@@ -1,8 +1,7 @@
-import { lighten } from 'polished';
 import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { encodeTag } from '../../../utils/tags';
-import Link from '../../Link';
+import { Link } from '../../Link';
 
 interface Props {
   tags: string[];
@@ -15,14 +14,13 @@ export const TagsContainer = styled.ul`
   padding: 0;
 `;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Tag = styled<any>(Link)`
+const Tag = styled(Link)`
   display: inline-block;
   margin: 0 0.3rem;
   padding: 0.25rem 0.5rem;
   background: ${({ theme }) => theme.tagBackground};
   border-radius: ${({ theme }) => theme.borderRadius};
-  color: ${({ theme }) => lighten(0.1, theme.text)} !important;
+  color: ${({ theme }) => theme.colors.text.primary} !important;
   font-weight: normal !important;
 `;
 

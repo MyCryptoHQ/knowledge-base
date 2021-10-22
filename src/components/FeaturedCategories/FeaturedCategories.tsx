@@ -29,7 +29,7 @@ const FeaturedCategories: FunctionComponent = () => {
   const { allYaml } = useStaticQuery<QueryData>(
     graphql`
       query {
-        allYaml(filter: { categoryId: { eq: null } }, sort: { fields: [priority], order: DESC }) {
+        allYaml(filter: { categoryId: { eq: null } }) {
           nodes {
             title
             slug

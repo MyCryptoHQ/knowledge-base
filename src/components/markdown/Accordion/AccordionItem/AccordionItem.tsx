@@ -1,7 +1,6 @@
-import { transitions } from 'polished';
 import { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
-import Icon from '../../../ui/Icon';
+import { Icon } from '../../../../../../ui';
 import Text from '../../../ui/Text';
 import Heading from '../../default/Heading';
 
@@ -18,7 +17,6 @@ const Container = styled.li<ContainerProps>`
   padding: 1.65em 3.375em;
   background: ${({ extended }) => (extended ? 'white' : 'none')};
   border-bottom: 1px solid ${({ theme }) => theme.actionPanelBorder};
-  ${transitions(['background'], '0.3s')};
 
   :first-of-type {
     border-top: 1px solid ${({ theme }) => theme.actionPanelBorder};
@@ -56,7 +54,7 @@ const AccordionItem: FunctionComponent<Props> = ({ title, children }) => {
     <Container extended={extended}>
       <ItemHeading onClick={handeToggle}>
         <Heading as="h2">{title}</Heading>
-        <Icon name={extended ? 'Contract' : 'Expand'} icon={extended ? 'minus' : 'plus'} />
+        <Icon name={extended ? 'Contract' : 'Expand'} type={'arrow'} />
       </ItemHeading>
       <ItemContent extended={extended}>{children}</ItemContent>
     </Container>

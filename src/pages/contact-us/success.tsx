@@ -1,21 +1,11 @@
 import { FunctionComponent } from 'react';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import MetaData from '../../components/MetaData';
+import { Page, Section } from '../../components';
 import Container from '../../components/ui/Container';
 import Heading from '../../components/ui/Heading';
-import PageContainer from '../../components/ui/PageContainer';
-import Section from '../../components/ui/Section';
-import SubHeader from '../../components/ui/SubHeader';
 import Text from '../../components/ui/Text';
 
 const SuccessPage: FunctionComponent = () => (
-  <PageContainer>
-    <MetaData title="Success · Contact us" noIndex={true} />
-
-    <SubHeader>
-      <Breadcrumbs breadcrumbs={[{ title: 'Contact us', slug: 'contact-us' }]} />
-    </SubHeader>
-
+  <Page title="Success · Contact us" noIndex={true}>
     <Section>
       <Container>
         <Heading as="h2">Contact us</Heading>
@@ -23,7 +13,7 @@ const SuccessPage: FunctionComponent = () => (
         <Text>Your message has been sent. We will get back to you as soon as possible!</Text>
       </Container>
     </Section>
-  </PageContainer>
+  </Page>
 );
 
 export default SuccessPage;

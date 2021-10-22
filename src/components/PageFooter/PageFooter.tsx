@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import githubIcon from '../../assets/images/icons/social/github-black.svg';
-import Link from '../Link';
+import { Link } from '../Link';
+import { Section } from '../Section';
 import Container from '../ui/Container';
-import Section from '../ui/Section';
 import Text from '../ui/Text';
 
 interface Props {

@@ -16,7 +16,7 @@ const ArticleWrapper = styled.div`
       margin-bottom: 1.5rem;
 
       h3 {
-        color: ${theme.primary};
+        color: ${theme.colors.primary};
       }
     `};
 

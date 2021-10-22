@@ -18,7 +18,7 @@ interface Props {
 const Heading = styled.h1<Props>`
   margin-top: 0;
   margin-bottom: 2.5rem;
-  color: ${({ theme }) => theme.secondary};
+  color: ${({ theme }) => theme.colors.secondary};
   font-size: ${({ as = 'h1' }) => sizes[as]};
 `;
 

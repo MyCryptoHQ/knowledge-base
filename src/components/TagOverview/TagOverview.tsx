@@ -15,7 +15,7 @@ const TagWrapper = styled.section`
 `;
 
 const OverviewHeading = styled(Heading)`
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 interface Props {

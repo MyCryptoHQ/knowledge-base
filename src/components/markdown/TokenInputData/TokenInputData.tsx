@@ -1,9 +1,9 @@
 import { defaultAbiCoder } from '@ethersproject/abi';
+import { Input } from '@mycrypto/ui';
 import BigNumber from 'bignumber.js';
 import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
 import Field from '../../ContactForm/Field';
-import Link from '../../Link';
-import Input from '../../ui/Input';
+import { Link } from '../../Link';
 
 const TRANSFER_ID = 'a9059cbb';
 

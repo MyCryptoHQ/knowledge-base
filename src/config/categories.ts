@@ -1,8 +1,13 @@
-import first from '../assets/images/home/1.svg';
-import second from '../assets/images/home/2.svg';
-import third from '../assets/images/home/3.svg';
-import fourth from '../assets/images/home/4.svg';
-import fifth from '../assets/images/home/5.svg';
+import { BadgeType } from '@mycrypto/ui';
+
+// TODO: Move to category YAML files
+export const CATEGORY_COLOURS: Record<string, BadgeType> = {
+  troubleshooting: 'success',
+  developers: 'info',
+  'how-to': 'action',
+  'staying-safe': 'warning',
+  'general-knowledge': 'error'
+};
 
 /**
  * List of categories shown on the home page and in the sidebar. Each item should have the slug of
@@ -10,23 +15,18 @@ import fifth from '../assets/images/home/5.svg';
  */
 export const FEATURED_CATEGORIES = [
   {
-    slug: 'troubleshooting',
-    image: first
+    slug: 'troubleshooting'
   },
   {
-    slug: 'how-to',
-    image: second
+    slug: 'how-to'
   },
   {
-    slug: 'staying-safe',
-    image: third
+    slug: 'staying-safe'
   },
   {
-    slug: 'general-knowledge',
-    image: fourth
+    slug: 'general-knowledge'
   },
   {
-    slug: 'developers',
-    image: fifth
+    slug: 'developers'
   }
 ];
