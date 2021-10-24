@@ -46,8 +46,8 @@ export const query = graphql`
         excerpt(pruneLength: 200)
         timeToRead
         category {
-          title
           parentCategory {
+            title
             slug
           }
         }
@@ -67,8 +67,8 @@ export const query = graphql`
         excerpt(pruneLength: 200)
         timeToRead
         category {
-          title
           parentCategory {
+            title
             slug
           }
         }

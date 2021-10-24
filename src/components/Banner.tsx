@@ -23,7 +23,7 @@ export const Banner: FunctionComponent<BannerProps & FlexProps> = ({ type, child
     sx={{
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'border',
+      borderColor: 'border.light',
       borderRadius: 'badge',
       position: 'relative'
     }}

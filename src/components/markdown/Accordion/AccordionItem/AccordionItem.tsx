@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
 import { Icon } from '../../../../../../ui';
 import Text from '../../../ui/Text';
-import Heading from '../../default/Heading';
+import { H2 } from '../../default/H2';
 
 interface Props {
   title: string;
@@ -28,11 +28,6 @@ const ItemHeading = styled.div`
   cursor: pointer;
   align-items: center;
   justify-content: space-between;
-
-  ${Heading} {
-    margin: 0;
-    font-size: 1.8rem;
-  }
 `;
 
 const ItemContent = styled.div<ContainerProps>`
@@ -53,7 +48,7 @@ const AccordionItem: FunctionComponent<Props> = ({ title, children }) => {
   return (
     <Container extended={extended}>
       <ItemHeading onClick={handeToggle}>
-        <Heading as="h2">{title}</Heading>
+        <H2>{title}</H2>
         <Icon name={extended ? 'Contract' : 'Expand'} type={'arrow'} />
       </ItemHeading>
       <ItemContent extended={extended}>{children}</ItemContent>

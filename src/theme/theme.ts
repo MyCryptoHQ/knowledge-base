@@ -3,9 +3,13 @@ import merge from 'lodash.merge';
 
 export const theme = merge(defaultTheme, {
   colors: {
-    border: '#e3e3e3',
+    border: { light: '#e3e3e3', dark: '#b5bfc7' },
     background: {
-      page: '#ffffff'
+      page: '#ffffff',
+      quote: '#a582ff'
+    },
+    text: {
+      accent: '#8f8f8f'
     }
   }
 });
