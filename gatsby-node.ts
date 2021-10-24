@@ -13,9 +13,7 @@ import { GatsbyIterable } from 'gatsby/dist/datastore/common/iterable';
 import { titleCase } from 'title-case';
 import { parse } from 'yaml';
 import { POPULAR_ARTICLES } from './src/config/articles';
-import { Breadcrumb } from './src/types/breadcrumb';
-import { YamlNode } from './src/types/category';
-import { MdxNode, RelatedArticle } from './src/types/page';
+import { Breadcrumb, YamlNode, MdxNode, RelatedArticle } from './src/types';
 import { encodeTag } from './src/utils';
 
 const REDIRECTS_FILE = resolve(__dirname, './content/redirects.yml');
@@ -189,11 +187,11 @@ const gatsbyNode: GatsbyNode = {
 
               return [
                 ...entries.map((entry) => ({
-                  title: entry.frontmatter.title,
+                  title: entry.frontmatter.title ?? 'foo',
                   url: `/${getPageSlug(entry, nodeModel)}`,
                   isRelative: true
                 })),
-                mdxNode.frontmatter.related_articles.filter((relatedArticle) => typeof relatedArticle !== 'string')
+                ...mdxNode.frontmatter.related_articles.filter((relatedArticle) => typeof relatedArticle !== 'string')
               ].filter(Boolean) as RelatedArticle[];
             }
 
