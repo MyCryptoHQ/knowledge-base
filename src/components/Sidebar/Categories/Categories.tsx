@@ -23,7 +23,7 @@ const Categories: FunctionComponent = () => {
   const { allYaml } = useStaticQuery<QueryData>(
     graphql`
       query {
-        allYaml(filter: { categoryId: { eq: null } }) {
+        allYaml(filter: { category: { slug: { eq: null } } }) {
           nodes {
             title
             slug

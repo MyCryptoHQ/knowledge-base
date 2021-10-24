@@ -6,9 +6,10 @@ import {
   CreateSchemaCustomizationArgs,
   GatsbyNode,
   Node,
-  Resolvers,
-  NodeModel
+  NodeModel,
+  Resolvers
 } from 'gatsby';
+import { GatsbyIterable } from 'gatsby/dist/datastore/common/iterable';
 import { titleCase } from 'title-case';
 import { parse } from 'yaml';
 import { POPULAR_ARTICLES } from './src/config/articles';
@@ -49,7 +50,6 @@ const gatsbyNode: GatsbyNode = {
       }
 
       type Mdx implements Node {
-        categoryId: ID!
         category: Yaml!
         slug: String!
         frontmatter: MdxFrontmatter!
@@ -62,10 +62,9 @@ const gatsbyNode: GatsbyNode = {
       }
 
       type Yaml implements Node {
-        categoryId: ID
         title: String! @titleCase
         slug: String!
-        category: Yaml @link(by: "id", from: "categoryId")
+        category: Yaml
         parentCategory: Yaml
         pages: [Mdx]
         categories: [Yaml]
@@ -88,7 +87,7 @@ const gatsbyNode: GatsbyNode = {
   /**
    * Adds resolvers for the added GraphQL fields.
    */
-  async createResolvers({ createResolvers, reporter }: CreateResolversArgs): Promise<void> {
+  async createResolvers({ createResolvers }: CreateResolversArgs): Promise<void> {
     const getPageSlug = (node: Node, nodeModel: NodeModel): string => {
       const { relativePath } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
       return relativePath.replace(/\.md$/, '');
@@ -99,13 +98,23 @@ const gatsbyNode: GatsbyNode = {
       return parent.relativePath.replace(/\/category\.yml$/, '');
     };
 
-    const getBreadcrumbs = (breadcrumbs: Breadcrumb[], nodes: YamlNode[], nodeModel: NodeModel): Breadcrumb[] => {
+    const getBreadcrumbs = async (breadcrumbs: Breadcrumb[], nodeModel: NodeModel): Promise<Breadcrumb[]> => {
       const parentSlug = join(breadcrumbs[0].slug, '..');
       if (parentSlug === '.') {
         return breadcrumbs;
       }
 
-      const parent = nodes.find((node) => getCategorySlug(node, nodeModel) === parentSlug);
+      const parent = await nodeModel.findOne<YamlNode>({
+        type: 'Yaml',
+        query: {
+          filter: {
+            slug: {
+              eq: parentSlug
+            }
+          }
+        }
+      });
+
       if (parent) {
         const newBreadcrumbs = [
           {
@@ -115,33 +124,10 @@ const gatsbyNode: GatsbyNode = {
           ...breadcrumbs
         ];
 
-        return getBreadcrumbs(newBreadcrumbs, nodes, nodeModel);
+        return getBreadcrumbs(newBreadcrumbs, nodeModel);
       }
 
       return breadcrumbs;
-    };
-
-    const getRelatedArticles = (node: MdxNode, nodeModel: NodeModel): RelatedArticle[] => {
-      const nodes = nodeModel.getAllNodes<MdxNode>({ type: 'Mdx' });
-
-      return node.frontmatter
-        .related_articles!.map((relatedArticle) => {
-          if (typeof relatedArticle === 'string') {
-            const relatedNode = nodes.find((mdxNode) => getPageSlug(mdxNode, nodeModel) === relatedArticle);
-            if (relatedNode) {
-              return {
-                title: relatedNode.frontmatter.title,
-                url: `/${getPageSlug(relatedNode, nodeModel)}`,
-                isRelative: true
-              };
-            }
-
-            return undefined;
-          }
-
-          return relatedArticle;
-        })
-        .filter(Boolean) as RelatedArticle[];
     };
 
     const resolvers: Resolvers = {
@@ -150,35 +136,25 @@ const gatsbyNode: GatsbyNode = {
           resolve: (node: Node, _, { nodeModel }) => getPageSlug(node, nodeModel)
         },
 
-        categoryId: {
-          resolve(node: Node, _, { nodeModel }): string {
-            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
-
-            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
-            const category = nodes.find((categoryNode) => {
-              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
-              return parent.relativeDirectory === relativeDirectory;
-            })!;
-
-            return category.id;
-          }
-        },
-
         category: {
-          resolve(node: Node, _, { nodeModel }): Node {
+          async resolve(node: Node, _, { nodeModel }): Promise<Node | undefined> {
             const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
 
-            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
-            return nodes.find((categoryNode) => {
-              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
-              return parent.relativeDirectory === relativeDirectory;
-            })!;
+            return nodeModel.findOne({
+              type: 'Yaml',
+              query: {
+                filter: {
+                  slug: {
+                    eq: relativeDirectory
+                  }
+                }
+              }
+            });
           }
         },
 
         breadcrumbs: {
-          resolve(node: Node, _, { nodeModel }): Breadcrumb[] {
-            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
+          async resolve(node: Node, _, { nodeModel }): Promise<Breadcrumb[]> {
             return getBreadcrumbs(
               [
                 {
@@ -186,16 +162,39 @@ const gatsbyNode: GatsbyNode = {
                   slug: getPageSlug(node, nodeModel)
                 }
               ],
-              nodes,
               nodeModel
             );
           }
         },
 
         relatedArticles: {
-          resolve(node: Node, _, { nodeModel }): RelatedArticle[] {
-            if ((node as MdxNode).frontmatter.related_articles) {
-              return getRelatedArticles(node as MdxNode, nodeModel);
+          async resolve(node: Node, _, { nodeModel }): Promise<RelatedArticle[]> {
+            const mdxNode = node as MdxNode;
+
+            if (mdxNode.frontmatter.related_articles) {
+              const slugs = mdxNode.frontmatter.related_articles.filter(
+                (relatedArticle) => typeof relatedArticle === 'string'
+              ) as string[];
+
+              const { entries } = await nodeModel.findAll<MdxNode>({
+                type: 'Mdx',
+                query: {
+                  filter: {
+                    slug: {
+                      in: slugs
+                    }
+                  }
+                }
+              });
+
+              return [
+                ...entries.map((entry) => ({
+                  title: entry.frontmatter.title,
+                  url: `/${getPageSlug(entry, nodeModel)}`,
+                  isRelative: true
+                })),
+                mdxNode.frontmatter.related_articles.filter((relatedArticle) => typeof relatedArticle !== 'string')
+              ].filter(Boolean) as RelatedArticle[];
             }
 
             return [];
@@ -208,27 +207,11 @@ const gatsbyNode: GatsbyNode = {
           resolve: (node: Node, _, { nodeModel }) => getCategorySlug(node, nodeModel)
         },
 
-        categoryId: {
-          resolve(node: Node, _, { nodeModel }): string | undefined {
-            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
-            const parentDirectory = join(relativeDirectory, '..');
-
-            if (parentDirectory === '.') {
-              return;
-            }
-
-            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
-            const category = nodes.find((categoryNode) => {
-              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
-              return parent.relativeDirectory === parentDirectory;
-            });
-
-            return category?.id;
-          }
-        },
-
+        /**
+         * Top level category.
+         */
         parentCategory: {
-          resolve(node: Node, _, { nodeModel }): Node | undefined {
+          async resolve(node: Node, _, { nodeModel }): Promise<Node | undefined> {
             const slug = getCategorySlug(node, nodeModel);
             const parentSlug = slug.split('/')[0];
 
@@ -236,16 +219,24 @@ const gatsbyNode: GatsbyNode = {
               return node;
             }
 
-            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
-            return nodes.find((categoryNode) => {
-              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
-              return parent.relativeDirectory === parentSlug;
+            return nodeModel.findOne({
+              type: 'Yaml',
+              query: {
+                filter: {
+                  slug: {
+                    eq: parentSlug
+                  }
+                }
+              }
             });
           }
         },
 
+        /**
+         * Direct parent category.
+         */
         category: {
-          resolve(node: Node, _, { nodeModel }): Node | undefined {
+          async resolve(node: Node, _, { nodeModel }): Promise<Node | undefined> {
             const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
             const parentDirectory = join(relativeDirectory, '..');
 
@@ -253,63 +244,75 @@ const gatsbyNode: GatsbyNode = {
               return;
             }
 
-            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
-            return nodes.find((categoryNode) => {
-              const parent = nodeModel.getNodeById<FileNode>({ id: categoryNode.parent! });
-              return parent.relativeDirectory === parentDirectory;
+            return nodeModel.findOne({
+              type: 'Yaml',
+              query: {
+                filter: {
+                  slug: {
+                    eq: parentDirectory
+                  }
+                }
+              }
             });
           }
         },
 
+        /**
+         * Child categories.
+         */
         categories: {
-          resolve(node: Node, _, { nodeModel }): Node[] | undefined {
-            const slug = getCategorySlug(node, nodeModel);
-            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
-
+          async resolve(node: Node, _, { nodeModel }): Promise<GatsbyIterable<Node> | undefined> {
             if (!node.categories) {
               return;
             }
 
-            return (node.categories as string[])
-              .map((category) => `${slug}/${category}`)
-              .map((categorySlug) => {
-                const category = nodes.find(
-                  (categoryNode) => categorySlug === getCategorySlug(categoryNode, nodeModel)
-                );
-                if (!category) {
-                  reporter.panic(`Category ${categorySlug} specified, but not found`);
-                }
+            const slug = getCategorySlug(node, nodeModel);
+            const slugs = (node.categories as string[]).map((category) => `${slug}/${category}`);
 
-                return category!;
-              });
+            const { entries } = await nodeModel.findAll({
+              type: 'Yaml',
+              query: {
+                filter: {
+                  slug: {
+                    in: slugs
+                  }
+                }
+              }
+            });
+
+            return entries;
           }
         },
 
+        /**
+         * Child pages.
+         */
         pages: {
-          resolve(node: Node, _, { nodeModel }): Node[] | undefined {
-            const slug = getCategorySlug(node, nodeModel);
-            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Mdx' });
-
+          async resolve(node: Node, _, { nodeModel }): Promise<GatsbyIterable<Node> | undefined> {
             if (!node.articles) {
               return;
             }
 
-            return (node.articles as string[])
-              .map((page) => `${slug}/${page}`)
-              .map((pageNode) => {
-                const page = nodes.find((categoryNode) => pageNode === getPageSlug(categoryNode, nodeModel));
-                if (!page) {
-                  reporter.panic(`Page ${pageNode} specified, but not found`);
-                }
+            const slug = getCategorySlug(node, nodeModel);
+            const slugs = (node.articles as string[]).map((page) => `${slug}/${page}`);
 
-                return page!;
-              });
+            const { entries } = await nodeModel.findAll({
+              type: 'Mdx',
+              query: {
+                filter: {
+                  slug: {
+                    in: slugs
+                  }
+                }
+              }
+            });
+
+            return entries;
           }
         },
 
         breadcrumbs: {
-          resolve(node: Node, _, { nodeModel }): Breadcrumb[] {
-            const nodes = nodeModel.getAllNodes<YamlNode>({ type: 'Yaml' });
+          async resolve(node: Node, _, { nodeModel }): Promise<Breadcrumb[]> {
             return getBreadcrumbs(
               [
                 {
@@ -317,7 +320,6 @@ const gatsbyNode: GatsbyNode = {
                   slug: getCategorySlug(node, nodeModel)
                 }
               ],
-              nodes,
               nodeModel
             );
           }

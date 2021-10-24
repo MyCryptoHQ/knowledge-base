@@ -5,7 +5,6 @@ import capitalize from './plugins/capitalize';
 
 const config: GatsbyConfig = {
   flags: {
-    DEV_SSR: true,
     FAST_DEV: true
   },
 
@@ -51,14 +50,14 @@ const config: GatsbyConfig = {
             }
           },
           {
+            resolve: 'gatsby-remark-copy-linked-files'
+          },
+          {
             resolve: 'gatsby-remark-external-links',
             options: {
               target: '_blank',
               rel: 'noopener noreferrer'
             }
-          },
-          {
-            resolve: 'gatsby-remark-static-images'
           }
         ],
         plugins: [
