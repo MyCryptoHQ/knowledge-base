@@ -3,7 +3,7 @@ import { Box, Breadcrumb, Breadcrumbs, Container, Flex, SubHeading } from '@mycr
 import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
 import { Label, Link, Markdown, Page as PageContainer, Sidebar } from '../components';
-import { Mdx } from '../types/page';
+import { Mdx } from '../types';
 
 interface Props {
   data: {
@@ -48,7 +48,8 @@ const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
             </Flex>
             <Markdown body={mdx.body} />
           </Box>
-          <Sidebar />
+
+          <Sidebar page={mdx} />
         </Flex>
       </Container>
     </Box>

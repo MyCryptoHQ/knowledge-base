@@ -3,6 +3,7 @@ export * from './Articles';
 export * from './Card';
 export * from './Categories';
 export * from './CategoryButton';
+export * from './Divider';
 export * from './Footer';
 export * from './Header';
 export * from './Hero';
