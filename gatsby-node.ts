@@ -13,7 +13,7 @@ import { GatsbyIterable } from 'gatsby/dist/datastore/common/iterable';
 import { titleCase } from 'title-case';
 import { parse } from 'yaml';
 import { POPULAR_ARTICLES } from './src/config/articles';
-import { Breadcrumb, YamlNode, MdxNode, RelatedArticle } from './src/types';
+import { Breadcrumb, YamlNode, MdxNode } from './src/types';
 import { encodeTag } from './src/utils';
 
 const REDIRECTS_FILE = resolve(__dirname, './content/redirects.yml');
@@ -41,18 +41,12 @@ const gatsbyNode: GatsbyNode = {
         slug: String!
       }
 
-      type RelatedArticle {
-        title: String!
-        url: String!
-        isRelative: Boolean
-      }
-
       type Mdx implements Node {
         category: Yaml!
         slug: String!
         frontmatter: MdxFrontmatter!
         breadcrumbs: [Breadcrumb]!
-        relatedArticles: [RelatedArticle]!
+        relatedArticles: [Mdx]
       }
 
       type MdxFrontmatter {
@@ -166,36 +160,23 @@ const gatsbyNode: GatsbyNode = {
         },
 
         relatedArticles: {
-          async resolve(node: Node, _, { nodeModel }): Promise<RelatedArticle[]> {
+          async resolve(node: Node, _, { nodeModel }): Promise<GatsbyIterable<Node> | undefined> {
             const mdxNode = node as MdxNode;
 
             if (mdxNode.frontmatter.related_articles) {
-              const slugs = mdxNode.frontmatter.related_articles.filter(
-                (relatedArticle) => typeof relatedArticle === 'string'
-              ) as string[];
-
               const { entries } = await nodeModel.findAll<MdxNode>({
                 type: 'Mdx',
                 query: {
                   filter: {
                     slug: {
-                      in: slugs
+                      in: mdxNode.frontmatter.related_articles
                     }
                   }
                 }
               });
 
-              return [
-                ...entries.map((entry) => ({
-                  title: entry.frontmatter.title ?? 'foo',
-                  url: `/${getPageSlug(entry, nodeModel)}`,
-                  isRelative: true
-                })),
-                ...mdxNode.frontmatter.related_articles.filter((relatedArticle) => typeof relatedArticle !== 'string')
-              ].filter(Boolean) as RelatedArticle[];
+              return entries;
             }
-
-            return [];
           }
         }
       },

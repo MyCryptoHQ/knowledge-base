@@ -73,7 +73,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
         </Link>
       </Card>
 
-      {page.relatedArticles?.length > 0 && (
+      {page.relatedArticles && (
         <Card marginBottom="4">
           <SubHeading fontSize="12px" lineHeight="15px" color="text.accent" sx={{ textTransform: 'uppercase' }}>
             <Trans>Related Articles</Trans>
@@ -83,7 +83,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
 
           {page.relatedArticles.map((relatedArticle) => (
             <Flex
-              key={`related-article-${relatedArticle.url}`}
+              key={`related-article-${relatedArticle.slug}`}
               marginBottom="3"
               sx={{
                 ':last-of-type': {
@@ -92,9 +92,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
               }}
             >
               <Icon type="external" width="12px" marginRight="2" flexShrink={0} />
-              <Link to={relatedArticle.url} external={!relatedArticle.isRelative}>
-                {relatedArticle.title}
-              </Link>
+              <Link to={`/${relatedArticle.slug}`}>{relatedArticle.frontmatter.title}</Link>
             </Flex>
           ))}
         </Card>

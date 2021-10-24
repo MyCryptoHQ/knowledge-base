@@ -1,8 +1,8 @@
-import { Trans } from '@lingui/macro';
-import { Box, Breadcrumb, Breadcrumbs, Container, Flex, SubHeading } from '@mycrypto/ui';
+import { t, Trans } from '@lingui/macro';
+import { Body, Box, Breadcrumb, Breadcrumbs, Container, Flex, SubHeading } from '@mycrypto/ui';
 import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
-import { Label, Link, Markdown, Page as PageContainer, Sidebar } from '../components';
+import { Article, Articles, Label, Link, Markdown, Page as PageContainer, Sidebar } from '../components';
 import { Mdx } from '../types';
 
 interface Props {
@@ -51,6 +51,22 @@ const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
 
           <Sidebar page={mdx} />
         </Flex>
+
+        {mdx.relatedArticles && (
+          <Box marginBottom="4">
+            <Articles title={t`Related Articles`}>
+              {mdx.relatedArticles.map((relatedArticle) => (
+                <Article key={relatedArticle.slug} article={relatedArticle} />
+              ))}
+            </Articles>
+          </Box>
+        )}
+
+        <Body fontSize="20px" lineHeight="24px" marginBottom="6">
+          <Trans>
+            Didn't find what you were looking for? <Link to="/contact-us">Contact Us</Link>
+          </Trans>
+        </Body>
       </Container>
     </Box>
   </PageContainer>
@@ -79,9 +95,18 @@ export const query = graphql`
         slug
       }
       relatedArticles {
-        title
-        url
-        isRelative
+        slug
+        excerpt(pruneLength: 200)
+        timeToRead
+        category {
+          parentCategory {
+            title
+            slug
+          }
+        }
+        frontmatter {
+          title
+        }
       }
     }
   }

@@ -26,7 +26,7 @@ export const Article: FunctionComponent<ArticleCardProps> = ({ article }) => {
         <Body marginBottom="3" sx={{ flexGrow: '1' }}>
           {article.excerpt}
         </Body>
-        <Link to={article.slug}>
+        <Link to={`/${article.slug}`}>
           <Button>
             <Trans>Read Now</Trans>
           </Button>
