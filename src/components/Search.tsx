@@ -2,9 +2,11 @@ import { t } from '@lingui/macro';
 import { Box, BoxProps, Input } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
 
-export type SearchProps = BoxProps;
+export interface SearchProps {
+  placeholder?: string;
+}
 
-export const Search: FunctionComponent<SearchProps> = ({ ...props }) => {
+export const Search: FunctionComponent<SearchProps & BoxProps> = ({ placeholder = t`Search here...`, ...props }) => {
   // const searchText = useSelector((state) => state.navigation.searchText);
   // const dispatch = useDispatch();
   //
@@ -35,7 +37,7 @@ export const Search: FunctionComponent<SearchProps> = ({ ...props }) => {
         variant="simple"
         icon="search"
         type="search"
-        placeholder={t`Try "Cancel Transaction" or "MetaMask"`}
+        placeholder={placeholder}
         // value={searchText}
         // onChange={handleChange}
         // onKeyPress={handleKeyPress}

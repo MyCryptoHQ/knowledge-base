@@ -6,7 +6,8 @@ export const theme = merge(defaultTheme, {
     border: { light: '#e3e3e3', dark: '#b5bfc7' },
     background: {
       page: '#ffffff',
-      quote: '#a582ff'
+      quote: '#a582ff',
+      search: '#f0f0f0'
     },
     text: {
       accent: '#8f8f8f',

@@ -1,4 +1,4 @@
-import { Trans } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import { Body, Box, Heading } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
 import { Categories } from './Categories';
@@ -12,7 +12,7 @@ export const Hero: FunctionComponent = () => (
     <Body fontSize="24px">
       <Trans>Search or browse for articles to help you get started or get un-stuck.</Trans>
     </Body>
-    <Search marginTop="5" />
+    <Search marginTop="5" placeholder={t`Try "Cancel Transaction" or "MetaMask"`} />
     <Categories marginTop="48px" />
   </Box>
 );

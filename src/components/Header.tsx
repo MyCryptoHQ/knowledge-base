@@ -12,7 +12,7 @@ export const Header: FunctionComponent = ({ children }) => (
     }
     centerComponents={
       <Link to="/">
-        <Logo />
+        <Logo minWidth={['130px', null, '200px']} maxWidth={['130px', null, '200px']} />
       </Link>
     }
     rightComponents={

@@ -1,4 +1,5 @@
-import { Flex } from '@mycrypto/ui';
+import { Trans } from '@lingui/macro';
+import { Body, Flex, SubHeader } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import '@fontsource/lato/300.css';
@@ -7,6 +8,7 @@ import '@fontsource/lato/700.css';
 import '@fontsource/roboto-mono/400.css';
 import { Footer } from './Footer';
 import { Header } from './Header';
+import { Search } from './Search';
 
 const GlobalStyle = createGlobalStyle`
   html, body, #___gatsby {
@@ -23,7 +25,16 @@ const GlobalStyle = createGlobalStyle`
 export const Layout: FunctionComponent = ({ children }) => (
   <Flex flexDirection="column" minHeight="100vh">
     <GlobalStyle />
-    <Header />
+    <Header>
+      <SubHeader>
+        <Flex alignItems="center">
+          <Body fontSize="14px" marginRight="3">
+            <Trans>What can we help you with?</Trans>
+          </Body>
+          <Search />
+        </Flex>
+      </SubHeader>
+    </Header>
 
     {children}
 
