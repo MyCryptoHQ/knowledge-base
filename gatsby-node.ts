@@ -402,7 +402,7 @@ const gatsbyNode: GatsbyNode = {
           component,
           context: {
             slug,
-            popularArticles: POPULAR_ARTICLES
+            glob: `${slug}/**`
           }
         });
       });

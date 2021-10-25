@@ -3,7 +3,7 @@ import { Body, Box, Breadcrumb, Breadcrumbs, Container, Flex, Image, SubHeading 
 import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
 import { Article, Articles, Categories, Category, Link, Page, Section } from '../components';
-import { Yaml } from '../types';
+import { Mdx, Yaml } from '../types';
 
 interface Props {
   pageContext: {
@@ -11,10 +11,13 @@ interface Props {
   };
   data: {
     yaml: Yaml;
+    allMdx: {
+      nodes: Mdx[];
+    };
   };
 }
 
-const CategoryPage: FunctionComponent<Props> = ({ data: { yaml } }) => (
+const CategoryPage: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
   <Page title={yaml.title} description={yaml.description}>
     <Section marginBottom="4">
       <Box marginBottom="4">
@@ -56,7 +59,19 @@ const CategoryPage: FunctionComponent<Props> = ({ data: { yaml } }) => (
         </Articles>
       )}
 
-      <Category category={yaml} list={yaml.list} />
+      {yaml.list ? (
+        <Category category={yaml} />
+      ) : (
+        <>
+          {allMdx.nodes.length > 0 && (
+            <Articles title={t`Browse All Articles`} marginBottom="5">
+              {allMdx.nodes.map((page) => (
+                <Article key={page.slug} article={page} />
+              ))}
+            </Articles>
+          )}
+        </>
+      )}
     </Container>
   </Page>
 );
@@ -84,7 +99,7 @@ export const query = graphql`
     }
   }
 
-  query Category($slug: String!) {
+  query Category($slug: String!, $glob: String!) {
     yaml(slug: { eq: $slug }) {
       title
       slug
@@ -109,6 +124,12 @@ export const query = graphql`
         slug
       }
       popularArticles {
+        ...Article
+      }
+    }
+
+    allMdx(filter: { slug: { glob: $glob } }, sort: { fields: [frontmatter___date_modified], order: DESC }) {
+      nodes {
         ...Article
       }
     }
