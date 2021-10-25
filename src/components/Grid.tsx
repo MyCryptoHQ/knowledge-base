@@ -12,8 +12,7 @@ export const Grid: FunctionComponent<GridProps & BoxProps> = ({ columns, childre
       gridTemplateColumns: ['repeat(1, 1fr)', null, `repeat(${columns}, 1fr)`],
       gap: '25px'
     }}
-    {...props}
-  >
+    {...props}>
     {children}
   </Box>
 );

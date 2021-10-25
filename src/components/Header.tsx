@@ -24,8 +24,7 @@ export const Header: FunctionComponent = ({ children }) => (
           <HeaderButton icon="present" text={t`Latest`} />
         </Link>
       </>
-    }
-  >
+    }>
     {children}
   </UIHeader>
 );

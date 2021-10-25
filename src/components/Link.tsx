@@ -19,8 +19,7 @@ const BaseLink: FunctionComponent<TextProps> = ({ children, ...props }) => (
         color: 'button.primary.hover'
       }
     }}
-    {...props}
-  >
+    {...props}>
     {children}
   </Text>
 );

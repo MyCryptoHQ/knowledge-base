@@ -40,8 +40,7 @@ export const Categories: FunctionComponent<CategoriesProps & BoxProps> = ({ excl
             marginRight: '0'
           }
         }
-      }}
-    >
+      }}>
       {allYaml.nodes
         .filter(({ slug }) => slug !== exclude)
         .map(({ title, slug, icon }) => (

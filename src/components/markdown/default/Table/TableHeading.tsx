@@ -17,8 +17,7 @@ export const TableHeading: FunctionComponent = ({ children, ...props }) => (
         paddingLeft: '20px'
       }
     }}
-    {...props}
-  >
+    {...props}>
     {children}
   </Box>
 );

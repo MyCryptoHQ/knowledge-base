@@ -40,8 +40,7 @@ const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
                 fontWeight="400"
                 lineHeight="29px"
                 color="text.accent"
-                marginRight="3"
-              >
+                marginRight="3">
                 <Trans>Last updated: {mdx.frontmatter.dateModified}</Trans>
               </SubHeading>
               <Label category={mdx.category} />

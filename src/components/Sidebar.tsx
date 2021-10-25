@@ -25,8 +25,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
           marginBottom="3"
           sx={{
             textTransform: 'uppercase'
-          }}
-        >
+          }}>
           <Trans>Share</Trans>
         </SubHeading>
         <Flex alignItems="center">
@@ -36,8 +35,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
               'twitter'
             )}`}
             external={true}
-            newTab={true}
-          >
+            newTab={true}>
             <Icon type="twitter" width="24px" marginRight="4" />
           </Link>
           <Link
@@ -46,8 +44,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
               'facebook'
             )}`}
             external={true}
-            newTab={true}
-          >
+            newTab={true}>
             <Icon type="facebook" width="24px" marginRight="4" />
           </Link>
           <Link
@@ -56,8 +53,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
               'linkedin'
             )}`}
             external={true}
-            newTab={true}
-          >
+            newTab={true}>
             <Icon type="linkedin" width="24px" marginRight="4" />
           </Link>
           <Copyable
@@ -104,8 +100,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
                 ':last-of-type': {
                   marginBottom: '0'
                 }
-              }}
-            >
+              }}>
               <Icon type="external" width="12px" marginRight="2" flexShrink={0} />
               <Link to={`/${relatedArticle.slug}`}>{relatedArticle.frontmatter.title}</Link>
             </Flex>
@@ -146,8 +141,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
           </Link>
           <Link
             to="https://app.mycrypto.com/membership?utm_medium=organic&utm_source=support&utm_campaign=sidebar"
-            external={true}
-          >
+            external={true}>
             <Button variant="inverted" fontWeight="bold">
               <Trans>Get Membership</Trans>
             </Button>

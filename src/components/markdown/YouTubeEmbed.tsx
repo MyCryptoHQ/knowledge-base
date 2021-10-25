@@ -20,8 +20,7 @@ export const YouTubeEmbed: FunctionComponent<YoutubeEmbedProps> = ({ id }) => (
         height: '100%',
         border: 'none'
       }
-    }}
-  >
+    }}>
     <iframe
       src={`https://www.youtube.com/embed/${id}`}
       frameBorder="0"

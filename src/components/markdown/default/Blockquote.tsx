@@ -17,8 +17,7 @@ export const Blockquote: FunctionComponent = ({ children, ...props }) => (
         color: 'background.quote'
       }
     }}
-    {...props}
-  >
+    {...props}>
     {children}
   </Box>
 );

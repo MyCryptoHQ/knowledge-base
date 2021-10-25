@@ -8,8 +8,7 @@ export const OrderedList: FunctionComponent = ({ children, ...props }) => (
     sx={{
       listStyleType: 'decimal'
     }}
-    {...props}
-  >
+    {...props}>
     {children}
   </Body>
 );

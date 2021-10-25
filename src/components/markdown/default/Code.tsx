@@ -11,8 +11,7 @@ export const Code: FunctionComponent = ({ children, ...props }) => (
     overflowX="auto"
     marginBottom="4"
     sx={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'border.dark', borderRadius: 'badge' }}
-    {...props}
-  >
+    {...props}>
     {children}
   </Box>
 );

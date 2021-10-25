@@ -8,8 +8,7 @@ export const Card: FunctionComponent<CardProps> = ({ children, ...props }) => (
     p="24px"
     backgroundColor="background.page"
     sx={{ borderRadius: 'large', boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.07)' }}
-    {...props}
-  >
+    {...props}>
     {children}
   </Box>
 );

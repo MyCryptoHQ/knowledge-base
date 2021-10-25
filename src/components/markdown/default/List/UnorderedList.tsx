@@ -8,8 +8,7 @@ export const UnorderedList: FunctionComponent = ({ children, ...props }) => (
     sx={{
       listStyleType: 'disc'
     }}
-    {...props}
-  >
+    {...props}>
     {children}
   </Box>
 );

@@ -15,8 +15,7 @@ export const Image: FunctionComponent<ImageProps> = ({ float, max = '100%', chil
     marginLeft={['auto', null, float === 'right' ? '4' : '0']}
     display={['block', null, 'initial']}
     sx={{ float: ['none', null, float], borderRadius: 'badge' }}
-    {...props}
-  >
+    {...props}>
     {children}
   </UIImage>
 );

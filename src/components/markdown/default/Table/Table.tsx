@@ -9,8 +9,7 @@ export const Table: FunctionComponent<BoxProps> = ({ children, ...props }) => (
     marginY="4"
     overflow="auto"
     sx={{ borderSpacing: '0', borderCollapse: 'collapse' }}
-    {...props}
-  >
+    {...props}>
     {children}
   </Box>
 );

@@ -22,8 +22,7 @@ export const Category: FunctionComponent<CategoryProps> = ({ category, depth = 0
         lineHeight: '24px',
         color: 'text.purple'
       }
-    }}
-  >
+    }}>
     {category.pages && category.pages.length > 0 && (
       <Grid columns={2} marginBottom="5">
         {category.pages.map((page) => (

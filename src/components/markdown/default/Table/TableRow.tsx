@@ -9,8 +9,7 @@ export const TableRow: FunctionComponent = ({ children, ...props }) => (
       borderBottomStyle: 'solid',
       borderBottomColor: 'table.border'
     }}
-    {...props}
-  >
+    {...props}>
     {children}
   </Box>
 );

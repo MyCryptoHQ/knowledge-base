@@ -27,8 +27,7 @@ export const Banner: FunctionComponent<BannerProps & FlexProps> = ({ type, child
       borderRadius: 'badge',
       position: 'relative'
     }}
-    {...props}
-  >
+    {...props}>
     {children}
     <Image
       src={BANNER_TYPES[type]}
