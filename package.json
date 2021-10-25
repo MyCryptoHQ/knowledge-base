@@ -9,7 +9,7 @@
     "@ethersproject/abi": "^5.5.0",
     "@ethersproject/bignumber": "^5.5.0",
     "@fontsource/lato": "^4.5.0",
-    "@fontsource/source-code-pro": "^4.5.0",
+    "@fontsource/roboto-mono": "^4.5.0",
     "@lingui/react": "^3.12.1",
     "@mycrypto/ui": "^1.8.0",
     "bignumber.js": "^9.0.1",
