@@ -16,7 +16,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
   const { siteUrl } = useSiteMetadata();
 
   return (
-    <Box maxWidth="362px">
+    <Box maxWidth={['100%', null, '362px']} marginBottom="4">
       <Card marginBottom="4">
         <SubHeading
           fontSize="12px"

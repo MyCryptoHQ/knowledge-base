@@ -1,7 +1,6 @@
-import { Body, Input } from '@mycrypto/ui';
+import { Body, Box, Flex, Input } from '@mycrypto/ui';
 import BigNumber from 'bignumber.js';
 import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
-import styled from 'styled-components';
 
 const isNumeric = (value: string): boolean => {
   return /^\d+(?:\.\d+)?$/.test(value);
@@ -11,7 +10,7 @@ const toPrecision = (value: BigNumber, multiplier: BigNumber): string => {
   return value.dividedBy(multiplier).precision(20).toString(10);
 };
 
-interface Props {
+export interface UnitProps {
   name: string;
   value: BigNumber;
   multiplier?: BigNumber;
@@ -19,19 +18,7 @@ interface Props {
   onChange(value: BigNumber): void;
 }
 
-const UnitContainer = styled.label`
-  margin: 1.5rem 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const UnitLabel = styled(Body)`
-  width: 6rem;
-  text-align: center;
-`;
-
-export const Unit: FunctionComponent<Props> = ({ name, multiplier = new BigNumber(1), value, onChange }) => {
+export const Unit: FunctionComponent<UnitProps> = ({ name, multiplier = new BigNumber(1), value, onChange }) => {
   const [localValue, setValue] = useState(toPrecision(value, multiplier));
 
   useEffect(() => {
@@ -47,9 +34,11 @@ export const Unit: FunctionComponent<Props> = ({ name, multiplier = new BigNumbe
   };
 
   return (
-    <UnitContainer>
-      <Input type="text" value={localValue} onChange={handleChange} />
-      <UnitLabel>{name}</UnitLabel>
-    </UnitContainer>
+    <Flex marginY="3" alignItems="center">
+      <Box flexGrow={1}>
+        <Input variant="simple" type="text" value={localValue} marginRight="3" onChange={handleChange} />
+      </Box>
+      <Body width="60px">{name}</Body>
+    </Flex>
   );
 };

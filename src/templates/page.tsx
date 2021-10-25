@@ -28,7 +28,7 @@ const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
           ))}
         </Breadcrumbs>
 
-        <Flex marginTop="48px">
+        <Flex marginTop="48px" flexDirection={['column', null, 'row']}>
           <Box paddingRight="4" flex={1}>
             <SubHeading fontSize="45px" lineHeight="54px" marginBottom="20px" color="text.primary">
               {mdx.frontmatter.title}

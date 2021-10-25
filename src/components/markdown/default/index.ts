@@ -16,11 +16,7 @@ import { ListItem, OrderedList, UnorderedList } from './List';
 import { Paragraph } from './Paragraph';
 import { PreformattedText } from './PreformattedText';
 import { StrongText } from './StrongText';
-import Table from './Table';
-import TableCell from './Table/TableCell';
-import TableHead from './Table/TableHead';
-import TableHeading from './Table/TableHeading';
-import TableRow from './Table/TableRow';
+import { Table, TableCell, TableHead, TableHeading, TableRow } from './Table';
 import { ThematicBreak } from './ThematicBreak';
 
 /**

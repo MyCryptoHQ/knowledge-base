@@ -11,6 +11,10 @@ export const theme = merge(defaultTheme, {
     text: {
       accent: '#8f8f8f',
       purple: '#a682ff'
+    },
+    table: {
+      background: '#fafcfc',
+      border: '#e8eaed'
     }
   },
   variants: {
