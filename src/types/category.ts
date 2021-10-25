@@ -10,6 +10,8 @@ export interface Yaml {
   title: string;
   slug: string;
   description: string;
+  list?: boolean;
+  totalArticles: number;
   category?: Yaml;
   parentCategory: Yaml;
   pages?: Mdx[];

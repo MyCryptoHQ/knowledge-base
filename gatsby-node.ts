@@ -60,6 +60,7 @@ const gatsbyNode: GatsbyNode = {
         parentCategory: Yaml
         pages: [Mdx]
         popularArticles: [Mdx]
+        totalArticles: Int!
         categories: [Yaml]
         breadcrumbs: [Breadcrumb]!
       }
@@ -326,6 +327,25 @@ const gatsbyNode: GatsbyNode = {
             });
 
             return entries;
+          }
+        },
+
+        totalArticles: {
+          async resolve(node: Node, _, { nodeModel }): Promise<number> {
+            const slug = getCategorySlug(node, nodeModel);
+
+            const { totalCount } = await nodeModel.findAll({
+              type: 'Mdx',
+              query: {
+                filter: {
+                  slug: {
+                    glob: `${slug}/**`
+                  }
+                }
+              }
+            });
+
+            return totalCount();
           }
         }
       }

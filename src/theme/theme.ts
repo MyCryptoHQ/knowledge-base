@@ -9,7 +9,8 @@ export const theme = merge(defaultTheme, {
       quote: '#a582ff'
     },
     text: {
-      accent: '#8f8f8f'
+      accent: '#8f8f8f',
+      purple: '#a682ff'
     }
   },
   variants: {
