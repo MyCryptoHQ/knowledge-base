@@ -30,3 +30,5 @@ typings/
 public/
 .cache
 content/
+src/locales/*/messages.ts
+src/locales/*/messages.d.ts
