@@ -1,7 +1,6 @@
-import { Input } from '@mycrypto/ui';
+import { Input, Body } from '@mycrypto/ui';
 import { ChangeEvent, FunctionComponent } from 'react';
 import { optional, pattern, string } from 'superstruct';
-import Text from '../../ui/Text';
 import Field from '../Field';
 
 interface Props {
@@ -42,10 +41,10 @@ const IssuesForm: FunctionComponent<Props> = ({ values, errors, onChange: handle
       </Field>
 
       <Field label="More details" hasError={errors.includes('body')}>
-        <Text small={true} noMargin={true}>
+        <Body>
           Please include all the necessary info, so that we can help you. Not doing so may cause delays.{' '}
           <strong>Do not send us your private key.</strong>
-        </Text>
+        </Body>
 
         <Input
           as="textarea"
@@ -57,10 +56,10 @@ const IssuesForm: FunctionComponent<Props> = ({ values, errors, onChange: handle
       </Field>
 
       <Field label="Screenshot (optional)" hasError={errors.includes('attachment')}>
-        <Text small={true} noMargin={true}>
+        <Body>
           Image files only. Do not send your private key or passport. Do not send a screenshot of your transaction
           history, but include a link instead.
-        </Text>
+        </Body>
 
         <Input
           type="file"

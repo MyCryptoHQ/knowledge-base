@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js';
 import { FunctionComponent, useState } from 'react';
-import Unit from './Unit';
+import { Unit } from './Unit';
 
-const UnitConverter: FunctionComponent = () => {
+export const UnitConverter: FunctionComponent = () => {
   const [value, setValue] = useState(new BigNumber('1000000000000000000'));
 
   return (
@@ -31,5 +31,3 @@ const UnitConverter: FunctionComponent = () => {
     </>
   );
 };
-
-export default UnitConverter;

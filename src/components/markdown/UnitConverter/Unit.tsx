@@ -1,8 +1,7 @@
-import { Input } from '@mycrypto/ui';
+import { Body, Input } from '@mycrypto/ui';
 import BigNumber from 'bignumber.js';
 import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Text from '../../../ui/Text';
 
 const isNumeric = (value: string): boolean => {
   return /^\d+(?:\.\d+)?$/.test(value);
@@ -27,12 +26,12 @@ const UnitContainer = styled.label`
   align-items: center;
 `;
 
-const UnitLabel = styled(Text)`
+const UnitLabel = styled(Body)`
   width: 6rem;
   text-align: center;
 `;
 
-const Unit: FunctionComponent<Props> = ({ name, multiplier = new BigNumber(1), value, onChange }) => {
+export const Unit: FunctionComponent<Props> = ({ name, multiplier = new BigNumber(1), value, onChange }) => {
   const [localValue, setValue] = useState(toPrecision(value, multiplier));
 
   useEffect(() => {
@@ -54,5 +53,3 @@ const Unit: FunctionComponent<Props> = ({ name, multiplier = new BigNumber(1), v
     </UnitContainer>
   );
 };
-
-export default Unit;

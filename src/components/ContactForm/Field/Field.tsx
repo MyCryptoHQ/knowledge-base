@@ -1,6 +1,6 @@
+import { Body } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
 import styled, { css } from 'styled-components';
-import Text from '../../ui/Text';
 
 interface Props {
   label: string;
@@ -12,7 +12,7 @@ interface FieldProps {
   as: string;
 }
 
-export const StyledField = styled(Text)<FieldProps>`
+export const StyledField = styled(Body)<FieldProps>`
   display: block;
   margin-bottom: 2rem;
 
@@ -21,10 +21,6 @@ export const StyledField = styled(Text)<FieldProps>`
     css`
       color: #ff433d;
     `};
-
-  ${Text} {
-    margin-bottom: 0.5rem;
-  }
 `;
 
 const LabelTitle = styled.div`

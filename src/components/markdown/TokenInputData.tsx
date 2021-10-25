@@ -2,15 +2,15 @@ import { defaultAbiCoder } from '@ethersproject/abi';
 import { Input } from '@mycrypto/ui';
 import BigNumber from 'bignumber.js';
 import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
-import Field from '../../ContactForm/Field';
-import { Link } from '../../Link';
+import Field from '../ContactForm/Field';
+import { Link } from '../Link';
 
 const TRANSFER_ID = 'a9059cbb';
 
 /**
  * Input data generator for token transactions. Can be used in Mist article for sending tokens, etc.
  */
-const TokenInputData: FunctionComponent = () => {
+export const TokenInputData: FunctionComponent = () => {
   const [tokenDecimals, setTokenDecimals] = useState<string>('');
   const [toAddress, setToAddress] = useState<string>('');
   const [amount, setAmount] = useState<string>('');
@@ -63,5 +63,3 @@ const TokenInputData: FunctionComponent = () => {
     </section>
   );
 };
-
-export default TokenInputData;

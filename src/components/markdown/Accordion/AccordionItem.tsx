@@ -1,8 +1,7 @@
 import { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
-import { Icon } from '../../../../../../ui';
-import Text from '../../../ui/Text';
-import { H2 } from '../../default/H2';
+import { Icon } from '../../../../../ui';
+import { H2 } from '../default/H2';
 
 interface Props {
   title: string;
@@ -34,20 +33,16 @@ const ItemContent = styled.div<ContainerProps>`
   margin-top: ${({ extended }) => (extended ? '3rem' : '0')};
   height: ${({ extended }) => (extended ? '100%' : '0')};
   overflow: hidden;
-
-  ${Text}:first-of-type {
-    margin-top: 0;
-  }
 `;
 
-const AccordionItem: FunctionComponent<Props> = ({ title, children }) => {
+export const AccordionItem: FunctionComponent<Props> = ({ title, children }) => {
   const [extended, setExtended] = useState<boolean>(false);
 
-  const handeToggle = () => setExtended((state) => !state);
+  const handleToggle = () => setExtended((state) => !state);
 
   return (
     <Container extended={extended}>
-      <ItemHeading onClick={handeToggle}>
+      <ItemHeading onClick={handleToggle}>
         <H2>{title}</H2>
         <Icon name={extended ? 'Contract' : 'Expand'} type={'arrow'} />
       </ItemHeading>
@@ -55,5 +50,3 @@ const AccordionItem: FunctionComponent<Props> = ({ title, children }) => {
     </Container>
   );
 };
-
-export default AccordionItem;

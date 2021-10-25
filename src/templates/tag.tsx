@@ -1,9 +1,7 @@
+import { Container } from '@mycrypto/ui';
 import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
-import styled from 'styled-components';
-import { Page, Section } from '../components';
-import TagOverview from '../components/TagOverview';
-import Container from '../components/ui/Container';
+import { Page } from '../components';
 import { Mdx } from '../types';
 
 interface Props {
@@ -20,36 +18,17 @@ interface Props {
   };
 }
 
-const TagContainer = styled(Container)`
-  display: flex;
-  flex-direction: row;
-`;
-
-const Tag: FunctionComponent<Props> = ({ data: { allMdx }, pageContext: { tagName } }) => (
+const Tag: FunctionComponent<Props> = ({ pageContext: { tagName } }) => (
   <Page title={tagName}>
-    <Section>
-      <TagContainer>
-        <TagOverview tagName={tagName} pages={allMdx.nodes} />
-      </TagContainer>
-    </Section>
+    <Container>{/* TODO */}</Container>
   </Page>
 );
 
 export default Tag;
 
 export const query = graphql`
-  query Tag($tag: [String]!, $popularArticles: [String!]!) {
+  query Tag($tag: [String]!) {
     allMdx(filter: { frontmatter: { tags: { in: $tag } } }) {
-      nodes {
-        slug
-        excerpt
-        frontmatter {
-          title
-        }
-      }
-    }
-
-    articles: allMdx(filter: { slug: { in: $popularArticles } }) {
       nodes {
         slug
         excerpt

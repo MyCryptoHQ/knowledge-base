@@ -1,10 +1,9 @@
-import { Button , Input } from '@mycrypto/ui';
+import { Button, Input, Body } from '@mycrypto/ui';
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react';
 import Recaptcha from 'react-google-recaptcha';
 import { validate } from 'superstruct';
 import { FORM_TYPES, FormType } from '../../config/contact-form';
 import { useSiteMetadata } from '../../hooks';
-import Text from '../ui/Text';
 import Field from './Field';
 import InlineField from './InlineField';
 
@@ -108,11 +107,11 @@ const ContactForm: FunctionComponent = () => {
       <Component values={formData} errors={errors} onChange={handleChange} />
 
       <Field label="Captcha" hasError={errors.includes('captcha')}>
-        <Text noMargin={true}>Sorry, we just need to make sure you are human.</Text>
+        <Body>Sorry, we just need to make sure you are human.</Body>
 
         <Recaptcha sitekey={recaptchaSitekey} onChange={handleVerify} onExpired={handleExpired} />
 
-        {errors.includes('captcha') ? <Text>Please complete the captcha.</Text> : null}
+        {errors.includes('captcha') ? <Body>Please complete the captcha.</Body> : null}
       </Field>
 
       <Button type="submit">Send message</Button>

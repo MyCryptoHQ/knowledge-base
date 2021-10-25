@@ -1,7 +1,6 @@
-import { Input } from '@mycrypto/ui';
+import { Input, Body } from '@mycrypto/ui';
 import { ChangeEvent, FunctionComponent } from 'react';
 import { string } from 'superstruct';
-import Text from '../../ui/Text';
 import Field from '../Field';
 
 interface Props {
@@ -20,9 +19,7 @@ const FeedbackForm: FunctionComponent<Props> = ({ values, errors, onChange: hand
     <input type="hidden" name="subject" value="Feedback about MyCrypto" />
 
     <Field label="Your Feedback" hasError={errors.includes('body')}>
-      <Text small={true} noMargin={true}>
-        Thank you for taking the time to provide feedback, it is highly appreciated.
-      </Text>
+      <Body>Thank you for taking the time to provide feedback, it is highly appreciated.</Body>
 
       <Input as="textarea" name="body" value={values.body || ''} onChange={handleChange} />
     </Field>

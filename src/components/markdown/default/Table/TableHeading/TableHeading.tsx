@@ -1,8 +1,8 @@
+import { Body } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import Text from '../../../../ui/Text';
 
-const StyledTableHeading = styled(Text)`
+const StyledTableHeading = styled(Body)`
   min-width: 1em;
   padding: 1em;
   color: ${({ theme }) => theme.headline};

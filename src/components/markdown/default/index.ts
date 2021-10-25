@@ -1,4 +1,3 @@
-import ThematicBreak from '../../ui/ThematicBreak';
 import Blockquote from './Blockquote';
 import { Code } from './Code';
 import { DeletedText } from './DeletedText';
@@ -22,6 +21,7 @@ import TableCell from './Table/TableCell';
 import TableHead from './Table/TableHead';
 import TableHeading from './Table/TableHeading';
 import TableRow from './Table/TableRow';
+import { ThematicBreak } from './ThematicBreak';
 
 /**
  * List of components that will be used when rendering markdown.

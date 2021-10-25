@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
 import { Article, Articles, Hero, Page } from '../components';
 import { Banner, BannerType } from '../components/Banner';
-import { Mdx } from '../types/page';
+import { Mdx } from '../types';
 
 export interface IndexProps {
   data: {
