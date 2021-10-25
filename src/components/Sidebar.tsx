@@ -139,12 +139,15 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
           <Trans>Please consider making a donation or purchasing a MyCrypto Membership!</Trans>
         </Body>
         <Flex>
-          <Link to="https://etherscan.io/address/0x4bbeEB066eD09B7AEd07bF39EEe0460DFa261520" external={true}>
+          <Link to="https://bit.ly/MyCryptoTipJar" external={true}>
             <Button variant="inverted" marginRight="3" fontWeight="bold">
               <Trans>Donate Now</Trans>
             </Button>
           </Link>
-          <Link to="https://app.mycrypto.com/membership" external={true}>
+          <Link
+            to="https://app.mycrypto.com/membership?utm_medium=organic&utm_source=support&utm_campaign=sidebar"
+            external={true}
+          >
             <Button variant="inverted" fontWeight="bold">
               <Trans>Get Membership</Trans>
             </Button>

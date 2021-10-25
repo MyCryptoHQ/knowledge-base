@@ -6,7 +6,7 @@ import { Link } from './Link';
 export const Header: FunctionComponent = ({ children }) => (
   <UIHeader
     leftComponents={
-      <Link to="https://app.mycrypto.com" external={true}>
+      <Link to="https://app.mycrypto.com/?utm_medium=organic&utm_source=support&utm_campaign=nav" external={true}>
         <HeaderButton icon="home" text={t`app.mycrypto.com`} />
       </Link>
     }
