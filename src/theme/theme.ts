@@ -11,6 +11,13 @@ export const theme = merge(defaultTheme, {
     text: {
       accent: '#8f8f8f'
     }
+  },
+  variants: {
+    banner: {
+      info: {
+        color: 'text.accent'
+      }
+    }
   }
 });
 

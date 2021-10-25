@@ -1,4 +1,4 @@
-import Blockquote from './Blockquote';
+import { Blockquote } from './Blockquote';
 import { Code } from './Code';
 import { DeletedText } from './DeletedText';
 import { EmphasizedText } from './EmphasizedText';

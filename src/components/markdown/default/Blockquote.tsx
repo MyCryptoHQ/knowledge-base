@@ -22,5 +22,3 @@ export const Blockquote: FunctionComponent = ({ children, ...props }) => (
     {children}
   </Box>
 );
-
-export default Blockquote;

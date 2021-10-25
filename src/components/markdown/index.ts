@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem } from './Accordion';
+import { Accordion, AccordionItem } from '@mycrypto/ui';
 import { Alert } from './Alert';
 import { Clearfix } from './Clearfix';
 import { TokenInputData } from './TokenInputData';

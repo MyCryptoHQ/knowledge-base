@@ -4,6 +4,7 @@ import { FunctionComponent } from 'react';
 export const Code: FunctionComponent = ({ children, ...props }) => (
   <Box
     as="code"
+    display="block"
     padding="24px"
     fontFamily="mono"
     backgroundColor="background.muted"
