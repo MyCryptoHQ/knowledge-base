@@ -1,8 +1,9 @@
 import { Trans } from '@lingui/macro';
-import { Body, Box, Button, Flex, Icon, SubHeading } from '@mycrypto/ui';
+import { Body, Box, Button, Copyable, Flex, Icon, SubHeading } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
 import { useSiteMetadata } from '../hooks';
 import { Mdx } from '../types';
+import { getSocialUrl } from '../utils';
 import Card from './Card';
 import { Divider } from './Divider';
 import { Link } from './Link';
@@ -30,27 +31,41 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
         </SubHeading>
         <Flex alignItems="center">
           <Link
-            to={`https://twitter.com/intent/tweet?text=${page.frontmatter.title}&url=${siteUrl}/${page.slug}`}
+            to={`https://twitter.com/intent/tweet?text=${page.frontmatter.title}&url=${getSocialUrl(
+              `${siteUrl}/${page.slug}`,
+              'twitter'
+            )}`}
             external={true}
             newTab={true}
           >
             <Icon type="twitter" width="24px" marginRight="4" />
           </Link>
           <Link
-            to={`https://www.facebook.com/sharer/sharer.php?t=${page.frontmatter.title}&u=${siteUrl}/${page.slug}`}
+            to={`https://www.facebook.com/sharer/sharer.php?t=${page.frontmatter.title}&u=${getSocialUrl(
+              `${siteUrl}/${page.slug}`,
+              'facebook'
+            )}`}
             external={true}
             newTab={true}
           >
             <Icon type="facebook" width="24px" marginRight="4" />
           </Link>
           <Link
-            to={`https://www.linkedin.com/sharing/share-offsite/?url=${siteUrl}/${page.slug}`}
+            to={`https://www.linkedin.com/sharing/share-offsite/?url=${getSocialUrl(
+              `${siteUrl}/${page.slug}`,
+              'linkedin'
+            )}`}
             external={true}
             newTab={true}
           >
             <Icon type="linkedin" width="24px" marginRight="4" />
           </Link>
-          <Icon type="link" width="24px" marginRight="4" />
+          <Copyable
+            text={`${siteUrl}/${page.slug}?utm_medium=social&utm_source=link&utm_campaign=share`}
+            icon="link"
+            width="24px"
+            fill="#55b6e2"
+          />
         </Flex>
       </Card>
 

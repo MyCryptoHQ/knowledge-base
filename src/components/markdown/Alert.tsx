@@ -1,4 +1,4 @@
-import { Banner } from '@mycrypto/ui';
+import { Banner, Box } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
 
 export interface AlertProps {
@@ -6,7 +6,9 @@ export interface AlertProps {
 }
 
 export const Alert: FunctionComponent<AlertProps> = ({ label, children }) => (
-  <Banner type="info" label={label}>
-    {children}
-  </Banner>
+  <Box marginBottom="4" sx={{ 'p:last-of-type': { marginBottom: '0' } }}>
+    <Banner type="info" label={label} extendable={false}>
+      {children}
+    </Banner>
+  </Box>
 );
