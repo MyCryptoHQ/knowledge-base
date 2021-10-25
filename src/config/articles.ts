@@ -1,6 +1,5 @@
 /**
- * List of popular articles shown on the home page and in the sidebar. Each item should be the slug
- * of the article.
+ * List of popular articles shown on the home page. Each item should be the slug of the article.
  */
 export const POPULAR_ARTICLES: string[] = [
   'how-to/sending/checking-or-replacing-a-transaction-after-it-has-been-sent',

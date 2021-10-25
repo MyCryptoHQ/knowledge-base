@@ -1,4 +1,5 @@
-/*eslint-disable*/ export const messages = {
+/*eslint-disable*/
+export const messages = {
   Contact: 'Contact',
   Home: 'Home',
   Latest: 'Latest',

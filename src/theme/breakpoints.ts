@@ -8,14 +8,13 @@ export const breakpoints: { [key: string]: number } = {
   xl: 1280
 };
 
-const breakpoint = (key: keyof typeof breakpoints, type: 'min' | 'max' = 'min') => (
-  first: TemplateStringsArray,
-  ...interpolations: SimpleInterpolation[]
-): FlattenSimpleInterpolation =>
-  css`
-    @media screen and (${type}-width: ${breakpoints[key]}px) {
-      ${css(first, ...interpolations)};
-    }
-  `;
+const breakpoint =
+  (key: keyof typeof breakpoints, type: 'min' | 'max' = 'min') =>
+  (first: TemplateStringsArray, ...interpolations: SimpleInterpolation[]): FlattenSimpleInterpolation =>
+    css`
+      @media screen and (${type}-width: ${breakpoints[key]}px) {
+        ${css(first, ...interpolations)};
+      }
+    `;
 
 export default breakpoint;

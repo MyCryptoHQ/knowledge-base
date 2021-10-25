@@ -1,7 +1,7 @@
 import { Box, BoxProps, IconType } from '@mycrypto/ui';
 import { graphql, useStaticQuery } from 'gatsby';
 import { FunctionComponent } from 'react';
-import { Yaml } from '../types/category';
+import { Yaml } from '../types';
 import { CategoryButton } from './CategoryButton';
 import { Link } from './Link';
 

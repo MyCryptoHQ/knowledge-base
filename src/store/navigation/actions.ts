@@ -2,10 +2,10 @@ import { ActionCreator } from 'redux';
 import {
   SEARCH,
   SearchAction,
-  SetDrawerOpenAction,
-  SetSearchTextAction,
   SET_DRAWER_OPEN,
-  SET_SEARCH_TEXT
+  SET_SEARCH_TEXT,
+  SetDrawerOpenAction,
+  SetSearchTextAction
 } from './types';
 
 export const setSearchText: ActionCreator<SetSearchTextAction> = (searchText: string) => ({

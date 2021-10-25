@@ -12,7 +12,7 @@ import { Image } from './Image';
 import { InlineCode } from './InlineCode';
 import { KeyboardInput } from './KeyboardInput';
 import { Link } from './Link';
-import { UnorderedList, OrderedList, ListItem } from './List';
+import { ListItem, OrderedList, UnorderedList } from './List';
 import { Paragraph } from './Paragraph';
 import { PreformattedText } from './PreformattedText';
 import { StrongText } from './StrongText';

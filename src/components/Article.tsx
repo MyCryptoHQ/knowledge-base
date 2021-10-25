@@ -1,7 +1,7 @@
 import { Trans } from '@lingui/macro';
 import { Body, Button, Flex, InlineBody, SubHeading } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
-import { Mdx } from '../types/page';
+import { Mdx } from '../types';
 import Card from './Card';
 import { Label } from './Label';
 import { Link } from './Link';

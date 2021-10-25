@@ -1,4 +1,4 @@
-import { SubHeading, Body } from '@mycrypto/ui';
+import { Body, SubHeading } from '@mycrypto/ui';
 import { useLocation } from '@reach/router';
 import { navigate } from 'gatsby';
 import { parse } from 'query-string';

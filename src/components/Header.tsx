@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { HeaderButton, Logo, Header as UIHeader } from '@mycrypto/ui';
+import { Header as UIHeader, HeaderButton, Logo } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
 import { Link } from './Link';
 

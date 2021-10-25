@@ -3,7 +3,7 @@
  * relies on v1.x.x, so we have to provide our own types for now.
  */
 declare module '@mdx-js/react' {
-  import { ComponentType, ReactNode, Component } from 'react';
+  import { Component, ComponentType, ReactNode } from 'react';
 
   type ComponentType =
     | 'p'

@@ -3,7 +3,7 @@ import { Body, Box, Breadcrumb, Breadcrumbs, Container, Flex, Image, SubHeading 
 import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
 import { Categories, Link, Page, Section } from '../components';
-import { Yaml, Mdx } from '../types';
+import { Mdx, Yaml } from '../types';
 
 interface Props {
   pageContext: {

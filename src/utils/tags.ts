@@ -1,4 +1,4 @@
-import { CATEGORY_COLOURS } from '../config/categories';
+import { CATEGORY_COLOURS } from '../config';
 import { Yaml } from '../types';
 
 export const encodeTag = (tag: string): string => {

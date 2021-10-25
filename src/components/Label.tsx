@@ -1,6 +1,6 @@
 import { Tag } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
-import { Yaml } from '../types/category';
+import { Yaml } from '../types';
 import { getCategoryTag } from '../utils';
 
 export interface LabelProps {
