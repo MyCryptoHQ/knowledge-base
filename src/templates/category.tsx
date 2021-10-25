@@ -1,9 +1,9 @@
-import { Plural, Trans } from '@lingui/macro';
+import { Plural, t, Trans } from '@lingui/macro';
 import { Body, Box, Breadcrumb, Breadcrumbs, Container, Flex, Image, SubHeading } from '@mycrypto/ui';
 import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
-import { Categories, Link, Page, Section } from '../components';
-import { Mdx, Yaml } from '../types';
+import { Article, Articles, Categories, Link, Page, Section } from '../components';
+import { Yaml } from '../types';
 
 interface Props {
   pageContext: {
@@ -11,13 +11,10 @@ interface Props {
   };
   data: {
     yaml: Yaml;
-    allMdx: {
-      nodes: Mdx[];
-    };
   };
 }
 
-const Category: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
+const Category: FunctionComponent<Props> = ({ data: { yaml } }) => (
   <Page title={yaml.title} description={yaml.description}>
     <Section marginBottom="4">
       <Box marginBottom="4">
@@ -37,7 +34,7 @@ const Category: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
       <Flex flexDirection="column" alignItems="center" textAlign="center">
         <Image src={yaml.parentCategory.icon?.large.publicURL} alt={yaml.title} maxWidth="170px" marginBottom="3" />
         <Body variant="muted" fontSize="18px" lineHeight="22px" marginBottom="2" sx={{ textTransform: 'uppercase' }}>
-          <Plural value={allMdx.nodes.length} zero="No articles" one="# article" other="# articles" />
+          <Plural value={yaml.pages?.length ?? 0} zero="No articles" one="# article" other="# articles" />
         </Body>
         <SubHeading fontSize="45px" lineHeight="54px" color="text.primary" marginBottom="3">
           {yaml.title}
@@ -47,8 +44,25 @@ const Category: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
         </Body>
       </Flex>
     </Section>
+
     <Container flex="1">
       <Categories exclude={yaml.slug} marginBottom="5" />
+
+      {yaml.popularArticles && yaml.popularArticles.length > 0 && (
+        <Articles title={t`Popular Articles`} columns={2} marginBottom="6">
+          {yaml.popularArticles.map((popularArticle) => (
+            <Article key={popularArticle.slug} article={popularArticle} />
+          ))}
+        </Articles>
+      )}
+
+      {yaml.pages && yaml.pages.length > 0 && (
+        <Articles title={t`Browse All Articles`} marginBottom="5">
+          {yaml.pages.map((page) => (
+            <Article key={page.slug} article={page} />
+          ))}
+        </Articles>
+      )}
     </Container>
   </Page>
 );
@@ -56,7 +70,7 @@ const Category: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
 export default Category;
 
 export const query = graphql`
-  query Category($slug: String!, $popularArticles: [String!]!) {
+  query Category($slug: String!) {
     yaml(slug: { eq: $slug }) {
       title
       slug
@@ -80,25 +94,14 @@ export const query = graphql`
         }
       }
       pages {
-        slug
-        frontmatter {
-          title
-        }
-        excerpt(pruneLength: 500)
+        ...Article
       }
       breadcrumbs {
         title
         slug
       }
-    }
-
-    allMdx(filter: { slug: { in: $popularArticles } }) {
-      nodes {
-        slug
-        excerpt
-        frontmatter {
-          title
-        }
+      popularArticles {
+        ...Article
       }
     }
   }

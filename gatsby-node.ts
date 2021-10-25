@@ -59,6 +59,7 @@ const gatsbyNode: GatsbyNode = {
         category: Yaml
         parentCategory: Yaml
         pages: [Mdx]
+        popularArticles: [Mdx]
         categories: [Yaml]
         breadcrumbs: [Breadcrumb]!
       }
@@ -301,6 +302,30 @@ const gatsbyNode: GatsbyNode = {
               ],
               nodeModel
             );
+          }
+        },
+
+        popularArticles: {
+          async resolve(node: Node, _, { nodeModel }): Promise<GatsbyIterable<Node>> {
+            if (!node.popular_articles) {
+              return new GatsbyIterable([]);
+            }
+
+            const slug = getCategorySlug(node, nodeModel);
+            const slugs = (node.popular_articles as string[]).map((page) => `${slug}/${page}`);
+
+            const { entries } = await nodeModel.findAll({
+              type: 'Mdx',
+              query: {
+                filter: {
+                  slug: {
+                    in: slugs
+                  }
+                }
+              }
+            });
+
+            return entries;
           }
         }
       }

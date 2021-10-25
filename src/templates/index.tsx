@@ -42,18 +42,7 @@ export const query = graphql`
   query Index($popularArticles: [String!]!) {
     popularArticles: allMdx(filter: { slug: { in: $popularArticles } }) {
       nodes {
-        slug
-        excerpt(pruneLength: 200)
-        timeToRead
-        category {
-          parentCategory {
-            title
-            slug
-          }
-        }
-        frontmatter {
-          title
-        }
+        ...Article
       }
     }
 
@@ -63,18 +52,7 @@ export const query = graphql`
       filter: { category: { parentCategory: { slug: { ne: "troubleshooter" } } } }
     ) {
       nodes {
-        slug
-        excerpt(pruneLength: 200)
-        timeToRead
-        category {
-          parentCategory {
-            title
-            slug
-          }
-        }
-        frontmatter {
-          title
-        }
+        ...Article
       }
     }
   }

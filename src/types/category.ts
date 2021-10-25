@@ -13,6 +13,7 @@ export interface Yaml {
   category?: Yaml;
   parentCategory: Yaml;
   pages?: Mdx[];
+  popularArticles?: Mdx[];
   categories?: Yaml[];
   breadcrumbs: Breadcrumb[];
   icon?: {

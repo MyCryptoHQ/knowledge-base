@@ -1,5 +1,6 @@
 import { Trans } from '@lingui/macro';
 import { Body, Button, Flex, InlineBody, SubHeading } from '@mycrypto/ui';
+import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
 import { Mdx } from '../types';
 import Card from './Card';
@@ -35,3 +36,20 @@ export const Article: FunctionComponent<ArticleCardProps> = ({ article }) => {
     </Card>
   );
 };
+
+export const query = graphql`
+  fragment Article on Mdx {
+    slug
+    excerpt(pruneLength: 200)
+    timeToRead
+    category {
+      parentCategory {
+        title
+        slug
+      }
+    }
+    frontmatter {
+      title
+    }
+  }
+`;

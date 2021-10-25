@@ -98,18 +98,7 @@ export const query = graphql`
         slug
       }
       relatedArticles {
-        slug
-        excerpt(pruneLength: 200)
-        timeToRead
-        category {
-          parentCategory {
-            title
-            slug
-          }
-        }
-        frontmatter {
-          title
-        }
+        ...Article
       }
     }
   }
