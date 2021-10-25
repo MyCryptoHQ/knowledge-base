@@ -94,7 +94,7 @@
     "clean": "gatsby clean",
     "start": "gatsby develop",
     "analyze": "cross-env ANALYZE_BUNDLE=true yarn build",
-    "build": "yarn compile && gatsby build",
+    "build": "gatsby build",
     "serve": "gatsby serve",
     "deploy": "gatsby-plugin-s3 deploy --yes",
     "extract": "lingui extract",

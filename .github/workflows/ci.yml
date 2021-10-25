@@ -36,6 +36,9 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Compile Translations
+        run: yarn compile
+
       - name: Lint
         run: yarn lint
 
@@ -64,6 +67,9 @@ jobs:
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Compile Translations
+        run: yarn compile
 
       - name: Build
         run: yarn build
