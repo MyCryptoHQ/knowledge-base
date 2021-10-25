@@ -64,7 +64,10 @@ const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
 
         <Body fontSize="20px" lineHeight="24px" marginBottom="6">
           <Trans>
-            Didn't find what you were looking for? <Link to="/contact-us">Contact Us</Link>
+            Didn't find what you were looking for?{' '}
+            <Link to="mailto:support@mycrypto.com" external={true}>
+              Contact Us
+            </Link>
           </Trans>
         </Body>
       </Container>

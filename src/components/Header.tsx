@@ -17,7 +17,7 @@ export const Header: FunctionComponent = ({ children }) => (
     }
     rightComponents={
       <>
-        <Link to="/contact-us">
+        <Link to="mailto:support@mycrypto.com" external={true}>
           <HeaderButton icon="help" text={t`Contact`} />
         </Link>
         <Link to="https://blog.mycrypto.com" external={true}>

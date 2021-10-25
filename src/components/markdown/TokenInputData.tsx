@@ -1,8 +1,7 @@
 import { defaultAbiCoder } from '@ethersproject/abi';
-import { Input } from '@mycrypto/ui';
+import { Box, Input } from '@mycrypto/ui';
 import BigNumber from 'bignumber.js';
 import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
-import Field from '../ContactForm/Field';
 import { Link } from '../Link';
 
 const TRANSFER_ID = 'a9059cbb';
@@ -39,27 +38,28 @@ export const TokenInputData: FunctionComponent = () => {
     }
   }, [tokenDecimals, toAddress, amount]);
 
+  // TODO
   return (
     <section>
-      <Field label="Token Decimals">
+      <Box label="Token Decimals">
         Enter the number of decimals the token contract uses. You can find this on{' '}
         <Link to="https://etherscan.io">Etherscan</Link>.
         <Input type="number" value={tokenDecimals} onChange={handleChangeDecimals} />
-      </Field>
-      <Field label="To Address">
+      </Box>
+      <Box label="To Address">
         Enter the address where you want to send the tokens to.{' '}
         <strong>Do not enter the token contract address here.</strong>
         <Input type="text" value={toAddress} onChange={handleChangeAddress} />
-      </Field>
-      <Field label="Amount">
+      </Box>
+      <Box label="Amount">
         Enter the number of tokens you want to send. It's highly recommended to use a small amount for a test
         transaction first.
         <Input type="number" value={amount} onChange={handleChangeAmount} />
-      </Field>
-      <Field label="Data">
+      </Box>
+      <Box label="Data">
         When all fields above are filled out, the data should appear below.
         <Input as="textarea" value={data} placeholder="Fill out the fields above to get the data" readOnly={true} />
-      </Field>
+      </Box>
     </section>
   );
 };
