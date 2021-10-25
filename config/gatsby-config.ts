@@ -27,6 +27,8 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-plugin-git-clone',
       options: {
         repository: 'https://github.com/MyCryptoHQ/knowledge-base-content',
+        // TODO: Remove before moving to production
+        branch: 'redesign',
         path: resolve(__dirname, '../content')
       }
     },
