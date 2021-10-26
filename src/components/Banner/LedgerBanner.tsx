@@ -6,7 +6,7 @@ import { Link } from '../Link';
 import { Banner } from './Banner';
 
 export const LedgerBanner: FunctionComponent<FlexProps> = (props) => (
-  <Link to="https://www.ledgerwallet.com/r/1985?path=/products/" external={true} newTab={true}>
+  <Link to="https://shop.ledger.com/?r=1985" external={true}>
     <Banner
       type="green"
       left={
