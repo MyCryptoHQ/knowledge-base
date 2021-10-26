@@ -1,5 +1,5 @@
 import { t, Trans } from '@lingui/macro';
-import { Box, Container, InlineBody } from '@mycrypto/ui';
+import { Box, Container } from '@mycrypto/ui';
 import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
 import { Article, Articles, Hero, Link, Page } from '../components';
