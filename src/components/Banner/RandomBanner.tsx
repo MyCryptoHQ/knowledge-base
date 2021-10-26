@@ -1,12 +1,3 @@
-import { FlexProps } from '@mycrypto/ui';
-import { FunctionComponent, useMemo } from 'react';
-import { LedgerBanner } from './LedgerBanner';
-import { MembershipBanner } from './MembershipBanner';
+import loadable from '@loadable/component';
 
-const BANNERS = [LedgerBanner, MembershipBanner];
-
-export const RandomBanner: FunctionComponent<FlexProps> = (props) => {
-  const Banner = useMemo(() => BANNERS[Math.floor(Math.random() * BANNERS.length)], []);
-
-  return <Banner {...props} />;
-};
+export const RandomBanner = loadable(() => import('./StaticRandomBanner'));
