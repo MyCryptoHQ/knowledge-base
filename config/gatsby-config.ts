@@ -52,7 +52,10 @@ const config: GatsbyConfig = {
             }
           },
           {
-            resolve: 'gatsby-remark-copy-linked-files'
+            resolve: 'gatsby-remark-copy-linked-files',
+            options: {
+              ignoreFileExtensions: ['png', 'jpg', 'jpeg']
+            }
           },
           {
             resolve: 'gatsby-remark-external-links',
