@@ -12,7 +12,7 @@ interface Props {
 }
 
 const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
-  <PageContainer title={mdx.frontmatter.title} keyWords={mdx.frontmatter.tags}>
+  <PageContainer title={mdx.frontmatter.title} description={mdx.excerpt} keyWords={mdx.frontmatter.tags}>
     <Box flex="1">
       <Container paddingTop="48px">
         <Breadcrumbs>
@@ -81,6 +81,7 @@ export const query = graphql`
     mdx(slug: { eq: $slug }) {
       body
       slug
+      excerpt(pruneLength: 155)
       frontmatter {
         title
         tags

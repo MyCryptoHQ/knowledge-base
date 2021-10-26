@@ -2940,10 +2940,10 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-2.0.0-next.8.tgz#66ecc27b78e07a3ea2eb1a8fc5a99dfa0ba96690"
   integrity sha512-T0BcXmNzEunFkuxrO8BFw44htvTPuAoKbLvTG41otyZBDV1Rs+JMddcUuaP5vXpTWtgD3grhcrPEwyx88RUumQ==
 
-"@mycrypto/ui@^1.8.0":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@mycrypto/ui/-/ui-1.8.0.tgz#6b281a51063900cfcd60bcbbdb157aa98985f21a"
-  integrity sha512-OYSyoY8hx2oh27P3E6pmKx1mk55xPS2W3nJoqWapDR4OCcHEZM7QgPp71gYVFr51DoZPCIYx7zO8YyWy7KmB2Q==
+"@mycrypto/ui@^1.8.1":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@mycrypto/ui/-/ui-1.8.1.tgz#5d5d3780dca90bc047c6d7790c11334dd25606ba"
+  integrity sha512-0Q50W2RiJfkcUa4ChAIsX9kWHL+7JIJmjN5YS+8GmgQ7TRtaB9qeVhTbu3hZLDqM9eh+4d2T50raq4rdQvH+Og==
   dependencies:
     "@rebass/forms" "4.0.6"
     "@types/rebass" "4.0.8"
