@@ -2,8 +2,7 @@ import { t, Trans } from '@lingui/macro';
 import { Box, Container } from '@mycrypto/ui';
 import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
-import { Article, Articles, Hero, Link, Page } from '../components';
-import { Banner, BannerType } from '../components/Banner';
+import { Article, Articles, Hero, Link, Page, RandomBanner } from '../components';
 import { Mdx } from '../types';
 
 export interface IndexProps {
@@ -31,7 +30,7 @@ const Index: FunctionComponent<IndexProps> = ({ data }) => (
           <Trans>Show More</Trans>
         </Link>
       </Box>
-      <Banner type={BannerType.Green} marginBottom="5" />
+      <RandomBanner marginBottom="5" />
       <Articles title={t`Latest Articles`} columns={2} marginBottom="4">
         {data.latestArticles.nodes.map((node) => (
           <Article key={`latest-${node.slug}`} article={node} />

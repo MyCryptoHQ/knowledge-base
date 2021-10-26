@@ -1,5 +1,6 @@
 export * from './Article';
 export * from './Articles';
+export * from './Banner';
 export * from './Card';
 export * from './Categories';
 export * from './Category';
