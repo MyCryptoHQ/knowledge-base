@@ -40,7 +40,7 @@ export default Index;
 
 export const query = graphql`
   query Index($popularArticles: [String!]!) {
-    popularArticles: allMdx(filter: { slug: { in: $popularArticles } }) {
+    popularArticles: allMdx(filter: { slug: { in: $popularArticles } }, limit: 3) {
       nodes {
         ...Article
       }

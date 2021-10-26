@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs';
 import { join, resolve } from 'path';
 import {
+  CreatePageArgs,
   CreatePagesArgs,
   CreateResolversArgs,
   CreateSchemaCustomizationArgs,
@@ -13,13 +14,9 @@ import { GatsbyIterable } from 'gatsby/dist/datastore/common/iterable';
 import { titleCase } from 'title-case';
 import { parse } from 'yaml';
 import { POPULAR_ARTICLES } from './src/config';
-import { Breadcrumb, YamlNode, MdxNode } from './src/types';
+import { Breadcrumb, MdxNode, YamlNode } from './src/types';
 
 const REDIRECTS_FILE = resolve(__dirname, './content/redirects.yml');
-
-const HOME_TEMPLATE = resolve(__dirname, './src/templates/index.tsx');
-const CATEGORY_TEMPLATE = resolve(__dirname, './src/templates/category.tsx');
-const PAGE_TEMPLATE = resolve(__dirname, './src/templates/page.tsx');
 
 type FileNode = Node & {
   relativePath: string;
@@ -352,80 +349,31 @@ const gatsbyNode: GatsbyNode = {
     createResolvers(resolvers);
   },
 
-  async createPages({ actions: { createPage, createRedirect }, graphql, reporter }: CreatePagesArgs): Promise<void> {
+  async createPages({ actions: { createRedirect } }: CreatePagesArgs): Promise<void> {
+    const { redirects } = parse(await fs.readFile(REDIRECTS_FILE, 'utf-8'));
+
+    redirects.forEach((redirect: { from: string; to: string }) => {
+      createRedirect({
+        fromPath: `/${redirect.from}`,
+        toPath: `/${redirect.to}`,
+        isPermanent: true
+      });
+    });
+  },
+
+  async onCreatePage({
+    page,
+    actions: { deletePage, createPage }
+  }: CreatePageArgs<Record<string, unknown>>): Promise<void> {
+    deletePage(page);
     createPage({
-      path: '/',
-      component: HOME_TEMPLATE,
+      ...page,
       context: {
-        popularArticles: POPULAR_ARTICLES
+        ...page.context,
+        popularArticles: POPULAR_ARTICLES,
+        glob: `${page.context.slug}/**`
       }
     });
-
-    type QueryData<T extends string> = {
-      [key in T]: {
-        nodes: Array<{
-          slug: string;
-        }>;
-      };
-    };
-
-    /**
-     * Simple helper function to create pages from a GraphQL query. This assumes the node has a slug,
-     * which is used as `path` and `context`.
-     *
-     * @param {string} fieldName The GraphQL field name of the data
-     * @param {string} component Path to the React component to use for the page
-     * @returns {Promise<void>}
-     */
-    const createPagesFromNode = async (fieldName: 'allMdx' | 'allYaml', component: string) => {
-      const result = await graphql<QueryData<typeof fieldName>>(`
-      query {
-        ${fieldName} {
-          nodes {
-            slug
-          }
-        }
-      }
-    `);
-
-      if (!result.data || result.errors) {
-        reporter.panicOnBuild('Failed to fetch all content', result.errors);
-        return process.exit(1);
-      }
-
-      const { nodes } = result.data[fieldName];
-      nodes.forEach(({ slug }) => {
-        createPage({
-          path: slug,
-          component,
-          context: {
-            slug,
-            glob: `${slug}/**`
-          }
-        });
-      });
-    };
-
-    /**
-     * Reads `redirects.yml` from the content repository and registers all redirects.
-     *
-     * @returns {Promise<void>}
-     */
-    const createRedirects = async () => {
-      const { redirects } = parse(await fs.readFile(REDIRECTS_FILE, 'utf-8'));
-
-      redirects.forEach((redirect: { from: string; to: string }) => {
-        createRedirect({
-          fromPath: `/${redirect.from}`,
-          toPath: `/${redirect.to}`,
-          isPermanent: true
-        });
-      });
-    };
-
-    await createPagesFromNode('allMdx', PAGE_TEMPLATE);
-    await createPagesFromNode('allYaml', CATEGORY_TEMPLATE);
-    await createRedirects();
   }
 };
 

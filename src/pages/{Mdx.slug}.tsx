@@ -77,7 +77,7 @@ const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
 export default Page;
 
 export const query = graphql`
-  query Page($slug: String!) {
+  query PageQuery($slug: String!) {
     mdx(slug: { eq: $slug }) {
       body
       slug

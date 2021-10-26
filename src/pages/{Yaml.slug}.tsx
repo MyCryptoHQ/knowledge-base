@@ -99,7 +99,7 @@ export const query = graphql`
     }
   }
 
-  query Category($slug: String!, $glob: String!) {
+  query CategoryQuery($slug: String!, $glob: String!) {
     yaml(slug: { eq: $slug }) {
       title
       slug

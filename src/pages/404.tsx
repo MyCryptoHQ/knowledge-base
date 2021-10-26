@@ -1,11 +1,11 @@
-import { Trans } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import { Body, Box, Breadcrumb, Breadcrumbs, Button, Container, Image, SubHeading } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
 import sadWallet from '../assets/images/sad-wallet.svg';
 import { Link, Page } from '../components';
 
 const Error404: FunctionComponent = () => (
-  <Page title="Page not found" noIndex={true}>
+  <Page title={t`Page Not Found`} noIndex={true}>
     <Container width="100%">
       <Breadcrumbs paddingY="48px">
         <Breadcrumb>
