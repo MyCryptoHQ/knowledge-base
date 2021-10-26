@@ -12,16 +12,14 @@ import {
 import { GatsbyIterable } from 'gatsby/dist/datastore/common/iterable';
 import { titleCase } from 'title-case';
 import { parse } from 'yaml';
-import { POPULAR_ARTICLES } from './src/config/articles';
+import { POPULAR_ARTICLES } from './src/config';
 import { Breadcrumb, YamlNode, MdxNode } from './src/types';
-import { encodeTag } from './src/utils';
 
 const REDIRECTS_FILE = resolve(__dirname, './content/redirects.yml');
 
 const HOME_TEMPLATE = resolve(__dirname, './src/templates/index.tsx');
 const CATEGORY_TEMPLATE = resolve(__dirname, './src/templates/category.tsx');
 const PAGE_TEMPLATE = resolve(__dirname, './src/templates/page.tsx');
-const TAG_TEMPLATE = resolve(__dirname, './src/templates/tag.tsx');
 
 type FileNode = Node & {
   relativePath: string;
@@ -408,53 +406,6 @@ const gatsbyNode: GatsbyNode = {
       });
     };
 
-    interface TagsQueryData {
-      allMdx: {
-        nodes: Array<{
-          frontmatter: {
-            tags: string[];
-          };
-        }>;
-      };
-    }
-
-    const createTags = async () => {
-      const result = await graphql<TagsQueryData>(`
-        query {
-          allMdx {
-            nodes {
-              frontmatter {
-                tags
-              }
-            }
-          }
-        }
-      `);
-
-      if (!result.data || result.errors) {
-        reporter.panicOnBuild('Failed to fetch tags', result.errors);
-        return process.exit(1);
-      }
-
-      const tags = new Set(result.data.allMdx.nodes.flatMap((page) => page.frontmatter.tags));
-
-      tags.forEach((tag) => {
-        if (!tag) {
-          return;
-        }
-
-        createPage({
-          path: `/tag/${encodeTag(tag)}`,
-          component: TAG_TEMPLATE,
-          context: {
-            tag: [tag],
-            tagName: tag,
-            popularArticles: POPULAR_ARTICLES
-          }
-        });
-      });
-    };
-
     /**
      * Reads `redirects.yml` from the content repository and registers all redirects.
      *
@@ -474,7 +425,6 @@ const gatsbyNode: GatsbyNode = {
 
     await createPagesFromNode('allMdx', PAGE_TEMPLATE);
     await createPagesFromNode('allYaml', CATEGORY_TEMPLATE);
-    await createTags();
     await createRedirects();
   }
 };
