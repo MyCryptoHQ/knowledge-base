@@ -39,12 +39,8 @@ const Popular: FunctionComponent<LatestArticlesProps> = ({ data }) => (
 export default Popular;
 
 export const query = graphql`
-  query {
-    allMdx(
-      sort: { order: DESC, fields: [frontmatter___date_published] }
-      limit: 30
-      filter: { category: { parentCategory: { slug: { ne: "troubleshooter" } } } }
-    ) {
+  query Popular($popularArticles: [String!]!) {
+    allMdx(filter: { slug: { in: $popularArticles } }, sort: { order: DESC, fields: [frontmatter___date_modified] }) {
       nodes {
         ...Article
       }
