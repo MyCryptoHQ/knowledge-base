@@ -24,7 +24,7 @@ export const Banner: FunctionComponent<BannerProps & FlexProps> = ({ type, left,
       borderRadius: 'badge'
     }}
     {...props}>
-    <Box minWidth={['150px', null, '300px']} marginX="4">
+    <Box minWidth={['100px', '150px', '300px']} marginX="4">
       {left}
     </Box>
     <Box

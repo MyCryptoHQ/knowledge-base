@@ -33,7 +33,7 @@ const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
             <SubHeading fontSize="45px" lineHeight="54px" marginBottom="20px" color="text.primary">
               {mdx.frontmatter.title}
             </SubHeading>
-            <Flex marginBottom="5">
+            <Flex marginBottom="5" flexDirection={['column', 'row']}>
               <SubHeading
                 as="h3"
                 fontSize="24px"
@@ -43,7 +43,9 @@ const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
                 marginRight="3">
                 <Trans>Last updated: {mdx.frontmatter.dateModified}</Trans>
               </SubHeading>
-              <Label category={mdx.category} />
+              <Box marginTop={['10px', '0']}>
+                <Label category={mdx.category} />
+              </Box>
             </Flex>
             <Markdown body={mdx.body} />
           </Box>
