@@ -12,7 +12,7 @@
     "@fontsource/roboto-mono": "^4.5.0",
     "@lingui/react": "^3.12.1",
     "@loadable/component": "^5.15.0",
-    "@mycrypto/ui": "^1.8.1",
+    "@mycrypto/ui": "^1.9.1",
     "bignumber.js": "^9.0.1",
     "isomorphic-unfetch": "^3.1.0",
     "lodash.merge": "^4.6.2",

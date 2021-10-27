@@ -1,5 +1,5 @@
-import { Trans } from '@lingui/macro';
-import { Body, Box, Button, Copyable, Flex, Icon, SubHeading } from '@mycrypto/ui';
+import { t, Trans } from '@lingui/macro';
+import { Body, Box, Button, Copyable, Flex, Icon, SubHeading, Tooltip } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
 import { useSiteMetadata } from '../hooks';
 import { Mdx } from '../types';
@@ -56,12 +56,14 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
             newTab={true}>
             <Icon type="linkedin" width="24px" marginRight="4" />
           </Link>
-          <Copyable
-            text={`${siteUrl}/${page.slug}?utm_medium=social&utm_source=link&utm_campaign=share`}
-            icon="link"
-            width="24px"
-            fill="#55b6e2"
-          />
+          <Tooltip tooltip={t`Click to copy`} placement="top" offset={[0, 10]}>
+            <Copyable
+              text={`${siteUrl}/${page.slug}?utm_medium=social&utm_source=link&utm_campaign=share`}
+              icon="link"
+              width="24px"
+              fill="#55b6e2"
+            />
+          </Tooltip>
         </Flex>
       </Card>
 
