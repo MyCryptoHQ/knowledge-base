@@ -22,8 +22,6 @@
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "react-is": "^17.0.2",
-    "react-redux": "^7.2.6",
-    "redux": "^4.1.1",
     "regenerator-runtime": "^0.13.9",
     "styled-components": "^5.3.3"
   },
@@ -45,7 +43,6 @@
     "@types/react-dom": "^17.0.10",
     "@types/react-google-recaptcha": "^2.1.2",
     "@types/react-helmet": "^6.1.4",
-    "@types/react-redux": "^7.1.20",
     "@types/styled-components": "^5.1.15",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",

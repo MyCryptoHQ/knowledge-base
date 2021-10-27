@@ -16,6 +16,7 @@ export * from './Link';
 export * from './Markdown';
 export * from './Metadata';
 export * from './Page';
+export * from './Results';
 export * from './Search';
 export * from './Section';
 export * from './Sidebar';
