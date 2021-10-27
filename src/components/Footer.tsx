@@ -20,7 +20,7 @@ export const Footer: FunctionComponent = () => (
         <FooterLinkColumn key={column.heading} heading={column.heading}>
           {column.links.map((link, index) => (
             <FooterLink key={index}>
-              <Link to={link.url} external={true}>
+              <Link to={link.url} external={true} color="inherit">
                 {link.title}
               </Link>
             </FooterLink>

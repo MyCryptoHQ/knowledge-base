@@ -24,10 +24,16 @@ const BaseLink: FunctionComponent<TextProps> = ({ children, ...props }) => (
   </Text>
 );
 
-export const Link: FunctionComponent<LinkProps> = ({ to, external = false, newTab = false, children }) => {
+export const Link: FunctionComponent<LinkProps & TextProps> = ({
+  to,
+  external = false,
+  newTab = false,
+  children,
+  ...props
+}) => {
   if (external) {
     return (
-      <BaseLink as="a" href={to} target={newTab ? '_blank' : '_self'} rel="noopener noreferrer">
+      <BaseLink as="a" href={to} target={newTab ? '_blank' : '_self'} rel="noopener noreferrer" {...props}>
         {children}
       </BaseLink>
     );
