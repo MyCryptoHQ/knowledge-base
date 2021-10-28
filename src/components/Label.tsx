@@ -1,7 +1,6 @@
 import { Tag } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
 import { Yaml } from '../types';
-import { getCategoryTag } from '../utils';
 import { Link } from './Link';
 
 export interface LabelProps {
@@ -10,7 +9,7 @@ export interface LabelProps {
 
 export const Label: FunctionComponent<LabelProps> = ({ category }) => (
   <Link to={`/${category.parentCategory.slug}`}>
-    <Tag type={getCategoryTag(category)} marginBottom="0">
+    <Tag type={category.parentCategory.badge} marginBottom="0">
       {category.parentCategory.title}
     </Tag>
   </Link>

@@ -92,6 +92,7 @@ export const query = graphql`
       category {
         parentCategory {
           title
+          badge
           slug
         }
       }
