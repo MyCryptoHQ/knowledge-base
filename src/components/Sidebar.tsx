@@ -31,35 +31,26 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
           </SubHeading>
           <Flex alignItems="center">
             <Link
-              to={`https://twitter.com/intent/tweet?text=${page.frontmatter.title}&url=${getSocialUrl(
-                `${siteUrl}/${page.slug}`,
-                'twitter'
-              )}`}
+              to={getSocialUrl(siteUrl, page.slug, page.frontmatter.title, 'twitter')}
               external={true}
               newTab={true}>
               <Icon type="twitter" width="24px" marginRight="4" />
             </Link>
             <Link
-              to={`https://www.facebook.com/sharer/sharer.php?t=${page.frontmatter.title}&u=${getSocialUrl(
-                `${siteUrl}/${page.slug}`,
-                'facebook'
-              )}`}
+              to={getSocialUrl(siteUrl, page.slug, page.frontmatter.title, 'facebook')}
               external={true}
               newTab={true}>
               <Icon type="facebook" width="24px" marginRight="4" />
             </Link>
             <Link
-              to={`https://www.linkedin.com/sharing/share-offsite/?url=${getSocialUrl(
-                `${siteUrl}/${page.slug}`,
-                'linkedin'
-              )}`}
+              to={getSocialUrl(siteUrl, page.slug, page.frontmatter.title, 'linkedin')}
               external={true}
               newTab={true}>
               <Icon type="linkedin" width="24px" marginRight="4" />
             </Link>
             <Tooltip tooltip={t`Click to copy`} placement="top" offset={[0, 10]}>
               <Copyable
-                text={`${siteUrl}/${page.slug}?utm_medium=social&utm_source=link&utm_campaign=share`}
+                text={getSocialUrl(siteUrl, page.slug, page.frontmatter.title, 'link')}
                 icon="link"
                 width="24px"
                 fill="#55b6e2"
