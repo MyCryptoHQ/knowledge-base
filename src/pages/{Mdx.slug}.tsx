@@ -30,13 +30,13 @@ const Page: FunctionComponent<Props> = ({ data: { mdx } }) => (
 
         <Flex marginTop="48px" flexDirection={['column', null, 'row']}>
           <Box paddingRight="4" flex={1}>
-            <SubHeading fontSize="45px" lineHeight="54px" marginBottom="20px" color="text.primary">
+            <SubHeading fontSize="large" lineHeight="120%" marginBottom="20px">
               {mdx.frontmatter.title}
             </SubHeading>
             <Flex marginBottom="5" flexDirection={['column', 'row']}>
               <SubHeading
                 as="h3"
-                fontSize="24px"
+                fontSize="medium"
                 fontWeight="400"
                 lineHeight="29px"
                 color="text.accent"

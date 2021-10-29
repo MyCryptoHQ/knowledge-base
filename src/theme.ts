@@ -24,6 +24,20 @@ export const theme = merge(defaultTheme, {
         color: 'text.accent'
       }
     }
+  },
+  text: {
+    heading: {
+      color: 'text.primary'
+    },
+    subHeading: {
+      color: 'text.primary'
+    }
+  },
+  fontSizes: {
+    tiny: '14px',
+    small: '18px',
+    medium: '24px',
+    large: '45px'
   }
 });
 

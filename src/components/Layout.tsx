@@ -28,7 +28,7 @@ export const Layout: FunctionComponent = ({ children }) => (
     <Header>
       <SubHeader>
         <Flex alignItems="center">
-          <Body fontSize="14px" marginRight="3">
+          <Body fontSize="tiny" marginRight="3">
             <Trans>What can we help you with?</Trans>
           </Body>
           <Search />

@@ -25,7 +25,7 @@ const Index: FunctionComponent<IndexProps> = ({ data }) => (
           <Article key={`popular-${node.slug}`} article={node} />
         ))}
       </Articles>
-      <Box fontSize="18px" fontWeight="bold" textAlign="center" marginBottom="5">
+      <Box fontSize="small" fontWeight="bold" textAlign="center" marginBottom="5">
         <Link to="/articles/popular">
           <Trans>Show More</Trans>
         </Link>
@@ -36,7 +36,7 @@ const Index: FunctionComponent<IndexProps> = ({ data }) => (
           <Article key={`latest-${node.slug}`} article={node} />
         ))}
       </Articles>
-      <Box fontSize="18px" fontWeight="bold" textAlign="center" marginBottom="5">
+      <Box fontSize="small" fontWeight="bold" textAlign="center" marginBottom="5">
         <Link to="/articles/latest">
           <Trans>Show More</Trans>
         </Link>

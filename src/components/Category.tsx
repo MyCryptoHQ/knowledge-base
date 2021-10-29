@@ -14,8 +14,8 @@ export const Category: FunctionComponent<CategoryProps> = ({ category, depth = 0
     marginBottom="5"
     sx={{
       h3: {
-        fontSize: '45px',
-        lineHeight: '54px'
+        fontSize: 'large',
+        lineHeight: '120%'
       },
       h4: {
         fontSize: '20px',
@@ -42,7 +42,7 @@ export const Category: FunctionComponent<CategoryProps> = ({ category, depth = 0
       <>
         {category.categories.map((category) => (
           <Box key={`sub-category=${category.slug}`}>
-            <SubHeading as={`h${depth + 3}` as ElementType} color="text.primary" marginBottom="24px">
+            <SubHeading as={`h${depth + 3}` as ElementType} marginBottom="24px">
               {category.title}
             </SubHeading>
             <Category category={category} depth={depth + 1} />

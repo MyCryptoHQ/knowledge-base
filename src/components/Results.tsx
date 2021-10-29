@@ -29,9 +29,7 @@ export const Results: FunctionComponent<ResultsProps> = ({ query }) => {
     <>
       {results.map((result) => (
         <Box key={`result-${result.slug}`} marginBottom="4">
-          <SubHeading as="h3" color="text.primary">
-            {result.title}
-          </SubHeading>
+          <SubHeading as="h3">{result.title}</SubHeading>
           <Body marginBottom="3">{result.excerpt}</Body>
           <Link to={`/${result.slug}`}>
             <Button>

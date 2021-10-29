@@ -33,10 +33,16 @@ const Search: FunctionComponent = () => {
           </Breadcrumbs>
 
           <Box marginTop="48px">
-            <SubHeading fontSize="45px" lineHeight="54px" marginBottom="20px" color="text.primary">
+            <SubHeading fontSize="large" lineHeight="120%" marginBottom="20px">
               <Trans>Search</Trans>
             </SubHeading>
-            <SubHeading as="h3" fontSize="24px" fontWeight="400" lineHeight="29px" color="text.accent" marginBottom="4">
+            <SubHeading
+              as="h3"
+              fontSize="medium"
+              fontWeight="400"
+              lineHeight="29px"
+              color="text.accent"
+              marginBottom="4">
               <Trans>Results for "{query}"</Trans>
             </SubHeading>
 

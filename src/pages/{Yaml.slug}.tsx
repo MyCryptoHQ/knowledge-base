@@ -36,13 +36,13 @@ const CategoryPage: FunctionComponent<Props> = ({ data: { yaml, allMdx } }) => (
       </Box>
       <Flex flexDirection="column" alignItems="center" textAlign="center">
         <Image src={yaml.parentCategory.icon?.large.publicURL} alt={yaml.title} maxWidth="170px" marginBottom="3" />
-        <Body variant="muted" fontSize="18px" lineHeight="22px" marginBottom="2" sx={{ textTransform: 'uppercase' }}>
+        <Body variant="muted" fontSize="small" lineHeight="22px" marginBottom="2" sx={{ textTransform: 'uppercase' }}>
           <Plural value={yaml.totalArticles} zero="No articles" one="# article" other="# articles" />
         </Body>
-        <SubHeading fontSize="45px" lineHeight="54px" color="text.primary" marginBottom="3">
+        <SubHeading fontSize="large" lineHeight="120%" marginBottom="3">
           {yaml.title}
         </SubHeading>
-        <Body fontSize="24px" lineHeight="29px">
+        <Body fontSize="medium" lineHeight="29px">
           {yaml.description}
         </Body>
       </Flex>

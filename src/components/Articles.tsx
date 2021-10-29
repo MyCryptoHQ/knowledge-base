@@ -9,7 +9,7 @@ export interface ArticlesProps {
 
 export const Articles: FunctionComponent<ArticlesProps & BoxProps> = ({ title, columns = 3, children, ...props }) => (
   <Box {...props}>
-    <SubHeading fontSize="45px" lineHeight="54px" marginBottom="4" color="text.primary">
+    <SubHeading fontSize="large" lineHeight="120%" marginBottom="4">
       {title}
     </SubHeading>
     <Grid columns={columns}>{children}</Grid>

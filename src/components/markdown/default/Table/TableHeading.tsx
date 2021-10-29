@@ -8,7 +8,7 @@ export const TableHeading: FunctionComponent = ({ children, ...props }) => (
     paddingY="3"
     textAlign="left"
     color="text.primary"
-    fontSize="14px"
+    fontSize="tiny"
     fontWeight="normal"
     letterSpacing="1px"
     sx={{

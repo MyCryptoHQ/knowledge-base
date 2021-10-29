@@ -60,7 +60,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
         </Card>
 
         <Card marginBottom="4" backgroundColor="background.muted">
-          <SubHeading fontSize="18px" lineHeight="22px" marginBottom="12px" color="text.primary">
+          <SubHeading fontSize="small" lineHeight="22px" marginBottom="12px">
             <Trans>MyCrypto is the number one way to manage all of your Ethereum Accounts</Trans>
           </SubHeading>
           <Body color="text.accent" marginBottom="3">

@@ -21,7 +21,7 @@ export const Article: FunctionComponent<ArticleCardProps> = ({ article }) => {
             <Trans>{article.timeToRead} Min Read</Trans>
           </InlineBody>
         </Flex>
-        <SubHeading fontSize="24px" lineHeight="29px" marginBottom="12px">
+        <SubHeading fontSize="medium" lineHeight="29px" marginBottom="12px">
           {article.frontmatter.title}
         </SubHeading>
         <Body marginBottom="3" sx={{ flexGrow: '1' }}>
