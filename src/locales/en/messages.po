@@ -21,11 +21,15 @@ msgstr ""
 msgid "All Popular Articles"
 msgstr ""
 
+#: src/components/markdown/TokenInputData.tsx:75
+msgid "Amount"
+msgstr ""
+
 #: src/pages/{Yaml.slug}.tsx:67
 msgid "Browse All Articles"
 msgstr ""
 
-#: src/components/Sidebar.tsx:60
+#: src/components/Sidebar.tsx:51
 msgid "Click to copy"
 msgstr ""
 
@@ -33,12 +37,32 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
+#: src/components/markdown/TokenInputData.tsx:88
+msgid "Data"
+msgstr ""
+
 #: src/pages/{Mdx.slug}.tsx:67
 msgid "Didn't find what you were looking for? <0>Contact Us</0>"
 msgstr ""
 
-#: src/components/Sidebar.tsx:142
+#: src/components/Sidebar.tsx:133
 msgid "Donate Now"
+msgstr ""
+
+#: src/components/markdown/TokenInputData.tsx:65
+msgid "Enter the address where you want to send the tokens to. <0>Do not enter the token contract address here.</0>"
+msgstr ""
+
+#: src/components/markdown/TokenInputData.tsx:49
+msgid "Enter the number of decimals the token contract uses. You can find this on <0>Etherscan</0>."
+msgstr ""
+
+#: src/components/markdown/TokenInputData.tsx:78
+msgid "Enter the number of tokens you want to send. It's highly recommended to use a small amount for a test transaction first."
+msgstr ""
+
+#: src/components/markdown/TokenInputData.tsx:97
+msgid "Fill out the fields above to get the data."
 msgstr ""
 
 #: src/components/Hero.tsx:37
@@ -49,7 +73,7 @@ msgstr ""
 #~ msgid "General Knowledge"
 #~ msgstr ""
 
-#: src/components/Sidebar.tsx:149
+#: src/components/Sidebar.tsx:140
 msgid "Get Membership"
 msgstr ""
 
@@ -105,7 +129,7 @@ msgstr ""
 msgid "Looks like you got lost somewhere along the way. Don't worry, the wizard can help you get back!"
 msgstr ""
 
-#: src/components/Sidebar.tsx:73
+#: src/components/Sidebar.tsx:64
 msgid "MyCrypto is the number one way to manage all of your Ethereum Accounts"
 msgstr ""
 
@@ -115,7 +139,7 @@ msgstr ""
 msgid "Page Not Found"
 msgstr ""
 
-#: src/components/Sidebar.tsx:137
+#: src/components/Sidebar.tsx:128
 msgid "Please consider making a donation or purchasing a MyCrypto Membership!"
 msgstr ""
 
@@ -127,16 +151,16 @@ msgid "Popular Articles"
 msgstr ""
 
 #: src/components/Article.tsx:32
-#: src/components/Results.tsx:38
+#: src/components/Results.tsx:44
 msgid "Read Now"
 msgstr ""
 
-#: src/components/Sidebar.tsx:93
+#: src/components/Sidebar.tsx:84
 #: src/pages/{Mdx.slug}.tsx:58
 msgid "Related Articles"
 msgstr ""
 
-#: src/pages/search.tsx:40
+#: src/pages/search.tsx:46
 msgid "Results for \"{query}\""
 msgstr ""
 
@@ -158,7 +182,7 @@ msgstr ""
 msgid "Search or browse for articles to help you get started or get un-stuck."
 msgstr ""
 
-#: src/components/Sidebar.tsx:85
+#: src/components/Sidebar.tsx:76
 msgid "Send Us A Message"
 msgstr ""
 
@@ -171,12 +195,24 @@ msgstr ""
 msgid "Show More"
 msgstr ""
 
-#: src/components/Sidebar.tsx:118
+#: src/components/Results.tsx:31
+msgid "Sorry, there are no results for \"{query}\". Please try another search query."
+msgstr ""
+
+#: src/components/Sidebar.tsx:109
 msgid "Support MyCrypto"
 msgstr ""
 
 #: src/components/Banner/MembershipBanner.tsx:22
 msgid "Support MyCrypto, become a member!"
+msgstr ""
+
+#: src/components/markdown/TokenInputData.tsx:62
+msgid "To Address"
+msgstr ""
+
+#: src/components/markdown/TokenInputData.tsx:46
+msgid "Token Decimals"
 msgstr ""
 
 #: src/components/Hero.tsx:17
@@ -187,7 +223,7 @@ msgstr ""
 msgid "Try \"Cancel Transaction\" or \"MetaMask\""
 msgstr ""
 
-#: src/components/Sidebar.tsx:131
+#: src/components/Sidebar.tsx:122
 msgid "We love helping the community stay safe and informed with these free educational articles, and are happy to walk you through solving problems even if they aren't directly related to MyCrypto."
 msgstr ""
 
@@ -196,11 +232,15 @@ msgstr ""
 msgid "What can we help you with?"
 msgstr ""
 
-#: src/components/Sidebar.tsx:76
+#: src/components/markdown/TokenInputData.tsx:91
+msgid "When all fields above are filled out, the data should appear below."
+msgstr ""
+
+#: src/components/Sidebar.tsx:67
 msgid "You can always email us for one-on-one help using <0>support@mycrypto.com</0>"
 msgstr ""
 
-#: src/components/Sidebar.tsx:125
+#: src/components/Sidebar.tsx:116
 msgid "Your support enables MyCrypto to continue developing non-custodial, user-friendly cryptocurrency management solutions as a public good."
 msgstr ""
 

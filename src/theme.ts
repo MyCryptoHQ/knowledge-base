@@ -23,6 +23,11 @@ export const theme = merge(defaultTheme, {
       info: {
         color: 'text.accent'
       }
+    },
+    input: {
+      simple: {
+        textarea: defaultTheme.variants.input.simple.input
+      }
     }
   },
   text: {
