@@ -1,9 +1,9 @@
 import { t, Trans } from '@lingui/macro';
 import { Body, Flex, FlexProps, Image } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
-import logo from '../../assets/images/membership.svg';
-import { Link } from '../Link';
-import { Banner } from './Banner';
+import logo from '../../../assets/images/membership.svg';
+import { Link } from '../../Link';
+import { Banner } from '../Banner';
 
 export const MembershipBanner: FunctionComponent<FlexProps> = (props) => (
   <Link

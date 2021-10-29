@@ -1,9 +1,22 @@
 import { FlexProps } from '@mycrypto/ui';
 import { FunctionComponent, useMemo } from 'react';
-import { LedgerBanner } from './LedgerBanner';
-import { MembershipBanner } from './MembershipBanner';
+import {
+  CoinbaseBanner,
+  LedgerBanner,
+  MembershipBanner,
+  QuickNodeBanner,
+  TrezorBanner,
+  UnstoppableDomainsBanner
+} from './Banners';
 
-const BANNERS = [LedgerBanner, MembershipBanner];
+const BANNERS = [
+  CoinbaseBanner,
+  LedgerBanner,
+  MembershipBanner,
+  QuickNodeBanner,
+  TrezorBanner,
+  UnstoppableDomainsBanner
+];
 
 const StaticRandomBanner: FunctionComponent<FlexProps> = (props) => {
   const Banner = useMemo(() => BANNERS[Math.floor(Math.random() * BANNERS.length)], []);

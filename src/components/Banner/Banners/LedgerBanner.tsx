@@ -1,9 +1,9 @@
 import { t, Trans } from '@lingui/macro';
 import { Body, Flex, FlexProps, Image } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
-import logo from '../../assets/images/logos/ledger.svg';
-import { Link } from '../Link';
-import { Banner } from './Banner';
+import logo from '../../../assets/images/logos/ledger.svg';
+import { Link } from '../../Link';
+import { Banner } from '../Banner';
 
 export const LedgerBanner: FunctionComponent<FlexProps> = (props) => (
   <Link to="https://shop.ledger.com/?r=1985" external={true}>

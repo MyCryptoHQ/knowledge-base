@@ -1,7 +1,11 @@
 import { Box, Flex, FlexProps } from '@mycrypto/ui';
 import { FunctionComponent, ReactElement } from 'react';
+import black from '../../assets/images/banners/black.png';
 import blue from '../../assets/images/banners/blue.png';
+import darkBlue from '../../assets/images/banners/dark-blue.png';
 import green from '../../assets/images/banners/green.png';
+import lightBlue from '../../assets/images/banners/light-blue.png';
+import lightGreen from '../../assets/images/banners/light-green.png';
 
 export interface BannerProps {
   type: string;
@@ -9,8 +13,12 @@ export interface BannerProps {
 }
 
 const BANNER_TYPES = {
+  black,
   blue,
-  green
+  darkBlue,
+  green,
+  lightBlue,
+  lightGreen
 };
 
 export const Banner: FunctionComponent<BannerProps & FlexProps> = ({ type, left, children, ...props }) => (
@@ -33,7 +41,7 @@ export const Banner: FunctionComponent<BannerProps & FlexProps> = ({ type, left,
       padding="3"
       paddingLeft="5"
       sx={{
-        background: `url(${BANNER_TYPES[type as 'blue' | 'green']})`,
+        background: `url(${BANNER_TYPES[type as keyof typeof BANNER_TYPES]})`,
         backgroundSize: 'auto 100%'
       }}>
       {children}
