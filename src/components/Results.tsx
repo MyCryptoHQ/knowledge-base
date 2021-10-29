@@ -25,6 +25,14 @@ export const Results: FunctionComponent<ResultsProps> = ({ query }) => {
     return <Spinner size={2} color="spinner" />;
   }
 
+  if (results.length === 0) {
+    return (
+      <Body>
+        <Trans>Sorry, there are no results for "{query}". Please try another search query.</Trans>
+      </Body>
+    );
+  }
+
   return (
     <>
       {results.map((result) => (
