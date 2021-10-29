@@ -29,8 +29,20 @@ msgstr ""
 msgid "Browse All Articles"
 msgstr ""
 
+#: src/components/Banner/Banners/CoinbaseBanner.tsx:20
+msgid "Buy ETH today"
+msgstr ""
+
+#: src/components/Banner/Banners/UnstoppableDomainsBanner.tsx:20
+msgid "Buy a .crypto domain today"
+msgstr ""
+
 #: src/components/Sidebar.tsx:51
 msgid "Click to copy"
+msgstr ""
+
+#: src/components/Banner/Banners/CoinbaseBanner.tsx:14
+msgid "Coinbase"
 msgstr ""
 
 #: src/components/Header.tsx:33
@@ -77,8 +89,16 @@ msgstr ""
 msgid "Get Membership"
 msgstr ""
 
-#: src/components/Banner/LedgerBanner.tsx:20
+#: src/components/Banner/Banners/LedgerBanner.tsx:20
 msgid "Get a Ledger hardware wallet"
+msgstr ""
+
+#: src/components/Banner/Banners/TrezorBanner.tsx:20
+msgid "Get a Trezor hardware wallet"
+msgstr ""
+
+#: src/components/Banner/Banners/QuickNodeBanner.tsx:20
+msgid "Get your own node today"
 msgstr ""
 
 #: src/pages/404.tsx:33
@@ -120,8 +140,8 @@ msgstr ""
 msgid "Latest Articles"
 msgstr ""
 
-#: src/components/Banner/LedgerBanner.tsx:14
-#: src/components/Banner/MembershipBanner.tsx:16
+#: src/components/Banner/Banners/LedgerBanner.tsx:14
+#: src/components/Banner/Banners/MembershipBanner.tsx:16
 msgid "Ledger"
 msgstr ""
 
@@ -148,6 +168,10 @@ msgstr ""
 #: src/pages/index.tsx:23
 #: src/pages/{Yaml.slug}.tsx:55
 msgid "Popular Articles"
+msgstr ""
+
+#: src/components/Banner/Banners/QuickNodeBanner.tsx:14
+msgid "QuickNode"
 msgstr ""
 
 #: src/components/Article.tsx:32
@@ -203,7 +227,7 @@ msgstr ""
 msgid "Support MyCrypto"
 msgstr ""
 
-#: src/components/Banner/MembershipBanner.tsx:22
+#: src/components/Banner/Banners/MembershipBanner.tsx:22
 msgid "Support MyCrypto, become a member!"
 msgstr ""
 
@@ -215,12 +239,20 @@ msgstr ""
 msgid "Token Decimals"
 msgstr ""
 
+#: src/components/Banner/Banners/TrezorBanner.tsx:14
+msgid "Trezor"
+msgstr ""
+
 #: src/components/Hero.tsx:17
 #~ msgid "Troubleshooting Issues"
 #~ msgstr ""
 
 #: src/components/Hero.tsx:15
 msgid "Try \"Cancel Transaction\" or \"MetaMask\""
+msgstr ""
+
+#: src/components/Banner/Banners/UnstoppableDomainsBanner.tsx:14
+msgid "Unstoppable Domains"
 msgstr ""
 
 #: src/components/Sidebar.tsx:122
