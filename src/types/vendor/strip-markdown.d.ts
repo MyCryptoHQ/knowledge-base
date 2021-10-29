@@ -1,5 +1,6 @@
 declare module 'strip-markdown' {
-  import { Processor, Transformer } from 'unified';
+  import { ProcessorSettings } from 'unified';
 
-  export default function <S, P>(this: Processor<P>, ...settings: S): Transformer | void;
+  const plugin: ProcessorSettings;
+  export default plugin;
 }

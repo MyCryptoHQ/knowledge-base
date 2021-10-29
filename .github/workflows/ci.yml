@@ -17,20 +17,27 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2-beta
+      - name: Read .nvmrc
+        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+        id: nvm
+
+      - name: Setup Node.js ${{ steps.nvm.outputs.NVMRC }}
+        uses: actions/setup-node@v2.1.5
         with:
-          node-version: 14.16.0
+          node-version: ${{ steps.nvm.outputs.NVMRC }}
 
       - name: Cache Dependencies
         uses: actions/cache@v2
         with:
           path: |
             node_modules
-          key: ${{ hashFiles('yarn.lock') }}-${{ hashFiles('gatsby/**/*') }}
+          key: ${{ hashFiles('yarn.lock') }}-${{ hashFiles('config/**/*') }}
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Compile Translations
+        run: yarn compile
 
       - name: Lint
         run: yarn lint
@@ -42,20 +49,27 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2-beta
+      - name: Read .nvmrc
+        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+        id: nvm
+
+      - name: Setup Node.js ${{ steps.nvm.outputs.NVMRC }}
+        uses: actions/setup-node@v2.1.5
         with:
-          node-version: 14.16.0
+          node-version: ${{ steps.nvm.outputs.NVMRC }}
 
       - name: Cache Dependencies
         uses: actions/cache@v2
         with:
           path: |
             node_modules
-          key: ${{ hashFiles('yarn.lock') }}-${{ hashFiles('gatsby/**/*') }}
+          key: ${{ hashFiles('yarn.lock') }}-${{ hashFiles('config/**/*') }}
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Compile Translations
+        run: yarn compile
 
       - name: Build
         run: yarn build

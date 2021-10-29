@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-unfetch';
 import { useMemo, useState } from 'react';
-import { ELASTIC_ENDPOINT } from '../config/search';
-import { SearchResult } from '../types/page';
+import { ELASTIC_ENDPOINT } from '../config';
+import { SearchResult } from '../types';
 
 interface SearchResponse {
   results: {

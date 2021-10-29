@@ -1,28 +1,41 @@
+import { t, Trans } from '@lingui/macro';
+import { Body, Box, Breadcrumb, Breadcrumbs, Button, Container, Image, SubHeading } from '@mycrypto/ui';
 import { FunctionComponent } from 'react';
-import Breadcrumbs from '../components/Breadcrumbs';
-import MetaData from '../components/MetaData';
-import Container from '../components/ui/Container';
-import Heading from '../components/ui/Heading';
-import PageContainer from '../components/ui/PageContainer';
-import Section from '../components/ui/Section';
-import SubHeader from '../components/ui/SubHeader';
-import Text from '../components/ui/Text';
+import sadWallet from '../assets/images/sad-wallet.svg';
+import { Link, Page } from '../components';
 
 const Error404: FunctionComponent = () => (
-  <PageContainer>
-    <MetaData title="Page not found" noIndex={true} />
+  <Page title={t`Page Not Found`} noIndex={true}>
+    <Container width="100%">
+      <Breadcrumbs paddingY="48px">
+        <Breadcrumb>
+          <Link to="/">
+            <Trans>Homepage</Trans>
+          </Link>
+        </Breadcrumb>
+        <Breadcrumb>
+          <Trans>Page Not Found</Trans>
+        </Breadcrumb>
+      </Breadcrumbs>
+    </Container>
 
-    <SubHeader>
-      <Breadcrumbs breadcrumbs={[{ title: 'Page not found', slug: '404' }]} />
-    </SubHeader>
-
-    <Section>
-      <Container>
-        <Heading as="h2">Page not found</Heading>
-        <Text>The page you are looking for could not be found.</Text>
-      </Container>
-    </Section>
-  </PageContainer>
+    <Container flex="1" paddingTop="5" textAlign="center">
+      <Box maxWidth="500px">
+        <Image src={sadWallet} alt="Sad wallet" width="300px" marginBottom="4" />
+        <SubHeading fontSize="medium" lineHeight="1" marginBottom="3">
+          <Trans>Page Not Found</Trans>
+        </SubHeading>
+        <Body fontSize="small" lineHeight="1.5" marginBottom="4">
+          <Trans>Looks like you got lost somewhere along the way. Don't worry, the wizard can help you get back!</Trans>
+        </Body>
+        <Link to="/">
+          <Button marginBottom="5">
+            <Trans>Go Home</Trans>
+          </Button>
+        </Link>
+      </Box>
+    </Container>
+  </Page>
 );
 
 export default Error404;

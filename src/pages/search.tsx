@@ -1,26 +1,57 @@
+import { t, Trans } from '@lingui/macro';
+import { Box, Breadcrumb, Breadcrumbs, Container, SubHeading } from '@mycrypto/ui';
+import { useLocation } from '@reach/router';
+import { navigate } from 'gatsby';
+import { parse } from 'query-string';
 import { FunctionComponent } from 'react';
-import Breadcrumbs from '../components/Breadcrumbs';
-import MetaData from '../components/MetaData';
-import SearchPage from '../components/SearchPage';
-import Container from '../components/ui/Container';
-import PageContainer from '../components/ui/PageContainer';
-import Section from '../components/ui/Section';
-import SubHeader from '../components/ui/SubHeader';
+import { Link, Page, Results } from '../components';
 
-const Search: FunctionComponent = () => (
-  <PageContainer>
-    <MetaData title="Search" noIndex={true} />
+const Search: FunctionComponent = () => {
+  const location = useLocation();
+  const query = parse(location.search).query as string;
 
-    <SubHeader>
-      <Breadcrumbs breadcrumbs={[{ title: 'Search', slug: 'search' }]} />
-    </SubHeader>
+  if (typeof window !== 'undefined' && !query) {
+    // Prevent manually navigating to /search
+    navigate('/');
 
-    <Section>
-      <Container>
-        <SearchPage />
-      </Container>
-    </Section>
-  </PageContainer>
-);
+    return null;
+  }
+
+  return (
+    <Page title={t`Search`} noIndex={true}>
+      <Box flex="1">
+        <Container paddingY="48px">
+          <Breadcrumbs>
+            <Breadcrumb>
+              <Link to="/">
+                <Trans>Homepage</Trans>
+              </Link>
+            </Breadcrumb>
+            <Breadcrumb>
+              <Trans>Search Results</Trans>
+            </Breadcrumb>
+          </Breadcrumbs>
+
+          <Box marginTop="48px">
+            <SubHeading fontSize="large" lineHeight="120%" marginBottom="20px">
+              <Trans>Search</Trans>
+            </SubHeading>
+            <SubHeading
+              as="h3"
+              fontSize="medium"
+              fontWeight="400"
+              lineHeight="29px"
+              color="text.accent"
+              marginBottom="4">
+              <Trans>Results for "{query}"</Trans>
+            </SubHeading>
+
+            <Results query={query} />
+          </Box>
+        </Container>
+      </Box>
+    </Page>
+  );
+};
 
 export default Search;

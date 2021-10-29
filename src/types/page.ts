@@ -21,7 +21,7 @@ export interface Mdx {
   wordCount: string;
   category: Yaml;
   breadcrumbs: Breadcrumb[];
-  relatedArticles: RelatedArticle[];
+  relatedArticles?: Mdx[];
 }
 
 interface MdxFrontmatter {
@@ -30,7 +30,7 @@ interface MdxFrontmatter {
   tags: string[];
   datePublished: string;
   dateModified: string;
-  related_articles?: Array<string | RelatedArticle>;
+  related_articles?: string[];
 }
 
 interface MdxHeading {
@@ -50,9 +50,3 @@ export interface PageResult {
 }
 
 export type SearchResult = Pick<Mdx, 'slug' | 'excerpt'> & { title: string; tags: string[] };
-
-export interface RelatedArticle {
-  title: string;
-  url: string;
-  isRelative?: boolean;
-}

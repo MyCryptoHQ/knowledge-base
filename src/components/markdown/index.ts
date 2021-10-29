@@ -1,9 +1,10 @@
-import Alert from '../ui/Alert';
-import Accordion, { AccordionItem } from './Accordion';
-import Clearfix from './Clearfix';
-import TokenInputData from './TokenInputData';
-import UnitConverter from './UnitConverter';
-import YouTubeEmbed from './YouTubeEmbed';
+import { AccordionItem } from '@mycrypto/ui';
+import { Accordion } from './Accordion';
+import { Alert } from './Alert';
+import { Clearfix } from './Clearfix';
+import { TokenInputData } from './TokenInputData';
+import { UnitConverter } from './UnitConverter';
+import { YouTubeEmbed } from './YouTubeEmbed';
 import components from './default';
 
 export default {

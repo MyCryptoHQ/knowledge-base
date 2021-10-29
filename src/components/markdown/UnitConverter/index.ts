@@ -1,1 +1,2 @@
-export { default } from './UnitConverter';
+export * from './Unit';
+export * from './UnitConverter';
