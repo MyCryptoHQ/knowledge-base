@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Body, Button, Flex, InlineBody, SubHeading } from '@mycrypto/ui';
+import { Body, Box, Button, Flex, InlineBody, SubHeading } from '@mycrypto/ui';
 import { graphql } from 'gatsby';
 import { FunctionComponent } from 'react';
 import { Mdx } from '../types';
@@ -21,12 +21,14 @@ export const Article: FunctionComponent<ArticleCardProps> = ({ article }) => {
             <Trans>{article.timeToRead} Min Read</Trans>
           </InlineBody>
         </Flex>
-        <SubHeading fontSize="medium" lineHeight="29px" marginBottom="12px">
-          {article.frontmatter.title}
-        </SubHeading>
-        <Body marginBottom="3" sx={{ flexGrow: '1' }}>
-          {article.excerpt}
-        </Body>
+        <Box flex={1}>
+          <Link to={`/${article.slug}`}>
+            <SubHeading fontSize="medium" lineHeight="29px" marginBottom="12px">
+              {article.frontmatter.title}
+            </SubHeading>
+            <Body marginBottom="3">{article.excerpt}</Body>
+          </Link>
+        </Box>
         <Link to={`/${article.slug}`}>
           <Button>
             <Trans>Read Now</Trans>
