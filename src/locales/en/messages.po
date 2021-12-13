@@ -174,7 +174,7 @@ msgstr ""
 msgid "QuickNode"
 msgstr ""
 
-#: src/components/Article.tsx:32
+#: src/components/Article.tsx:34
 #: src/components/Results.tsx:44
 msgid "Read Now"
 msgstr ""

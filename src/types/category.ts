@@ -11,6 +11,7 @@ export interface Yaml {
   title: string;
   slug: string;
   description: string;
+  extendedDescription?: Mdx;
   list?: boolean;
   badge: BadgeType;
   totalArticles: number;

@@ -129,7 +129,7 @@ const config: GatsbyConfig = {
         enabled: !!process.env.ELASTIC_AWS_SYNC,
         query: `
           query {
-            allMdx {
+            allMdx (filter: { slug: { glob: "!troubleshooter/**" } }) {
               nodes {
                 slug
                 rawBody
