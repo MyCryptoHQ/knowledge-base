@@ -385,8 +385,15 @@ const gatsbyNode: GatsbyNode = {
   }: CreatePageArgs<Record<string, unknown>>): Promise<void> {
     deletePage(page);
 
+    const slug = page.context.slug as string | undefined;
+
+    // Skip description files
+    if (slug?.startsWith('troubleshooter') && slug?.endsWith('description')) {
+      return;
+    }
+
     // Override component for troubleshooter pages
-    if ((page.context.slug as string | undefined)?.startsWith('troubleshooter')) {
+    if (slug?.startsWith('troubleshooter')) {
       return createPage({
         ...page,
         component: require.resolve('./src/components/Troubleshooter.tsx'),
