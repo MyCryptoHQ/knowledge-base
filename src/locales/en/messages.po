@@ -109,6 +109,7 @@ msgstr ""
 #~ msgid "Home"
 #~ msgstr ""
 
+#: src/components/Troubleshooter.tsx:31
 #: src/pages/404.tsx:13
 #: src/pages/articles/latest.tsx:22
 #: src/pages/articles/popular.tsx:22
@@ -174,7 +175,7 @@ msgstr ""
 msgid "QuickNode"
 msgstr ""
 
-#: src/components/Article.tsx:32
+#: src/components/Article.tsx:34
 #: src/components/Results.tsx:44
 msgid "Read Now"
 msgstr ""

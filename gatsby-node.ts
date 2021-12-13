@@ -50,6 +50,7 @@ const gatsbyNode: GatsbyNode = {
 
       type Yaml implements Node {
         title: String! @titleCase
+        extendedDescription: Mdx
         slug: String!
         category: Yaml
         parentCategory: Yaml
@@ -181,6 +182,23 @@ const gatsbyNode: GatsbyNode = {
       Yaml: {
         slug: {
           resolve: (node: Node, _, { nodeModel }) => getCategorySlug(node, nodeModel)
+        },
+
+        extendedDescription: {
+          async resolve(node: Node, _, { nodeModel }): Promise<Node | undefined> {
+            const { relativeDirectory } = nodeModel.getNodeById<FileNode>({ id: node.parent! });
+
+            return nodeModel.findOne<MdxNode>({
+              type: 'Mdx',
+              query: {
+                filter: {
+                  slug: {
+                    eq: `${relativeDirectory}/description`
+                  }
+                }
+              }
+            });
+          }
         },
 
         /**
@@ -366,6 +384,20 @@ const gatsbyNode: GatsbyNode = {
     actions: { deletePage, createPage }
   }: CreatePageArgs<Record<string, unknown>>): Promise<void> {
     deletePage(page);
+
+    // Override component for troubleshooter pages
+    if ((page.context.slug as string | undefined)?.startsWith('troubleshooter')) {
+      return createPage({
+        ...page,
+        component: require.resolve('./src/components/Troubleshooter.tsx'),
+        context: {
+          ...page.context,
+          popularArticles: POPULAR_ARTICLES,
+          glob: `${page.context.slug}/**`
+        }
+      });
+    }
+
     createPage({
       ...page,
       context: {

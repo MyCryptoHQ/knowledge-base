@@ -18,7 +18,10 @@ export interface CategoriesProps {
 export const Categories: FunctionComponent<CategoriesProps & BoxProps> = ({ exclude, ...props }) => {
   const { allYaml } = useStaticQuery<QueryData>(graphql`
     query {
-      allYaml(filter: { category: { slug: { eq: null } } }, sort: { order: DESC, fields: [priority] }) {
+      allYaml(
+        filter: { category: { slug: { eq: null } }, slug: { ne: "troubleshooter" } }
+        sort: { order: DESC, fields: [priority] }
+      ) {
         nodes {
           title
           slug
