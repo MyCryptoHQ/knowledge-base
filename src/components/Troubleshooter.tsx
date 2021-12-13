@@ -21,8 +21,9 @@ interface Props {
   };
 }
 
+// TODO: Remove `noIndex`
 const TroubleshooterPage: FunctionComponent<Props> = ({ data: { yaml } }) => (
-  <Page title={yaml.title} description={yaml.extendedDescription?.excerpt ?? yaml.description}>
+  <Page title={yaml.title} description={yaml.extendedDescription?.excerpt ?? yaml.description} noIndex={true}>
     <Section marginBottom="4">
       <Box marginBottom="4">
         <Breadcrumbs>
