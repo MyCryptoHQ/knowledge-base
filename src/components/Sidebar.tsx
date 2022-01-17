@@ -91,47 +91,6 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({ page }) => {
           ))}
         </Card>
       )}
-
-      <Card>
-        <Flex alignItems="center">
-          <Icon type="support" width="24px" marginRight="2" />
-          <SubHeading fontSize="12px" lineHeight="15px" color="text.accent" sx={{ textTransform: 'uppercase' }}>
-            <Trans>Support MyCrypto</Trans>
-          </SubHeading>
-        </Flex>
-
-        <Divider marginY="3" />
-
-        <Body fontWeight="bold" fontSize="20px" lineHeight="30px" marginBottom="3">
-          <Trans>
-            Your support enables MyCrypto to continue developing non-custodial, user-friendly cryptocurrency management
-            solutions as a public good.
-          </Trans>
-        </Body>
-        <Body marginBottom="3">
-          <Trans>
-            We love helping the community stay safe and informed with these free educational articles, and are happy to
-            walk you through solving problems even if they aren't directly related to MyCrypto.
-          </Trans>
-        </Body>
-        <Body marginBottom="3" color="primary" fontWeight="bold">
-          <Trans>Please consider making a donation or purchasing a MyCrypto Membership!</Trans>
-        </Body>
-        <Flex>
-          <Link to="https://bit.ly/MyCryptoTipJar" external={true}>
-            <Button variant="inverted" marginRight="3" fontWeight="bold">
-              <Trans>Donate Now</Trans>
-            </Button>
-          </Link>
-          <Link
-            to="https://app.mycrypto.com/membership?utm_medium=organic&utm_source=support&utm_campaign=sidebar"
-            external={true}>
-            <Button variant="inverted" fontWeight="bold">
-              <Trans>Get Membership</Trans>
-            </Button>
-          </Link>
-        </Flex>
-      </Card>
     </Box>
   );
 };
