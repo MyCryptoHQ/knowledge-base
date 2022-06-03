@@ -61,7 +61,7 @@
     "gatsby-plugin-git-clone": "^0.1.0",
     "gatsby-plugin-manifest": "^4.0.0",
     "gatsby-plugin-matomo": "^0.10.0",
-    "gatsby-plugin-mdx": "^3.0.0",
+    "gatsby-plugin-mdx": "^3.15.2",
     "gatsby-plugin-react-helmet": "^5.0.0",
     "gatsby-plugin-s3": "^0.3.8",
     "gatsby-plugin-sharp": "^4.0.0",
